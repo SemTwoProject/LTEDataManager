@@ -18,6 +18,7 @@ import entities.Failure;
 import entities.Fault;
 import entities.MCC;
 import entities.MNC;
+import entities.NEVersion;
 import entities.UE;
 
 @Stateless
@@ -40,11 +41,11 @@ public class FaultDAOImpl implements FaultDAO {
 		return faults.get(0);
 	}
 
-	public void createFault(String date, EventId eventId, Failure failure,
-			UE tac, MCC mcc, MNC mnc, CellHier cellId, Duration duration,
-			EventCause eventCause) {
+	public void createFault(String date, EventId eventId, Failure failure, UE tac, MCC mcc,
+			MNC mnc, CellHier cellId, 
+			Duration duration, EventCause eventCause, NEVersion ne){
 		Fault fault = new Fault(date, eventId, failure, tac, mcc, mnc, cellId,
-				duration, eventCause);
+				duration, eventCause, ne);
 		em.persist(fault);
 	}
 }

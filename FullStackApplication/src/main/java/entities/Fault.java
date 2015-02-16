@@ -63,17 +63,18 @@ public class Fault implements Serializable {
 	}
 
 	public Fault(String date, EventId eventId, Failure failure, UE tac,
-			MCC mcc, MNC mnc, CellHier cellId, Duration duration,
-			EventCause eventCause) {
+			MCC mcc, MNC mnc, CellHier cell, Duration duration,
+			EventCause eventCause, NEVersion ne) {
 		this.date = date;
 		this.eventId = eventId;
 		this.failure = failure;
 		this.tac = tac;
 		this.mcc = mcc;
 		this.mnc = mnc;
-		// this.cellId = cellId;
+		this.cell = cell;
 		this.duration = duration;
 		this.event = eventCause;
+		this.ne = ne;
 	}
 
 	public Integer getId() {
