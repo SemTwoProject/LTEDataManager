@@ -32,4 +32,8 @@ public class UserServiceEJB implements UserService {
 	public Collection<User> getAllUsersInDatabase(){
 		return dao.getAllUsers();
 	}
+
+	public Collection<User> checkLoginDetails() {
+		return dao.getUserByUsernameAndPassword();
+	}
 }

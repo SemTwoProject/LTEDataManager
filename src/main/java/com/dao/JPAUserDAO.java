@@ -30,4 +30,11 @@ public class JPAUserDAO implements UserDAO {
 		if(!users.contains(user))
 			em.persist(user);
 	}
+
+	public Collection<User> getUserByUsernameAndPassword() {
+		Query query = em.createQuery("FROM com.entity.User");
+		List<User> users = query.getResultList();
+		return users;
+	}
+
 }

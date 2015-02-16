@@ -8,6 +8,7 @@ public interface UserDAO {
 
 	void addUser(User user);
 	Collection<User> getAllUsers();
+	Collection<User> getUserByUsernameAndPassword();
 
 }
 

@@ -1,5 +1,7 @@
-package com.jaxrs;
+package com.rest;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.persistence.Table;
 import javax.ws.rs.GET;
@@ -12,15 +14,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.interfaces.UserService;
 
-@Path("/user")
+@Path("/users")
 //@Table(name="users")
-public class UserCRUDService {
+public class UserREST {
 
 	@Inject
 	private UserService service;
 	
 		// /rest/user/status
 		@GET
+		@RolesAllowed("System Administrator")
 		@Produces("text/html")
 		@Path("status")
 		public Response getStatus() {
@@ -29,6 +32,7 @@ public class UserCRUDService {
 
 		// /rest/user/list
 		@GET
+		@RolesAllowed("System Administrator")
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("list")
 		public Response listUsers() {

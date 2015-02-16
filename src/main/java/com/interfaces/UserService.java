@@ -11,4 +11,5 @@ public interface UserService {
 	
 	void addToUserDatabase(User user);
 	Collection<User> getAllUsersInDatabase();
+	Collection<User> checkLoginDetails();
 }

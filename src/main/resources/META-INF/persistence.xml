@@ -7,6 +7,7 @@
 	<persistence-unit name="dt340a">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/mySQL</jta-data-source>
+		<class>com.entity.User</class>
 		<properties>
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="false" />

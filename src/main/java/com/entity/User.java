@@ -2,6 +2,7 @@ package com.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -15,8 +16,11 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="`last-modified`")
+	private Date last_modified;
 
 	private String name;
 
@@ -36,6 +40,14 @@ public class User implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Date getLast_modified() {
+		return this.last_modified;
+	}
+
+	public void setLast_modified(Date last_modified) {
+		this.last_modified = last_modified;
 	}
 
 	public String getName() {
