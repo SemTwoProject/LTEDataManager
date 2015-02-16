@@ -269,7 +269,8 @@ public class ExcelReadImpl implements ApachePOIReader {
 					.formatCellValue(col4.get(i)))), mnc.getByMNC(Integer
 					.parseInt(formatter.formatCellValue(col5.get(i)))), cell
 					.getByCellId(Long.parseLong(formatter.formatCellValue(col6
-							.get(i)))), duration.getByDuration(Integer
+							.get(i)))), 
+					duration.getByDuration(Integer
 					.parseInt(formatter.formatCellValue(col7.get(i)))),
 					eventCause.getByEventCause(Integer.parseInt(formatter
 							.formatCellValue(col8.get(i)))));

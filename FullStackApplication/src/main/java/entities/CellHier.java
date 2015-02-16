@@ -24,7 +24,8 @@ public class CellHier implements Serializable {
 	private Long hier32Id;
 	@Column(name = "hier321_id")
 	private Long hier321Id;
-	@OneToMany(mappedBy = "cellId", cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "cell", cascade = CascadeType.ALL)
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public CellHier() {
@@ -87,7 +88,19 @@ public class CellHier implements Serializable {
 	}
 
 	public void addFault(Fault fault) {
-		fault.setCellId(this);
+		fault.setCell(this);
 		faultList.add(fault);
 	}
+	/*public List<Fault> getFaultList() {
+		return faultList;
+	}
+
+	public void setFaultList(List<Fault> faultList) {
+		this.faultList = faultList;
+	}
+
+	public void addFault(Fault fault) {
+		fault.setCellId(this);
+		faultList.add(fault);
+	}*/
 }

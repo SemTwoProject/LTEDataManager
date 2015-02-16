@@ -32,9 +32,10 @@ public class FaultDAOImpl implements FaultDAO {
 		Query q = em.createQuery("select ft from Fault ft");
 		return q.getResultList();
 	}
-	
-	public Fault getById(Integer id){
-		Query q = em.createQuery("select f from Fault f where f.id = "+id, Fault.class);
+
+	public Fault getById(Integer id) {
+		Query q = em.createQuery("select f from Fault f where f.id = " + id,
+				Fault.class);
 		List<Fault> faults = q.getResultList();
 		return faults.get(0);
 	}

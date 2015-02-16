@@ -20,7 +20,7 @@ public class CellDAOImpl implements CellDAO {
 
 	@SuppressWarnings("unchecked")
 	public Collection<CellHier> getCell() {
-		Query q = em.createQuery("select c from Cell c left join fetch c.faultList");
+		Query q = em.createQuery("select c from CellHier c left join fetch c.faultList");
 		return q.getResultList();
 	}
 	public void createCellHier(Long cellId, Long hier3_id, Long hier32_id, Long hier321_id) {

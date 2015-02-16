@@ -18,6 +18,7 @@ public interface FaultDAO {
 
 	Collection<Fault> getFault();
 	public void createFault(String date, EventId eventId, Failure failure, UE tac, MCC mcc,
-			MNC mnc, CellHier cellId, Duration duration, EventCause eventCause);
+			MNC mnc, CellHier cellId, 
+			Duration duration, EventCause eventCause);
 	Fault getById(Integer id);
 }

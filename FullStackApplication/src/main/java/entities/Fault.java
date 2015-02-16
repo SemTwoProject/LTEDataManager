@@ -25,30 +25,30 @@ public class Fault implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 	@Column(name = "date_time")
-	//@Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	private String date;
-	@JoinColumn(name = "event_id", referencedColumnName = "event_id")
+	@JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
 	@ManyToOne
 	private EventId eventId;
-	@JoinColumn(name = "failure", referencedColumnName = "failure")
+	@JoinColumn(name = "failure", referencedColumnName = "failure", nullable = false)
 	@ManyToOne
 	private Failure failure;
 	@JoinColumn(name = "tac", referencedColumnName = "tac", nullable = false)
 	@ManyToOne
 	private UE tac;
-	@JoinColumn(name = "market", referencedColumnName = "mcc")
+	@JoinColumn(name = "market", referencedColumnName = "mcc", nullable = false)
 	@ManyToOne
 	private MCC mcc;
-	@JoinColumn(name = "operator", referencedColumnName = "mnc")
+	@JoinColumn(name = "operator", referencedColumnName = "mnc", nullable = false)
 	@ManyToOne
 	private MNC mnc;
-	@JoinColumn(name = "duration", referencedColumnName = "duration")
+	@JoinColumn(name = "duration", referencedColumnName = "duration", nullable = false)
 	@ManyToOne
 	private Duration duration;
 	@JoinColumn(name = "event_cause", referencedColumnName = "event", nullable = false)
 	@ManyToOne
 	private EventCause event;
-	@JoinColumn(name = "ne", referencedColumnName = "ne")
+	@JoinColumn(name = "ne", referencedColumnName = "ne", nullable = false)
 	@ManyToOne
 	private NEVersion ne;
 	@JoinColumn(name = "imsi", referencedColumnName = "imsi", nullable = false)
@@ -56,21 +56,22 @@ public class Fault implements Serializable {
 	private IMSI imsi;
 	@JoinColumn(name = "cell_id", referencedColumnName = "cell_id", nullable = false)
 	@ManyToOne
-	private CellHier cellId;
+	private CellHier cell;
 
 	public Fault() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Fault(String date, EventId eventId, Failure failure, UE tac, MCC mcc,
-			MNC mnc, CellHier cellId, Duration duration, EventCause eventCause) {
+	public Fault(String date, EventId eventId, Failure failure, UE tac,
+			MCC mcc, MNC mnc, CellHier cellId, Duration duration,
+			EventCause eventCause) {
 		this.date = date;
 		this.eventId = eventId;
 		this.failure = failure;
 		this.tac = tac;
 		this.mcc = mcc;
 		this.mnc = mnc;
-		this.cellId = cellId;
+		// this.cellId = cellId;
 		this.duration = duration;
 		this.event = eventCause;
 	}
@@ -137,17 +138,17 @@ public class Fault implements Serializable {
 	}
 
 	@XmlTransient
-	public CellHier getCellId() {
-		return cellId;
-	}
-
-	public void setCellId(CellHier cellId) {
-		this.cellId = cellId;
+	public Duration getDuration() {
+		return duration;
 	}
 
 	@XmlTransient
-	public Duration getDuration() {
-		return duration;
+	public CellHier getCell() {
+		return cell;
+	}
+
+	public void setCell(CellHier cell) {
+		this.cell = cell;
 	}
 
 	public void setDuration(Duration duration) {
