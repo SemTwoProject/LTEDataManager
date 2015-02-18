@@ -4,8 +4,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
 
+import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
@@ -20,12 +22,11 @@ public class loginFormHandler {
 	private UserService service;
 
 	@POST
+	@PermitAll
 	@Consumes("multipart/form-data")
-	public void checkLogin(UserLogin login) throws URISyntaxException{
-		String username = login.getUsername();
-		String password = login.getPassword();
+	public void checkLogin(@FormParam("username") String username,@FormParam("password") String password) throws URISyntaxException{
 		String authLevel = null;
-		URI location = new URI("/LTEDataManager/home.html");
+		URI location = new URI("localhost:8080/LTEDataManager/home.html");
 
 		Collection<User> users = service.checkLoginDetails();
 		for (User user:users){
@@ -37,8 +38,6 @@ public class loginFormHandler {
 		if ((!authLevel.equals("System Administrator"))||(!authLevel.equals("Customer Service Rep"))
 				||(!authLevel.equals("Support Engineer"))||(!authLevel.equals("Network Management"))
 				|| username.equals(null)|| username.equals("")){
-
-
 			Response.temporaryRedirect(location);
 		}
 	}
