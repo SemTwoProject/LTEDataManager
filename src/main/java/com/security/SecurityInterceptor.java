@@ -85,11 +85,6 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
 			final String username = tokenizer.nextToken();
 			final String password = tokenizer.nextToken();
 
-			//Verifying Username and password
-			System.out.println("THIS IS WHERE WE ARE");
-			System.out.println(username);
-			System.out.println(password);
-
 			//Verify user access
 			if(method.isAnnotationPresent(RolesAllowed.class))
 			{
@@ -118,7 +113,6 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
 				userRole = user.getUserType(); 
 			}
 		}
-
 
 		//Step 2. Verify user role
 		if(rolesSet.contains(userRole))

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>User Login</title>
+</head>
+<body>
+	<form action="/LTEDataManager/rest/login" method="post">
+		<table>
+			<tr>
+				<td>
+					<span>Username:</span>
+				</td>
+				<td>
+					<input type="text" name="username" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span>Password:</span>
+				</td>
+				<td>
+					<input type="password" name="password" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">
+					<input name="loginbutton" 
+						type="submit" value="Log In" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

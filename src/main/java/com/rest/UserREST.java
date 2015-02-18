@@ -1,15 +1,15 @@
 package com.rest;
 
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-import javax.persistence.Table;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.entity.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.interfaces.UserService;
@@ -21,13 +21,22 @@ public class UserREST {
 	@Inject
 	private UserService service;
 	
-		// /rest/user/status
+		// /rest/users/status
 		@GET
 		@RolesAllowed("System Administrator")
 		@Produces("text/html")
 		@Path("status")
 		public Response getStatus() {
 			return Response.ok("<h1>LTE Data Manager is up !!!</h1>").build();
+		}
+		
+		// /rest/users/adduser
+		@POST
+		@RolesAllowed("System Administrator")
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("adduser")
+		public void addUser(User user){
+			service.addToUserDatabase(user);
 		}
 
 		// /rest/user/list

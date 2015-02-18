@@ -25,7 +25,6 @@ public class UserServiceEJB implements UserService {
 	}
 	
 	public void addToUserDatabase(User user){
-		if(!dao.getAllUsers().contains(user))
 			dao.addUser(user);
 	}
 	
