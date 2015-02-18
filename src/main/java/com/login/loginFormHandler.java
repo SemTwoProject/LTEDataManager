@@ -9,10 +9,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
-
-import org.apache.http.client.utils.URIBuilder;
-import org.jboss.resteasy.annotations.Form;
 
 import com.entity.User;
 import com.interfaces.UserService;
@@ -29,7 +25,7 @@ public class loginFormHandler {
 		String username = login.getUsername();
 		String password = login.getPassword();
 		String authLevel = null;
-		URI location = new URI("http://localhost:8080/LTEDataManager/home.html");
+		URI location = new URI("/LTEDataManager/home.html");
 
 		Collection<User> users = service.checkLoginDetails();
 		for (User user:users){
