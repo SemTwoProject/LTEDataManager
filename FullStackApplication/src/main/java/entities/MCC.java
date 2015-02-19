@@ -26,7 +26,6 @@ public class MCC implements Serializable {
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public MCC() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public MCC(Integer mcc, String country) {

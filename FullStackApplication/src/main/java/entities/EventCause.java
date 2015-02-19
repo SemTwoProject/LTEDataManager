@@ -35,7 +35,6 @@ public class EventCause implements Serializable {
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public EventCause() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public EventCause(Integer event, String description, EventId eventId) {

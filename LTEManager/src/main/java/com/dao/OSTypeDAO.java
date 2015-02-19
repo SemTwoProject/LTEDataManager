@@ -1,0 +1,15 @@
+package com.dao;
+
+import java.util.Collection;
+
+import javax.ejb.Local;
+
+import com.entities.OSType;
+
+@Local
+public interface OSTypeDAO {
+
+	Collection<OSType> getOSType();
+	OSType getByOSType(String os);
+	void createOSType(String osType);
+}

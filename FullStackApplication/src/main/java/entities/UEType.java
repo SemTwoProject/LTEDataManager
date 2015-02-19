@@ -23,7 +23,6 @@ public class UEType implements Serializable {
 	private List<UE> ueList = new ArrayList<UE>();
 
 	public UEType() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public UEType(String ueType) {

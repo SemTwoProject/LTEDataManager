@@ -14,11 +14,11 @@ import entities.CellHier;
 
 @Stateless
 @Local
+@SuppressWarnings("unchecked")
 public class CellDAOImpl implements CellDAO {
 
 	@PersistenceContext private EntityManager em;
-
-	@SuppressWarnings("unchecked")
+	
 	public Collection<CellHier> getCell() {
 		Query q = em.createQuery("select c from CellHier c left join fetch c.faultList");
 		return q.getResultList();

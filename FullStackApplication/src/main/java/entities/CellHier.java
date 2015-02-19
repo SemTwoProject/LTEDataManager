@@ -29,7 +29,6 @@ public class CellHier implements Serializable {
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public CellHier() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public CellHier(Long cellId, Long hier3Id, Long hier32Id, Long hier321Id) {
