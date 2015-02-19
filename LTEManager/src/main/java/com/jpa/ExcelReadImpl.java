@@ -30,7 +30,7 @@ public class ExcelReadImpl implements ExcelDAO {
 			FileNotFoundException, IOException {
 
 		CellDAO cellDAO = new CellDAOImpl();
-		ArrayList<Cell> col = selectColumnValue(1, 0);
+		ArrayList<Cell> col = selectColumnValue(0, 10);
 		ArrayList<Cell> col1 = selectColumnValue(0, 11);
 		ArrayList<Cell> col2 = selectColumnValue(0, 12);
 		ArrayList<Cell> col3 = selectColumnValue(0, 13);
@@ -79,14 +79,15 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createInputMode() throws InvalidFormatException,
+	public String createInputMode() throws InvalidFormatException,
 			FileNotFoundException, IOException {
 
 		InputModeDAO input = new InputModeDAOImpl();
 		ArrayList<Cell> col = selectColumnValue(3, 8);
-		for (int i = 1; i < col.size(); i++) {
-			input.createInputMode(formatter.formatCellValue(col.get(i)));
-		}
+		//for (int i = 1; i < col.size(); i++) {
+		return formatter.formatCellValue(col.get(0));
+			//input.createInputMode(formatter.formatCellValue(col.get(0)));
+		//}
 	}
 
 	public void createOSType() throws InvalidFormatException,
@@ -275,7 +276,7 @@ public class ExcelReadImpl implements ExcelDAO {
 			HSSFWorkbook wb = new HSSFWorkbook(file);
 			Sheet sheet = wb.getSheetAt(sheetNumber);
 
-			for (int i = 1; i < sheet.getLastRowNum(); i++) {
+			for (int i = 1; i < sheet.getLastRowNum()+1; i++) {
 				Row row = sheet.getRow(i);
 				Cell cell = row.getCell(cellNumber);
 				list.add(cell);

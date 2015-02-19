@@ -26,7 +26,6 @@ public class EventId implements Serializable {
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public EventId() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public EventId(Integer eventId) {

@@ -22,7 +22,6 @@ public class IMSI implements Serializable {
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public IMSI() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public IMSI(Long imsi) {

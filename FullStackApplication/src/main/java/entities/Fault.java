@@ -59,7 +59,6 @@ public class Fault implements Serializable {
 	private CellHier cell;
 
 	public Fault() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Fault(String date, EventId eventId, Failure failure, UE tac,

@@ -22,7 +22,6 @@ public class NEVersion implements Serializable {
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public NEVersion() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public NEVersion(Integer ne) {

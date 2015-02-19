@@ -23,7 +23,6 @@ public class InputMode implements Serializable {
 	private List<UE> ueList = new ArrayList<UE>();
 
 	public InputMode() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public InputMode(String inputMode) {

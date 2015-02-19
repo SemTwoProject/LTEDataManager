@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import service.CellServiceLocal;
 import entities.CellHier;
 
-@Path("/mcc")
+@Path("/cell")
 public class CellRest {
 
 	@EJB

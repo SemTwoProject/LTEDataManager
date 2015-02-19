@@ -23,7 +23,6 @@ public class OSType implements Serializable {
 	private List<UE> ueList = new ArrayList<UE>();
 
 	public OSType() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public OSType(String os) {

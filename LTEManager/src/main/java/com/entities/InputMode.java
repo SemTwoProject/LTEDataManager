@@ -16,7 +16,7 @@ public class InputMode implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "input_mode")
+	@Column(name = "input_mode", nullable = false, unique = true)
 	private String inputMode;
 
 	@OneToMany(mappedBy = "inputMode", cascade = CascadeType.ALL)

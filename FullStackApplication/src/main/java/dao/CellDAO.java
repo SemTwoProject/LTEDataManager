@@ -12,4 +12,3 @@ public interface CellDAO {
 	CellHier getByCellId(Long cellId);
 	void createCellHier(Long cellId, Long hier3_id, Long hier32_id, Long hier321_id);
 }
-

@@ -27,7 +27,6 @@ public class Failure implements Serializable {
 
 
 	public Failure() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Failure(Integer failure, String description) {

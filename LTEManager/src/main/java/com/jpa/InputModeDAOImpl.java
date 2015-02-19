@@ -26,7 +26,13 @@ public class InputModeDAOImpl implements InputModeDAO {
 	}
 	public void createInputMode(String input){
 		InputMode inputMode = new InputMode(input);
-		em.persist(inputMode);
+		
+		if (!getInputMode().contains(input)){
+			em.persist(inputMode);
+		}
+		else {
+			em.refresh(inputMode);
+		}
 	}
 	
 	public InputMode getByInputMode(String input){

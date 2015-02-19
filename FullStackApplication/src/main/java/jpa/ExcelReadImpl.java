@@ -1,20 +1,25 @@
 package jpa;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.DataFormatter;
 
-import service.ExcelService;
 import dao.*;
 
 @Stateless
@@ -22,31 +27,20 @@ import dao.*;
 public class ExcelReadImpl implements ExcelDAO {
 
 	private DataFormatter formatter = new DataFormatter();
-	private ExcelService service;
-	private ExcelService service1;
-	private ExcelService service2;
-	private ExcelService service3;
-	private ExcelService service4;
-	private ExcelService service5;
-	private ExcelService service6;
-	private ExcelService service7;
-	private ExcelService service8;
-	private ExcelService service9;
+
 	@PersistenceContext
 	private EntityManager em;
+	private File file = new File("App-1/test.xls");
 
-	public void createCell(File file) throws InvalidFormatException,
+	public void createCell() throws InvalidFormatException,
 			FileNotFoundException, IOException {
+		// file = new File(fileIn);
 
 		CellDAO cellDAO = new CellDAOImpl();
-		service = new ExcelService(0, 6, file);
-		ArrayList<Cell> col = service.selectColumnValue();
-		service1 = new ExcelService(0, 11, file);
-		ArrayList<Cell> col1 = service1.selectColumnValue();
-		service2 = new ExcelService(0, 12, file);
-		ArrayList<Cell> col2 = service2.selectColumnValue();
-		service3 = new ExcelService(0, 13, file);
-		ArrayList<Cell> col3 = service3.selectColumnValue();
+		ArrayList<Cell> col = selectColumnValue(0,10);
+		ArrayList<Cell> col1 = selectColumnValue(0,11);
+		ArrayList<Cell> col2 = selectColumnValue(0,12);
+		ArrayList<Cell> col3 = selectColumnValue(0,13);
 
 		for (int i = 1; i < col.size(); i++) {
 
@@ -58,12 +52,12 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createDuration(File file) throws InvalidFormatException,
+	public void createDuration() throws InvalidFormatException,
 			FileNotFoundException, IOException {
 
+		// file = new File(fileIn);
 		DurationDAO durationDAO = new DurationDAOImpl();
-		service = new ExcelService(0, 7, file);
-		ArrayList<Cell> col = service.selectColumnValue();
+		ArrayList<Cell> col = selectColumnValue(0,7);
 		for (int i = 1; i < col.size(); i++) {
 
 			durationDAO.createDuration(Integer.parseInt(formatter
@@ -71,11 +65,11 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createEventId(File file) throws InvalidFormatException,
+	public void createEventId() throws InvalidFormatException,
 			FileNotFoundException, IOException {
+		// file = new File(fileIn);
 		EventIdDAO eventId = new EventIdDAOImpl();
-		service = new ExcelService(1, 1, file);
-		ArrayList<Cell> col = service.selectColumnValue();
+		ArrayList<Cell> col = selectColumnValue(1,1);
 		for (int i = 1; i < col.size(); i++) {
 
 			eventId.createEventId(Integer.parseInt(formatter
@@ -83,64 +77,63 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createIMSI(File file) throws InvalidFormatException,
+	public void createIMSI() throws InvalidFormatException,
 			FileNotFoundException, IOException {
+		// file = new File(fileIn);
 		IMSIDAO imsi = new IMSIDAOImpl();
-		service = new ExcelService(0, 10, file);
-		ArrayList<Cell> col = service.selectColumnValue();
+		ArrayList<Cell> col = selectColumnValue(0,10);
 		for (int i = 1; i < col.size(); i++) {
 			imsi.createIMSI(Long.parseLong(formatter.formatCellValue(col.get(i))));
 		}
 	}
 
-	public void createInputMode(File file) throws InvalidFormatException,
+	public void createInputMode() throws InvalidFormatException,
 			FileNotFoundException, IOException {
+		// file = new File(fileIn);
 		InputModeDAO input = new InputModeDAOImpl();
-		service = new ExcelService(3, 8, file);
-		ArrayList<Cell> col = service.selectColumnValue();
+		ArrayList<Cell> col = selectColumnValue(3,8);
 		for (int i = 1; i < col.size(); i++) {
 			input.createInputMode(formatter.formatCellValue(col.get(i)));
 		}
 	}
 
-	public void createOSType(File file) throws InvalidFormatException,
+	public void createOSType() throws InvalidFormatException,
 			FileNotFoundException, IOException {
+		// file = new File(fileIn);
 		OSTypeDAO os = new OSTypeDAOImpl();
-		service = new ExcelService(3, 9, file);
-		ArrayList<Cell> col = service.selectColumnValue();
+		ArrayList<Cell> col = selectColumnValue(3,9);
 		for (int i = 1; i < col.size(); i++) {
 			os.createOSType(formatter.formatCellValue(col.get(i)));
 		}
 	}
 
-	public void createUEType(File file) throws InvalidFormatException,
+	public void createUEType() throws InvalidFormatException,
 			FileNotFoundException, IOException {
+		// file = new File(fileIn);
 		UETypeDAO ue = new UETypeDAOImpl();
-		service = new ExcelService(3, 8, file);
-		ArrayList<Cell> col = service.selectColumnValue();
+		ArrayList<Cell> col = selectColumnValue(3,6);
 		for (int i = 1; i < col.size(); i++) {
 			ue.createUEType(formatter.formatCellValue(col.get(i)));
 		}
 	}
 
-	public void createNEVersion(File file) throws InvalidFormatException,
+	public void createNEVersion() throws InvalidFormatException,
 			FileNotFoundException, IOException {
+		// file = new File(fileIn);
 		NEVersionDAO ne = new NEVersionDAOImpl();
-		service = new ExcelService(0, 9, file);
-		ArrayList<Cell> col = service.selectColumnValue();
+		ArrayList<Cell> col = selectColumnValue(0,9);
 		for (int i = 1; i < col.size(); i++) {
 			ne.createNEVersion(Integer.parseInt(formatter.formatCellValue(col
 					.get(i))));
 		}
 	}
 
-	public void createMCC(File file) throws InvalidFormatException,
+	public void createMCC() throws InvalidFormatException,
 			FileNotFoundException, IOException {
+		// file = new File(fileIn);
 		MCCDAO mcc = new MCCDAOImpl();
-		service = new ExcelService(4, 0, file);
-		ArrayList<Cell> col = service.selectColumnValue();
-		service1 = new ExcelService(4, 2, file);
-		ArrayList<Cell> col1 = service1.selectColumnValue();
+		ArrayList<Cell> col = selectColumnValue(4,0);
+		ArrayList<Cell> col1 = selectColumnValue(4,2);
 		for (int i = 1; i < col.size(); i++) {
 			mcc.createMCC(
 					Integer.parseInt(formatter.formatCellValue(col.get(i))),
@@ -148,16 +141,14 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createMNC(File file) throws InvalidFormatException,
+	public void createMNC() throws InvalidFormatException,
 			FileNotFoundException, IOException {
+		// file = new File(fileIn);
 		MNCDAO mnc = new MNCDAOImpl();
 		MCCDAO mcc = new MCCDAOImpl();
-		service = new ExcelService(4, 1, file);
-		service1 = new ExcelService(4, 3, file);
-		service2 = new ExcelService(4, 0, file);
-		ArrayList<Cell> col = service.selectColumnValue();
-		ArrayList<Cell> col1 = service1.selectColumnValue();
-		ArrayList<Cell> col2 = service2.selectColumnValue();
+		ArrayList<Cell> col = selectColumnValue(4,1);
+		ArrayList<Cell> col1 = selectColumnValue(4,3);
+		ArrayList<Cell> col2 = selectColumnValue(4,0);
 		for (int i = 1; i < col.size(); i++) {
 			mnc.createMNC(
 					Integer.parseInt(formatter.formatCellValue(col.get(i))),
@@ -167,14 +158,12 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createFailure(File file) throws InvalidFormatException,
+	public void createFailure() throws InvalidFormatException,
 			FileNotFoundException, IOException {
-
-		service = new ExcelService(2, 0, file);
-		service1 = new ExcelService(2, 1, file);
+		// file = new File(fileIn);
 		FailureDAO failureDAO = new FailureDAOImpl();
-		ArrayList<Cell> col = service.selectColumnValue();
-		ArrayList<Cell> col1 = service1.selectColumnValue();
+		ArrayList<Cell> col = selectColumnValue(2,0);
+		ArrayList<Cell> col1 = selectColumnValue(2,1);
 		for (int i = 1; i < col.size(); i++) {
 
 			failureDAO.createFailure(
@@ -183,14 +172,12 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createEventCause(File file) throws InvalidFormatException,
+	public void createEventCause() throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		service = new ExcelService(1, 0, file);
-		ArrayList<Cell> col = service.selectColumnValue();
-		service1 = new ExcelService(1, 2, file);
-		ArrayList<Cell> col1 = service1.selectColumnValue();
-		service2 = new ExcelService(1, 1, file);
-		ArrayList<Cell> col2 = service2.selectColumnValue();
+		// file = new File(fileIn);
+		ArrayList<Cell> col = selectColumnValue(1,0);
+		ArrayList<Cell> col1 = selectColumnValue(1,2);
+		ArrayList<Cell> col2 = selectColumnValue(1,1);
 		EventCauseDAO eventCause = new EventCauseDAOImpl();
 		EventIdDAO eventId = new EventIdDAOImpl();
 		for (int i = 1; i < col.size(); i++) {
@@ -202,30 +189,23 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createUE(File file) throws InvalidFormatException,
+	public void createUE() throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		service = new ExcelService(3, 0, file);
-		ArrayList<Cell> col = service.selectColumnValue();
-		service1 = new ExcelService(3, 1, file);
-		ArrayList<Cell> col1 = service1.selectColumnValue();
-		service2 = new ExcelService(3, 2, file);
-		ArrayList<Cell> col2 = service2.selectColumnValue();
-		service3 = new ExcelService(3, 3, file);
-		ArrayList<Cell> col3 = service3.selectColumnValue();
-		service4 = new ExcelService(3, 4, file);
-		ArrayList<Cell> col4 = service4.selectColumnValue();
-		service5 = new ExcelService(3, 5, file);
-		ArrayList<Cell> col5 = service5.selectColumnValue();
-		service6 = new ExcelService(3, 6, file);
-		ArrayList<Cell> col6 = service6.selectColumnValue();
-		service7 = new ExcelService(3, 7, file);
-		ArrayList<Cell> col7 = service7.selectColumnValue();
-		service8 = new ExcelService(3, 8, file);
-		ArrayList<Cell> col8 = service8.selectColumnValue();
+		// file = new File(fileIn);
+	
+		ArrayList<Cell> col = selectColumnValue(3, 0);
+		ArrayList<Cell> col1 = selectColumnValue(3, 1);
+		ArrayList<Cell> col2 = selectColumnValue(3, 2);
+		ArrayList<Cell> col3 = selectColumnValue(3, 3);
+		ArrayList<Cell> col4 = selectColumnValue(3, 4);
+		ArrayList<Cell> col5 = selectColumnValue(3, 5);
+		ArrayList<Cell> col6 = selectColumnValue(3, 6);
+		ArrayList<Cell> col7 = selectColumnValue(3, 7);
+		ArrayList<Cell> col8 = selectColumnValue(3, 8);
 
 		/*
-		 * tac, marketingName, manufacturer, accessCapability, model, vendorName,
-		 *  os, inputMode, ueType
+		 * tac, marketingName, manufacturer, accessCapability, model,
+		 * vendorName, os, inputMode, ueType
 		 */
 
 		UEDAO ue = new UEDAOImpl();
@@ -235,7 +215,8 @@ public class ExcelReadImpl implements ExcelDAO {
 		UETypeDAO ueType = new UETypeDAOImpl();
 		for (int i = 1; i < col.size(); i++) {
 
-			ue.createUE(Integer.parseInt(formatter.formatCellValue(col.get(i))),
+			ue.createUE(
+					Integer.parseInt(formatter.formatCellValue(col.get(i))),
 					formatter.formatCellValue(col1.get(i)),
 					formatter.formatCellValue(col2.get(i)),
 					formatter.formatCellValue(col3.get(i)),
@@ -247,28 +228,19 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createFault(File file) throws InvalidFormatException,
+	public void createFault() throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		service = new ExcelService(0, 0, file);
-		ArrayList<Cell> col = service.selectColumnValue();
-		service1 = new ExcelService(0, 1, file);
-		ArrayList<Cell> col1 = service1.selectColumnValue();
-		service2 = new ExcelService(0, 2, file);
-		ArrayList<Cell> col2 = service2.selectColumnValue();
-		service3 = new ExcelService(0, 3, file);
-		ArrayList<Cell> col3 = service3.selectColumnValue();
-		service4 = new ExcelService(0, 4, file);
-		ArrayList<Cell> col4 = service4.selectColumnValue();
-		service5 = new ExcelService(0, 5, file);
-		ArrayList<Cell> col5 = service5.selectColumnValue();
-		service6 = new ExcelService(0, 6, file);
-		ArrayList<Cell> col6 = service6.selectColumnValue();
-		service7 = new ExcelService(0, 7, file);
-		ArrayList<Cell> col7 = service7.selectColumnValue();
-		service8 = new ExcelService(0, 8, file);
-		ArrayList<Cell> col8 = service8.selectColumnValue();
-		service9 = new ExcelService(0, 9, file);
-		ArrayList<Cell> col9 = service9.selectColumnValue();
+		// file = new File(fileIn);
+		ArrayList<Cell> col = selectColumnValue(0, 0);
+		ArrayList<Cell> col1 = selectColumnValue(0, 1);
+		ArrayList<Cell> col2 = selectColumnValue(0, 2);
+		ArrayList<Cell> col3 = selectColumnValue(0, 3);
+		ArrayList<Cell> col4 = selectColumnValue(0, 4);
+		ArrayList<Cell> col5 = selectColumnValue(0, 5);
+		ArrayList<Cell> col6 = selectColumnValue(0, 6);
+		ArrayList<Cell> col7 = selectColumnValue(0, 7);
+		ArrayList<Cell> col8 = selectColumnValue(0, 8);
+		ArrayList<Cell> col9 = selectColumnValue(0, 9);
 
 		/*
 		 * date, eventId, failure, tac, mcc, mnc, cellId, duration, eventCause
@@ -296,12 +268,29 @@ public class ExcelReadImpl implements ExcelDAO {
 					.formatCellValue(col4.get(i)))), mnc.getByMNC(Integer
 					.parseInt(formatter.formatCellValue(col5.get(i)))), cell
 					.getByCellId(Long.parseLong(formatter.formatCellValue(col6
-							.get(i)))), 
-					duration.getByDuration(Integer
+							.get(i)))), duration.getByDuration(Integer
 					.parseInt(formatter.formatCellValue(col7.get(i)))),
 					eventCause.getByEventCause(Integer.parseInt(formatter
-							.formatCellValue(col8.get(i)))), ne.getByNE(Integer.parseInt(formatter
-							.formatCellValue(col9.get(i)))));
+							.formatCellValue(col8.get(i)))), ne.getByNE(Integer
+							.parseInt(formatter.formatCellValue(col9.get(i)))));
 		}
+	}
+
+	private ArrayList<Cell> selectColumnValue(int sheetNumber, int cellNumber) throws InvalidFormatException,
+			IOException, FileNotFoundException {
+
+		ArrayList<Cell> list = new ArrayList<Cell>();
+		// get everything in a specified column from a work sheet
+		Workbook wb = WorkbookFactory.create(new FileInputStream(file));
+		Sheet sheet = wb.getSheetAt(sheetNumber);
+
+		for (int j = 1; j < sheet.getLastRowNum() + 1; j++) {
+			Row row = sheet.getRow(j);
+			Cell cell = row.getCell(cellNumber);
+			list.add(cell);
+		}
+
+		return list;
+
 	}
 }

@@ -1,6 +1,5 @@
 package service;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -22,100 +21,100 @@ public class ExcelServiceEJB implements ExcelServiceLocal {
 	private ExcelDAO dao;
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createDuration(File file) throws InvalidFormatException,
+	public void createDuration() throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createCell(file);
+		dao.createCell();
 
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createIMSI(File file) throws InvalidFormatException,
+	public void createIMSI( ) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createIMSI(file);
+		dao.createIMSI();
 
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createCell(File file) throws InvalidFormatException,
+	public void createCell( ) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createCell(file);
+		dao.createCell();
 
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createInputMode(File file) throws InvalidFormatException,
+	public void createInputMode( ) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createInputMode(file);
+		dao.createInputMode();
 
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createOSType(File file) throws InvalidFormatException,
+	public void createOSType( ) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createOSType(file);
+		dao.createOSType();
 
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createNEVersion(File file) throws InvalidFormatException,
+	public void createNEVersion( ) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createNEVersion(file);
+		dao.createNEVersion();
 
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createUEType(File file) throws InvalidFormatException,
+	public void createUEType( ) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createUEType(file);
+		dao.createUEType();
 
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createMCC(File file) throws InvalidFormatException,
+	public void createMCC( ) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createMCC(file);
+		dao.createMCC();
 
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createFailure(File file) throws InvalidFormatException,
+	public void createFailure( ) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createFailure(file);
+		dao.createFailure();
 
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createEventId(File file) throws InvalidFormatException,
+	public void createEventId( ) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createEventId(file);
+		dao.createEventId();
 
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createMNC(File file) throws InvalidFormatException,
+	public void createMNC( ) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createMNC(file);
+		dao.createMNC();
 
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createEventCause(File file) throws InvalidFormatException,
+	public void createEventCause( ) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createEventCause(file);
+		dao.createEventCause();
 
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createUE(File file) throws InvalidFormatException,
+	public void createUE( ) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createUE(file);
+		dao.createUE();
 
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createFault(File file) throws InvalidFormatException,
+	public void createFault( ) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createFault(file);
+		dao.createFault();
 
 	}
 }

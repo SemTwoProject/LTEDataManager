@@ -22,7 +22,6 @@ public class Duration implements Serializable {
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public Duration() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Duration(Integer duration) {

@@ -35,7 +35,6 @@ public class MNC implements Serializable {
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public MNC() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public MNC(Integer mnc, String operator, MCC mcc) {

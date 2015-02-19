@@ -53,7 +53,6 @@ public class UE implements Serializable {
 	private InputMode inputMode;
 
 	public UE() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public UE(Integer tac, String marketingName, String manufacturer,
