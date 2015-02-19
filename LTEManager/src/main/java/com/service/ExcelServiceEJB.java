@@ -2,6 +2,7 @@ package com.service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
@@ -9,7 +10,9 @@ import javax.ejb.Stateless;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
+import com.dao.DurationDAO;
 import com.dao.ExcelDAO;
+import com.jpa.ExcelReadImpl;
 
 @Stateless
 @Local
@@ -17,11 +20,21 @@ public class ExcelServiceEJB implements ExcelServiceLocal {
 
 	@EJB
 	private ExcelDAO dao;
+	private DurationDAO dDao;
+	ArrayList<Integer> durations = new ArrayList<Integer>();
 
-	public void createDuration() throws InvalidFormatException,
-			FileNotFoundException, IOException {
-		dao.createCell();
-
+	public void createDuration() throws InvalidFormatException{
+		
+	try {
+		durations = dao.createDuration();
+		dDao.createDuration(durations.get(0));
+		if(!durations.isEmpty())
+			for(Integer duration: durations){
+				
+			}
+	} catch (InvalidFormatException | IOException e) {
+		e.getMessage();
+	}
 	}
 
 	public void createIMSI() throws InvalidFormatException,
@@ -33,12 +46,6 @@ public class ExcelServiceEJB implements ExcelServiceLocal {
 	public void createCell() throws InvalidFormatException,
 			FileNotFoundException, IOException {
 		dao.createCell();
-
-	}
-
-	public void createInputMode() throws InvalidFormatException,
-			FileNotFoundException, IOException {
-		dao.createInputMode();
 
 	}
 

@@ -10,5 +10,5 @@ public interface DurationDAO {
 
 	Collection<Duration> getDuration();
 	Duration getByDuration(Integer duration);
-	void createDuration(Integer duration);
+	public void createDuration(Integer duration);
 }

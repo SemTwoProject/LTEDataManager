@@ -15,9 +15,6 @@ public interface ExcelServiceLocal {
 	void createIMSI() throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createInputMode() throws InvalidFormatException,
-			FileNotFoundException, IOException;
-
 	void createOSType() throws InvalidFormatException, FileNotFoundException,
 			IOException;
 

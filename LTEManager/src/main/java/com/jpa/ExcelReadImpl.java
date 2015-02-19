@@ -18,6 +18,7 @@ import javax.ejb.Stateless;
 import org.apache.poi.ss.usermodel.DataFormatter;
 
 import com.dao.*;
+import com.entities.Duration;
 
 @Stateless
 @Local
@@ -45,16 +46,17 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createDuration() throws InvalidFormatException,
+	public ArrayList<Integer> createDuration() throws InvalidFormatException,
 			FileNotFoundException, IOException {
-
-		DurationDAO durationDAO = new DurationDAOImpl();
 		ArrayList<Cell> col = selectColumnValue(0, 7);
+		ArrayList<Integer> durations = new ArrayList<Integer>();
 		for (int i = 1; i < col.size(); i++) {
 
-			durationDAO.createDuration(Integer.parseInt(formatter
+			durations.add(Integer.parseInt(formatter
 					.formatCellValue(col.get(i))));
+			
 		}
+		return durations;
 	}
 
 	public void createEventId() throws InvalidFormatException,
