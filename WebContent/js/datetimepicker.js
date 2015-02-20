@@ -27,8 +27,16 @@
  THE SOFTWARE.
  */
 
-
-
+$(function() {
+	$('#todate').datetimepicker({
+		format: 'DD-MM-YYYY',
+		defaultDate : "01/01/2015"
+	});
+	$('#fromdate').datetimepicker({
+		format: 'DD-MM-YYYY',
+		defaultDate : new Date()
+	});
+});
 
 (function(factory) {
 	'use strict';
@@ -1911,8 +1919,3 @@
 				keepOpen : false
 			};
 		}));
-
-$(function() {
-	$('#todate').datetimepicker();
-	$('#fromdate').datetimepicker();
-});
