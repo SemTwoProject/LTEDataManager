@@ -1,52 +1,14 @@
 <!DOCTYPE html>
-
 <html>
 <head>
-<title>Ericsson LTE Data Manager</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css" />
-<link rel="stylesheet" href="css/screen.css" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REST with Forms</title>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 </head>
 <body>
-	<div id="container">
-		<section>
-			<article id="intro-art" data-role="page" data-title="Home">
-				<div data-role="header" class="header">
-					<h3>Ericsson LTE Data Manager</h3>
-				</div>
-				<div class="ui-content" role="main">
-					<div class="wrap">
-						<div class="login-panel panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Please Sign In</h3>
-							</div>
-							<div class="panel-body">
-								<form role="form">
-									<fieldset>
-										<div class="form-group">
-											<input class="form-control" placeholder="Username"
-												name="email" type="email" autofocus>
-										</div>
-										<div class="form-group">
-											<input class="form-control" placeholder="Password"
-												name="password" type="password" value="">
-										</div>
-										<!-- Change this to a button or input when using this as a form -->
-										<button onclick="window.location.href='home.html'">Login</button>
-									</fieldset>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</article>
-		</section>
-	</div>
-
-	<script type="text/javascript" src="js/libs/jquery-2.0.3.js"></script>
-	<script type="text/javascript" src="js/libs/jquery.mobile-1.4.2.js"></script>
-	<script type="text/javascript" src="js/libs/lodash-2.4.1.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
+	<form method="post" action="http://localhost:8080/LTEDataManager/login">
+		Username: <input type="text" name="username" id="username" /> 
+		Password: <input type="text" name="password" id="password" /> 
+		<input type="submit" value="Submit" />
+	</form>
 </body>
 </html>

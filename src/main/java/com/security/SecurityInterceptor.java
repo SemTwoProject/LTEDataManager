@@ -3,7 +3,6 @@ package com.security;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +22,7 @@ import org.jboss.resteasy.core.ServerResponse;
 import org.jboss.resteasy.util.Base64;
 
 import com.entity.User;
-import com.interfaces.UserService;
+import com.serviceInterfaces.UserService;
 
 /**
  * This interceptor verify the access permissions for a user 
@@ -85,11 +84,6 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
 			final String username = tokenizer.nextToken();
 			final String password = tokenizer.nextToken();
 
-			//Verifying Username and password
-			System.out.println("THIS IS WHERE WE ARE");
-			System.out.println(username);
-			System.out.println(password);
-
 			//Verify user access
 			if(method.isAnnotationPresent(RolesAllowed.class))
 			{
@@ -112,13 +106,8 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
 		boolean isAllowed = false;
 		String userRole = null;
 
-		Collection<User> users = service.checkLoginDetails();
-		for (User user:users){
-			if ((user.getUsername().equals(username)) && (user.getPassword().equals(password))){
-				userRole = user.getUserType(); 
-			}
-		}
-
+		User user = service.checkLoginDetails(username,password);
+		userRole = user.getUserType(); 
 
 		//Step 2. Verify user role
 		if(rolesSet.contains(userRole))

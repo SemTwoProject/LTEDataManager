@@ -1,18 +1,25 @@
 package com.rest;
 
+import java.io.IOException;
+
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.entity.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.interfaces.UserService;
+import com.serviceInterfaces.UserService;
 
 @Path("/users")
 //@Table(name="users")
@@ -21,16 +28,36 @@ public class UserREST {
 	@Inject
 	private UserService service;
 	
-		// /rest/user/status
+		// /rest/users/status
 		@GET
-		@RolesAllowed("System Administrator")
+		@PermitAll
 		@Produces("text/html")
 		@Path("status")
 		public Response getStatus() {
 			return Response.ok("<h1>LTE Data Manager is up !!!</h1>").build();
 		}
+		
+		// /rest/users/adduser
+		@POST
+		@PermitAll
+		@Produces(MediaType.APPLICATION_FORM_URLENCODED)
+		@Path("adduser")
+		public void addUser(@FormParam("name") String name, @FormParam("username")String username, 
+				@FormParam("password") String password,@FormParam("usertype") String userType,
+				@Context HttpServletRequest request, @Context HttpServletResponse response){
+			
+			User user = new User(name,username,password,userType);
+			service.addToUserDatabase(user);
+			
+			try {
+				response.sendRedirect(response.encodeRedirectURL("/LTEDataManager/home.html"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
-		// /rest/user/list
+		// /rest/users/list
 		@GET
 		@RolesAllowed("System Administrator")
 		@Produces(MediaType.APPLICATION_JSON)
