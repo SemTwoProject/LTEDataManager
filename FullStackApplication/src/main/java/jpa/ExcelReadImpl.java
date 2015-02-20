@@ -281,7 +281,13 @@ public class ExcelReadImpl implements ExcelDAO {
 
 		ArrayList<Cell> list = new ArrayList<Cell>();
 		// get everything in a specified column from a work sheet
-		Workbook wb = WorkbookFactory.create(new FileInputStream(file));
+		Workbook wb = null;
+		try {
+			wb = WorkbookFactory.create(new FileInputStream(file));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Sheet sheet = wb.getSheetAt(sheetNumber);
 
 		for (int j = 1; j < sheet.getLastRowNum() + 1; j++) {
