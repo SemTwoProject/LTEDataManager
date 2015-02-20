@@ -6,20 +6,20 @@
    <persistence-unit name="fullStack">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
       <jta-data-source>java:jboss/datasources/mysql</jta-data-source>
-      <class>com.entities.CellHier</class>
-      <class>com.entities.Duration</class>
-      <class>com.entities.EventCause</class>
-      <class>com.entities.EventId</class>
-      <class>com.entities.Failure</class>
-      <class>com.entities.Fault</class>
-      <class>com.entities.IMSI</class>
-      <class>com.entities.InputMode</class>
-      <class>com.entities.MCC</class>
-      <class>com.entities.MNC</class>
-      <class>com.entities.NEVersion</class>
-      <class>com.entities.OSType</class>
-      <class>com.entities.UE</class>
-      <class>com.entities.UEType</class>     
+      <class>entities.CellHier</class>
+      <class>entities.Duration</class>
+      <class>entities.EventCause</class>
+      <class>entities.EventId</class>
+      <class>entities.Failure</class>
+      <class>entities.Fault</class>
+      <class>entities.IMSI</class>
+      <class>entities.InputMode</class>
+      <class>entities.MCC</class>
+      <class>entities.MNC</class>
+      <class>entities.NEVersion</class>
+      <class>entities.OSType</class>
+      <class>entities.UE</class>
+      <class>entities.UEType</class>     
       <properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
          <property name="hibernate.hbm2ddl.auto" value="update" />
