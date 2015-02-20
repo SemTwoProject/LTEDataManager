@@ -107,12 +107,8 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
 		boolean isAllowed = false;
 		String userRole = null;
 
-		Collection<User> users = service.checkLoginDetails();
-		for (User user:users){
-			if ((user.getUsername().equals(username)) && (user.getPassword().equals(password))){
-				userRole = user.getUserType(); 
-			}
-		}
+		User user = service.checkLoginDetails(username,password);
+		userRole = user.getUserType(); 
 
 		//Step 2. Verify user role
 		if(rolesSet.contains(userRole))

@@ -1,21 +1,27 @@
 package com.login;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
 
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.entity.User;
 import com.interfaces.UserService;
 
 @Path("/login")
+@PermitAll
 public class loginFormHandler {
 
 	@Inject
@@ -23,22 +29,19 @@ public class loginFormHandler {
 
 	@POST
 	@PermitAll
-	@Consumes("multipart/form-data")
-	public void checkLogin(@FormParam("username") String username,@FormParam("password") String password) throws URISyntaxException{
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public void checkLogin(@FormParam("username") String username,@FormParam("password") String password,@Context HttpServletResponse response, @Context HttpServletRequest request) throws IOException{
 		String authLevel = null;
-		URI location = new URI("localhost:8080/LTEDataManager/home.html");
 
-		Collection<User> users = service.checkLoginDetails();
-		for (User user:users){
-			if ((user.getUsername().equals(username)) && (user.getPassword().equals(password))){
-				authLevel = user.getUserType(); 
-			}
-		}
+		User user = service.checkLoginDetails(username,password);
+		authLevel = user.getUserType(); 
 
-		if ((!authLevel.equals("System Administrator"))||(!authLevel.equals("Customer Service Rep"))
-				||(!authLevel.equals("Support Engineer"))||(!authLevel.equals("Network Management"))
-				|| username.equals(null)|| username.equals("")){
-			Response.temporaryRedirect(location);
+		/*if (authLevel == null){
+			response.sendRedirect(response.encodeRedirectURL("/LTEDataManager/login.html"));
+
 		}
+		else {*/
+			response.sendRedirect("/LTEDataManager/home/");
+		//}
 	}
 }

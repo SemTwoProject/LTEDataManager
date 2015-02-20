@@ -2,7 +2,6 @@ package com.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Date;
 
 
 /**
@@ -18,10 +17,6 @@ public class User implements Serializable {
 	@Id
 	private int id;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="`last-modified`")
-	private Date last_modified;
-
 	private String name;
 
 	private String password;
@@ -33,6 +28,13 @@ public class User implements Serializable {
 
 	public User() {
 	}
+	
+	public User(String name, String username, String password, String userType){
+		this.name = name;
+		this.username = username;
+		this.password = password;
+		this.userType = userType;
+	}
 
 	public int getId() {
 		return this.id;
@@ -40,14 +42,6 @@ public class User implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Date getLast_modified() {
-		return this.last_modified;
-	}
-
-	public void setLast_modified(Date last_modified) {
-		this.last_modified = last_modified;
 	}
 
 	public String getName() {
@@ -81,5 +75,4 @@ public class User implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 }

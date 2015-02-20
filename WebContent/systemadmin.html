@@ -45,7 +45,7 @@
 							<li><a href="#">Account</a></li>
 							<li><a href="#">Settings</a></li>
 							<li class="divider"></li>
-							<li><a href="index.html">Logout</a></li>
+							<li><a href="login.html">Logout</a></li>
 						</ul></li>
 				</ul>
 			</div>
@@ -83,32 +83,30 @@
 									<div class="panel panel-default">
 										<div class="panel-heading">Add New User</div>
 										<div class="panel-body">
-											<form role="form">
+											<form role="form" action ="/LTEDataManager/users/adduser" method="post" role="form"> 
 												<div class="form-group">
 													<label>Username</label> <input class="form-control"
-														placeholder="Username..">
+														name = "username" placeholder="Username..">
 												</div>
 												<div class="form-group">
 													<label>Name</label> <input class="form-control"
-														placeholder="Name..">
+														name = "name" placeholder="Name..">
 												</div>
 												<div class="form-group">
 													<label>Password</label> <input class="form-control"
-														placeholder="Password..">
+														name = "password" placeholder="Password..">
 												</div>
 
 												<div class="form-group">
-													<label>User Role</label> <select class="form-control">
+													<label>User Role</label> <select class="form-control" name="usertype">
 														<option>Customer Service Rep</option>
 														<option>Support Engineer</option>
 														<option>Network Management Engineer</option>
-														<option>System Admin</option>
+														<option>System Administrator</option>
 													</select>
 												</div>
-												<button type="submit" class="btn btn-default pull-right">Add
-													User</button>
-												<button type="reset" class="btn btn-default pull-right">Reset
-												</button>
+												<input type="submit" class="btn btn-default pull-right" value ="Add User"/>
+												<input type="reset" class="btn btn-default pull-right" value ="Reset"/>
 											</form>
 										</div>
 									</div>

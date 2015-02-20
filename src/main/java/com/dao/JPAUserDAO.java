@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -30,11 +29,38 @@ public class JPAUserDAO implements UserDAO {
 		if(!users.contains(user))
 			em.persist(user);
 	}
-
-	public Collection<User> getUserByUsernameAndPassword() {
+	
+	public void deleteUser(User user){
 		Query query = em.createQuery("FROM com.entity.User");
 		List<User> users = query.getResultList();
-		return users;
+		if(users.contains(user))
+			em.remove(user);
+	}
+
+	public User getUserByUsernameAndPassword(String username,String password) {
+		Query query = em.createQuery("FROM com.entity.User");
+		List<User> users = query.getResultList();
+		for (User user:users){
+			if(user.getUsername().equals(username)&&user.getPassword().equals(password)){
+				return user;
+			}
+			else{
+				User nullUser = new User(null,null,null,null);
+				return nullUser;
+			}
+		}
+		return null;
+	}
+
+	public User getUserByName(String name) {
+		Query query = em.createQuery("FROM com.entity.User");
+		List<User> users = query.getResultList();
+		for (User user: users){
+			if(user.getName().equals(name)){
+				return user;
+			}		
+		}
+		return null;
 	}
 
 }
