@@ -23,11 +23,11 @@ public class CellDAOImpl implements CellDAO {
 		Query q = em.createQuery("select c from CellHier c left join fetch c.faultList");
 		return q.getResultList();
 	}
-	public void createCellHier(Long cellId, Long hier3_id, Long hier32_id, Long hier321_id) {
+	public void createCellHier(Integer cellId, Long hier3_id, Long hier32_id, Long hier321_id) {
 		CellHier cell = new CellHier(cellId,hier3_id,hier32_id,hier321_id);
 		em.persist(cell);
 	}
-	public CellHier getByCellId(Long cellId){
+	public CellHier getByCellId(Integer cellId){
 		Query q = em.createQuery("select cid from CellHier cid where cid.cellId = "+cellId +" left join fetch cid.faultList", CellHier.class);
 		List<CellHier> cells = q.getResultList();
 		return cells.get(0);

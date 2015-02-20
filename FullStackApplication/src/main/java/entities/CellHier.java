@@ -17,7 +17,7 @@ public class CellHier implements Serializable {
 	private Integer id;
 
 	@Column(name = "cell_id")
-	private Long cellId;
+	private Integer cellId;
 	@Column(name = "hier3_id")
 	private Long hier3Id;
 	@Column(name = "hier32_id")
@@ -31,7 +31,7 @@ public class CellHier implements Serializable {
 	public CellHier() {
 	}
 
-	public CellHier(Long cellId, Long hier3Id, Long hier32Id, Long hier321Id) {
+	public CellHier(Integer cellId, Long hier3Id, Long hier32Id, Long hier321Id) {
 		this.cellId = cellId;
 		this.hier3Id = hier3Id;
 		this.hier32Id = hier32Id;
@@ -46,11 +46,11 @@ public class CellHier implements Serializable {
 		this.id = id;
 	}
 
-	public Long getCellId() {
+	public Integer getCellId() {
 		return cellId;
 	}
 
-	public void setCellId(Long cellId) {
+	public void setCellId(Integer cellId) {
 		this.cellId = cellId;
 	}
 

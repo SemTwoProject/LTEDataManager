@@ -45,7 +45,7 @@ public class ExcelReadImpl implements ExcelDAO {
 		for (int i = 1; i < col.size(); i++) {
 
 			cellDAO.createCellHier(
-					Long.parseLong(formatter.formatCellValue(col.get(i))),
+					Integer.parseInt(formatter.formatCellValue(col.get(i))),
 					Long.parseLong(formatter.formatCellValue(col1.get(i))),
 					Long.parseLong(formatter.formatCellValue(col2.get(i))),
 					Long.parseLong(formatter.formatCellValue(col3.get(i))));
@@ -267,7 +267,7 @@ public class ExcelReadImpl implements ExcelDAO {
 							.get(i)))), mcc.getByMCC(Integer.parseInt(formatter
 					.formatCellValue(col4.get(i)))), mnc.getByMNC(Integer
 					.parseInt(formatter.formatCellValue(col5.get(i)))), cell
-					.getByCellId(Long.parseLong(formatter.formatCellValue(col6
+					.getByCellId(Integer.parseInt(formatter.formatCellValue(col6
 							.get(i)))), duration.getByDuration(Integer
 					.parseInt(formatter.formatCellValue(col7.get(i)))),
 					eventCause.getByEventCause(Integer.parseInt(formatter
