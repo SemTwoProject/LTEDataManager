@@ -31,9 +31,9 @@ public class FaultDAOImpl implements FaultDAO {
 		List<Fault> faults = q.getResultList();
 		return faults.get(0);
 	}
-	public Fault getFaultByIMSI(Long imsi){
+	public Collection<Fault> getFaultByIMSI(Long imsi){
 		Query q = em.createQuery("select f from Fault where f.imsi = "+imsi);
 		List<Fault> faults = q.getResultList();
-		return faults.get(0);
+		return faults;
 	}
 }

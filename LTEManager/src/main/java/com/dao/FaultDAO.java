@@ -12,5 +12,5 @@ public interface FaultDAO {
 	Collection<Fault> getFault();
 
 	Fault getById(Integer id);
-	Fault getFaultByIMSI(Long imsi);
+	Collection <Fault> getFaultByIMSI(Long imsi);
 }
