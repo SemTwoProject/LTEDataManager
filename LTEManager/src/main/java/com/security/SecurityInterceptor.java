@@ -1,4 +1,4 @@
-package com.security;
+/*package com.security;
 
 
 import java.io.IOException;
@@ -25,10 +25,10 @@ import org.jboss.resteasy.util.Base64;
 import com.entity.User;
 import com.interfaces.UserService;
 
-/**
+*//**
  * This interceptor verify the access permissions for a user 
  * based on username and passowrd provided in request
- * */
+ * *//*
 @Provider
 public class SecurityInterceptor implements javax.ws.rs.container.ContainerRequestFilter
 {
@@ -119,3 +119,4 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
 	}
 
 }
+*/

@@ -1,6 +1,6 @@
 package arquillian;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 

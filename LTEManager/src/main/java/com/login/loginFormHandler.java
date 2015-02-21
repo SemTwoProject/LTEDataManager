@@ -32,12 +32,12 @@ public class loginFormHandler {
 		User user = service.checkLoginDetails(username,password);
 		authLevel = user.getUserType(); 
 
-		/*if (authLevel == null){
+		if (authLevel == null){
 			response.sendRedirect(response.encodeRedirectURL("/LTEDataManager/login.html"));
 
 		}
-		else {*/
+		else {
 			response.sendRedirect("/LTEDataManager/home/");
-		//}
+		}
 	}
 }
