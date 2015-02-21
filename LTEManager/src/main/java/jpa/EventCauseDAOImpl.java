@@ -11,6 +11,7 @@ import javax.persistence.Query;
 
 import dao.EventCauseDAO;
 import entities.EventCause;
+import entities.Fault;
 
 @Stateless
 @Local
@@ -28,5 +29,10 @@ public class EventCauseDAOImpl implements EventCauseDAO {
 		Query q = em.createQuery("select e from EventCause e where e.event = "+event, EventCause.class);
 		List<EventCause> causes = q.getResultList();
 		return causes.get(0);
+	}
+	
+	public List<Object> getEventCauseByFault(Fault fault){
+		Query q = em.createQuery("select e from EventCause e where e.eventId = "+fault.getEventId());
+		return q.getResultList();
 	}
 }

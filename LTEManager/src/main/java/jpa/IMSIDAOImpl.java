@@ -21,12 +21,15 @@ public class IMSIDAOImpl implements IMSIDAO {
 	private EntityManager em;
 
 	public Collection<IMSI> getIMSI() {
-		Query q = em.createQuery("select I from IMSI I left join fetch I.faultList");
+		Query q = em
+				.createQuery("select I from IMSI I left join fetch I.faultList");
 		return q.getResultList();
 
 	}
-	public IMSI getByIMSI(Long imsi){
-		Query q = em.createQuery("select I from IMSI I where I.imsi = "+imsi+" left join fetch I.faultList", IMSI.class);
+
+	public IMSI getByIMSI(Long imsi) {
+		Query q = em.createQuery("select I from IMSI I where I.imsi = " + imsi,
+				IMSI.class);
 		List<IMSI> imsis = q.getResultList();
 		return imsis.get(0);
 	}

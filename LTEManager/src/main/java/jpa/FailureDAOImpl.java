@@ -11,6 +11,7 @@ import javax.persistence.Query;
 
 import dao.FailureDAO;
 import entities.Failure;
+import entities.Fault;
 
 @Stateless
 @Local
@@ -24,7 +25,6 @@ public class FailureDAOImpl implements FailureDAO {
 		Query q = em
 				.createQuery("select fl from Failure fl left join fetch fl.faultList");
 		return q.getResultList();
-
 	}
 
 	public Failure getByFailure(Integer failure) {
@@ -32,5 +32,10 @@ public class FailureDAOImpl implements FailureDAO {
 				+ failure + " left join fetch f.faultList", Failure.class);
 		List<Failure> fails = q.getResultList();
 		return fails.get(0);
+	}
+	
+	public Collection<Object> getFailureByFault(Fault fault){
+		Query q = em.createQuery("select f from Failure f where f.failure = "+fault.getFailure());
+		return q.getResultList();
 	}
 }
