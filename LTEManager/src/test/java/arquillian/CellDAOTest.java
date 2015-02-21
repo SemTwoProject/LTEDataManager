@@ -15,19 +15,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import dao.EventCauseDAO;
-import dao.EventIdDAO;
+import dao.CellDAO;
+import dao.DurationDAO;
 import entities.CellHier;
-import entities.EventCause;
-import entities.EventId;
 
 @RunWith(Arquillian.class)
-public class EventIdDAOTest {
+public class CellDAOTest {
 
-	
 	@EJB
-	EventIdDAO dao;
-	
+	private CellDAO dao;
+
 	@Deployment
 	public static WebArchive createDeployment() {
 
@@ -36,21 +33,22 @@ public class EventIdDAOTest {
 				.as(WebArchive.class);
 
 	}
+
 	@Before
 	public void setUp() {
-		
 	}
 
 	@Test
-	public void EventCauseListIsReturned() {
-		assertEquals(dao.getEventId().size(), 3);
+	public void CellListIsReturned() {
+		assertEquals(dao.getCell().size(), 3);
 	}
 
 	@Test
 	public void CellIsReturnedById() {
-		EventId e = dao.getByEventId(1111);
-		int x = 1;
-		int y = e.getId();
+		
+		CellHier cell = dao.getByCellId(4);
+		int x = 4;
+		int y = cell.getCellId();
 		assertEquals(x,y);
 	}
 

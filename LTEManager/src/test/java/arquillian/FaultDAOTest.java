@@ -15,18 +15,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import dao.EventCauseDAO;
-import dao.EventIdDAO;
+import dao.CellDAO;
+import dao.FaultDAO;
+import dao.IMSIDAO;
 import entities.CellHier;
-import entities.EventCause;
-import entities.EventId;
+import entities.Failure;
+import entities.Fault;
+import entities.IMSI;
 
 @RunWith(Arquillian.class)
-public class EventIdDAOTest {
+public class FaultDAOTest {
 
-	
 	@EJB
-	EventIdDAO dao;
+	FaultDAO faultDao;
+	CellDAO cellDao;
 	
 	@Deployment
 	public static WebArchive createDeployment() {
@@ -42,16 +44,26 @@ public class EventIdDAOTest {
 	}
 
 	@Test
-	public void EventCauseListIsReturned() {
-		assertEquals(dao.getEventId().size(), 3);
+	public void FaultListIsReturned() {
+		assertEquals(faultDao.getFault().size(), 3);
 	}
 
 	@Test
-	public void CellIsReturnedById() {
-		EventId e = dao.getByEventId(1111);
-		int x = 1;
-		int y = e.getId();
-		assertEquals(x,y);
+	public void FaultIsReturnedById() {
+		Fault f = faultDao.getById(1);
+		CellHier cell = f.getCell();
+		int y = 4;
+		int x = cell.getCellId();
+		assertEquals(y,x);
 	}
+	/*@Test
+	public void FaultIsReturnedByIMSI() {
+		Fault f = faultDao.getFaultByIMSI(new Long("11000000000003"));
+		int x = f.getId();
+		There is more than one fault per imsi. so needs to return a list. 
+	}*/
+	
+	
+	
 
 }

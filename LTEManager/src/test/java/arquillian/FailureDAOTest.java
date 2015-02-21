@@ -10,11 +10,13 @@ import java.util.List;
 import javax.ejb.EJB;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.importer.ZipImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import dao.EventCauseDAO;
 import dao.FailureDAO;
@@ -24,7 +26,7 @@ import entities.EventCause;
 import entities.Failure;
 import entities.Fault;
 
-
+@RunWith(Arquillian.class)
 public class FailureDAOTest {
 
 	
@@ -47,7 +49,7 @@ public class FailureDAOTest {
 
 	@Test
 	public void FailureListIsReturned() {
-		assertEquals(failureDao.getFailure(), 3);
+		assertEquals(failureDao.getFailure().size(), 3);
 	}
 
 	@Test

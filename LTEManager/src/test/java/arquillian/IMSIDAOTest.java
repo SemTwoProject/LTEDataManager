@@ -15,16 +15,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import dao.CellDAO;
-import dao.DurationDAO;
+import dao.IMSIDAO;
 import entities.CellHier;
+import entities.Fault;
+import entities.IMSI;
 
 @RunWith(Arquillian.class)
-public class CellDaoTest {
+public class IMSIDAOTest {
 
 	@EJB
-	private CellDAO dao;
-
+	IMSIDAO dao;
+	
+	
 	@Deployment
 	public static WebArchive createDeployment() {
 
@@ -33,23 +35,24 @@ public class CellDaoTest {
 				.as(WebArchive.class);
 
 	}
-
+	
+	
 	@Before
 	public void setUp() {
-	}
-
-	@Test
-	public void CellListIsReturned() {
-		assertEquals(dao.getCell().size(), 3);
-	}
-
-	@Test
-	public void CellIsReturnedById() {
 		
-		CellHier cell = dao.getByCellId(4);
-		int x = 4;
-		int y = cell.getCellId();
-		assertEquals(x,y);
+	}
+
+	@Test
+	public void IMSIListIsReturned() {
+		assertEquals(dao.getIMSI().size(), 7);
+	}
+
+	@Test
+	public void IMSIIsReturnedByIMSI() {
+		IMSI imsi = dao.getByIMSI(new Long("33000000000003"));
+		int y = 3;
+		int x = imsi.getId();
+		assertEquals(y,x);
 	}
 
 }
