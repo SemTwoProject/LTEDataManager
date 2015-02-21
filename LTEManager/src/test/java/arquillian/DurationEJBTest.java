@@ -15,7 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import dao.DurationDAO;
+import com.dao.DurationDAO;
 
 @RunWith(Arquillian.class)
 public class DurationEJBTest {
