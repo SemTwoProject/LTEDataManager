@@ -11,4 +11,5 @@ public interface OSTypeDAO {
 
 	Collection<OSType> getOSType();
 	OSType getByOSType(String os);
+	public void createOSTypes();
 }

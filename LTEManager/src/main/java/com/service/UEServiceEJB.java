@@ -4,14 +4,14 @@ import java.util.Collection;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import com.dao.UEDAO;
 import com.entity.UE;
 
-@Stateless
+@Stateful
 @Local
 public class UEServiceEJB implements UEServiceLocal {
 
@@ -21,6 +21,10 @@ public class UEServiceEJB implements UEServiceLocal {
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Collection<UE> getAllUE() {
 		return dao.getUE();
+	}
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void createUEs(){
+		dao.createUEs();
 	}
 
 }

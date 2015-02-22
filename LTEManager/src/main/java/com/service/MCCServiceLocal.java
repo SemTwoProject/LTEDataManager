@@ -6,4 +6,5 @@ import com.entity.MCC;
 
 public interface MCCServiceLocal {
 	Collection<MCC> getAllMCC();
+	public void createMCCs();
 }

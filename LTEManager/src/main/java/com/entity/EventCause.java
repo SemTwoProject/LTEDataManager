@@ -24,7 +24,7 @@ public class EventCause implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Integer id;
-	@Column(name = "event")
+	@Column(name = "event_cause")
 	private Integer event;
 	@Column(name = "description")
 	private String description;

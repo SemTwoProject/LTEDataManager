@@ -11,4 +11,5 @@ public interface UEDAO {
 
 	Collection<UE> getUE();
 	UE getByTac(Integer tac);
+	public void createUEs();
 }

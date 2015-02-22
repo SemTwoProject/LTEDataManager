@@ -4,14 +4,14 @@ import java.util.Collection;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import com.dao.MCCDAO;
 import com.entity.MCC;
 
-@Stateless
+@Stateful
 @Local
 public class MCCServiceEJB implements MCCServiceLocal {
 
@@ -21,5 +21,9 @@ public class MCCServiceEJB implements MCCServiceLocal {
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Collection<MCC> getAllMCC() {
 		return dao.getMCC();
+	}
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void createMCCs(){
+		dao.createMCCs();
 	}
 }

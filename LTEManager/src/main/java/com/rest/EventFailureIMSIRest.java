@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import javax.ejb.EJB;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -17,10 +16,12 @@ public class EventFailureIMSIRest {
 
 	@EJB
 	private EventFailureIMSIServiceLocal service;
-
+	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Object> getEventsAndFailuresByImsi(@FormParam("imsi") Long imsi) {
+	public Collection<Object> 
+	getEventsAndFailuresByImsi(@FormParam("imsi") Long imsi) {
+		System.out.println("This " + imsi);
 		return service.getAllEventsAndFailure(imsi);
 	}
 }

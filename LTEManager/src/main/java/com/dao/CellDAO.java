@@ -9,4 +9,5 @@ public interface CellDAO {
 
 	Collection<CellHier> getCell();
 	CellHier getByCellId(Integer cellId);
+	public void createCells();
 }

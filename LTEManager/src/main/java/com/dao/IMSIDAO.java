@@ -10,4 +10,5 @@ public interface IMSIDAO {
 
 	Collection<IMSI> getIMSI();
 	IMSI getByIMSI(Long imsi);
+	public void createIMSIs();
 }

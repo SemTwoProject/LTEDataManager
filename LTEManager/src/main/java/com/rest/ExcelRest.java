@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
@@ -35,5 +36,9 @@ public class ExcelRest {
 			service.createMNC();
 			service.createUE();
 			service.createFault();
+	}
+	@POST
+	public void allCreate(){
+		service.allCreate();
 	}
 }

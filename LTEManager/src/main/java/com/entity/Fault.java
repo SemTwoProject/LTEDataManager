@@ -25,7 +25,7 @@ public class Fault implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 	@Column(name = "date_time")
-	// @Temporal(TemporalType.DATE)
+	//@Temporal(TemporalType.DATE)
 	private String date;
 	@JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
 	@ManyToOne
@@ -45,7 +45,7 @@ public class Fault implements Serializable {
 	@JoinColumn(name = "duration", referencedColumnName = "duration", nullable = false)
 	@ManyToOne
 	private Duration duration;
-	@JoinColumn(name = "event_cause", referencedColumnName = "event", nullable = false)
+	@JoinColumn(name = "event_cause", referencedColumnName = "event_cause", nullable = false)
 	@ManyToOne
 	private EventCause event;
 	@JoinColumn(name = "ne", referencedColumnName = "ne", nullable = false)
@@ -84,10 +84,12 @@ public class Fault implements Serializable {
 		this.id = id;
 	}
 
+	//@Temporal(TemporalType.DATE)
 	public String getDate() {
 		return date;
 	}
 
+	//@Temporal(TemporalType.DATE)
 	public void setDate(String date) {
 		this.date = date;
 	}

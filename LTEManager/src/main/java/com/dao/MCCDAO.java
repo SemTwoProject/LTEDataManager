@@ -11,4 +11,5 @@ public interface MCCDAO {
 
 	Collection<MCC> getMCC();
 	MCC getByMCC(Integer mcc);
+	public void createMCCs();
 }

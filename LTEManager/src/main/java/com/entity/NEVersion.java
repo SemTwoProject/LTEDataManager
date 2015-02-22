@@ -17,14 +17,14 @@ public class NEVersion implements Serializable {
 	private Integer id;
 
 	@Column(name = "ne")
-	private Integer ne;
+	private String ne;
 	@OneToMany(mappedBy = "ne", cascade = CascadeType.ALL)
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public NEVersion() {
 	}
 
-	public NEVersion(Integer ne) {
+	public NEVersion(String ne) {
 		this.ne = ne;
 	}
 
@@ -36,11 +36,11 @@ public class NEVersion implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getNe() {
+	public String getNe() {
 		return ne;
 	}
 
-	public void setNe(Integer ne) {
+	public void setNe(String ne) {
 		this.ne = ne;
 	}
 

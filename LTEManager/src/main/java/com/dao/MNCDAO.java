@@ -10,4 +10,5 @@ public interface MNCDAO {
 
 	Collection<MNC> getMNC();
 	MNC getByMNC(Integer mnc);
+	public void createMNCs();
 }

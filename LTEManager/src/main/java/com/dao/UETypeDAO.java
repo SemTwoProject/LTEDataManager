@@ -11,4 +11,5 @@ public interface UETypeDAO {
 
 	Collection<UEType> getUEType();
 	UEType getByUEType(String ue);
+	public void createUETypes();
 }

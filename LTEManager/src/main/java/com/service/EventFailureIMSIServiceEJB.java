@@ -5,21 +5,25 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 
 import com.dao.EventCauseDAO;
 import com.dao.FailureDAO;
 import com.dao.FaultDAO;
 import com.entity.Fault;
 
-@Stateless
+@Stateful
 @Local
 public class EventFailureIMSIServiceEJB implements EventFailureIMSIServiceLocal {
 
+	@Inject
 	private EventCauseDAO eventCauseDao;
+	@Inject
 	private FaultDAO faultDao;
+	@Inject
 	private FailureDAO failureDao;
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -28,9 +32,9 @@ public class EventFailureIMSIServiceEJB implements EventFailureIMSIServiceLocal 
 
 		Collection<Fault> faults = faultDao.getFaultByIMSI(imsi);
 		for (Fault fault : faults) {
-			rs.addAll(eventCauseDao.getEventCauseByFault(fault));
+			rs.add(eventCauseDao.getEventCauseByFault(fault));
 
-			rs.addAll(failureDao.getFailureByFault(fault));
+			rs.add(failureDao.getFailureByFault(fault));
 		}
 		return rs;
 	}

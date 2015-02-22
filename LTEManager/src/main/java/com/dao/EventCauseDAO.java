@@ -13,4 +13,5 @@ public interface EventCauseDAO {
 	Collection<EventCause> getEventCause();
 	EventCause getByEventCause(Integer event);
 	List<Object> getEventCauseByFault(Fault fault);
+	public void createEventCauses();
 }

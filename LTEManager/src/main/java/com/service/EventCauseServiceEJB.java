@@ -4,14 +4,14 @@ import java.util.Collection;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import com.dao.EventCauseDAO;
 import com.entity.EventCause;
 
-@Stateless
+@Stateful
 @Local
 public class EventCauseServiceEJB implements EventCauseServiceLocal {
 
@@ -21,5 +21,9 @@ public class EventCauseServiceEJB implements EventCauseServiceLocal {
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Collection<EventCause> getAllEventCause() {
 		return dao.getEventCause();
+	}
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void createEventCauses(){
+		dao.createEventCauses();
 	}
 }

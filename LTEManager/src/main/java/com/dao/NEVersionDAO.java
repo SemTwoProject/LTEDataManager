@@ -9,5 +9,6 @@ import java.util.Collection;
 public interface NEVersionDAO {
 
 	Collection<NEVersion> getNEVersion();
-	NEVersion getByNE(Integer ne);
+	NEVersion getByNE(String ne);
+	public void createNEVersions();
 }

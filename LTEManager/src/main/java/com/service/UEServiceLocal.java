@@ -6,4 +6,5 @@ import com.entity.UE;
 
 public interface UEServiceLocal {
 	Collection<UE> getAllUE();
+	public void createUEs();
 }

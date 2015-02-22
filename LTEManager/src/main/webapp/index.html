@@ -22,7 +22,8 @@
 								<h3 class="panel-title">Please Sign In</h3>
 							</div>
 							<div class="panel-body">
-								<form  action="/LTEDataManager/rest/login" method="post" role="form">
+								<form action="/LTEDataManager/rest/login" method="post"
+									role="form">
 									<fieldset>
 										<div class="form-group">
 											<input class="form-control" placeholder="Username"
@@ -32,16 +33,70 @@
 											<input class="form-control" placeholder="Password"
 												name="password" type="password" value="">
 										</div>
-										<input type="submit" value="Login"/>
+										<input type="submit" value="Login" />
 									</fieldset>
 								</form>
 							</div>
 						</div>
 					</div>
-					<form method="POST" action="rest/efimsi">
-					<input type="text" id="imsi" value="imsi">
-					</input><br/>
-					<button value="submit">Submit</button></form>
+					<hr/>
+
+					<form method="post" action="rest/duration">
+						<input type="submit" value="Duration" />
+					</form>
+					<form method="post" action="rest/cell">
+						<input type="submit" value="Cell" />
+					</form>
+					<form method="post" action="rest/eventd">
+						<input type="submit" value="Event Id" />
+					</form>
+					<hr/>
+					
+					<form method="post" action="rest/failure">
+						<input type="submit" value="Failure" />
+					</form>
+					
+					<form method="post" action="rest/imsi">
+						<input type="submit" value="IMSI" />
+					</form>
+					<form method="post" action="rest/inputmode">
+						<input type="submit" value="Input Mode" />
+					</form>
+					<form method="post" action="rest/mcc">
+						<input type="submit" value="MCC" />
+					</form>
+					
+					<form method="post" action="rest/neversion">
+						<input type="submit" value="NE Version" />
+					</form>
+					<form method="post" action="rest/ostype">
+						<input type="submit" value="OS Type" />
+					</form>
+					<form method="post" action="rest/ue">
+						<input type="submit" value="UE" />
+					</form>
+					<hr />
+					<form method="post" action="rest/mnc">
+						<input type="submit" value="MNC" />
+					</form>
+					<form method="post" action="rest/eventcause">
+						<input type="submit" value="Event Cause" />
+					</form>
+					<form method="post" action="rest/uetype">
+						<input type="submit" value="UE Type" />
+					</form>
+					<hr />
+					<form method="post" action="rest/fault">
+						<input type="submit" value="Fault" />
+					</form>
+					<hr />
+					<form method="post" action="rest/efimsi">
+					<input type="text" name="imsi"></input>
+						<input type="submit" value="IMSI" />
+					</form>
+					<form method="post" action="rest/excel">
+						<input type="submit" value="Excel" />
+					</form>
 				</div>
 			</article>
 		</section>

@@ -11,4 +11,5 @@ public interface EventIdDAO {
 
 	Collection<EventId> getEventId();
 	EventId getByEventId(Integer eventId);
+	public void createEventIds();
 }

@@ -6,4 +6,5 @@ import com.entity.Duration;
 
 public interface DurationServiceLocal {
 	Collection<Duration> getAllDuration();
+	public void createDurations();
 }

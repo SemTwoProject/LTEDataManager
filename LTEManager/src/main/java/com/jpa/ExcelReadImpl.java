@@ -24,6 +24,8 @@ import com.dao.EventCauseDAO;
 import com.dao.EventIdDAO;
 import com.dao.ExcelDAO;
 import com.dao.FailureDAO;
+import com.dao.FaultDAO;
+import com.dao.IMSIDAO;
 import com.dao.InputModeDAO;
 import com.dao.MCCDAO;
 import com.dao.MNCDAO;
@@ -68,7 +70,42 @@ public class ExcelReadImpl implements ExcelDAO {
 	private UE ue;
 	private UEType ueType;
 	private HSSFDataFormatter formatter;
+	private HSSFWorkbook wb;
+	private Sheet sheet;
 
+	public void allCreate(){
+		CellDAO cell = new CellDAOImpl();
+		cell.createCells();
+		DurationDAO duration = new DurationDAOImpl();
+		duration.createDurations();
+		FailureDAO fail = new FailureDAOImpl();
+		fail.createFailures();
+		EventIdDAO eventId = new EventIdDAOImpl();
+		eventId.createEventIds();
+		MCCDAO mcc = new MCCDAOImpl();
+		mcc.createMCCs();
+		NEVersionDAO ne = new NEVersionDAOImpl();
+		ne.createNEVersions();
+		OSTypeDAO os = new OSTypeDAOImpl();
+		os.createOSTypes();
+		InputModeDAO input = new InputModeDAOImpl();
+		input.createInputModes();
+		IMSIDAO imsi = new IMSIDAOImpl();
+		imsi.createIMSIs();
+		UETypeDAO ueType = new UETypeDAOImpl();
+		ueType.createUETypes();
+		
+		MNCDAO mnc = new MNCDAOImpl();
+		mnc.createMNCs();
+		EventCauseDAO eventCause = new EventCauseDAOImpl();
+		eventCause.createEventCauses();
+		UEDAO ue = new UEDAOImpl();
+		ue.createUEs();
+		FaultDAO fault = new FaultDAOImpl();
+		fault.createFaults();
+		fault.createFaultsTwo();
+
+	}
 	public void createCell() throws InvalidFormatException,
 			FileNotFoundException, IOException {
 		ArrayList<Cell> col;
@@ -195,8 +232,8 @@ public class ExcelReadImpl implements ExcelDAO {
 		try {
 			col = selectColumnValue(0, 9);
 			for (int i = 0; i < col.size(); i++) {
-				ne = new NEVersion(Integer.parseInt(formatter
-						.formatCellValue(col.get(i))));
+				ne = new NEVersion(formatter
+						.formatCellValue(col.get(i)));
 				em.persist(ne);
 			}
 		} catch (InvalidFormatException e) {
@@ -355,7 +392,8 @@ public class ExcelReadImpl implements ExcelDAO {
 			 * eventCause
 			 */
 			for (int i = 0; i < col.size(); i++) {
-				fault = new Fault(formatter.formatCellValue(col.get(i)),
+				fault = new Fault(formatter
+						.formatCellValue(col.get(i)),
 						eventIdF.getByEventId(Integer.parseInt(formatter
 								.formatCellValue(col1.get(i)))),
 						failF.getByFailure(Integer.parseInt(formatter
@@ -372,8 +410,7 @@ public class ExcelReadImpl implements ExcelDAO {
 								.formatCellValue(col7.get(i)))),
 						eventCauseF.getByEventCause(Integer.parseInt(formatter
 								.formatCellValue(col8.get(i)))),
-						neF.getByNE(Integer.parseInt(formatter
-								.formatCellValue(col9.get(i)))));
+						neF.getByNE(formatter.formatCellValue(col9.get(i))));
 				em.persist(fault);
 			}
 		} catch (InvalidFormatException e) {
@@ -393,8 +430,8 @@ public class ExcelReadImpl implements ExcelDAO {
 			file = new File(getClass().getClassLoader().getResource("test.xls")
 					.getFile());
 			inputStream = new FileInputStream(file);
-			HSSFWorkbook wb = new HSSFWorkbook(inputStream);
-			Sheet sheet = wb.getSheetAt(sheetNumber);
+			wb = new HSSFWorkbook(inputStream);
+			sheet = wb.getSheetAt(sheetNumber);
 
 			for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
 				Row row = sheet.getRow(i);

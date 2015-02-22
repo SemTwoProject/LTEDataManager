@@ -5,13 +5,13 @@ import java.io.IOException;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import com.dao.ExcelDAO;
 
-@Stateless
+@Stateful
 @Local
 public class ExcelServiceEJB implements ExcelServiceLocal {
 
@@ -22,6 +22,9 @@ public class ExcelServiceEJB implements ExcelServiceLocal {
 			FileNotFoundException, IOException {
 		dao.createCell();
 
+	}
+	public void allCreate(){
+		dao.allCreate();
 	}
 
 	public void createDuration() throws InvalidFormatException,

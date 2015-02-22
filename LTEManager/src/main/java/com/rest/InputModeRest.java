@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -21,5 +22,9 @@ public class InputModeRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<InputMode> getInputMode() {
 		return service.getAllInputMode();
+	}
+	@POST
+	public void createInputModes(){
+		service.createInputModes();
 	}
 }
