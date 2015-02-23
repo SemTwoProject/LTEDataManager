@@ -11,5 +11,4 @@ public interface InputModeDAO {
 
 	Collection<InputMode> getInputMode();
 	InputMode getByInputMode(String input);
-	public void createInputModes();
 }

@@ -22,9 +22,4 @@ public class UETypeServiceEJB implements UETypeServiceLocal {
 	public Collection<UEType> getAllUEType() {
 		return dao.getUEType();
 	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createUETypes(){
-		dao.createUETypes();
-	}
-
 }

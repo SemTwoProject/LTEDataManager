@@ -22,8 +22,4 @@ public class MNCServiceEJB implements MNCServiceLocal {
 	public Collection<MNC> getAllMNC() {
 		return dao.getMNC();
 	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createMNCs(){
-		dao.createMNCs();
-	}
 }

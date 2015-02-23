@@ -1,7 +1,7 @@
 package com.entity;
 
 import java.io.Serializable;
-//import java.util.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-//import javax.persistence.Temporal;
-//import javax.persistence.TemporalType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlTransient;
 
 @SuppressWarnings("serial")
@@ -25,8 +25,8 @@ public class Fault implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 	@Column(name = "date_time")
-	//@Temporal(TemporalType.DATE)
-	private String date;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date date;
 	@JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
 	@ManyToOne
 	private EventId eventId;
@@ -61,9 +61,9 @@ public class Fault implements Serializable {
 	public Fault() {
 	}
 	
-	public Fault(String date, EventId eventId, Failure failure, UE tac,
+	public Fault(Date date, EventId eventId, Failure failure, UE tac,
 			MCC mcc, MNC mnc, CellHier cell, Duration duration,
-			EventCause eventCause, NEVersion ne) {
+			EventCause eventCause, NEVersion ne, IMSI imsi) {
 		this.date = date;
 		this.eventId = eventId;
 		this.failure = failure;
@@ -74,6 +74,7 @@ public class Fault implements Serializable {
 		this.duration = duration;
 		this.cause = eventCause;
 		this.ne = ne;
+		this.imsi = imsi;
 	}
 
 	public Integer getId() {
@@ -84,13 +85,13 @@ public class Fault implements Serializable {
 		this.id = id;
 	}
 
-	//@Temporal(TemporalType.DATE)
-	public String getDate() {
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getDate() {
 		return date;
 	}
 
-	//@Temporal(TemporalType.DATE)
-	public void setDate(String date) {
+	@Temporal(TemporalType.TIMESTAMP)
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

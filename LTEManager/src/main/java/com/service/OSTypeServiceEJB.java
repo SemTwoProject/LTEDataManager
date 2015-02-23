@@ -22,8 +22,4 @@ public class OSTypeServiceEJB implements OSTypeServiceLocal {
 	public Collection<OSType> getAllOSType() {
 		return dao.getOSType();
 	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createOSTypes(){
-		dao.createOSTypes();
-	}
 }

@@ -10,5 +10,4 @@ public interface NEVersionDAO {
 
 	Collection<NEVersion> getNEVersion();
 	NEVersion getByNE(String ne);
-	public void createNEVersions();
 }

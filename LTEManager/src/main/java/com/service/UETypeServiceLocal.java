@@ -6,5 +6,4 @@ import com.entity.UEType;
 
 public interface UETypeServiceLocal {
 	Collection<UEType> getAllUEType();
-	public void createUETypes();
 }

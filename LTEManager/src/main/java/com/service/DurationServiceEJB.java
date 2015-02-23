@@ -22,9 +22,4 @@ public class DurationServiceEJB implements DurationServiceLocal {
 	public Collection<Duration> getAllDuration() {
 		return dao.getDuration();
 	}
-	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createDurations(){
-		dao.createDurations();
-	}
 }

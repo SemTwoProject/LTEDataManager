@@ -6,5 +6,4 @@ import com.entity.EventCause;
 
 public interface EventCauseServiceLocal {
 	Collection<EventCause> getAllEventCause();
-	public void createEventCauses();
 }

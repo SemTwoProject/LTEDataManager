@@ -22,9 +22,4 @@ public class IMSIServiceEJB implements IMSIServiceLocal {
 	public Collection<IMSI> getAllIMSI() {
 		return dao.getIMSI();
 	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createIMSIs(){
-		dao.createIMSIs();
-	}
-
 }

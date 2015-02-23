@@ -22,8 +22,4 @@ public class MCCServiceEJB implements MCCServiceLocal {
 	public Collection<MCC> getAllMCC() {
 		return dao.getMCC();
 	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createMCCs(){
-		dao.createMCCs();
-	}
 }

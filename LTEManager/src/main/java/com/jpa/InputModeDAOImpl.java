@@ -19,37 +19,17 @@ public class InputModeDAOImpl implements InputModeDAO {
 
 	@PersistenceContext
 	private EntityManager em;
-	
-	public void createInputModes(){
-		InputMode in;
-		in = new InputMode("BASIC");
-		em.persist(in);
-		in = new InputMode("QWERTY");
-		em.persist(in);
-		in = new InputMode("TOUCH_SCREEN");
-		em.persist(in);
-		in = new InputMode("(null)");
-		em.persist(in);
-	}
 
 	public Collection<InputMode> getInputMode() {
 		Query q = em.createQuery("select i from InputMode i");
 		return q.getResultList();
 	}
-	public void createInputMode(String input){
-		InputMode inputMode = new InputMode(input);
-		
-		if (!getInputMode().contains(input)){
-			em.persist(inputMode);
-		}
-		else {
-			em.refresh(inputMode);
-		}
-	}
-	
-	public InputMode getByInputMode(String input){
-		Query q = em.createQuery("select i from InputMode i where i.inputMode ='"+input+"'", InputMode.class);
-		List<InputMode> inputs = q.getResultList();
+
+	public InputMode getByInputMode(String input) {
+		Query q = em.createQuery("select i from InputMode i where i.input = :input",
+				InputMode.class);
+		 q.setParameter("input", input);
+		 List<InputMode> inputs = q.getResultList();
 		return inputs.get(0);
 	}
 }

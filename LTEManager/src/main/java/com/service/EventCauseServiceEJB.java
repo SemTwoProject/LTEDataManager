@@ -22,8 +22,4 @@ public class EventCauseServiceEJB implements EventCauseServiceLocal {
 	public Collection<EventCause> getAllEventCause() {
 		return dao.getEventCause();
 	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createEventCauses(){
-		dao.createEventCauses();
-	}
 }

@@ -22,8 +22,4 @@ public class CellServiceEJB implements CellServiceLocal {
 	public Collection<CellHier> getAllCell() {
 		return dao.getCell();
 	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createCells(){
-		dao.createCells();
-	}
 }

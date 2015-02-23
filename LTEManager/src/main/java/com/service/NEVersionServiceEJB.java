@@ -22,8 +22,4 @@ public class NEVersionServiceEJB implements NEVersionServiceLocal {
 	public Collection<NEVersion> getAllNEVersion() {
 		return dao.getNEVersion();
 	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createNEVersions(){
-		dao.createNEVersions();
-	}
 }

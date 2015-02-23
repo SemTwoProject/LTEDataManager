@@ -22,8 +22,4 @@ public class FailureServiceEJB implements FailureServiceLocal {
 	public Collection<Failure> getAllFailure() {
 		return dao.getFailure();
 	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createFailures(){
-		dao.createFailures();
-	}
 }

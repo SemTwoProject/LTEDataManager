@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Local;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -12,23 +12,13 @@ import javax.persistence.Query;
 import com.dao.IMSIDAO;
 import com.entity.IMSI;
 
-@Stateful
+@Stateless
 @Local
 @SuppressWarnings("unchecked")
 public class IMSIDAOImpl implements IMSIDAO {
 
 	@PersistenceContext
 	private EntityManager em;
-
-	public void createIMSIs(){
-		IMSI imsi;
-		imsi = new IMSI(344930000000011L);
-		em.persist(imsi);
-		imsi = new IMSI(310560000000012L);
-		em.persist(imsi);
-		imsi = new IMSI(310560000000013L);
-		em.persist(imsi);
-	}
 
 	public Collection<IMSI> getIMSI() {
 		Query q = em
@@ -38,8 +28,9 @@ public class IMSIDAOImpl implements IMSIDAO {
 	}
 
 	public IMSI getByIMSI(Long imsi) {
-		Query q = em.createQuery("select I from IMSI I where I.imsi = '" + imsi+"'",
+		Query q = em.createQuery("select i from imsi i where i.imsi = :imsi",
 				IMSI.class);
+		q.setParameter("imsi", imsi);
 		List<IMSI> imsis = q.getResultList();
 		return imsis.get(0);
 	}

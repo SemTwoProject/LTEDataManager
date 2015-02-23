@@ -6,5 +6,4 @@ import com.entity.CellHier;
 
 public interface CellServiceLocal {
 	Collection<CellHier> getAllCell();
-	public void createCells();
 }

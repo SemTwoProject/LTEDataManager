@@ -22,8 +22,4 @@ public class InputModeServiceEJB implements InputModeServiceLocal {
 	public Collection<InputMode> getAllInputMode() {
 		return dao.getInputMode();
 	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createInputModes(){
-		dao.createInputModes();
-	}
 }

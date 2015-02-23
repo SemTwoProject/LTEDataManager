@@ -22,9 +22,4 @@ public class UEServiceEJB implements UEServiceLocal {
 	public Collection<UE> getAllUE() {
 		return dao.getUE();
 	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createUEs(){
-		dao.createUEs();
-	}
-
 }
