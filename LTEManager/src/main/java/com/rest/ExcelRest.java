@@ -37,8 +37,4 @@ public class ExcelRest {
 			service.createUE();
 			service.createFault();
 	}
-	@POST
-	public void allCreate(){
-		service.allCreate();
-	}
 }

@@ -45,9 +45,9 @@ public class Fault implements Serializable {
 	@JoinColumn(name = "duration", referencedColumnName = "duration", nullable = false)
 	@ManyToOne
 	private Duration duration;
-	@JoinColumn(name = "event_cause", referencedColumnName = "event_cause", nullable = false)
+	@JoinColumn(name = "cause", referencedColumnName = "cause", nullable = false)
 	@ManyToOne
-	private EventCause event;
+	private EventCause cause;
 	@JoinColumn(name = "ne", referencedColumnName = "ne", nullable = false)
 	@ManyToOne
 	private NEVersion ne;
@@ -72,7 +72,7 @@ public class Fault implements Serializable {
 		this.mnc = mnc;
 		this.cell = cell;
 		this.duration = duration;
-		this.event = eventCause;
+		this.cause = eventCause;
 		this.ne = ne;
 	}
 
@@ -159,11 +159,11 @@ public class Fault implements Serializable {
 
 	@XmlTransient
 	public EventCause getEvent() {
-		return event;
+		return cause;
 	}
 
-	public void setEvent(EventCause event) {
-		this.event = event;
+	public void setEvent(EventCause cause) {
+		this.cause = cause;
 	}
 
 	@XmlTransient

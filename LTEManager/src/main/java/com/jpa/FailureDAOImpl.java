@@ -20,18 +20,18 @@ public class FailureDAOImpl implements FailureDAO {
 
 	@PersistenceContext
 	private EntityManager em;
-	
-	public void createFailures(){
+
+	public void createFailures() {
 		Failure fail;
-		fail = new Failure(0,"EMERGENCY");
+		fail = new Failure(0, "EMERGENCY");
 		em.persist(fail);
-		fail = new Failure(1,"HIGH PRIORITY ACCESS");
+		fail = new Failure(1, "HIGH PRIORITY ACCESS");
 		em.persist(fail);
-		fail = new Failure(2,"MT ACCESS");
+		fail = new Failure(2, "MT ACCESS");
 		em.persist(fail);
-		fail = new Failure(3,"MO SIGNALLING");
+		fail = new Failure(3, "MO SIGNALLING");
 		em.persist(fail);
-		fail = new Failure(4,"MO DATA");
+		fail = new Failure(4, "MO DATA");
 		em.persist(fail);
 	}
 
@@ -43,13 +43,15 @@ public class FailureDAOImpl implements FailureDAO {
 
 	public Failure getByFailure(Integer failure) {
 		Query q = em.createQuery("select f from Failure f where f.failure = '"
-				+ failure +"'", Failure.class);
+				+ failure + "'", Failure.class);
 		List<Failure> fails = q.getResultList();
 		return fails.get(0);
 	}
-	
-	public Collection<Object> getFailureByFault(Fault fault){
-		Query q = em.createQuery("select f from Failure f where f.failure = '"+fault.getFailure()+"'", Failure.class);
+
+	public Collection<Object> getFailureByFault(Fault fault) {
+		Query q = em.createQuery(
+				"select f from Failure f where f.failure = failure",
+				Failure.class).setParameter("failure", fault.getFailure());
 		List<Object> fails = q.getResultList();
 		return fails;
 	}

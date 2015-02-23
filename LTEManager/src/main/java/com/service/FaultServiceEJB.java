@@ -22,12 +22,4 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	public Collection<Fault> getAllFault() {
 		return dao.getFault();
 	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createFaults(){
-		dao.createFaults();
-	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createFaultsTwo(){
-		dao.createFaultsTwo();
-	}
 }

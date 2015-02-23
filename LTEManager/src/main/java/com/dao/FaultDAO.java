@@ -13,6 +13,4 @@ public interface FaultDAO {
 
 	Fault getById(Integer id);
 	Collection <Fault> getFaultByIMSI(Long imsi);
-	public void createFaults();
-	public void createFaultsTwo();
 }

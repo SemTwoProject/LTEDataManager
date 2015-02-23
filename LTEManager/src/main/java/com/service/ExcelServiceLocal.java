@@ -8,8 +8,6 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 public interface ExcelServiceLocal {
 	
-	public void allCreate();
-	
 	void createCell() throws InvalidFormatException, FileNotFoundException,
 			IOException;
 

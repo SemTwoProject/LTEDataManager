@@ -23,9 +23,4 @@ public class FaultRest {
 	public Collection<Fault> getFault() {
 		return service.getAllFault();
 	}
-	@POST
-	public void createFaults(){
-		service.createFaults();
-		service.createFaultsTwo();
-	}
 }

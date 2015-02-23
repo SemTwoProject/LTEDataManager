@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.ejb.Local;
@@ -14,6 +15,7 @@ import javax.persistence.PersistenceContext;
 import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -70,42 +72,11 @@ public class ExcelReadImpl implements ExcelDAO {
 	private UE ue;
 	private UEType ueType;
 	private HSSFDataFormatter formatter;
-	private HSSFWorkbook wb;
+	private POIFSFileSystem fs;
 	private Sheet sheet;
+	private HSSFWorkbook wb;
+	private InputStream inputStream;
 
-	public void allCreate(){
-		CellDAO cell = new CellDAOImpl();
-		cell.createCells();
-		DurationDAO duration = new DurationDAOImpl();
-		duration.createDurations();
-		FailureDAO fail = new FailureDAOImpl();
-		fail.createFailures();
-		EventIdDAO eventId = new EventIdDAOImpl();
-		eventId.createEventIds();
-		MCCDAO mcc = new MCCDAOImpl();
-		mcc.createMCCs();
-		NEVersionDAO ne = new NEVersionDAOImpl();
-		ne.createNEVersions();
-		OSTypeDAO os = new OSTypeDAOImpl();
-		os.createOSTypes();
-		InputModeDAO input = new InputModeDAOImpl();
-		input.createInputModes();
-		IMSIDAO imsi = new IMSIDAOImpl();
-		imsi.createIMSIs();
-		UETypeDAO ueType = new UETypeDAOImpl();
-		ueType.createUETypes();
-		
-		MNCDAO mnc = new MNCDAOImpl();
-		mnc.createMNCs();
-		EventCauseDAO eventCause = new EventCauseDAOImpl();
-		eventCause.createEventCauses();
-		UEDAO ue = new UEDAOImpl();
-		ue.createUEs();
-		FaultDAO fault = new FaultDAOImpl();
-		fault.createFaults();
-		fault.createFaultsTwo();
-
-	}
 	public void createCell() throws InvalidFormatException,
 			FileNotFoundException, IOException {
 		ArrayList<Cell> col;
@@ -170,14 +141,14 @@ public class ExcelReadImpl implements ExcelDAO {
 			col1 = selectColumnValue(1, 2);
 			col2 = selectColumnValue(1, 1);
 
-			for (int i = 0; i < col.size(); i++) {
+		/*	for (int i = 0; i < col.size(); i++) {
 				eventCause = new EventCause(Integer.parseInt(formatter
 						.formatCellValue(col.get(i))),
 						formatter.formatCellValue(col1.get(i)),
 						eventId.getByEventId(Integer.parseInt(formatter
 								.formatCellValue(col2.get(i)))));
 				em.persist(eventCause);
-			}
+			}*/
 		} catch (InvalidFormatException e) {
 			e.getMessage();
 		}
@@ -232,8 +203,7 @@ public class ExcelReadImpl implements ExcelDAO {
 		try {
 			col = selectColumnValue(0, 9);
 			for (int i = 0; i < col.size(); i++) {
-				ne = new NEVersion(formatter
-						.formatCellValue(col.get(i)));
+				ne = new NEVersion(formatter.formatCellValue(col.get(i)));
 				em.persist(ne);
 			}
 		} catch (InvalidFormatException e) {
@@ -392,8 +362,7 @@ public class ExcelReadImpl implements ExcelDAO {
 			 * eventCause
 			 */
 			for (int i = 0; i < col.size(); i++) {
-				fault = new Fault(formatter
-						.formatCellValue(col.get(i)),
+				/*fault = new Fault(formatter.formatCellValue(col.get(i)),
 						eventIdF.getByEventId(Integer.parseInt(formatter
 								.formatCellValue(col1.get(i)))),
 						failF.getByFailure(Integer.parseInt(formatter
@@ -411,7 +380,7 @@ public class ExcelReadImpl implements ExcelDAO {
 						eventCauseF.getByEventCause(Integer.parseInt(formatter
 								.formatCellValue(col8.get(i)))),
 						neF.getByNE(formatter.formatCellValue(col9.get(i))));
-				em.persist(fault);
+				*/em.persist(fault);
 			}
 		} catch (InvalidFormatException e) {
 			e.getMessage();
@@ -423,16 +392,16 @@ public class ExcelReadImpl implements ExcelDAO {
 
 		ArrayList<Cell> list = new ArrayList<Cell>();
 
-		File file;
-		FileInputStream inputStream;
-
 		try {
-			file = new File(getClass().getClassLoader().getResource("test.xls")
-					.getFile());
-			inputStream = new FileInputStream(file);
-			wb = new HSSFWorkbook(inputStream);
-			sheet = wb.getSheetAt(sheetNumber);
+			File f = new File("/test.xls");
+			inputStream = new FileInputStream(f);
+					//getClass().getClassLoader()
+					//.getResourceAsStream("test.xls");
+			fs = new POIFSFileSystem(inputStream);
+			inputStream.close();
+			wb = new HSSFWorkbook(fs);
 
+			sheet = wb.getSheetAt(sheetNumber);
 			for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
 				Row row = sheet.getRow(i);
 				Cell cell = row.getCell(cellNumber);

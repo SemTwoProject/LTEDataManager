@@ -13,32 +13,35 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlTransient;
+//import javax.xml.bind.annotation.XmlTransient;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "event_cause")
+@Table(name = "cause")
 public class EventCause implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Integer id;
-	@Column(name = "event_cause")
-	private Integer event;
+	
+	@Column(name = "cause")
+	private Integer cause;
+	
 	@Column(name = "description")
 	private String description;
+	
 	@JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
 	@ManyToOne
 	private EventId eventId;
-	@OneToMany(mappedBy = "event")
+	@OneToMany(mappedBy = "cause")
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public EventCause() {
 	}
 
-	public EventCause(Integer event, String description, EventId eventId) {
-		this.event = event;
+	public EventCause(Integer cause, String description, EventId eventId) {
+		this.cause = cause;
 		this.description = description;
 		this.eventId = eventId;
 	}
@@ -52,11 +55,11 @@ public class EventCause implements Serializable {
 	}
 
 	public Integer getEvent() {
-		return event;
+		return cause;
 	}
 
-	public void setEvent(Integer event) {
-		this.event = event;
+	public void setEvent(Integer cause) {
+		this.cause = cause;
 	}
 
 	public String getDescription() {
@@ -67,7 +70,7 @@ public class EventCause implements Serializable {
 		this.description = description;
 	}
 
-	@XmlTransient
+
 	public EventId getEventId() {
 		return eventId;
 	}

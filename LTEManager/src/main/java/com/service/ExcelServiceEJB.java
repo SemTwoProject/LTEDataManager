@@ -23,9 +23,6 @@ public class ExcelServiceEJB implements ExcelServiceLocal {
 		dao.createCell();
 
 	}
-	public void allCreate(){
-		dao.allCreate();
-	}
 
 	public void createDuration() throws InvalidFormatException,
 			FileNotFoundException, IOException {

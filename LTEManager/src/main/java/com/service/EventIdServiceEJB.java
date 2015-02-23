@@ -22,8 +22,9 @@ public class EventIdServiceEJB implements EventIdServiceLocal {
 	public Collection<EventId> getAllEventId() {
 		return dao.getEventId();
 	}
+	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void createEventIds(){
-		dao.createEventIds();
+	public EventId getByEventId(Integer eventId){
+		return dao.getByEventId(eventId);
 	}
 }

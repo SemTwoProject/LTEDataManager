@@ -11,8 +11,6 @@ import org.apache.poi.ss.usermodel.Cell;
 
 @Local
 public interface ExcelDAO {
-	
-	public void allCreate();
 
 	// are not dependent on the creation of parent entity
 	public void createCell() throws InvalidFormatException,
