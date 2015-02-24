@@ -1,12 +1,14 @@
 package com.service;
 
+import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.io.IOException;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 public interface ExcelServiceLocal {
+	
+	public void returnRow(File file) throws InvalidFormatException;
 	
 	void createCell() throws InvalidFormatException, FileNotFoundException,
 			IOException;

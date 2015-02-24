@@ -1,5 +1,6 @@
 package com.service;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -18,6 +19,9 @@ public class ExcelServiceEJB implements ExcelServiceLocal {
 	@EJB
 	private ExcelDAO dao;
 
+	public void returnRow(File file) throws InvalidFormatException{
+		dao.returnRow(file);
+	}
 	public void createCell() throws InvalidFormatException,
 			FileNotFoundException, IOException {
 		dao.createCell();

@@ -11,6 +11,7 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.ServletContext;
 
 import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -372,6 +373,29 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
+	public void returnRow(File file)
+			throws InvalidFormatException {
+		try {
+			inputStream = new FileInputStream(file);
+
+			fs = new POIFSFileSystem(inputStream);
+			inputStream.close();
+			wb = new HSSFWorkbook(fs);
+
+			sheet = wb.getSheetAt(0);
+			for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+				Row row = sheet.getRow(i);
+				Cell cell = row.getCell(0);
+				System.out.println(cell.getStringCellValue());
+			}
+			wb.close();
+
+		} catch (FileNotFoundException fi) {
+			System.out.println(fi.getMessage());
+		} catch (IOException io) {
+			System.out.println(io.getMessage());
+		}
+	}
 	public ArrayList<Cell> selectColumnValue(int sheetNumber, int cellNumber)
 			throws InvalidFormatException {
 

@@ -21,7 +21,6 @@ public class EventFailureIMSIRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Object> 
 	getEventsAndFailuresByImsi(@FormParam("imsi") Long imsi) {
-		System.out.println("This " + imsi);
 		return service.getAllEventsAndFailure(imsi);
 	}
 }

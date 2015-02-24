@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import org.apache.poi.ss.usermodel.Cell;
 
 @Local
 public interface ExcelDAO {
+	
+	public void returnRow(File file) throws InvalidFormatException;
 
 	// are not dependent on the creation of parent entity
 	public void createCell() throws InvalidFormatException,
