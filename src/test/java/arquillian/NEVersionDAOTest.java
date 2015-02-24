@@ -43,17 +43,17 @@ public class NEVersionDAOTest {
 
 	@Test
 	public void NEReturnedByNEVersionValue() {
-		int verizon = 1111;
-		int three = 2222;
-		int o2 = 3333;
-		int telephonica = 4444;
-		int vodafone = 5555;
+		String verizon = "1111";
+		String three = "2222";
+		String o2 = "3333";
+		String telephonica = "4444";
+		String vodafone = "5555";
 				
-		int testVerizon = dao.getByNE(verizon).getNe();
-		int testThree = dao.getByNE(three).getNe();
-		int testO2 = dao.getByNE(o2).getNe();
-		int testTelephonica = dao.getByNE(telephonica).getNe();
-		int testVodafone = dao.getByNE(vodafone).getNe();
+		String testVerizon = dao.getByNE(verizon).getNe();
+		String testThree = dao.getByNE(three).getNe();
+		String testO2 = dao.getByNE(o2).getNe();
+		String testTelephonica = dao.getByNE(telephonica).getNe();
+		String testVodafone = dao.getByNE(vodafone).getNe();
 
 		assertEquals(verizon, testVerizon);
 		assertEquals(three, testThree);
