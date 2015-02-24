@@ -1,5 +1,6 @@
 package com.jpa;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -43,13 +44,41 @@ public class FaultDAOImpl implements FaultDAO {
 		return faults.get(0);
 	}
 
-	public Collection<Fault> getFaultByIMSI(Long imsi) {
+	public Collection<Object> getFaultByIMSI(Long imsi) {
+		Collection<Fault> faults = getFaultsFromImsi(imsi);
+		List<Object> results = new ArrayList<Object>();
+		for(Fault fault: faults){
+			results.addAll(getEventCauseByFault(fault));
+			results.addAll(getFailureByFault(fault));
+		}
+		return results;
+	}
+	public Collection<Fault> getFaultsFromImsi(Long imsi) {
 		Query q = em.createQuery("select f from Fault f where f.imsi = :imsi",
 				Fault.class).setParameter("imsi", imsi);
 		List<Fault> faults = q.getResultList();
 		return faults;
 	}
+	public List<Object> getEventCauseByFault(Fault fault) {
+		Query q = em.createQuery(
+				"select e from EventCause e where e.eventId = :fault",
+				EventCause.class);
+		q.setParameter("fault", fault.getEventId());
+		List<Object> causes = q.getResultList();
+		return causes;
+	}
+	public Collection<Object> getFailureByFault(Fault fault) {
+		Query q = em.createQuery("select f from Failure f where f.fault = :fault",
+				Failure.class);
+		q.setParameter("fault", fault.getFailure());
+		List<Object> fails = q.getResultList();
+		return fails;
+	}
 
+	/**
+	 * Helper queries for constructing a Fault by retrieving the relevant entity objects
+	 */
+	
 	public Failure getByFailure(Integer failure) {
 		Query q = em.createQuery(
 				"select f from Failure f where f.failure = :failure",

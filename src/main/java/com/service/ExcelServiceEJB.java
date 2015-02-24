@@ -1,8 +1,8 @@
 package com.service;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
@@ -19,84 +19,82 @@ public class ExcelServiceEJB implements ExcelServiceLocal {
 	@EJB
 	private ExcelDAO dao;
 
-	public void returnRow(File file) throws InvalidFormatException{
-		dao.returnRow(file);
-	}
-	public void createCell() throws InvalidFormatException,
+	
+	public void createCell(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createCell();
+		dao.createCell(in);
 
 	}
 
-	public void createDuration() throws InvalidFormatException,
+	public void createDuration(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createDuration();
+		dao.createDuration(in);
 
 	}
 
-	public void createIMSI() throws InvalidFormatException,
+	public void createIMSI(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createIMSI();
+		dao.createIMSI(in);
 
 	}
 
-	public void createOSType() throws InvalidFormatException,
+	public void createOSType(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createOSType();
+		dao.createOSType(in);
 
 	}
 
-	public void createNEVersion() throws InvalidFormatException,
+	public void createNEVersion(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createNEVersion();
+		dao.createNEVersion(in);
 
 	}
 
-	public void createUEType() throws InvalidFormatException,
+	public void createUEType(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createUEType();
+		dao.createUEType(in);
 
 	}
 
-	public void createMCC() throws InvalidFormatException,
+	public void createMCC(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createMCC();
+		dao.createMCC(in);
 
 	}
 
-	public void createFailure() throws InvalidFormatException,
+	public void createFailure(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createFailure();
+		dao.createFailure(in);
 
 	}
 
-	public void createEventId() throws InvalidFormatException,
+	public void createEventId(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createEventId();
+		dao.createEventId(in);
 
 	}
 
-	public void createMNC() throws InvalidFormatException,
+	public void createMNC(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createMNC();
+		dao.createMNC(in);
 
 	}
 
-	public void createEventCause() throws InvalidFormatException,
+	public void createEventCause(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createEventCause();
+		dao.createEventCause(in);
 
 	}
 
-	public void createUE() throws InvalidFormatException,
+	public void createUE(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createUE();
+		dao.createUE(in);
 
 	}
 
-	public void createFault() throws InvalidFormatException,
+	public void createFault(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createFault();
+		dao.createFault(in);
 
 	}
 }

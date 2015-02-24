@@ -1,51 +1,50 @@
 package com.service;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 public interface ExcelServiceLocal {
 	
-	public void returnRow(File file) throws InvalidFormatException;
-	
-	void createCell() throws InvalidFormatException, FileNotFoundException,
+
+	void createCell(InputStream in) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createDuration() throws InvalidFormatException, FileNotFoundException,
+	void createDuration(InputStream in) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createIMSI() throws InvalidFormatException, FileNotFoundException,
+	void createIMSI(InputStream in) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createOSType() throws InvalidFormatException, FileNotFoundException,
+	void createOSType(InputStream in) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createNEVersion() throws InvalidFormatException,
+	void createNEVersion(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	void createUEType() throws InvalidFormatException, FileNotFoundException,
+	void createUEType(InputStream in) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createMCC() throws InvalidFormatException, FileNotFoundException,
+	void createMCC(InputStream in) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createFailure() throws InvalidFormatException, FileNotFoundException,
+	void createFailure(InputStream in) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createEventId() throws InvalidFormatException, FileNotFoundException,
+	void createEventId(InputStream in) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createMNC() throws InvalidFormatException, FileNotFoundException,
+	void createMNC(InputStream in) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createEventCause() throws InvalidFormatException,
+	void createEventCause(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	void createUE() throws InvalidFormatException, FileNotFoundException,
+	void createUE(InputStream in) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createFault() throws InvalidFormatException, FileNotFoundException,
+	void createFault(InputStream in) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 }

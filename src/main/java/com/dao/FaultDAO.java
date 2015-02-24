@@ -23,7 +23,7 @@ public interface FaultDAO {
 
 	Fault getById(Integer id);
 
-	Collection<Fault> getFaultByIMSI(Long imsi);
+	Collection<Object> getFaultByIMSI(Long imsi);
 
 	Failure getByFailure(Integer failure);
 

@@ -1,7 +1,9 @@
 package com.rest;
 
 import javax.ejb.EJB;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -22,4 +24,12 @@ public class FaultRest {
 	public Collection<Fault> getFault() {
 		return service.getAllFault();
 	}
+
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Object> getEventsAndFailuresByImsi(
+			@FormParam("imsi") Long imsi) {
+		return service.getFaultByIMSI(imsi);
+	}
+
 }
