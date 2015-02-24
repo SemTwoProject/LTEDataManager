@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.ejb.Local;
 
+import org.apache.commons.fileupload.FileUpload;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 
@@ -13,49 +14,46 @@ import org.apache.poi.ss.usermodel.Cell;
 public interface ExcelDAO {
 
 	// are not dependent on the creation of parent entity
-	public void createCell() throws InvalidFormatException,
+	public void createCell(FileUpload form) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createDuration() throws InvalidFormatException,
+	public void createDuration(FileUpload form) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createIMSI() throws InvalidFormatException,
+	public void createIMSI(FileUpload form) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createOSType() throws InvalidFormatException,
+	public void createOSType(FileUpload form) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 	
-	public void createInputMode() throws InvalidFormatException,
+	public void createInputMode(FileUpload form) throws InvalidFormatException,
 	FileNotFoundException, IOException;
 
 	public void createNEVersion() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createUEType() throws InvalidFormatException,
+	public void createUEType(FileUpload form) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createMCC() throws InvalidFormatException,
+	public void createMCC(FileUpload form) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createFailure() throws InvalidFormatException,
+	public void createFailure(FileUpload form) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createEventId() throws InvalidFormatException,
+	public void createEventId(FileUpload form) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
 	// are child dependents
-	public void createMNC() throws InvalidFormatException,
+	public void createMNC(FileUpload form) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createEventCause() throws InvalidFormatException,
+	public void createEventCause(FileUpload form) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createUE() throws InvalidFormatException,
+	public void createUE(FileUpload form) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createFault() throws InvalidFormatException,
+	public void createFault(FileUpload form) throws InvalidFormatException,
 			FileNotFoundException, IOException;
-	
-	ArrayList<Cell> selectColumnValue(int sheet, int column) throws InvalidFormatException;
-
 }
