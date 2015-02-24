@@ -6,7 +6,7 @@
 
 	<persistence-unit name="LTEManager">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>java:/mySQL</jta-data-source>
+		<jta-data-source>java:jboss/datasources/mysql</jta-data-source>
 		<class>com.entity.CellHier</class>
 		<class>com.entity.Duration</class>
 		<class>com.entity.EventCause</class>

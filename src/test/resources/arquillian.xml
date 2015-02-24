@@ -5,7 +5,7 @@
         http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 	<container qualifier="jbossas-managed-wildfly-8" default="true">
 		<configuration>
-			<property name="jbossHome">{JBOSS_HOME}</property>
+			<property name="jbossHome">C:\Users\D14125324\jboss\wildfly-8.2.0.Final</property>
 		</configuration>
 	</container>
 </arquillian>

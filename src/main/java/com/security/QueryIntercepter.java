@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
-import javax.inject.Inject;
+import javax.ejb.EJB;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.MultivaluedMap;
@@ -25,11 +25,6 @@ import org.jboss.resteasy.util.Base64;
 import com.entity.User;
 import com.interfaces.UserServiceLocal;
 
-/*This method checks the role permission on the method being called
-and depending on the user role access is granted or denied. It takes
-in the user password and username that is enrypted and then compares
-that username to the users table in the database to determine the user
-role type.*/
 
 @Provider
 public class QueryIntercepter implements ContainerRequestFilter {
@@ -40,7 +35,7 @@ public class QueryIntercepter implements ContainerRequestFilter {
 	private static final ServerResponse ACCESS_FORBIDDEN = new ServerResponse("This act is forbidden",403, new Headers<Object>());
 	private static final ServerResponse SERVER_ERROR = new ServerResponse("SERVER ERROR", 500, new Headers<Object>());
 
-	@Inject 
+	@EJB
 	private UserServiceLocal service;
 
 	public void filter(ContainerRequestContext requestContext){
