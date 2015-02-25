@@ -40,6 +40,7 @@ public class ExcelRest {
 			FileItemStream item = iter.next();
 		    String name = item.getFieldName();
 		    InputStream stream = item.openStream();
+		    System.out.println("File Name: "+name);
 		    
 		    service.createCell(stream);
 			service.createDuration(stream);
@@ -55,7 +56,7 @@ public class ExcelRest {
 			service.createUE(stream);
 			service.createFault(stream);
 			
-			System.out.println("File Name: "+name);
+			
 
 		} catch (FileUploadException e) {
 			e.printStackTrace();

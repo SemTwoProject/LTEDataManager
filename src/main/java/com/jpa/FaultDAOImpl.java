@@ -47,9 +47,11 @@ public class FaultDAOImpl implements FaultDAO {
 	public Collection<Object> getFaultByIMSI(Long imsi) {
 		Collection<Fault> faults = getFaultsFromImsi(imsi);
 		List<Object> results = new ArrayList<Object>();
+		System.out.println("Fault: "+imsi);
 		for(Fault fault: faults){
-			results.addAll(getEventCauseByFault(fault));
-			results.addAll(getFailureByFault(fault));
+			System.out.println("Faults: "+fault);
+			results.add(getEventCauseByFault(fault));
+			results.add(getFailureByFault(fault));
 		}
 		return results;
 	}

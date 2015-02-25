@@ -14,7 +14,6 @@ import org.apache.commons.fileupload.FileUpload;
 import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -61,10 +60,8 @@ public class ExcelReadImpl implements ExcelDAO {
 	private UE ue;
 	private UEType ueType;
 	private HSSFDataFormatter formatter;
-	private POIFSFileSystem fs;
 	private Sheet sheet;
 	private HSSFWorkbook wb;
-	private InputStream inputStream;
 	FileUpload file;
 
 	public void createCell(InputStream in) throws InvalidFormatException,
@@ -378,9 +375,7 @@ public class ExcelReadImpl implements ExcelDAO {
 		ArrayList<Cell> list = new ArrayList<Cell>();
 
 		try {
-			fs = new POIFSFileSystem(in);
-			inputStream.close();
-			wb = new HSSFWorkbook(fs);
+			wb = new HSSFWorkbook(in);
 
 			sheet = wb.getSheetAt(sheetNumber);
 			for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
