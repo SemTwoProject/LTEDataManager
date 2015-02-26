@@ -133,4 +133,6 @@ public class FaultDAOImpl implements FaultDAO {
 		 List<UE> tacs = q.getResultList();
 		return tacs.get(0);
 	}
+
+	
 }

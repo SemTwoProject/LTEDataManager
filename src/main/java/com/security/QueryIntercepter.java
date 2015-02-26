@@ -1,4 +1,4 @@
-package com.security;
+/*package com.security;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -121,3 +121,4 @@ public class QueryIntercepter implements ContainerRequestFilter {
 
 }	
 
+*/
