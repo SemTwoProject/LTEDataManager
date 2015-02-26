@@ -28,7 +28,7 @@ public class IMSIDAOImpl implements IMSIDAO {
 	}
 
 	public IMSI getByIMSI(Long imsi) {
-		Query q = em.createQuery("select i from imsi i where i.imsi = :imsi",
+		Query q = em.createQuery("select i from IMSI i where i.imsi = :imsi",
 				IMSI.class);
 		q.setParameter("imsi", imsi);
 		List<IMSI> imsis = q.getResultList();

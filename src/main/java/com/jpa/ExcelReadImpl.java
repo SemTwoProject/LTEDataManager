@@ -10,7 +10,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.apache.commons.fileupload.FileUpload;
 import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -62,7 +61,6 @@ public class ExcelReadImpl implements ExcelDAO {
 	private HSSFDataFormatter formatter;
 	private Sheet sheet;
 	private HSSFWorkbook wb;
-	FileUpload file;
 
 	public void createCell(InputStream in) throws InvalidFormatException,
 			FileNotFoundException, IOException {

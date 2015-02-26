@@ -32,7 +32,7 @@ public class FaultDAOImpl implements FaultDAO {
 	private EntityManager em;
 
 	public Collection<Fault> getFault() {
-		Query q = em.createQuery("select ft from Fault ft");
+		Query q = em.createQuery("select f from Fault f");
 		return q.getResultList();
 	}
 
@@ -47,32 +47,30 @@ public class FaultDAOImpl implements FaultDAO {
 	public Collection<Object> getFaultByIMSI(Long imsi) {
 		Collection<Fault> faults = getFaultsFromImsi(imsi);
 		List<Object> results = new ArrayList<Object>();
-		System.out.println("Fault: "+imsi);
 		for(Fault fault: faults){
-			System.out.println("Faults: "+fault);
-			results.add(getEventCauseByFault(fault));
-			results.add(getFailureByFault(fault));
+			results.addAll(getEventCauseByFault(fault));
+			results.addAll(getFailureByFault(fault));
 		}
 		return results;
 	}
 	public Collection<Fault> getFaultsFromImsi(Long imsi) {
-		Query q = em.createQuery("select f from Fault f where f.imsi = :imsi",
+		Query q = em.createQuery("select f from Fault f where f.imsi.imsi = :imsi",
 				Fault.class).setParameter("imsi", imsi);
 		List<Fault> faults = q.getResultList();
 		return faults;
 	}
 	public List<Object> getEventCauseByFault(Fault fault) {
 		Query q = em.createQuery(
-				"select e from EventCause e where e.eventId = :fault",
+				"select e from EventCause e where e.eventId.eventId = :fault",
 				EventCause.class);
-		q.setParameter("fault", fault.getEventId());
+		q.setParameter("fault", fault.getEventId().getEventId());
 		List<Object> causes = q.getResultList();
 		return causes;
 	}
 	public Collection<Object> getFailureByFault(Fault fault) {
-		Query q = em.createQuery("select f from Failure f where f.fault = :fault",
+		Query q = em.createQuery("select f from Failure f where f.failure = :fault",
 				Failure.class);
-		q.setParameter("fault", fault.getFailure());
+		q.setParameter("fault", fault.getFailure().getfailure());
 		List<Object> fails = q.getResultList();
 		return fails;
 	}
@@ -108,7 +106,7 @@ public class FaultDAOImpl implements FaultDAO {
 	}
 
 	public IMSI getByIMSI(Long imsi) {
-		Query q = em.createQuery("select i from imsi i where i.imsi = :imsi",
+		Query q = em.createQuery("select i from IMSI i where i.imsi = :imsi",
 				IMSI.class);
 		q.setParameter("imsi", imsi);
 		List<IMSI> imsis = q.getResultList();

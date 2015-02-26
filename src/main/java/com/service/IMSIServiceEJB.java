@@ -18,8 +18,11 @@ public class IMSIServiceEJB implements IMSIServiceLocal {
 	@EJB
 	private IMSIDAO dao;
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Collection<IMSI> getAllIMSI() {
 		return dao.getIMSI();
+	}
+
+	public IMSI getByIMSI(Long imsi) {
+		return dao.getByIMSI(imsi);
 	}
 }

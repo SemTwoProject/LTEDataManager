@@ -70,17 +70,16 @@
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
 				<div>
-					<form action="rest/excel" method="post"
-						enctype="multipart/form-data">
-						<p>
-							Select a file : <input type="file" name="file" /> <input
-								type="submit" value="Upload" />
+					<form action="rest/excel" method="post" enctype="multipart/form-data">
+ 					 	<input type="text" name="name" />
+  						<input type="file" name="file" />
+  						<input type="submit" />
+		
 					</form>
-					<form action="rest/fault" method="post"
-						enctype="multipart/form-data">
+					<form action="rest/fault" method="post">
 						<p>
-							Select a imsi : <input type="text" name="imsi" /> <input
-								type="submit" value="Submit" />
+					Select a imsi : <input type="text" name="imsi" /> 
+<input type="submit" value="Search" />
 					</form>
 				</div>
 				<div class="row">
