@@ -133,6 +133,11 @@ public class FaultDAOImpl implements FaultDAO {
 		 List<UE> tacs = q.getResultList();
 		return tacs.get(0);
 	}
-
-	
+	//Unfinished
+//	@Override
+//	public Collection<Object> getTotalFaultsAndDurationPerIMSI()
+//	{
+//		Query q = em.createQuery("select IMSI as IMSI, COUNT(f.id) as TotalFailures, SUM(duration) as TotalDuration from Faults f Group By IMSI");
+//		return null;
+//	}	
 }
