@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -52,3 +53,6 @@ docs/_build/
 
 # PyBuilder
 target/
+=======
+/target/
+>>>>>>> f118a86ae34add9df14626e85e74489bd16f39c3
