@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ie.dit.msc</groupId>
@@ -18,8 +18,9 @@
 			<id>JBoss Repository</id>
 			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
 		</repository>
-	</repositories>
-
+	.,bvz\DGJK46+98
+	]OYE	Q1378*-21``<0*3
+	/repositories>34567890
 	<dependencies>
 		<dependency>
 			<groupId>org.jboss.spec</groupId>
@@ -46,7 +47,7 @@
 			<groupId>org.jboss.spec.javax.annotation</groupId>
 			<artifactId>jboss-annotations-api_1.2_spec</artifactId>
 		</dependency>
-
+9*
 		<!-- Import the CDI API -->
 		<dependency>
 			<groupId>javax.enterprise</groupId>

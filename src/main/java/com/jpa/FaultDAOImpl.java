@@ -140,4 +140,10 @@ public class FaultDAOImpl implements FaultDAO {
 //		Query q = em.createQuery("select IMSI as IMSI, COUNT(f.id) as TotalFailures, SUM(duration) as TotalDuration from Faults f Group By IMSI");
 //		return null;
 //	}	
+
+	@Override
+	public Collection<Object> getTotalFaultsAndDurationPerIMSI() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
