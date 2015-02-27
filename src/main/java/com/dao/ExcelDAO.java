@@ -2,7 +2,6 @@ package com.dao;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.ejb.Local;
 
@@ -12,46 +11,46 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 public interface ExcelDAO {
 
 	// are not dependent on the creation of parent entity
-	public void createCell(InputStream form) throws InvalidFormatException,
+	public void createCell() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createDuration(InputStream form) throws InvalidFormatException,
+	public void createDuration() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createIMSI(InputStream form) throws InvalidFormatException,
+	public void createIMSI() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createOSType(InputStream form) throws InvalidFormatException,
+	public void createOSType() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 	
-	public void createInputMode(InputStream form) throws InvalidFormatException,
+	public void createInputMode() throws InvalidFormatException,
 	FileNotFoundException, IOException;
 
-	public void createNEVersion(InputStream form) throws InvalidFormatException,
+	public void createNEVersion() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createUEType(InputStream form) throws InvalidFormatException,
+	public void createUEType() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createMCC(InputStream form) throws InvalidFormatException,
+	public void createMCC() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createFailure(InputStream form) throws InvalidFormatException,
+	public void createFailure() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createEventId(InputStream form) throws InvalidFormatException,
+	public void createEventId() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
 	// are child dependents
-	public void createMNC(InputStream form) throws InvalidFormatException,
+	public void createMNC() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createEventCause(InputStream form) throws InvalidFormatException,
+	public void createEventCause() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createUE(InputStream form) throws InvalidFormatException,
+	public void createUE() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createFault(InputStream form) throws InvalidFormatException,
+	public void createFault() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 }
