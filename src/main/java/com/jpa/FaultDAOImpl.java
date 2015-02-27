@@ -16,6 +16,10 @@ import com.entity.EventCause;
 import com.entity.EventId;
 import com.entity.Failure;
 import com.entity.Fault;
+<<<<<<< HEAD
+=======
+import com.entity.IMSI;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 import com.entity.MCC;
 import com.entity.MNC;
 import com.entity.NEVersion;
@@ -35,17 +39,128 @@ public class FaultDAOImpl implements FaultDAO {
 	}
 
 	public Fault getById(Integer id) {
+<<<<<<< HEAD
 		Query q = em.createQuery("select f from Fault f where f.id = " + id,
 				Fault.class);
+=======
+		Query q = em.createQuery("select f from Fault f where f.id = :id",
+				Fault.class);
+		q.setParameter("id", id);
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 		List<Fault> faults = q.getResultList();
 		return faults.get(0);
 	}
 
+<<<<<<< HEAD
 	public void createFault(String date, EventId eventId, Failure failure, UE tac, MCC mcc,
 			MNC mnc, CellHier cellId, 
 			Duration duration, EventCause eventCause, NEVersion ne){
 		Fault fault = new Fault(date, eventId, failure, tac, mcc, mnc, cellId,
 				duration, eventCause, ne);
 		em.persist(fault);
+=======
+	public Collection<Fault> getFaultByIMSI(Long imsi) {
+		Query q = em.createQuery("select f from Fault f where f.imsi = :imsi",
+				Fault.class).setParameter("imsi", imsi);
+		List<Fault> faults = q.getResultList();
+		return faults;
+	}
+
+	public Failure getByFailure(Integer failure) {
+		Query q = em.createQuery(
+				"select f from Failure f where f.failure = :failure",
+				Failure.class);
+		q.setParameter("failure", failure);
+		List<Failure> fails = q.getResultList();
+		return fails.get(0);
+	}
+
+	public CellHier getByCellId(Integer cellId) {
+		Query q = em.createQuery(
+				"select c from CellHier c where c.cellId = :cellId",
+				CellHier.class);
+		q.setParameter("cellId", cellId);
+		List<CellHier> cells = q.getResultList();
+		return cells.get(0);
+	}
+
+	public NEVersion getByNE(String ne) {
+		Query q = em.createQuery("select n from NEVersion n where n.ne = :ne",
+				NEVersion.class);
+		q.setParameter("ne", ne);
+		List<NEVersion> nes = q.getResultList();
+		return nes.get(0);
+	}
+
+	public IMSI getByIMSI(Long imsi) {
+		Query q = em.createQuery("select i from imsi i where i.imsi = :imsi",
+				IMSI.class);
+		q.setParameter("imsi", imsi);
+		List<IMSI> imsis = q.getResultList();
+		return imsis.get(0);
+	}
+
+	public Duration getByDuration(Integer duration) {
+		Query q = em.createQuery(
+				"select d from Duration d where d.duration = :duration",
+				Duration.class);
+		q.setParameter("duration", duration);
+		List<Duration> durations = q.getResultList();
+		return durations.get(0);
+	}
+
+	public EventCause getByEventCause(Integer event) {
+		Query q = em.createQuery(
+				"select e from EventCause e where e.cause = :event",
+				EventCause.class);
+		q.setParameter("event", event);
+		List<EventCause> causes = q.getResultList();
+		return causes.get(0);
+	}
+
+	public EventId getByEventId(Integer eventId) {
+		Query q = em.createQuery(
+				"select e from EventId e where e.eventId = :eventId",
+				EventId.class);
+		q.setParameter("eventId", eventId);
+		List<EventId> events = q.getResultList();
+		return events.get(0);
+	}
+
+	public MCC getByMCC(Integer mcc) {
+		Query q = em.createQuery("select m from MCC m where m.mcc = :mcc",
+				MCC.class);
+		q.setParameter("mcc", mcc);
+		List<MCC> mccs = q.getResultList();
+		return mccs.get(0);
+	}
+
+	public MNC getByMNC(Integer mnc) {
+		Query q = em.createQuery("select m from MNC m where m.mnc = :mnc",
+				MNC.class);
+		q.setParameter("mnc", mnc);
+		List<MNC> mncs = q.getResultList();
+		return mncs.get(0);
+	}
+	public UE getByTac(Integer tac) {
+		Query q = em.createQuery("select u from UE u where u.tac = :tac",
+				UE.class);
+		 q.setParameter("tac", tac);
+		 List<UE> tacs = q.getResultList();
+		return tacs.get(0);
+	}
+	//Unfinished
+//	@Override
+//	public Collection<Object> getTotalFaultsAndDurationPerIMSI()
+//	{
+//		Query q = em.createQuery("select IMSI as IMSI, COUNT(f.id) as TotalFailures, SUM(duration) as TotalDuration from Faults f Group By IMSI");
+//		return null;
+//	}	
+
+	@Override
+	public Collection<Object> getTotalFaultsAndDurationPerIMSI() {
+		// TODO Auto-generated method stub
+		return null;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	}
 }

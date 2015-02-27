@@ -3,9 +3,16 @@
 	xsi:schemaLocation="
         http://java.sun.com/xml/ns/persistence
         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+<<<<<<< HEAD
 	<persistence-unit name="ltedb">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/ltedbmySQL</jta-data-source>
+=======
+
+	<persistence-unit name="LTEManager">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:jboss/datasources/mysql</jta-data-source>
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 		<class>com.entity.CellHier</class>
 		<class>com.entity.Duration</class>
 		<class>com.entity.EventCause</class>
@@ -20,11 +27,20 @@
 		<class>com.entity.OSType</class>
 		<class>com.entity.UE</class>
 		<class>com.entity.UEType</class>
+<<<<<<< HEAD
 		<jta-data-source>java:/lteusersmySQL</jta-data-source>
+=======
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 		<class>com.entity.User</class>
 		<properties>
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="false" />
+<<<<<<< HEAD
 		</properties>
 	</persistence-unit> 
+=======
+			<property name="hibernate.hdm2ddl.auto" value="update"/>
+		</properties>
+	</persistence-unit>
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 </persistence>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 DELEGATES_PREFERENCE=delegateValidatorList
 USER_BUILD_PREFERENCE=enabledBuildValidatorListorg.jboss.tools.common.validation.ValidatorManager;org.eclipse.wst.wsi.ui.internal.WSIMessageValidator;org.eclipse.jst.j2ee.internal.classpathdep.ClasspathDependencyValidator;org.jboss.tools.seam.internal.core.validation.SeamProjectPropertyValidator;
 USER_MANUAL_PREFERENCE=enabledManualValidatorListorg.jboss.tools.common.validation.ValidatorManager;org.eclipse.wst.wsi.ui.internal.WSIMessageValidator;org.eclipse.jst.j2ee.internal.classpathdep.ClasspathDependencyValidator;org.jboss.tools.seam.internal.core.validation.SeamProjectPropertyValidator;
@@ -20,3 +21,7 @@ vals/org.eclipse.wst.xsd.core.xsd/groups=0107include0107fileext03xsdF0107exclude
 vals/org.eclipse.wst.xsl.core.xsl/groups=0107include0207fileext03xslF111contentType134org.eclipse.wst.xml.core.xslsourceT0107exclude0104file03srcT02
 vals/org.jboss.tools.jsf.xhtml/groups=0107include06111contentType111jsf.faceletT111contentType136org.eclipse.wst.html.core.htmlsourceT111contentType142org.eclipse.jst.jsp.core.jspfragmentsourceT111contentType134org.eclipse.jst.jsp.core.tagsourceT07fileext05xhtmlF07fileext03jsfF0107exclude0104file03srcT02
 vf.version=3
+=======
+disabled=06target
+eclipse.preferences.version=1
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68

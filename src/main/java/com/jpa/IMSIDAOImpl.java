@@ -21,6 +21,7 @@ public class IMSIDAOImpl implements IMSIDAO {
 	private EntityManager em;
 
 	public Collection<IMSI> getIMSI() {
+<<<<<<< HEAD
 		Query q = em.createQuery("select I from IMSI I left join fetch I.faultList");
 		return q.getResultList();
 
@@ -35,4 +36,19 @@ public class IMSIDAOImpl implements IMSIDAO {
 		em.persist(im);
 		
 	}
+=======
+		Query q = em
+				.createQuery("select I from IMSI I");
+		return q.getResultList();
+
+	}
+
+	public IMSI getByIMSI(Long imsi) {
+		Query q = em.createQuery("select i from imsi i where i.imsi = :imsi",
+				IMSI.class);
+		q.setParameter("imsi", imsi);
+		List<IMSI> imsis = q.getResultList();
+		return imsis.get(0);
+	}
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 }

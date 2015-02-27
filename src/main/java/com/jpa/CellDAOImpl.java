@@ -17,6 +17,7 @@ import com.entity.CellHier;
 @SuppressWarnings("unchecked")
 public class CellDAOImpl implements CellDAO {
 
+<<<<<<< HEAD
 	@PersistenceContext private EntityManager em;
 	
 	public Collection<CellHier> getCell() {
@@ -30,6 +31,22 @@ public class CellDAOImpl implements CellDAO {
 	public CellHier getByCellId(Long cellId){
 		Query q = em.createQuery("select cid from CellHier cid where cid.cellId = "+cellId +" left join fetch cid.faultList", CellHier.class);
 		List<CellHier> cells = q.getResultList();
+=======
+	@PersistenceContext
+	private EntityManager em;
+	
+	public Collection<CellHier> getCell() {
+		Query q = em
+				.createQuery("select c from CellHier c");
+		return q.getResultList();
+	}
+	
+	public CellHier getByCellId(Integer cellId) {
+		Query q = em.createQuery("select c from CellHier c where c.cellId = :cellId",
+				CellHier.class);
+		 q.setParameter("cellId", cellId);
+		 List<CellHier> cells = q.getResultList();
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 		return cells.get(0);
 	}
 }

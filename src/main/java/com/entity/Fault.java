@@ -1,7 +1,11 @@
 package com.entity;
 
 import java.io.Serializable;
+<<<<<<< HEAD
 //import java.util.Date;
+=======
+import java.util.Date;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +15,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+<<<<<<< HEAD
 //import javax.persistence.Temporal;
 //import javax.persistence.TemporalType;
+=======
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 import javax.xml.bind.annotation.XmlTransient;
 
 @SuppressWarnings("serial")
@@ -25,8 +34,13 @@ public class Fault implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 	@Column(name = "date_time")
+<<<<<<< HEAD
 	// @Temporal(TemporalType.DATE)
 	private String date;
+=======
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date date;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	@JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
 	@ManyToOne
 	private EventId eventId;
@@ -45,9 +59,15 @@ public class Fault implements Serializable {
 	@JoinColumn(name = "duration", referencedColumnName = "duration", nullable = false)
 	@ManyToOne
 	private Duration duration;
+<<<<<<< HEAD
 	@JoinColumn(name = "event_cause", referencedColumnName = "event", nullable = false)
 	@ManyToOne
 	private EventCause event;
+=======
+	@JoinColumn(name = "cause", referencedColumnName = "cause", nullable = false)
+	@ManyToOne
+	private EventCause cause;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	@JoinColumn(name = "ne", referencedColumnName = "ne", nullable = false)
 	@ManyToOne
 	private NEVersion ne;
@@ -60,10 +80,17 @@ public class Fault implements Serializable {
 
 	public Fault() {
 	}
+<<<<<<< HEAD
 
 	public Fault(String date, EventId eventId, Failure failure, UE tac,
 			MCC mcc, MNC mnc, CellHier cell, Duration duration,
 			EventCause eventCause, NEVersion ne) {
+=======
+	
+	public Fault(Date date, EventId eventId, Failure failure, UE tac,
+			MCC mcc, MNC mnc, CellHier cell, Duration duration,
+			EventCause eventCause, NEVersion ne, IMSI imsi) {
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 		this.date = date;
 		this.eventId = eventId;
 		this.failure = failure;
@@ -72,8 +99,14 @@ public class Fault implements Serializable {
 		this.mnc = mnc;
 		this.cell = cell;
 		this.duration = duration;
+<<<<<<< HEAD
 		this.event = eventCause;
 		this.ne = ne;
+=======
+		this.cause = eventCause;
+		this.ne = ne;
+		this.imsi = imsi;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	}
 
 	public Integer getId() {
@@ -84,11 +117,21 @@ public class Fault implements Serializable {
 		this.id = id;
 	}
 
+<<<<<<< HEAD
 	public String getDate() {
 		return date;
 	}
 
 	public void setDate(String date) {
+=======
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getDate() {
+		return date;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	public void setDate(Date date) {
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 		this.date = date;
 	}
 
@@ -157,11 +200,19 @@ public class Fault implements Serializable {
 
 	@XmlTransient
 	public EventCause getEvent() {
+<<<<<<< HEAD
 		return event;
 	}
 
 	public void setEvent(EventCause event) {
 		this.event = event;
+=======
+		return cause;
+	}
+
+	public void setEvent(EventCause cause) {
+		this.cause = cause;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	}
 
 	@XmlTransient

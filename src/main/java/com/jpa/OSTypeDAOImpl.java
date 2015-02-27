@@ -19,6 +19,7 @@ public class OSTypeDAOImpl implements OSTypeDAO {
 
 	@PersistenceContext
 	private EntityManager em;
+<<<<<<< HEAD
 
 	
 	public Collection<OSType> getOSType() {
@@ -34,5 +35,21 @@ public class OSTypeDAOImpl implements OSTypeDAO {
 	public void createOSType(String osType) {
 		OSType os = new OSType(osType);
 		em.persist(os);
+=======
+	
+	public Collection<OSType> getOSType() {
+		Query q = em
+				.createQuery("select o from OSType o");
+		return q.getResultList();
+
+	}
+	
+	public OSType getByOSType(String os) {
+		Query q = em.createQuery("select o from OSType o where o.os = :os",
+				OSType.class);
+		 q.setParameter("os", os);
+		 List<OSType> ostypes = q.getResultList();
+		return ostypes.get(0);
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	}
 }

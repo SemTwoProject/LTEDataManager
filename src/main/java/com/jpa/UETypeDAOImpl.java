@@ -22,12 +22,17 @@ public class UETypeDAOImpl implements UETypeDAO {
 
 	public Collection<UEType> getUEType() {
 		Query q = em
+<<<<<<< HEAD
 				.createQuery("select ut from UEType ut left join fetch ut.ueList");
+=======
+				.createQuery("select ut from UEType ut");
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 		return q.getResultList();
 
 	}
 
 	public UEType getByUEType(String ue) {
+<<<<<<< HEAD
 		Query q = em.createQuery("select ut from UEType ut where ut.ueType = "
 				+ ue + " left join fetch ut.ueList", UEType.class);
 		List<UEType> types = q.getResultList();
@@ -38,5 +43,12 @@ public class UETypeDAOImpl implements UETypeDAO {
 		UEType ue = new UEType(ueType);
 		em.persist(ue);
 
+=======
+		Query q = em.createQuery("select u from UEType u where u.ueType = :ue",
+				UEType.class);
+		 q.setParameter("ue", ue);
+		 List<UEType> uetypes = q.getResultList();
+		return uetypes.get(0);
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	}
 }
