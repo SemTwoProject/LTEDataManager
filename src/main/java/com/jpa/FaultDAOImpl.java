@@ -47,28 +47,35 @@ public class FaultDAOImpl implements FaultDAO {
 	public Collection<Object> getFaultByIMSI(Long imsi) {
 		Collection<Fault> faults = getFaultsFromImsi(imsi);
 		List<Object> results = new ArrayList<Object>();
-		for(Fault fault: faults){
-			results.addAll(getEventCauseByFault(fault));
+		for (Fault fault : faults) {
+			results.addAll(getEventIdByFault(fault));
 			results.addAll(getFailureByFault(fault));
 		}
 		return results;
 	}
+
 	public Collection<Fault> getFaultsFromImsi(Long imsi) {
-		Query q = em.createQuery("select f from Fault f where f.imsi.imsi = :imsi",
-				Fault.class).setParameter("imsi", imsi);
+		Query q = em.createQuery(
+				"select f from Fault f where f.imsi.imsi = :imsi", Fault.class)
+				.setParameter("imsi", imsi);
 		List<Fault> faults = q.getResultList();
 		return faults;
 	}
-	public List<Object> getEventCauseByFault(Fault fault) {
-		Query q = em.createQuery(
-				"select e from EventCause e where e.eventId.eventId = :fault",
-				EventCause.class);
+
+	public List<Object> getEventIdByFault(Fault fault) {
+		Query q = em
+				.createQuery(
+						"select distinct e from EventId e left join fetch e.eventCauses where e.eventId = :fault",
+						EventCause.class);
 		q.setParameter("fault", fault.getEventId().getEventId());
 		List<Object> causes = q.getResultList();
 		return causes;
 	}
+
 	public Collection<Object> getFailureByFault(Fault fault) {
-		Query q = em.createQuery("select f from Failure f where f.failure = :fault",
+		Query q = em.createQuery(
+				"select distinct f from Failure f left join fetch"
+						+ " f.faultList where f.failure = :fault",
 				Failure.class);
 		q.setParameter("fault", fault.getFailure().getfailure());
 		List<Object> fails = q.getResultList();
@@ -76,9 +83,10 @@ public class FaultDAOImpl implements FaultDAO {
 	}
 
 	/**
-	 * Helper queries for constructing a Fault by retrieving the relevant entity objects
+	 * Helper queries for constructing a Fault by retrieving the relevant entity
+	 * objects
 	 */
-	
+
 	public Failure getByFailure(Integer failure) {
 		Query q = em.createQuery(
 				"select f from Failure f where f.failure = :failure",
@@ -155,11 +163,12 @@ public class FaultDAOImpl implements FaultDAO {
 		List<MNC> mncs = q.getResultList();
 		return mncs.get(0);
 	}
+
 	public UE getByTac(Integer tac) {
 		Query q = em.createQuery("select u from UE u where u.tac = :tac",
 				UE.class);
-		 q.setParameter("tac", tac);
-		 List<UE> tacs = q.getResultList();
+		q.setParameter("tac", tac);
+		List<UE> tacs = q.getResultList();
 		return tacs.get(0);
 	}
 }

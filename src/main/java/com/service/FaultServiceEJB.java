@@ -18,12 +18,10 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	@EJB
 	private FaultDAO dao;
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Collection<Fault> getAllFault() {
 		return dao.getFault();
 	}
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Collection<Object> getFaultByIMSI(Long imsi) {
 		return dao.getFaultByIMSI(imsi);
 	}
