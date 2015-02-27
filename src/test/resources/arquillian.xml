@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<arquillian xmlns="http://jboss.org/schema/arquillian"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://jboss.org/schema/arquillian
+        http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+	<container qualifier="jbossas-managed-wildfly-8" default="true">
+		<configuration>
+			<property name="jbossHome">c:\\Users\\Shane\\wildfly-8.2.0.Final</property>
+		</configuration>
+	</container>
+=======
+>>>>>>> 324425364305526399e910bc0c61b9a257e84f9f
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <arquillian xmlns="http://jboss.org/schema/arquillian" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
     <container qualifier="arquillian-wildfly-remote"/>
@@ -24,4 +39,8 @@
         <property name="disableStrictHostChecking">true</property>
     </configuration>
 </container>
+<<<<<<< HEAD
+=======
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
+>>>>>>> 324425364305526399e910bc0c61b9a257e84f9f
 </arquillian>

@@ -17,7 +17,10 @@ import com.entity.EventCause;
 import com.entity.EventId;
 import com.entity.Failure;
 import com.entity.Fault;
+<<<<<<< HEAD
+=======
 import com.entity.IMSI;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 import com.entity.MCC;
 import com.entity.MNC;
 import com.entity.NEVersion;
@@ -37,13 +40,19 @@ public class FaultDAOImpl implements FaultDAO {
 	}
 
 	public Fault getById(Integer id) {
+<<<<<<< HEAD
+		Query q = em.createQuery("select f from Fault f where f.id = " + id,
+				Fault.class);
+=======
 		Query q = em.createQuery("select f from Fault f where f.id = :id",
 				Fault.class);
 		q.setParameter("id", id);
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 		List<Fault> faults = q.getResultList();
 		return faults.get(0);
 	}
 
+<<<<<<< HEAD
 	public Collection<Object> getFaultByIMSI(Long imsi) {
 		Collection<Fault> faults = getFaultsFromImsi(imsi);
 		List<Object> results = new ArrayList<Object>();
@@ -58,6 +67,19 @@ public class FaultDAOImpl implements FaultDAO {
 		Query q = em.createQuery(
 				"select f from Fault f where f.imsi.imsi = :imsi", Fault.class)
 				.setParameter("imsi", imsi);
+=======
+<<<<<<< HEAD
+	public void createFault(String date, EventId eventId, Failure failure, UE tac, MCC mcc,
+			MNC mnc, CellHier cellId, 
+			Duration duration, EventCause eventCause, NEVersion ne){
+		Fault fault = new Fault(date, eventId, failure, tac, mcc, mnc, cellId,
+				duration, eventCause, ne);
+		em.persist(fault);
+=======
+	public Collection<Fault> getFaultByIMSI(Long imsi) {
+		Query q = em.createQuery("select f from Fault f where f.imsi = :imsi",
+				Fault.class).setParameter("imsi", imsi);
+>>>>>>> 324425364305526399e910bc0c61b9a257e84f9f
 		List<Fault> faults = q.getResultList();
 		return faults;
 	}
@@ -170,5 +192,19 @@ public class FaultDAOImpl implements FaultDAO {
 		q.setParameter("tac", tac);
 		List<UE> tacs = q.getResultList();
 		return tacs.get(0);
+	}
+	//Unfinished
+//	@Override
+//	public Collection<Object> getTotalFaultsAndDurationPerIMSI()
+//	{
+//		Query q = em.createQuery("select IMSI as IMSI, COUNT(f.id) as TotalFailures, SUM(duration) as TotalDuration from Faults f Group By IMSI");
+//		return null;
+//	}	
+
+	@Override
+	public Collection<Object> getTotalFaultsAndDurationPerIMSI() {
+		// TODO Auto-generated method stub
+		return null;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	}
 }

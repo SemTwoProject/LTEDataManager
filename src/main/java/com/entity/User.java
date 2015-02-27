@@ -2,7 +2,15 @@ package com.entity;
 
 import java.io.Serializable;
 
+<<<<<<< HEAD
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+=======
 import javax.persistence.*;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 
 
 /**
@@ -76,5 +84,8 @@ public class User implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+<<<<<<< HEAD
+=======
 
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 }

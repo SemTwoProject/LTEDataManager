@@ -6,11 +6,54 @@ import java.io.IOException;
 import javax.ejb.Local;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+import com.entity.EventId;
+import com.entity.MCC;
+=======
+import org.apache.poi.ss.usermodel.Cell;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
+>>>>>>> 324425364305526399e910bc0c61b9a257e84f9f
 
 @Local
 public interface ExcelDAO {
 
 	// are not dependent on the creation of parent entity
+<<<<<<< HEAD
+	ArrayList<Integer> createCell( ) throws InvalidFormatException, FileNotFoundException, IOException;
+	ArrayList<Integer> createHier3Id();
+	ArrayList<Integer> createHier32Id();
+	ArrayList<Integer> createHier321Id();
+	
+	ArrayList<Integer> createDuration() throws InvalidFormatException, FileNotFoundException, IOException;
+	ArrayList<Integer> createIMSI( ) throws InvalidFormatException, FileNotFoundException, IOException;
+	ArrayList<String> createOSType() throws InvalidFormatException, FileNotFoundException, IOException;
+	ArrayList<String> createNEVersion() throws InvalidFormatException, FileNotFoundException, IOException;
+	ArrayList<String> createUEType() throws InvalidFormatException, FileNotFoundException, IOException;
+	
+	ArrayList<Integer> createMCC() throws InvalidFormatException, FileNotFoundException, IOException;
+	ArrayList<Integer> createCountry() throws InvalidFormatException, FileNotFoundException, IOException;
+	
+	ArrayList<Integer> createFailure() throws InvalidFormatException, FileNotFoundException, IOException;
+	ArrayList<String> createFailureDescription();
+	
+	ArrayList<Integer> createEventId() throws InvalidFormatException, FileNotFoundException, IOException;
+	// are child dependents
+	ArrayList<Integer> createMNC() throws InvalidFormatException, FileNotFoundException, IOException;
+	ArrayList<String> createOperator();
+	ArrayList<MCC> createMNCMCCKey();
+	
+	ArrayList<Integer> createEventCause() throws InvalidFormatException, FileNotFoundException, IOException;
+	ArrayList<String> createEventDescription();
+	ArrayList<EventId> createEventCauseEventId();
+	
+	public void createUE() throws InvalidFormatException, FileNotFoundException, IOException;
+	
+	
+	public void createFault()throws InvalidFormatException, FileNotFoundException, IOException;
+=======
 	public void createCell() throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
@@ -53,4 +96,11 @@ public interface ExcelDAO {
 
 	public void createFault() throws InvalidFormatException,
 			FileNotFoundException, IOException;
+<<<<<<< HEAD
+=======
+	
+	ArrayList<Cell> selectColumnValue(int sheet, int column) throws InvalidFormatException;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
+
+>>>>>>> 324425364305526399e910bc0c61b9a257e84f9f
 }

@@ -19,7 +19,11 @@ import javax.ws.rs.core.Response;
 import com.entity.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+<<<<<<< HEAD
+import com.serviceInterfaces.UserService;
+=======
 import com.interfaces.UserService;
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 
 @Path("/users")
 //@Table(name="users")
@@ -34,7 +38,11 @@ public class UserREST {
 		@Produces("text/html")
 		@Path("status")
 		public Response getStatus() {
+<<<<<<< HEAD
+			return Response.ok("<h1>LTE Data Manager is up !!!</h1>").build();
+=======
 			return Response.ok("<h1>LTE Manager is up !!!</h1>").build();
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 		}
 		
 		// /rest/users/adduser
@@ -46,11 +54,14 @@ public class UserREST {
 				@FormParam("password") String password,@FormParam("usertype") String userType,
 				@Context HttpServletRequest request, @Context HttpServletResponse response){
 			
+<<<<<<< HEAD
+=======
 			System.out.println(name);
 			System.out.println(username);
 			System.out.println(password);
 			System.out.println(userType);
 			
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 			User user = new User(name,username,password,userType);
 			service.addToUserDatabase(user);
 			

@@ -1,8 +1,11 @@
 $('#dates').hide();
 
-$(document).ready(function() {
-	$("select").change(function() {
-		$("select option:selected").each(function() {
+$(document).ready(function() 
+		{
+	$("select").change(function() 
+			{
+		$("select option:selected").each(function() 
+				{
 			if ($(this).attr("value") == "1") 
 			{
 				$("#dates").hide();
