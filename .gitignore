@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /target/
 <<<<<<< HEAD
 .classpath
@@ -7,3 +8,63 @@
 .classpath
 >>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 >>>>>>> 324425364305526399e910bc0c61b9a257e84f9f
+=======
+<<<<<<< HEAD
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+=======
+/target/
+>>>>>>> f118a86ae34add9df14626e85e74489bd16f39c3
+>>>>>>> bbdff10582034ea0c35c23b1637d2d1b70525a1b
