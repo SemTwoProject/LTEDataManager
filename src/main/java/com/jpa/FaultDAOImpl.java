@@ -65,8 +65,13 @@ public class FaultDAOImpl implements FaultDAO {
 	public List<Object> getEventIdByFault(Fault fault) {
 		Query q = em
 				.createQuery(
+<<<<<<< HEAD
 						"select distinct e from EventId e left join fetch e.eventCauses where e.eventId = :fault",
 						EventId.class);
+=======
+		"select distinct e from EventId e left join fetch e.eventCauses where e.eventId = :fault",
+						EventCause.class);
+>>>>>>> 8f7e1d6638ac2ed1f6c7041de4efb9695698afdf
 		q.setParameter("fault", fault.getEventId().getEventId());
 		List<Object> causes = q.getResultList();
 		return causes;
@@ -170,5 +175,19 @@ public class FaultDAOImpl implements FaultDAO {
 		q.setParameter("tac", tac);
 		List<UE> tacs = q.getResultList();
 		return tacs.get(0);
+	}
+}
+	//Unfinished
+//	@Override
+//	public Collection<Object> getTotalFaultsAndDurationPerIMSI()
+//	{
+//		Query q = em.createQuery("select IMSI as IMSI, COUNT(f.id) as TotalFailures, SUM(duration) as TotalDuration from Faults f Group By IMSI");
+//		return null;
+//	}	
+
+	@Override
+	public Collection<Object> getTotalFaultsAndDurationPerIMSI() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

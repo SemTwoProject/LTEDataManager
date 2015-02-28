@@ -21,6 +21,20 @@ public class EventIdDAOImpl implements EventIdDAO {
 	private EntityManager em;
 
 	public Collection<EventId> getEventId() {
+<<<<<<< HEAD
+		Query q = em.createQuery("select eId from EventId eId left join fetch eId.eventCauses");
+		return q.getResultList();
+	}
+	
+	public void createEventId(Integer event){
+		EventId eventId = new EventId(event);
+		em.persist(eventId);
+	}
+	public EventId getByEventId(Integer eventId){
+		Query q = em.createQuery("select eid from EventId eid where eid.eventId = "+eventId+" left join fetch eid.eventCauses", EventId.class);
+		List<EventId> causes = q.getResultList();
+		return causes.get(0);
+=======
 		Query q = em.createQuery("select eId from EventId eId");
 		return q.getResultList();
 	}
@@ -31,5 +45,6 @@ public class EventIdDAOImpl implements EventIdDAO {
 		 q.setParameter("eventId", eventId);
 		 List<EventId> events = q.getResultList();
 		return events.get(0);
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	}
 }

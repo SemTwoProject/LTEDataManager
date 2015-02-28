@@ -23,10 +23,29 @@ public class UEDAOImpl implements UEDAO {
 	@PersistenceContext
 	private EntityManager em;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	public Collection<UE> getUE() {
 		Query q = em.createQuery("select u from UE u");
 		return q.getResultList();
 	}
+<<<<<<< HEAD
+	public UE getByTac(Integer tac){
+		Query q = em.createQuery("select u from UE u where u.tac ="+tac, UE.class);
+		List<UE> ul = q.getResultList();
+		return ul.get(0);
+	}
+	public void createUE(Integer tac, String marketingName,
+			String manufacturer, String accessCapability, String model,
+			String vendorName, OSType os, InputMode inputMode, UEType ueType) {
+		UE ue = new UE(tac, marketingName, manufacturer,
+			 accessCapability, model, vendorName,
+			 os, inputMode, ueType);
+		em.persist(ue);
+		
+=======
 
 	public UE getByTac(Integer tac) {
 		Query q = em.createQuery("select u from UE u where u.tac = :tac",
@@ -59,5 +78,6 @@ public class UEDAOImpl implements UEDAO {
 		q.setParameter("input", input);
 		List<InputMode> inputs = q.getResultList();
 		return inputs.get(0);
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	}
 }

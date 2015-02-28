@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+=======
+project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ie.dit.msc</groupId>
 	<artifactId>LTEManager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+<<<<<<< HEAD
+	<name>LTEManager</name>
+=======
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -12,14 +20,143 @@
 		<version.arquillian>1.1.1.Final</version.arquillian>
 		<version.wildfly.as>8.0.0.Beta1</version.wildfly.as>
 	</properties>
+<<<<<<< HEAD
+	<dependencies>
+		<dependency>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-6.0</artifactId>
+			<version>1.0.0.Final</version>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.11</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.11</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>3.11</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.11</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.11</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>3.11</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+
+		<!-- core library -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.0.2.Final</version>
+		</dependency>
+
+		<!-- Junit support -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- JAXB support -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>3.0.2.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>jaxrs-api</artifactId>
+			<version>3.0.2.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.scannotation</groupId>
+			<artifactId>scannotation</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.arquillian.protocol</groupId>
+			<artifactId>arquillian-protocol-servlet</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<scope>test</scope>
+=======
 
 	<repositories>
 		<repository>
 			<id>JBoss Repository</id>
 			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
 		</repository>
-	</repositories>
-
+	.,bvz\DGJK46+98
+	]OYE	Q1378*-21``<0*3
+	/repositories>34567890
 	<dependencies>
 		<dependency>
 			<groupId>org.jboss.spec</groupId>
@@ -46,7 +183,7 @@
 			<groupId>org.jboss.spec.javax.annotation</groupId>
 			<artifactId>jboss-annotations-api_1.2_spec</artifactId>
 		</dependency>
-
+9*
 		<!-- Import the CDI API -->
 		<dependency>
 			<groupId>javax.enterprise</groupId>
@@ -155,6 +292,7 @@
 			<artifactId>poi-ooxml-schemas</artifactId>
 			<version>3.11</version>
 			<scope>runtime</scope>
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 		</dependency>
 
 		<dependency>
@@ -169,9 +307,23 @@
 			<scope>test</scope>
 		</dependency>
 
+<<<<<<< HEAD
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+	
+	<dependencyManagement>
+		<dependencies>
+=======
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 			<dependency>
 				<groupId>org.wildfly</groupId>
 				<artifactId>wildfly-version</artifactId>
@@ -212,6 +364,11 @@
 			</dependency>
 
 		</dependencies>
+<<<<<<< HEAD
+
+	</dependencyManagement>
+
+=======
 	</dependencyManagement>
 	<build>
 		<finalName>arquillian</finalName>
@@ -247,6 +404,7 @@
 			</plugin>
 		</plugins>
 	</build>
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 
 	<profiles>
 		<profile>
@@ -266,8 +424,23 @@
 							</systemPropertyVariables>
 						</configuration>
 					</plugin>
+<<<<<<< HEAD
+
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<version>2.4</version>
+						<configuration>
+							<failOnMissingWebXml>false</failOnMissingWebXml>
+						</configuration>
+					</plugin>
+
 				</plugins>
 				<finalName>LTEManager</finalName>
+
+=======
+				</plugins>
+				<finalName>LTEManager</finalName>
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 			</build>
 			<dependencies>
 				<dependency>
@@ -295,4 +468,8 @@
 			</dependencies>
 		</profile>
 	</profiles>
+<<<<<<< HEAD
 </project>
+=======
+</project>
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68

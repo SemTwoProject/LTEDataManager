@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+default.configuration=LTEDataManager (2)
+=======
 default.configuration=LTEDataManagerV1
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 eclipse.preferences.version=1
 hibernate3.enabled=true

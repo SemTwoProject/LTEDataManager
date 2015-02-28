@@ -21,6 +21,25 @@ public class InputModeDAOImpl implements InputModeDAO {
 	private EntityManager em;
 
 	public Collection<InputMode> getInputMode() {
+<<<<<<< HEAD
+		Query q = em.createQuery("select i from InputMode i left join fetch i.ueList");
+		return q.getResultList();
+	}
+	public void createInputMode(String input){
+		InputMode inputMode = new InputMode(input);
+		
+		if (!getInputMode().contains(input)){
+			em.persist(inputMode);
+		}
+		else {
+			em.refresh(inputMode);
+		}
+	}
+	
+	public InputMode getByInputMode(String input){
+		Query q = em.createQuery("select i from InputMode i where i.inputMode = "+input+" left join fetch i.ueList", InputMode.class);
+		List<InputMode> inputs = q.getResultList();
+=======
 		Query q = em.createQuery("select i from InputMode i");
 		return q.getResultList();
 	}
@@ -30,6 +49,7 @@ public class InputModeDAOImpl implements InputModeDAO {
 				InputMode.class);
 		 q.setParameter("input", input);
 		 List<InputMode> inputs = q.getResultList();
+>>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 		return inputs.get(0);
 	}
 }
