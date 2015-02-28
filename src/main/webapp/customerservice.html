@@ -70,15 +70,20 @@
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
 				<div>
+					<h1>JAX-RS Upload Form</h1>
+
 					<form action="rest/excel" method="post" enctype="multipart/form-data">
-  						<input type="file" name="file" />
-  						<input type="submit" />
-		
+
+						<p>
+							Select a file : <input type="file" name="file" />
+						</p>
+
+						<input type="submit" value="Upload" />
 					</form>
 					<form action="rest/fault" method="post">
 						<p>
-					Select a imsi : <input type="text" name="imsi" /> 
-<input type="submit" value="Search" />
+							Select a imsi : <input type="text" name="imsi" /> <input
+								type="submit" value="Search" />
 					</form>
 				</div>
 				<div class="row">

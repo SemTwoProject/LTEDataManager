@@ -66,7 +66,7 @@ public class FaultDAOImpl implements FaultDAO {
 		Query q = em
 				.createQuery(
 						"select distinct e from EventId e left join fetch e.eventCauses where e.eventId = :fault",
-						EventCause.class);
+						EventId.class);
 		q.setParameter("fault", fault.getEventId().getEventId());
 		List<Object> causes = q.getResultList();
 		return causes;

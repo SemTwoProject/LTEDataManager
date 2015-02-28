@@ -4,47 +4,48 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 public interface ExcelServiceLocal {
 	
 
-	void createCell(InputStream in) throws InvalidFormatException, FileNotFoundException,
+	void createCell(HSSFWorkbook wb) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createDuration(InputStream in) throws InvalidFormatException, FileNotFoundException,
+	void createDuration(HSSFWorkbook wb) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createIMSI(InputStream in) throws InvalidFormatException, FileNotFoundException,
+	void createIMSI(HSSFWorkbook wb) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createOSType(InputStream in) throws InvalidFormatException, FileNotFoundException,
+	void createOSType(HSSFWorkbook wb) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createNEVersion(InputStream in) throws InvalidFormatException,
+	void createNEVersion(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	void createUEType(InputStream in) throws InvalidFormatException, FileNotFoundException,
+	void createUEType(HSSFWorkbook wb) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createMCC(InputStream in) throws InvalidFormatException, FileNotFoundException,
+	void createMCC(HSSFWorkbook wb) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createFailure(InputStream in) throws InvalidFormatException, FileNotFoundException,
+	void createFailure(HSSFWorkbook wb) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createEventId(InputStream in) throws InvalidFormatException, FileNotFoundException,
+	void createEventId(HSSFWorkbook wb) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createMNC(InputStream in) throws InvalidFormatException, FileNotFoundException,
+	void createMNC(HSSFWorkbook wb) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createEventCause(InputStream in) throws InvalidFormatException,
+	void createEventCause(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	void createUE(InputStream in) throws InvalidFormatException, FileNotFoundException,
+	void createUE(HSSFWorkbook wb) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 
-	void createFault(InputStream in) throws InvalidFormatException, FileNotFoundException,
+	void createFault(HSSFWorkbook wb) throws InvalidFormatException, FileNotFoundException,
 			IOException;
 }

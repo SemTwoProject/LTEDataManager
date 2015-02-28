@@ -2,12 +2,12 @@ package com.service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateful;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import com.dao.ExcelDAO;
@@ -19,82 +19,81 @@ public class ExcelServiceEJB implements ExcelServiceLocal {
 	@EJB
 	private ExcelDAO dao;
 
-	
-	public void createCell(InputStream in) throws InvalidFormatException,
+	public void createCell(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createCell(in);
+		dao.createCell(wb);
 
 	}
 
-	public void createDuration(InputStream in) throws InvalidFormatException,
+	public void createDuration(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createDuration(in);
+		dao.createDuration(wb);
 
 	}
 
-	public void createIMSI(InputStream in) throws InvalidFormatException,
+	public void createIMSI(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createIMSI(in);
+		dao.createIMSI(wb);
 
 	}
 
-	public void createOSType(InputStream in) throws InvalidFormatException,
+	public void createOSType(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createOSType(in);
+		dao.createOSType(wb);
 
 	}
 
-	public void createNEVersion(InputStream in) throws InvalidFormatException,
+	public void createNEVersion(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createNEVersion(in);
+		dao.createNEVersion(wb);
 
 	}
 
-	public void createUEType(InputStream in) throws InvalidFormatException,
+	public void createUEType(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createUEType(in);
+		dao.createUEType(wb);
 
 	}
 
-	public void createMCC(InputStream in) throws InvalidFormatException,
+	public void createMCC(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createMCC(in);
+		dao.createMCC(wb);
 
 	}
 
-	public void createFailure(InputStream in) throws InvalidFormatException,
+	public void createFailure(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createFailure(in);
+		dao.createFailure(wb);
 
 	}
 
-	public void createEventId(InputStream in) throws InvalidFormatException,
+	public void createEventId(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createEventId(in);
+		dao.createEventId(wb);
 
 	}
 
-	public void createMNC(InputStream in) throws InvalidFormatException,
+	public void createMNC(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createMNC(in);
+		dao.createMNC(wb);
 
 	}
 
-	public void createEventCause(InputStream in) throws InvalidFormatException,
+	public void createEventCause(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createEventCause(in);
+		dao.createEventCause(wb);
 
 	}
 
-	public void createUE(InputStream in) throws InvalidFormatException,
+	public void createUE(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createUE(in);
+		dao.createUE(wb);
 
 	}
 
-	public void createFault(InputStream in) throws InvalidFormatException,
+	public void createFault(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createFault(in);
+		dao.createFault(wb);
 
 	}
 }

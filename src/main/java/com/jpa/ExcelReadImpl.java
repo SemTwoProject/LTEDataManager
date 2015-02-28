@@ -2,11 +2,10 @@ package com.jpa;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -37,7 +36,7 @@ import com.entity.OSType;
 import com.entity.UE;
 import com.entity.UEType;
 
-@Stateless
+@Stateful
 @Local
 public class ExcelReadImpl implements ExcelDAO {
 
@@ -60,19 +59,18 @@ public class ExcelReadImpl implements ExcelDAO {
 	private UEType ueType;
 	private HSSFDataFormatter formatter;
 	private Sheet sheet;
-	private HSSFWorkbook wb;
 
-	public void createCell(InputStream in) throws InvalidFormatException,
+	public void createCell(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
 		ArrayList<Cell> col;
 		ArrayList<Cell> col1;
 		ArrayList<Cell> col2;
 		ArrayList<Cell> col3;
 		try {
-			col = selectColumnValue(0, 10, in);
-			col1 = selectColumnValue(0, 11, in);
-			col2 = selectColumnValue(0, 12, in);
-			col3 = selectColumnValue(0, 13, in);
+			col = selectColumnValue(0, 10, wb);
+			col1 = selectColumnValue(0, 11, wb);
+			col2 = selectColumnValue(0, 12, wb);
+			col3 = selectColumnValue(0, 13, wb);
 
 			for (int i = 0; i < col.size(); i++) {
 				cell = new CellHier(Integer.parseInt(formatter
@@ -88,10 +86,10 @@ public class ExcelReadImpl implements ExcelDAO {
 
 	}
 
-	public void createDuration(InputStream in) {
+	public void createDuration(HSSFWorkbook wb) {
 		ArrayList<Cell> col;
 		try {
-			col = selectColumnValue(1, 1, in);
+			col = selectColumnValue(1, 1, wb);
 			for (int i = 0; i < col.size(); i++) {
 				duration = new Duration(Integer.parseInt(formatter
 						.formatCellValue(col.get(i))));
@@ -102,10 +100,10 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createEventId(InputStream in) {
+	public void createEventId(HSSFWorkbook wb) {
 		ArrayList<Cell> col;
 		try {
-			col = selectColumnValue(1, 1, in);
+			col = selectColumnValue(1, 1, wb);
 			for (int i = 0; i < col.size(); i++) {
 				eventId = new EventId(Integer.parseInt(formatter
 						.formatCellValue(col.get(i))));
@@ -116,15 +114,15 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createEventCause(InputStream in) {
+	public void createEventCause(HSSFWorkbook wb) {
 		ArrayList<Cell> col;
 		ArrayList<Cell> col1;
 		ArrayList<Cell> col2;
 		EventCauseDAO dao = new EventCauseDAOImpl();
 		try {
-			col = selectColumnValue(1, 0, in);
-			col1 = selectColumnValue(1, 2, in);
-			col2 = selectColumnValue(1, 1, in);
+			col = selectColumnValue(1, 0, wb);
+			col1 = selectColumnValue(1, 2, wb);
+			col2 = selectColumnValue(1, 1, wb);
 
 			for (int i = 0; i < col.size(); i++) {
 				eventCause = new EventCause(Integer.parseInt(formatter
@@ -139,12 +137,12 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createFailure(InputStream in) {
+	public void createFailure(HSSFWorkbook wb) {
 		ArrayList<Cell> col;
 		ArrayList<Cell> col1;
 		try {
-			col = selectColumnValue(2, 0, in);
-			col1 = selectColumnValue(2, 1, in);
+			col = selectColumnValue(2, 0, wb);
+			col1 = selectColumnValue(2, 1, wb);
 			for (int i = 0; i < col.size(); i++) {
 				failure = new Failure(Integer.parseInt(formatter
 						.formatCellValue(col.get(i))),
@@ -156,10 +154,10 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createIMSI(InputStream in) throws InvalidFormatException {
+	public void createIMSI(HSSFWorkbook wb) throws InvalidFormatException {
 		ArrayList<Cell> col;
 		try {
-			col = selectColumnValue(0, 10, in);
+			col = selectColumnValue(0, 10, wb);
 			for (int i = 0; i < col.size(); i++) {
 				imsi = new IMSI(Long.parseLong(formatter.formatCellValue(col
 						.get(i))));
@@ -170,10 +168,10 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createInputMode(InputStream in) {
+	public void createInputMode(HSSFWorkbook wb) {
 		ArrayList<Cell> col;
 		try {
-			col = selectColumnValue(3, 8, in);
+			col = selectColumnValue(3, 8, wb);
 			for (int i = 0; i < col.size(); i++) {
 				input = new InputMode(formatter.formatCellValue(col.get(i)));
 				em.persist(input);
@@ -183,10 +181,10 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createNEVersion(InputStream in) {
+	public void createNEVersion(HSSFWorkbook wb) {
 		ArrayList<Cell> col;
 		try {
-			col = selectColumnValue(0, 9, in);
+			col = selectColumnValue(0, 9, wb);
 			for (int i = 0; i < col.size(); i++) {
 				ne = new NEVersion(formatter.formatCellValue(col.get(i)));
 				em.persist(ne);
@@ -196,10 +194,10 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createUEType(InputStream in) {
+	public void createUEType(HSSFWorkbook wb) {
 		ArrayList<Cell> col;
 		try {
-			col = selectColumnValue(3, 6, in);
+			col = selectColumnValue(3, 6, wb);
 			for (int i = 0; i < col.size(); i++) {
 				ueType = new UEType(formatter.formatCellValue(col.get(i)));
 				em.persist(ueType);
@@ -209,10 +207,10 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createOSType(InputStream in) {
+	public void createOSType(HSSFWorkbook wb) {
 		ArrayList<Cell> col;
 		try {
-			col = selectColumnValue(3, 9, in);
+			col = selectColumnValue(3, 9, wb);
 			for (int i = 0; i < col.size(); i++) {
 				os = new OSType(formatter.formatCellValue(col.get(i)));
 				em.persist(os);
@@ -222,12 +220,12 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createMCC(InputStream in) {
+	public void createMCC(HSSFWorkbook wb) {
 		ArrayList<Cell> col;
 		ArrayList<Cell> col1;
 		try {
-			col = selectColumnValue(4, 0, in);
-			col1 = selectColumnValue(4, 2, in);
+			col = selectColumnValue(4, 0, wb);
+			col1 = selectColumnValue(4, 2, wb);
 			for (int i = 0; i < col.size(); i++) {
 				mcc = new MCC(Integer.parseInt(formatter.formatCellValue(col
 						.get(i))), formatter.formatCellValue(col1.get(i)));
@@ -238,15 +236,15 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createMNC(InputStream in) {
+	public void createMNC(HSSFWorkbook wb) {
 		ArrayList<Cell> col;
 		ArrayList<Cell> col1;
 		ArrayList<Cell> col2;
 		MNCDAO dao = new MNCDAOImpl();
 		try {
-			col = selectColumnValue(4, 1, in);
-			col1 = selectColumnValue(4, 3, in);
-			col2 = selectColumnValue(4, 0, in);
+			col = selectColumnValue(4, 1, wb);
+			col1 = selectColumnValue(4, 3, wb);
+			col2 = selectColumnValue(4, 0, wb);
 			for (int i = 0; i < col.size(); i++) {
 				mnc = new MNC(Integer.parseInt(formatter.formatCellValue(col
 						.get(i))), formatter.formatCellValue(col1.get(i)),
@@ -259,7 +257,7 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createUE(InputStream in) {
+	public void createUE(HSSFWorkbook wb) {
 		ArrayList<Cell> col;
 		ArrayList<Cell> col1;
 		ArrayList<Cell> col2;
@@ -278,15 +276,15 @@ public class ExcelReadImpl implements ExcelDAO {
 		UEDAO dao = new UEDAOImpl();
 
 		try {
-			col = selectColumnValue(3, 0, in);
-			col1 = selectColumnValue(3, 1, in);
-			col2 = selectColumnValue(3, 2, in);
-			col3 = selectColumnValue(3, 3, in);
-			col4 = selectColumnValue(3, 4, in);
-			col5 = selectColumnValue(3, 5, in);
-			col6 = selectColumnValue(3, 6, in);
-			col7 = selectColumnValue(3, 7, in);
-			col8 = selectColumnValue(3, 8, in);
+			col = selectColumnValue(3, 0, wb);
+			col1 = selectColumnValue(3, 1, wb);
+			col2 = selectColumnValue(3, 2, wb);
+			col3 = selectColumnValue(3, 3, wb);
+			col4 = selectColumnValue(3, 4, wb);
+			col5 = selectColumnValue(3, 5, wb);
+			col6 = selectColumnValue(3, 6, wb);
+			col7 = selectColumnValue(3, 7, wb);
+			col8 = selectColumnValue(3, 8, wb);
 
 			for (int i = 0; i < col.size(); i++) {
 				ue = new UE(
@@ -308,7 +306,7 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public void createFault(InputStream in) {
+	public void createFault(HSSFWorkbook wb) {
 		ArrayList<Cell> col;
 		ArrayList<Cell> col1;
 		ArrayList<Cell> col2;
@@ -323,17 +321,17 @@ public class ExcelReadImpl implements ExcelDAO {
 
 		FaultDAO dao = new FaultDAOImpl();
 		try {
-			col = selectColumnValue(0, 0, in);
-			col1 = selectColumnValue(0, 1, in);
-			col2 = selectColumnValue(0, 2, in);
-			col3 = selectColumnValue(0, 3, in);
-			col4 = selectColumnValue(0, 4, in);
-			col5 = selectColumnValue(0, 5, in);
-			col6 = selectColumnValue(0, 6, in);
-			col7 = selectColumnValue(0, 7, in);
-			col8 = selectColumnValue(0, 8, in);
-			col9 = selectColumnValue(0, 9, in);
-			col10 = selectColumnValue(0, 10, in);
+			col = selectColumnValue(0, 0, wb);
+			col1 = selectColumnValue(0, 1, wb);
+			col2 = selectColumnValue(0, 2, wb);
+			col3 = selectColumnValue(0, 3, wb);
+			col4 = selectColumnValue(0, 4, wb);
+			col5 = selectColumnValue(0, 5, wb);
+			col6 = selectColumnValue(0, 6, wb);
+			col7 = selectColumnValue(0, 7, wb);
+			col8 = selectColumnValue(0, 8, wb);
+			col9 = selectColumnValue(0, 9, wb);
+			col10 = selectColumnValue(0, 10, wb);
 
 			/*
 			 * date, eventId, failure, tac, mcc, mnc, cellId, duration,
@@ -367,14 +365,11 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 	}
 
-	public ArrayList<Cell> selectColumnValue(int sheetNumber, int cellNumber,
-			InputStream in) throws InvalidFormatException {
+	public ArrayList<Cell> selectColumnValue(int sheetNumber, int cellNumber, HSSFWorkbook wb) throws InvalidFormatException {
 
 		ArrayList<Cell> list = new ArrayList<Cell>();
 
 		try {
-			wb = new HSSFWorkbook(in);
-
 			sheet = wb.getSheetAt(sheetNumber);
 			for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
 				Row row = sheet.getRow(i);
