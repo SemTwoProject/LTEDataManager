@@ -28,11 +28,12 @@
 
 				<ul class="nav navbar-nav hidden-md hidden-sm hidden-lg">
 					<li><a href="home.html">Dashboard</a></li>
-					<li><a href="systemadmin.html">System Administration</a></li>
-					<li class="active"><a href="networkmanagement.html">Network
-							Management</a></li>
+
 					<li><a href="customerservice.html">Customer Service</a></li>
 					<li><a href="supportadmin.html">Support Administration</a></li>
+					<li class="active"><a href="networkmanagement.html">Network
+							Management</a></li>
+					<li><a href="systemadmin.html">System Administration</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -56,11 +57,11 @@
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
 				<li><a href="home.html">Dashboard</a></li>
-				<li><a href="systemadmin.html">System Administration</a></li>
-				<li class="active"><a href="networkmanagement.html">Network
-						Management</a></li>
 				<li><a href="customerservice.html">Customer Service</a></li>
 				<li><a href="supportadmin.html">Support Administration</a></li>
+				<li class="active"><a href="networkmanagement.html">Network
+						Management</a></li>
+				<li><a href="systemadmin.html">System Administration</a></li>
 			</ul>
 		</div>
 
@@ -74,18 +75,35 @@
 								<div class="col-sm-8">
 									<div class="form-group">
 										<select class="form-control" id="querydropdown">
-											<option value="query1">Query1</option>
-											<option value="query2">Query2</option>
-											<option value="query3">Query3</option>
+											<option value="query1">Count for each IMSI the
+												number of call failures and total duration during a given
+												period of time</option>
+											<option value="query2">Display for a given model of
+												phone, all the unique failure Event ID and Cause Code
+												combinations and the number of occurences</option>
+											<option value="query3">Display the Top 10
+												Market/Operator/Cell ID combinations that had call faulures
+												during a given period of time</option>
+											<option value="query4">Display the Top 10 IMSIs that
+												had call failures during a given time period</option>
 										</select>
 									</div>
 								</div>
 
-								
-
 								<div class="col-sm-1 pull-right">
 									<button type="button" class="btn btn-default">Search</button>
 								</div>
+
+								<div class="col-sm-3 pull-right">
+									<div class="form-group">
+										<input type="text" class="form-control"
+											placeholder="Search for model..">
+									</div>
+								</div>
+
+
+
+
 
 								<div class="col-sm-12" id="dates">
 									<div class="col-sm-6">
@@ -125,7 +143,7 @@
 
 	<script src="js/libs/jquery-2.0.3.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script
-		src="js/bootstrap.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/networkmanagementdropdown.js"></script>
 </body>
 </html>

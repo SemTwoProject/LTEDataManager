@@ -72,7 +72,9 @@
 							<div class="panel-heading">Import Data</div>
 							<div class="panel-body">
 								<input id="input-id" type="file" class="file"
-									data-preview-file-type="text">
+									data-preview-file-type="text"> <input type="submit"
+									class="btn btn-default pull-right" value="Import" />
+
 							</div>
 						</div>
 
@@ -83,30 +85,33 @@
 									<div class="panel panel-default">
 										<div class="panel-heading">Add New User</div>
 										<div class="panel-body">
-											<form action ="/LTEManager/rest/manage/users/adduser" method="post" role="form"> 
+											<form action="/LTEManager/rest/manage/users/adduser"
+												method="post" role="form">
 												<div class="form-group">
 													<label>Username</label> <input class="form-control"
-														name = "username" placeholder="Username..">
+														name="username" placeholder="Username..">
 												</div>
 												<div class="form-group">
-													<label>Name</label> <input class="form-control"
-														name = "name" placeholder="Name..">
+													<label>Name</label> <input class="form-control" name="name"
+														placeholder="Name..">
 												</div>
 												<div class="form-group">
 													<label>Password</label> <input class="form-control"
-														name = "password" placeholder="Password..">
+														name="password" placeholder="Password..">
 												</div>
 
 												<div class="form-group">
-													<label>User Role</label> <select class="form-control" name="usertype">
+													<label>User Role</label> <select class="form-control"
+														name="usertype">
 														<option>Customer Service Rep</option>
 														<option>Support Engineer</option>
 														<option>Network Management Engineer</option>
 														<option>System Administrator</option>
 													</select>
 												</div>
-												<input type="submit" class="btn btn-default pull-right" value ="Add User"/>
-												<input type="reset" class="btn btn-default pull-right" value ="Reset"/>
+												<input type="submit" class="btn btn-default pull-right"
+													value="Add User" /> <input type="reset"
+													class="btn btn-default pull-right" value="Reset" />
 											</form>
 										</div>
 									</div>
@@ -116,9 +121,12 @@
 									<div class="panel panel-default">
 										<div class="panel-heading">Existing Users</div>
 										<div class="panel-body">
+											<div class=col-sm-12>
+												<table class="table table-bordered" id="usertable">
+												</table>
+											</div>
 											<form role="form">
-												<button type="reset" class="btn btn-default pull-right">Remove
-													User</button>
+												<input type="submit" class="btn btn-default pull-right"></button>
 											</form>
 										</div>
 									</div>
@@ -133,7 +141,7 @@
 
 	<script src="js/libs/jquery-2.0.3.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script
-		src="js/bootstrap.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/systemadmin.js"></script>
 </body>
 </html>

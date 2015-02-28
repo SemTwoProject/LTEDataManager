@@ -44,4 +44,6 @@ public interface FaultDAO {
 	MNC getByMNC(Integer mnc);
 
 	UE getByTac(Integer tac);
+
+	Collection<Object> getTotalFaultsAndDurationPerIMSI();
 }

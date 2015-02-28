@@ -22,4 +22,10 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	public Collection<Fault> getAllFault() {
 		return dao.getFault();
 	}
+
+	@Override
+	public Collection<Object> getTotalFaultsAndDurationPerIMSI()
+	{
+		return dao.getTotalFaultsAndDurationPerIMSI();
+	}
 }
