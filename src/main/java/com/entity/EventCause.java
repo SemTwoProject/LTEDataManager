@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "cause")
+@Table(name = "event_cause")
 public class EventCause implements Serializable {
 
 	@Id
