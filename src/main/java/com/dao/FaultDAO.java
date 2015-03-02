@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.util.Collection;
+
 import javax.ejb.Local;
 
 import com.entity.CellHier;
@@ -14,8 +16,6 @@ import com.entity.MNC;
 import com.entity.NEVersion;
 import com.entity.UE;
 
-import java.util.Collection;
-
 @Local
 public interface FaultDAO {
 
@@ -23,7 +23,7 @@ public interface FaultDAO {
 
 	Fault getById(Integer id);
 
-	Collection<Fault> getFaultByIMSI(Long imsi);
+	Collection<Object> getFaultByIMSI(Long imsi);
 
 	Failure getByFailure(Integer failure);
 

@@ -2,60 +2,56 @@ package com.dao;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.ejb.Local;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
 
 @Local
 public interface ExcelDAO {
 
 	// are not dependent on the creation of parent entity
-	public void createCell() throws InvalidFormatException,
+	public void createCell(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createDuration() throws InvalidFormatException,
+	public void createDuration(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createIMSI() throws InvalidFormatException,
+	public void createIMSI(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createOSType() throws InvalidFormatException,
+	public void createOSType(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 	
-	public void createInputMode() throws InvalidFormatException,
+	public void createInputMode(HSSFWorkbook wb) throws InvalidFormatException,
 	FileNotFoundException, IOException;
 
-	public void createNEVersion() throws InvalidFormatException,
+	public void createNEVersion(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createUEType() throws InvalidFormatException,
+	public void createUEType(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createMCC() throws InvalidFormatException,
+	public void createMCC(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createFailure() throws InvalidFormatException,
+	public void createFailure(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createEventId() throws InvalidFormatException,
+	public void createEventId(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
 	// are child dependents
-	public void createMNC() throws InvalidFormatException,
+	public void createMNC(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createEventCause() throws InvalidFormatException,
+	public void createEventCause(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createUE() throws InvalidFormatException,
+	public void createUE(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createFault() throws InvalidFormatException,
-			FileNotFoundException, IOException;
-	
-	ArrayList<Cell> selectColumnValue(int sheet, int column) throws InvalidFormatException;
-
+	public void createFault(HSSFWorkbook wb) throws InvalidFormatException,
+	FileNotFoundException, IOException;
 }

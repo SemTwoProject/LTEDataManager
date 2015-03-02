@@ -1,14 +1,13 @@
 package com.rest;
 
 import javax.ejb.EJB;
-import javax.ws.rs.GET;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.service.FaultServiceLocal;
-import com.entity.Fault;
 
 import java.util.Collection;
 
@@ -18,10 +17,11 @@ public class FaultRest {
 	@EJB
 	private FaultServiceLocal service;
 	
-	@GET
+	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Object> getTotalFaultsAndDurationPerIMSI()
-	{
-		return service.getTotalFaultsAndDurationPerIMSI();
+	public Collection<Object> getFaultByIMSI(
+			@FormParam("imsi") Long imsi) {
+		return service.getFaultByIMSI(imsi);
+		
 	}
 }

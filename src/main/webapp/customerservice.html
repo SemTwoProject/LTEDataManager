@@ -66,6 +66,20 @@
 				<li><a href="systemadmin.html">System Administration</a></li>
 			</ul>
 		</div>
+		<form action="rest/excel" method="post" enctype="multipart/form-data">
+
+						<p>
+							Select a file : <input type="file" name="file" />
+						</p>
+
+						<input type="submit" value="Upload" />
+					</form>
+					<form action="rest/fault" method="post">
+						<p>
+							Select a imsi : <input type="text" name="imsi" /> <input
+								type="submit" value="Search" />
+					</form>
+				</div>
 
 
 		<div id="page-content-wrapper">
