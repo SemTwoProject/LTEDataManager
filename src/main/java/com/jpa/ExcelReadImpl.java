@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.ejb.Local;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -37,14 +37,14 @@ import com.entity.OSType;
 import com.entity.UE;
 import com.entity.UEType;
 
-@Stateful
+@Stateless
 @Local
 public class ExcelReadImpl implements ExcelDAO {
 
 	@PersistenceContext
 	private EntityManager em;
 
-	private CellHier cell;
+	private CellHier cellHier;
 	private Duration duration;
 	private EventCause eventCause;
 	private EventId eventId;
@@ -59,6 +59,7 @@ public class ExcelReadImpl implements ExcelDAO {
 	private UE ue;
 	private UEType ueType;
 	private HSSFDataFormatter formatter;
+	private ArrayList<Cell> list;
 
 	public void createCell(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
@@ -66,6 +67,7 @@ public class ExcelReadImpl implements ExcelDAO {
 		ArrayList<Cell> col1;
 		ArrayList<Cell> col2;
 		ArrayList<Cell> col3;
+		
 		try {
 			col = selectColumnValue(0, 10, wb);
 			col1 = selectColumnValue(0, 11, wb);
@@ -73,12 +75,12 @@ public class ExcelReadImpl implements ExcelDAO {
 			col3 = selectColumnValue(0, 13, wb);
 
 			for (int i = 0; i < col.size(); i++) {
-				cell = new CellHier(Integer.parseInt(formatter
+				cellHier = new CellHier(Integer.parseInt(formatter
 						.formatCellValue(col.get(i))), Long.parseLong(formatter
 						.formatCellValue(col1.get(i))),
 						Long.parseLong(formatter.formatCellValue(col2.get(i))),
 						Long.parseLong(formatter.formatCellValue(col3.get(i))));
-				em.persist(cell);
+				em.persist(cellHier);
 			}
 		} catch (InvalidFormatException e) {
 			e.getMessage();
@@ -89,10 +91,11 @@ public class ExcelReadImpl implements ExcelDAO {
 	public void createDuration(HSSFWorkbook wb) {
 		ArrayList<Cell> col;
 		try {
-			col = selectColumnValue(1, 1, wb);
+			col = selectColumnValue(0, 7, wb);
+			System.out.println("List Size :"+col.size());
+			System.out.println("Index zero :"+col.get(0).getNumericCellValue());
 			for (int i = 0; i < col.size(); i++) {
-				duration = new Duration(Integer.parseInt(formatter
-						.formatCellValue(col.get(i))));
+				duration = new Duration((int)col.get(i).getNumericCellValue());
 				em.persist(duration);
 			}
 		} catch (InvalidFormatException e) {
@@ -267,7 +270,7 @@ public class ExcelReadImpl implements ExcelDAO {
 		ArrayList<Cell> col6;
 		ArrayList<Cell> col7;
 		ArrayList<Cell> col8;
-		
+
 		/*
 		 * tac, marketingName, manufacturer, accessCapability, model,
 		 * vendorName, os, inputMode, ueType
@@ -287,8 +290,9 @@ public class ExcelReadImpl implements ExcelDAO {
 
 			for (int i = 1; i < col.size(); i++) {
 
-				ue = new UE(Integer.parseInt(formatter.formatCellValue(col
-						.get(i))), formatter.formatCellValue(col1.get(i)),
+				ue = new UE(
+						Integer.parseInt(formatter.formatCellValue(col.get(i))),
+						formatter.formatCellValue(col1.get(i)),
 						formatter.formatCellValue(col2.get(i)),
 						formatter.formatCellValue(col3.get(i)),
 						formatter.formatCellValue(col4.get(i)),
@@ -365,25 +369,14 @@ public class ExcelReadImpl implements ExcelDAO {
 
 	public ArrayList<Cell> selectColumnValue(int sheetNumber, int cellNumber,
 			HSSFWorkbook wb) throws InvalidFormatException {
-
-		ArrayList<Cell> list = new ArrayList<Cell>();
-
-		try {
-			HSSFSheet sheet = wb.getSheetAt(sheetNumber);
-			for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
-				HSSFRow row = sheet.getRow(i);
-				HSSFCell cell = row.getCell(cellNumber);
-				list.add(cell);
-			}
-			wb.close();
-
-		} catch (FileNotFoundException fi) {
-			fi.getMessage();
-		} catch (IOException io) {
-			io.getMessage();
+		list = new ArrayList<Cell>();
+		HSSFSheet sheet = wb.getSheetAt(sheetNumber);
+		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+			HSSFRow row = sheet.getRow(i);
+			HSSFCell cell = row.getCell(cellNumber);
+			list.add(cell);
+			
 		}
-
 		return list;
-
 	}
 }

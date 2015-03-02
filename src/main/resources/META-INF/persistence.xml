@@ -21,9 +21,9 @@
 		<class>com.entity.UEType</class>
 		<class>com.entity.User</class>
 		<properties>
+			<property name="hibernate.hdm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="false" />
-			<property name="hibernate.hdm2ddl.auto" value="update"/>
 		</properties>
 	</persistence-unit>
 </persistence>
