@@ -12,15 +12,10 @@ import javax.persistence.Query;
 
 import com.dao.FaultDAO;
 import com.entity.CellHier;
-import com.entity.Duration;
 import com.entity.EventCause;
-import com.entity.EventId;
 import com.entity.Failure;
 import com.entity.Fault;
-import com.entity.IMSI;
-import com.entity.MCC;
-import com.entity.MNC;
-import com.entity.NEVersion;
+import com.entity.MccMnc;
 import com.entity.UE;
 
 @Stateless
@@ -48,12 +43,16 @@ public class FaultDAOImpl implements FaultDAO {
 		Collection<Fault> faults = getFaultsFromImsi(imsi);
 		List<Object> results = new ArrayList<Object>();
 		for (Fault fault : faults) {
-			results.addAll(getEventIdByFault(fault));
-			results.addAll(getFailureByFault(fault));
+			//results.add(getEventIdByFault(fault));
+			results.add(getFailureByFault(fault));
 		}
 		return results;
 	}
 
+	@Override
+	public Fault getByEventId(Integer eventId) {
+		return null;
+	}
 	public Collection<Fault> getFaultsFromImsi(Long imsi) {
 		Query q = em.createQuery(
 				"select f from Fault f where f.imsi.imsi = :imsi", Fault.class)
@@ -62,29 +61,12 @@ public class FaultDAOImpl implements FaultDAO {
 		return faults;
 	}
 
-	public List<Object> getEventIdByFault(Fault fault) {
-		Query q = em
-				.createQuery(
-<<<<<<< HEAD
-						"select distinct e from EventId e left join fetch e.eventCauses where e.eventId = :fault",
-						EventId.class);
-=======
-		"select distinct e from EventId e left join fetch e.eventCauses where e.eventId = :fault",
-						EventCause.class);
->>>>>>> 8f7e1d6638ac2ed1f6c7041de4efb9695698afdf
-		q.setParameter("fault", fault.getEventId().getEventId());
-		List<Object> causes = q.getResultList();
-		return causes;
-	}
-
-	public Collection<Object> getFailureByFault(Fault fault) {
-		Query q = em.createQuery(
-				"select distinct f from Failure f left join fetch"
-						+ " f.faultList where f.failure = :fault",
+	public Object getFailureByFault(Fault fault) {
+		Query q = em.createQuery("select distinct f from Failure f left join fetch f.faultList where f.failure = :fault",
 				Failure.class);
 		q.setParameter("fault", fault.getFailure().getfailure());
 		List<Object> fails = q.getResultList();
-		return fails;
+		return fails.get(0);
 	}
 
 	/**
@@ -92,91 +74,56 @@ public class FaultDAOImpl implements FaultDAO {
 	 * objects
 	 */
 
-	public Failure getByFailure(Integer failure) {
+	public Failure getByFailure(Integer failureid) {
 		Query q = em.createQuery(
-				"select f from Failure f where f.failure = :failure",
+				"select f from Failure f where f.failureid = :failureid",
 				Failure.class);
-		q.setParameter("failure", failure);
+		q.setParameter("failureid", failureid);
 		List<Failure> fails = q.getResultList();
 		return fails.get(0);
 	}
 
 	public CellHier getByCellId(Integer cellId) {
 		Query q = em.createQuery(
-				"select c from CellHier c where c.cellId = :cellId",
+				"select c from CellHier c where c.cellId.cellId = :cellId",
 				CellHier.class);
 		q.setParameter("cellId", cellId);
 		List<CellHier> cells = q.getResultList();
 		return cells.get(0);
 	}
 
-	public NEVersion getByNE(String ne) {
-		Query q = em.createQuery("select n from NEVersion n where n.ne = :ne",
-				NEVersion.class);
-		q.setParameter("ne", ne);
-		List<NEVersion> nes = q.getResultList();
-		return nes.get(0);
-	}
-
-	public IMSI getByIMSI(Long imsi) {
-		Query q = em.createQuery("select i from IMSI i where i.imsi = :imsi",
-				IMSI.class);
-		q.setParameter("imsi", imsi);
-		List<IMSI> imsis = q.getResultList();
-		return imsis.get(0);
-	}
-
-	public Duration getByDuration(Integer duration) {
+	public EventCause getByEventCause(Integer causeid) {
 		Query q = em.createQuery(
-				"select d from Duration d where d.duration = :duration",
-				Duration.class);
-		q.setParameter("duration", duration);
-		List<Duration> durations = q.getResultList();
-		return durations.get(0);
-	}
-
-	public EventCause getByEventCause(Integer event) {
-		Query q = em.createQuery(
-				"select e from EventCause e where e.cause = :event",
+				"select e from EventCause e where e.causeid.causeid = :causeid",
 				EventCause.class);
-		q.setParameter("event", event);
+		q.setParameter("causeid", causeid);
 		List<EventCause> causes = q.getResultList();
 		return causes.get(0);
 	}
 
-	public EventId getByEventId(Integer eventId) {
-		Query q = em.createQuery(
-				"select e from EventId e where e.eventId = :eventId",
-				EventId.class);
-		q.setParameter("eventId", eventId);
-		List<EventId> events = q.getResultList();
-		return events.get(0);
-	}
-
-	public MCC getByMCC(Integer mcc) {
-		Query q = em.createQuery("select m from MCC m where m.mcc = :mcc",
-				MCC.class);
-		q.setParameter("mcc", mcc);
-		List<MCC> mccs = q.getResultList();
+	public MccMnc getByMCC(Integer mccid) {
+		Query q = em.createQuery("select m from MccMnc m where m.mccid.mccid = :mccid",
+				MccMnc.class);
+		q.setParameter("mccid", mccid);
+		List<MccMnc> mccs = q.getResultList();
 		return mccs.get(0);
 	}
 
-	public MNC getByMNC(Integer mnc) {
-		Query q = em.createQuery("select m from MNC m where m.mnc = :mnc",
-				MNC.class);
-		q.setParameter("mnc", mnc);
-		List<MNC> mncs = q.getResultList();
+	public MccMnc getByMNC(Integer mnc) {
+		Query q = em.createQuery("select m from MccMnc m where m.mnc.mnc = :mnc",
+				MccMnc.class);
+		q.setParameter("mncid", mnc);
+		List<MccMnc> mncs = q.getResultList();
 		return mncs.get(0);
 	}
 
 	public UE getByTac(Integer tac) {
-		Query q = em.createQuery("select u from UE u where u.tac = :tac",
+		Query q = em.createQuery("select u from UE u where u.tac.tac = :tac",
 				UE.class);
 		q.setParameter("tac", tac);
 		List<UE> tacs = q.getResultList();
 		return tacs.get(0);
 	}
-}
 	//Unfinished
 //	@Override
 //	public Collection<Object> getTotalFaultsAndDurationPerIMSI()
@@ -190,4 +137,6 @@ public class FaultDAOImpl implements FaultDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 }

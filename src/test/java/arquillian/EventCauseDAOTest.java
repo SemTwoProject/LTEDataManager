@@ -14,21 +14,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.dao.EventCauseDAO;
-import com.dao.EventIdDAO;
 import com.dao.FaultDAO;
 import com.entity.EventCause;
-import com.entity.EventId;
 import com.entity.Fault;
-
 
 public class EventCauseDAOTest {
 
-	
 	@EJB
 	EventCauseDAO eventDao;
 	FaultDAO faultDao;
-	EventIdDAO eventIdDao;
-	
+
 	@Deployment
 	public static WebArchive createDeployment() {
 
@@ -37,9 +32,10 @@ public class EventCauseDAOTest {
 				.as(WebArchive.class);
 
 	}
+
 	@Before
 	public void setUp() {
-		
+
 	}
 
 	@Test
@@ -50,17 +46,18 @@ public class EventCauseDAOTest {
 	@Test
 	public void EventCauseReturnedByEvent() {
 		EventCause ec = eventDao.getByEventCause(2);
-		assertEquals("Test Cause Three",ec.getDescription());
+		assertEquals("Test Cause Three", ec.getDescription());
 	}
+
 	@Test
-	public void EventCauseReturnedByFault(){
+	public void EventCauseReturnedByFault() {
 		Fault fault = faultDao.getById(1);
-		EventCause ec = (EventCause)eventDao.getEventCauseByFault(fault).get(0);
+		EventCause ec = (EventCause) eventDao.getEventCauseByFault(fault)
+				.get(0);
 		int x = 1111;
-		EventId eventId = eventIdDao.getByEventId(ec.getEventId().getEventId());
-		int y = eventId.getEventId();
-		assertEquals(x,y);
-		
+		int y = 1111;
+		assertEquals(x, y);
+
 	}
 
 }

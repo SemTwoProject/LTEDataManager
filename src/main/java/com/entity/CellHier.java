@@ -4,18 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-=======
 import javax.persistence.*;
->>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 
 @SuppressWarnings("serial")
 @Entity
@@ -24,10 +13,10 @@ public class CellHier implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer id;
-
 	@Column(name = "cell_id")
+	private Integer cell_id;
+
+	@Column(name = "cell_number")
 	private Integer cellId;
 	@Column(name = "hier3_id")
 	private Long hier3Id;
@@ -36,7 +25,7 @@ public class CellHier implements Serializable {
 	@Column(name = "hier321_id")
 	private Long hier321Id;
 
-	@OneToMany(mappedBy = "cell", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cell_id", cascade = CascadeType.ALL)
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public CellHier() {
@@ -50,11 +39,11 @@ public class CellHier implements Serializable {
 	}
 
 	public Integer getId() {
-		return id;
+		return cell_id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer cell_id) {
+		this.cell_id = cell_id;
 	}
 
 	public Integer getCellId() {
@@ -101,16 +90,4 @@ public class CellHier implements Serializable {
 		fault.setCell(this);
 		faultList.add(fault);
 	}
-	/*public List<Fault> getFaultList() {
-		return faultList;
-	}
-
-	public void setFaultList(List<Fault> faultList) {
-		this.faultList = faultList;
-	}
-
-	public void addFault(Fault fault) {
-		fault.setCellId(this);
-		faultList.add(fault);
-	}*/
 }

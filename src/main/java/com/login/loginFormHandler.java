@@ -14,11 +14,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.entity.User;
-<<<<<<< HEAD
-import com.serviceInterfaces.UserService;
-=======
 import com.interfaces.UserService;
->>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 
 @Path("/login")
 @PermitAll
@@ -36,15 +32,6 @@ public class loginFormHandler {
 		User user = service.checkLoginDetails(username,password);
 		authLevel = user.getUserType(); 
 
-<<<<<<< HEAD
-		/*if (authLevel == null){
-			response.sendRedirect(response.encodeRedirectURL("/LTEDataManager/login.html"));
-
-		}
-		else {*/
-			response.sendRedirect("/LTEDataManager/home/");
-		//}
-=======
 		if (authLevel == null){
 			response.sendRedirect(response.encodeRedirectURL("/LTEDataManager/login.html"));
 
@@ -52,6 +39,5 @@ public class loginFormHandler {
 		else {
 			response.sendRedirect("/LTEDataManager/home/");
 		}
->>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	}
 }

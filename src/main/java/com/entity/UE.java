@@ -10,11 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlTransient;
 
 @SuppressWarnings("serial")
 @Entity
@@ -40,24 +37,19 @@ public class UE implements Serializable {
 	
 	@OneToMany(mappedBy = "tac", cascade = CascadeType.ALL)
 	private List<Fault> faultList = new ArrayList<Fault>();
-	
-	//Foreign Keys
-	@JoinColumn(name = "ue_type", referencedColumnName = "ue_type", nullable = false)
-	@ManyToOne
-	private UEType ueType;
-	@JoinColumn(name = "os", referencedColumnName = "os", nullable = false)
-	@ManyToOne
-	private OSType os;
-	@JoinColumn(name = "input_mode", referencedColumnName = "input_mode", nullable = false)
-	@ManyToOne
-	private InputMode inputMode;
+	@Column(name = "ue_type")
+	private String ueType;
+	@Column(name = "os")
+	private String os;
+	@Column(name = "input_mode")
+	private String inputMode;
 
 	public UE() {
 	}
 
 	public UE(Integer tac, String marketingName, String manufacturer,
 			String accessCapability, String model, String vendorName,
-			OSType os, InputMode inputMode, UEType ueType) {
+			String os, String inputMode, String ueType) {
 		this.tac = tac;
 		this.marketingName = marketingName;
 		this.manufacturer = manufacturer;
@@ -125,30 +117,27 @@ public class UE implements Serializable {
 		this.vendorName = vendorName;
 	}
 
-	@XmlTransient
-	public UEType getUeType() {
+	public String getUeType() {
 		return ueType;
 	}
 
-	public void setUeType(UEType ueType) {
+	public void setUeType(String ueType) {
 		this.ueType = ueType;
 	}
 
-	@XmlTransient
-	public OSType getOs() {
+	public String getOs() {
 		return os;
 	}
 
-	public void setOs(OSType os) {
+	public void setOs(String os) {
 		this.os = os;
 	}
 
-	@XmlTransient
-	public InputMode getInputMode() {
+	public String getInputMode() {
 		return inputMode;
 	}
 
-	public void setInputMode(InputMode inputMode) {
+	public void setInputMode(String inputMode) {
 		this.inputMode = inputMode;
 	}
 	

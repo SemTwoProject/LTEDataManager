@@ -7,7 +7,7 @@ public class Form {
 
 	public Form() {
 	}
-	
+
 	private byte[] data;
 
 	public byte[] getData() {
@@ -19,5 +19,5 @@ public class Form {
 	public void setData(byte[] data) {
 		this.data = data;
 	}
-	
+
 }

@@ -4,17 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-=======
 import javax.persistence.*;
->>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 
 @SuppressWarnings("serial")
 @Entity
@@ -23,8 +13,8 @@ public class Failure implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer id;
+	@Column(name = "failure_id")
+	private Integer failureid;
 
 	@Column(name = "failure")
 	private Integer failure;
@@ -32,7 +22,7 @@ public class Failure implements Serializable {
 	@Column(name = "description")
 	private String description;
 	
-	@OneToMany(mappedBy = "failure")
+	@OneToMany(mappedBy = "failureid")
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 
@@ -45,11 +35,11 @@ public class Failure implements Serializable {
 	}
 
 	public Integer getId() {
-		return id;
+		return failureid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer failureid) {
+		this.failureid = failureid;
 	}
 
 	public Integer getfailure() {

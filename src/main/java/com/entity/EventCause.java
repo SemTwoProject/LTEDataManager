@@ -9,39 +9,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-<<<<<<< HEAD
-import javax.xml.bind.annotation.XmlTransient;
-
-@SuppressWarnings("serial")
-@Entity
-@Table(name = "event_cause")
-=======
 //import javax.xml.bind.annotation.XmlTransient;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "cause")
->>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 public class EventCause implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer id;
-<<<<<<< HEAD
-	@Column(name = "event")
-	private Integer event;
-	@Column(name = "description")
-	private String description;
-	@JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
-	@ManyToOne
-	private EventId eventId;
-	@OneToMany(mappedBy = "event")
-=======
+	@Column(name = "cause_id")
+	private Integer causeid;
 	
 	@Column(name = "cause")
 	private Integer cause;
@@ -49,49 +29,31 @@ public class EventCause implements Serializable {
 	@Column(name = "description")
 	private String description;
 	
-	@JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
-	@ManyToOne
-	private EventId eventId;
-	@OneToMany(mappedBy = "cause")
->>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
+	@OneToMany(mappedBy = "causeid")
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public EventCause() {
 	}
 
-<<<<<<< HEAD
-	public EventCause(Integer event, String description, EventId eventId) {
-		this.event = event;
-=======
-	public EventCause(Integer cause, String description, EventId eventId) {
+	public EventCause(Integer cause, String description) {
 		this.cause = cause;
->>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 		this.description = description;
-		this.eventId = eventId;
 	}
 
 	public Integer getId() {
-		return id;
+		return causeid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer causeid) {
+		this.causeid = causeid;
 	}
 
 	public Integer getEvent() {
-<<<<<<< HEAD
-		return event;
-	}
-
-	public void setEvent(Integer event) {
-		this.event = event;
-=======
 		return cause;
 	}
 
 	public void setEvent(Integer cause) {
 		this.cause = cause;
->>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 	}
 
 	public String getDescription() {
@@ -102,18 +64,6 @@ public class EventCause implements Serializable {
 		this.description = description;
 	}
 
-<<<<<<< HEAD
-	@XmlTransient
-=======
-
->>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
-	public EventId getEventId() {
-		return eventId;
-	}
-
-	public void setEventId(EventId eventId) {
-		this.eventId = eventId;
-	}
 	public void addFault(Fault fault) {
 		fault.setEvent(this);
 		faultList.add(fault);
