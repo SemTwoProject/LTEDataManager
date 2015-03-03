@@ -45,7 +45,7 @@ public class EventIdDAOTest {
 
 	@Test
 	public void CellIsReturnedById() {
-		EventId e = dao.getByEventId(1111);
+		EventId e = dao.getByEventId(4098);
 		int x = 1;
 		int y = e.getId();
 		assertEquals(x,y);

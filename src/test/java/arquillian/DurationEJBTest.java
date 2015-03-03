@@ -38,7 +38,7 @@ public class DurationEJBTest {
 
 	@Test
 	public void durationsListIsReturned() {
-		assertEquals(dao.getDuration().size(), 1);
+		assertEquals(dao.getDuration().size(), 3);
 	}
 
 	@Test

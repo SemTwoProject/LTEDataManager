@@ -42,13 +42,13 @@ public class IMSIDAOTest {
 
 	@Test
 	public void IMSIListIsReturned() {
-		assertEquals(dao.getIMSI().size(), 7);
+		assertEquals(dao.getIMSI().size(), 6);
 	}
 
 	@Test
 	public void IMSIIsReturnedByIMSI() {
-		IMSI imsi = dao.getByIMSI(new Long("33000000000003"));
-		int y = 3;
+		IMSI imsi = dao.getByIMSI(240210000000013L);
+		int y = 8;
 		int x = imsi.getId();
 		assertEquals(y,x);
 	}

@@ -1,0 +1,28 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+   version="1.0">
+ 
+   <persistence-unit name="fullStack">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      <jta-data-source>java:jboss/datasources/mysql</jta-data-source>
+      <class>entities.CellHier</class>
+      <class>entities.Duration</class>
+      <class>entities.EventCause</class>
+      <class>entities.EventId</class>
+      <class>entities.Failure</class>
+      <class>entities.Fault</class>
+      <class>entities.IMSI</class>
+      <class>entities.InputMode</class>
+      <class>entities.MCC</class>
+      <class>entities.MNC</class>
+      <class>entities.NEVersion</class>
+      <class>entities.OSType</class>
+      <class>entities.UE</class>
+      <class>entities.UEType</class>     
+      <properties>
+         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+         <property name="hibernate.hbm2ddl.auto" value="update" />
+      </properties>
+   </persistence-unit>
+</persistence>
