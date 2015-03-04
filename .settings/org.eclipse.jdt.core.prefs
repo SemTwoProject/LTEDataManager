@@ -1,6 +1,9 @@
 eclipse.preferences.version=1
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0ddfb1a8027a6a4e45bf83d6e2aa9b14d5628b18
 org.eclipse.jdt.core.compiler.codegen.methodParameters=do not generate
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8
 org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve
@@ -8,6 +11,7 @@ org.eclipse.jdt.core.compiler.compliance=1.8
 org.eclipse.jdt.core.compiler.debug.lineNumber=generate
 org.eclipse.jdt.core.compiler.debug.localVariable=generate
 org.eclipse.jdt.core.compiler.debug.sourceFile=generate
+<<<<<<< HEAD
 org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
 org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning
@@ -38,3 +42,9 @@ org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning
 org.eclipse.jdt.core.compiler.source=1.7
 >>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 >>>>>>> 324425364305526399e910bc0c61b9a257e84f9f
+=======
+org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
+org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
+org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning
+org.eclipse.jdt.core.compiler.source=1.8
+>>>>>>> 0ddfb1a8027a6a4e45bf83d6e2aa9b14d5628b18

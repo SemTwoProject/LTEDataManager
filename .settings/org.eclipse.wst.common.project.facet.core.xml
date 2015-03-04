@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0ddfb1a8027a6a4e45bf83d6e2aa9b14d5628b18
 <?xml version="1.0" encoding="UTF-8"?>
 <faceted-project>
   <fixed facet="wst.jsdt.web"/>
@@ -11,6 +14,7 @@
   <installed facet="jst.web" version="3.1"/>
   <installed facet="java" version="1.8"/>
 </faceted-project>
+<<<<<<< HEAD
 =======
 <?xml version="1.0" encoding="UTF-8"?>
 <faceted-project>
@@ -35,3 +39,5 @@
 >>>>>>> d1ca346c5313165f298de19b2f765d6cc3010c68
 </faceted-project>
 >>>>>>> 324425364305526399e910bc0c61b9a257e84f9f
+=======
+>>>>>>> 0ddfb1a8027a6a4e45bf83d6e2aa9b14d5628b18

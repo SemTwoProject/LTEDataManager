@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0ddfb1a8027a6a4e45bf83d6e2aa9b14d5628b18
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" output="target/classes" path="src/main/java">
@@ -36,6 +39,7 @@
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
+<<<<<<< HEAD
 =======
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
@@ -93,3 +97,5 @@
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
 >>>>>>> 324425364305526399e910bc0c61b9a257e84f9f
+=======
+>>>>>>> 0ddfb1a8027a6a4e45bf83d6e2aa9b14d5628b18
