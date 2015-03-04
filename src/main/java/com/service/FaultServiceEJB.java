@@ -26,13 +26,18 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	}
 
 	@Override
-<<<<<<< HEAD
+	public Collection<Object> getTotalFaultsAndDurationPerIMSI(
+			Timestamp startdate, Timestamp enddate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*@Override
 	public Collection<Object> getTotalFaultsAndDurationPerIMSI() {
 		return dao.getTotalFaultsAndDurationPerIMSI();
-=======
 	public Collection<Object> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end)
 	{
 		return dao.getTotalFaultsAndDurationPerIMSI(start, end);
->>>>>>> 6ab11dcb92ea0679af53a5d6dc0e734a03282b21
-	}
+
+	}*/
 }
