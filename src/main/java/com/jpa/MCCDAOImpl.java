@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.dao.MCCDAO;
-import com.entity.MCC;
+import com.entity.MccMnc;
 
 @Stateless
 @Local
@@ -20,17 +20,17 @@ public class MCCDAOImpl implements MCCDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	public Collection<MCC> getMCC() {
+	public Collection<MccMnc> getMCC() {
 		Query q = em.createQuery("select m from MCC m");
 		return q.getResultList();
 
 	}
 
-	public MCC getByMCC(Integer mcc) {
+	public MccMnc getByMCC(Integer mcc) {
 		Query q = em.createQuery("select m from MCC m where m.mcc = :mcc",
-				MCC.class);
+				MccMnc.class);
 		q.setParameter("mcc", mcc);
-		List<MCC> mccs = q.getResultList();
+		List<MccMnc> mccs = q.getResultList();
 		return mccs.get(0);
 	}
 }

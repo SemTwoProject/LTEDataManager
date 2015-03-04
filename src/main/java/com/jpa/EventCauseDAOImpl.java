@@ -1,6 +1,5 @@
 package com.jpa;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -11,7 +10,6 @@ import javax.persistence.Query;
 
 import com.dao.EventCauseDAO;
 import com.entity.EventCause;
-import com.entity.EventId;
 import com.entity.Fault;
 
 @Stateless
@@ -22,9 +20,13 @@ public class EventCauseDAOImpl implements EventCauseDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	public Collection<EventCause> getEventCause() {
-		Query q = em.createQuery("select ec from EventCause ec");
-		return q.getResultList();
+	public EventCause getEventCause(Integer causeid) {
+		Query q = em.createQuery(
+				"select e from EventCause e where e.causeid = :causeid",
+				EventCause.class);
+		q.setParameter("causeid", causeid);
+		List<EventCause> causes = q.getResultList();
+		return causes.get(0);
 	}
 
 	public EventCause getByEventCause(Integer event) {
@@ -40,17 +42,8 @@ public class EventCauseDAOImpl implements EventCauseDAO {
 		Query q = em.createQuery(
 				"select e from EventCause e where e.eventId = :fault",
 				EventCause.class);
-		q.setParameter("fault", fault.getEventId());
+		q.setParameter("fault", fault.getEventCause());
 		List<Object> causes = q.getResultList();
 		return causes;
-	}
-
-	public EventId getByEventId(Integer eventId) {
-		Query q = em.createQuery(
-				"select e from EventId e where e.eventId = :eventId",
-				EventId.class);
-		q.setParameter("eventId", eventId);
-		List<EventId> events = q.getResultList();
-		return events.get(0);
 	}
 }

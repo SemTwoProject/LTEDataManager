@@ -4,18 +4,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "failure_class")
+@Table(name = "failure")
 public class Failure implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer id;
 
+	@Id
 	@Column(name = "failure")
 	private Integer failure;
 	
@@ -32,14 +33,6 @@ public class Failure implements Serializable {
 	public Failure(Integer failure, String description) {
 		this.failure = failure;
 		this.description = description;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public Integer getfailure() {
@@ -70,4 +63,44 @@ public class Failure implements Serializable {
 		fault.setFailure(this);
 		faultList.add(fault);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((failure == null) ? 0 : failure.hashCode());
+		result = prime * result
+				+ ((faultList == null) ? 0 : faultList.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Failure other = (Failure) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (failure == null) {
+			if (other.failure != null)
+				return false;
+		} else if (!failure.equals(other.failure))
+			return false;
+		if (faultList == null) {
+			if (other.faultList != null)
+				return false;
+		} else if (!faultList.equals(other.faultList))
+			return false;
+		return true;
+	}
+	
 }

@@ -31,22 +31,13 @@ public class ExcelRest {
 
 		String fileName = "";
 		try {
-			wb = new HSSFWorkbook(new ByteArrayInputStream(form.getData()));
-			//service.createCell(wb);
-			service.createDuration(wb);
-			//service.createEventId(wb);
-			//service.createFailure(wb);
-			//service.createIMSI(wb);
-			//service.createMCC(wb);
-			//service.createNEVersion(wb);
-			//service.createOSType(wb);
-			//service.createUEType(wb);
-			
-			//service.createEventCause(wb);
-			//service.createMNC(wb);
-			//service.createUE(wb);
-			//service.createFault(wb);
-			
+			wb = new HSSFWorkbook(new ByteArrayInputStream(form.getData()));	
+			service.createCell(wb);
+			service.createFailure(wb);
+			service.createMccMnc(wb);
+			service.createEventCause(wb);
+			service.createUE(wb);
+			service.createFault(wb);
 		} catch (IOException | InvalidFormatException e) {
 			e.printStackTrace();
 		}

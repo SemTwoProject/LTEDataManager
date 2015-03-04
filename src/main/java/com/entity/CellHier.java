@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
@@ -12,11 +17,7 @@ import javax.persistence.*;
 public class CellHier implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer id;
-
-	@Column(name = "cell_id")
+	@Column(name = "cell")
 	private Integer cellId;
 	@Column(name = "hier3_id")
 	private Long hier3Id;
@@ -38,13 +39,6 @@ public class CellHier implements Serializable {
 		this.hier321Id = hier321Id;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public Integer getCellId() {
 		return cellId;
@@ -90,16 +84,57 @@ public class CellHier implements Serializable {
 		fault.setCell(this);
 		faultList.add(fault);
 	}
-	/*public List<Fault> getFaultList() {
-		return faultList;
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cellId == null) ? 0 : cellId.hashCode());
+		result = prime * result
+				+ ((faultList == null) ? 0 : faultList.hashCode());
+		result = prime * result
+				+ ((hier321Id == null) ? 0 : hier321Id.hashCode());
+		result = prime * result
+				+ ((hier32Id == null) ? 0 : hier32Id.hashCode());
+		result = prime * result + ((hier3Id == null) ? 0 : hier3Id.hashCode());
+		return result;
 	}
 
-	public void setFaultList(List<Fault> faultList) {
-		this.faultList = faultList;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CellHier other = (CellHier) obj;
+		if (cellId == null) {
+			if (other.cellId != null)
+				return false;
+		} else if (!cellId.equals(other.cellId))
+			return false;
+		if (faultList == null) {
+			if (other.faultList != null)
+				return false;
+		} else if (!faultList.equals(other.faultList))
+			return false;
+		if (hier321Id == null) {
+			if (other.hier321Id != null)
+				return false;
+		} else if (!hier321Id.equals(other.hier321Id))
+			return false;
+		if (hier32Id == null) {
+			if (other.hier32Id != null)
+				return false;
+		} else if (!hier32Id.equals(other.hier32Id))
+			return false;
+		if (hier3Id == null) {
+			if (other.hier3Id != null)
+				return false;
+		} else if (!hier3Id.equals(other.hier3Id))
+			return false;
+		return true;
 	}
-
-	public void addFault(Fault fault) {
-		fault.setCellId(this);
-		faultList.add(fault);
-	}*/
+	
 }

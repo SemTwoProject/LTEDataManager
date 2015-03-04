@@ -19,7 +19,7 @@ public class EventCauseRest {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<EventCause> getEventCause() {
-		return service.getAllEventCause();
+	public EventCause getEventCause() {
+		return service.getAllEventCause(10);
 	}
 }

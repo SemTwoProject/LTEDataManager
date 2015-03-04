@@ -28,7 +28,7 @@ public class FailureDAOImpl implements FailureDAO {
 	}
 
 	public Failure getByFailure(Integer failure) {
-		Query q = em.createQuery("select f from Failure f where f.failure = :failure",
+		Query q = em.createQuery("select f from Failure f where f.failure.failure = :failure",
 				Failure.class);
 		q.setParameter("failure", failure);
 		List<Failure> fails = q.getResultList();

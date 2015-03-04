@@ -6,60 +6,55 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.IdClass;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-//import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlTransient;
 
 @SuppressWarnings("serial")
+@IdClass(EventCauseId.class)
 @Entity
 @Table(name = "cause")
 public class EventCause implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer id;
+	@Column(name = "event_id")
+	private Integer eventId;
 	
+	@Id
 	@Column(name = "cause")
-	private Integer cause;
+	private Integer causeCode;
 	
 	@Column(name = "description")
 	private String description;
 	
-	@JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
-	@ManyToOne
-	private EventId eventId;
-	@OneToMany(mappedBy = "cause")
+	@OneToMany(mappedBy = "eventCause")
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public EventCause() {
 	}
 
-	public EventCause(Integer cause, String description, EventId eventId) {
-		this.cause = cause;
+	public EventCause(Integer causeCode, Integer eventId, String description) {
+		this.causeCode = causeCode;
+		this.eventId = eventId;
 		this.description = description;
+	}
+
+	public Integer getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(Integer eventId) {
 		this.eventId = eventId;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public Integer getEvent() {
-		return cause;
+		return causeCode;
 	}
 
-	public void setEvent(Integer cause) {
-		this.cause = cause;
+	public void setEvent(Integer causeCode) {
+		this.causeCode = causeCode;
 	}
 
 	public String getDescription() {
@@ -70,16 +65,24 @@ public class EventCause implements Serializable {
 		this.description = description;
 	}
 
-
-	public EventId getEventId() {
-		return eventId;
+	public Integer getCauseCode() {
+		return causeCode;
 	}
 
-	public void setEventId(EventId eventId) {
-		this.eventId = eventId;
+	public void setCauseCode(Integer causeCode) {
+		this.causeCode = causeCode;
 	}
+	@XmlTransient
+	public List<Fault> getFaultList() {
+		return faultList;
+	}
+
+	public void setFaultList(List<Fault> faultList) {
+		this.faultList = faultList;
+	}
+
 	public void addFault(Fault fault) {
-		fault.setEvent(this);
+		fault.setEventCause(this);
 		faultList.add(fault);
 	}
 }

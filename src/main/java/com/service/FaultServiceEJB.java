@@ -19,13 +19,13 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	public Collection<Fault> getAllFault() {
 		return dao.getFault();
 	}
-	public Collection<Object> getFaultByIMSI(Long imsi){
+
+	public Collection<Object> getFaultByIMSI(Long imsi) {
 		return dao.getFaultByIMSI(imsi);
 	}
 
 	@Override
-	public Collection<Object> getTotalFaultsAndDurationPerIMSI()
-	{
+	public Collection<Object> getTotalFaultsAndDurationPerIMSI() {
 		return dao.getTotalFaultsAndDurationPerIMSI();
 	}
 }

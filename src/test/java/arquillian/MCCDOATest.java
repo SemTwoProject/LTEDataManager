@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.dao.MCCDAO;
-import com.entity.MCC;
+import com.entity.MccMnc;
 
 public class MCCDOATest {
 
@@ -49,9 +49,9 @@ public class MCCDOATest {
 		String germany = new String("Germany");
 		String india = new String("India");
 				
-		MCC testUnitedStates = dao.getByMCC(x);
-		MCC testGermany = dao.getByMCC(y);
-		MCC testIndia = dao.getByMCC(z);
+		MccMnc testUnitedStates = dao.getByMCC(x);
+		MccMnc testGermany = dao.getByMCC(y);
+		MccMnc testIndia = dao.getByMCC(z);
 		
 		assertEquals(uSA, testUnitedStates.getCountry());
 		assertEquals(germany, testGermany.getCountry());

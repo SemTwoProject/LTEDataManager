@@ -9,7 +9,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import com.dao.MCCDAO;
-import com.entity.MCC;
+import com.entity.MccMnc;
 
 @Stateful
 @Local
@@ -19,7 +19,7 @@ public class MCCServiceEJB implements MCCServiceLocal {
 	private MCCDAO dao;
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public Collection<MCC> getAllMCC() {
+	public Collection<MccMnc> getAllMCC() {
 		return dao.getMCC();
 	}
 }

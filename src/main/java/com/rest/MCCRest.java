@@ -9,7 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.service.MCCServiceLocal;
-import com.entity.MCC;
+import com.entity.MccMnc;
 
 @Path("/mcc")
 public class MCCRest {
@@ -19,7 +19,7 @@ public class MCCRest {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<MCC> getMCC() {
+	public Collection<MccMnc> getMCC() {
 		return service.getAllMCC();
 	}
 }

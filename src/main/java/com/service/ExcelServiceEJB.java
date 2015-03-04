@@ -25,39 +25,9 @@ public class ExcelServiceEJB implements ExcelServiceLocal {
 
 	}
 
-	public void createDuration(HSSFWorkbook wb) throws InvalidFormatException,
+	public void createMccMnc(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
-		dao.createDuration(wb);
-
-	}
-
-	public void createIMSI(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException {
-		dao.createIMSI(wb);
-
-	}
-
-	public void createOSType(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException {
-		dao.createOSType(wb);
-
-	}
-
-	public void createNEVersion(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException {
-		dao.createNEVersion(wb);
-
-	}
-
-	public void createUEType(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException {
-		dao.createUEType(wb);
-
-	}
-
-	public void createMCC(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException {
-		dao.createMCC(wb);
+		dao.createMccMnc(wb);
 
 	}
 
@@ -67,20 +37,8 @@ public class ExcelServiceEJB implements ExcelServiceLocal {
 
 	}
 
-	public void createEventId(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException {
-		dao.createEventId(wb);
-
-	}
-
-	public void createMNC(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException {
-		dao.createMNC(wb);
-
-	}
-
-	public void createEventCause(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException {
+	public void createEventCause(HSSFWorkbook wb)
+			throws InvalidFormatException, FileNotFoundException, IOException {
 		dao.createEventCause(wb);
 
 	}

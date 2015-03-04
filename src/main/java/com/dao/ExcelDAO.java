@@ -15,36 +15,13 @@ public interface ExcelDAO {
 	public void createCell(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createDuration(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException;
-
-	public void createIMSI(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException;
-
-	public void createOSType(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException;
-	
-	public void createInputMode(HSSFWorkbook wb) throws InvalidFormatException,
-	FileNotFoundException, IOException;
-
-	public void createNEVersion(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException;
-
-	public void createUEType(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException;
-
-	public void createMCC(HSSFWorkbook wb) throws InvalidFormatException,
+	public void createMccMnc(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
 	public void createFailure(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;
 
-	public void createEventId(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException;
-
 	// are child dependents
-	public void createMNC(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException;
 
 	public void createEventCause(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException;

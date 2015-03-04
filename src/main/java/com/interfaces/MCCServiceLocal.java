@@ -2,8 +2,8 @@ package com.interfaces;
 
 import java.util.Collection;
 
-import com.entity.MCC;
+import com.entity.MccMnc;
 
 public interface MCCServiceLocal {
-	Collection<MCC> getAllMCC();
+	Collection<MccMnc> getAllMCC();
 }

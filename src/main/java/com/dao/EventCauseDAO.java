@@ -1,22 +1,18 @@
 package com.dao;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import com.entity.EventCause;
-import com.entity.EventId;
 import com.entity.Fault;
-
-import java.util.Collection;
-import java.util.List;
 
 @Local
 public interface EventCauseDAO {
 
-	Collection<EventCause> getEventCause();
+	EventCause getEventCause(Integer eventid);
 
 	EventCause getByEventCause(Integer event);
 
 	List<Object> getEventCauseByFault(Fault fault);
-
-	EventId getByEventId(Integer eventId);
 }
