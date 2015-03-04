@@ -19,7 +19,7 @@ public class UERest {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<UE> getMNC() {
+	public Collection<UE> getUE() {
 		return service.getAllUE();
 	}
 }

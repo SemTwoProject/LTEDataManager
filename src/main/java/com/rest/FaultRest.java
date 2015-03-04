@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.service.FaultServiceLocal;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 
 @Path("/fault")
@@ -24,4 +25,16 @@ public class FaultRest {
 		return service.getFaultByIMSI(imsi);
 		
 	}
+<<<<<<< HEAD
 }
+=======
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Object> getTotalFaultsAndDurationPerIMSI(
+			Timestamp startdate, Timestamp enddate)
+	{
+		return service.getTotalFaultsAndDurationPerIMSI(startdate, enddate);
+	}
+}
+>>>>>>> 6ab11dcb92ea0679af53a5d6dc0e734a03282b21

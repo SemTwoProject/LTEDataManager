@@ -1,0 +1,12 @@
+<arquillian xmlns="http://jboss.org/schema/arquillian"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://jboss.org/schema/arquillian
+        http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+    <container qualifier="jbossas-managed-wildfly-8" default="true">
+        <configuration>
+            <property name="jbossHome">C:\\wildfly\\wildfly-8.2.0.Final</property>
+          
+        </configuration>
+    </container>
+</arquillian>
