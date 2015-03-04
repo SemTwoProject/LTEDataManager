@@ -1,5 +1,6 @@
 package com.service;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 
 import javax.ejb.EJB;
@@ -24,8 +25,8 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	}
 
 	@Override
-	public Collection<Object> getTotalFaultsAndDurationPerIMSI()
+	public Collection<Object> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end)
 	{
-		return dao.getTotalFaultsAndDurationPerIMSI();
+		return dao.getTotalFaultsAndDurationPerIMSI(start, end);
 	}
 }

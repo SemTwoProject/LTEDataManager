@@ -1,5 +1,6 @@
 package com.jpa;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -167,17 +168,9 @@ public class FaultDAOImpl implements FaultDAO {
 		List<UE> tacs = q.getResultList();
 		return tacs.get(0);
 	}
-	//Unfinished
-//	@Override
-//	public Collection<Object> getTotalFaultsAndDurationPerIMSI()
-//	{
-//		Query q = em.createQuery("select IMSI as IMSI, COUNT(f.id) as TotalFailures, SUM(duration) as TotalDuration from Faults f Group By IMSI");
-//		return null;
-//	}	
 
-	@Override
-	public Collection<Object> getTotalFaultsAndDurationPerIMSI() {
-		// TODO Auto-generated method stub
+	public Collection<Object> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end) {
+		//Query q = em.createQuery("select IMSI as IMSI, COUNT(f.id) as TotalFailures, SUM(duration) as TotalDuration from Faults f Group By IMSI");		
 		return null;
 	}
 }
