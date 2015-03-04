@@ -144,7 +144,7 @@ public class ExcelReadImpl implements ExcelDAO {
 			col7 = selectColumnValue(3, 7, wb);
 			col8 = selectColumnValue(3, 8, wb);
 
-			for (int i = 1; i < col.size(); i++) {
+			for (int i = 0; i < col.size(); i++) {
 
 				ue = new UE(col.get(i).intValue(), col1.get(i), col2.get(i),
 						col3.get(i), col4.get(i), col5.get(i), col6.get(i),
