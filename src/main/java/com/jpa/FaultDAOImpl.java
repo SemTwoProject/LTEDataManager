@@ -1,7 +1,6 @@
 package com.jpa;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,10 +11,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.dao.FaultDAO;
-import com.entity.CellHier;
 import com.entity.Failure;
 import com.entity.Fault;
-import com.entity.UE;
 
 @Stateless
 @Local
@@ -38,31 +35,27 @@ public class FaultDAOImpl implements FaultDAO {
 		return faults.get(0);
 	}
 
-	public Collection<Object> getFaultByIMSI(Long imsi) {
-		Collection<Fault> faults = getFaultsFromImsi(imsi);
-		List<Object> results = new ArrayList<Object>();
-		for (Fault fault : faults) {
-			//results.add(getEventIdByFault(fault));
-			results.add(getFailureByFault(fault));
-		}
-		return results;
-	}
+	/*
+	 * public Collection<Object> getFaultByIMSIOd(Long imsi) { Collection<Fault>
+	 * faults = getFaultsByImsi(imsi); List<Object> results = new
+	 * ArrayList<Object>(); for (Fault fault : faults) {
+	 * //results.add(getEventIdByFault(fault));
+	 * results.add(getFailureByFault(fault)); } return results; }
+	 */
 
-	@Override
-	public Fault getByEventId(Integer eventId) {
-		return null;
-	}
-	public Collection<Fault> getFaultsFromImsi(Long imsi) {
-		Query q = em.createQuery(
-				"select f from Fault f where f.imsi.imsi = :imsi", Fault.class)
-				.setParameter("imsi", imsi);
+	public Collection<Fault> getFaultByIMSI(Long imsi) {
+		Query q = em
+				.createQuery(
+						"select distinct f.tac, f.eventCause from Fault f where f.imsi = :imsi").setParameter("imsi", imsi);
 		List<Fault> faults = q.getResultList();
 		return faults;
 	}
 
 	public Object getFailureByFault(Fault fault) {
-		Query q = em.createQuery("select distinct f from Failure f left join fetch f.faultList where f.failure = :fault",
-				Failure.class);
+		Query q = em
+				.createQuery(
+						"select distinct f from Failure f left join fetch f.faultList where f.failure = :fault",
+						Failure.class);
 		q.setParameter("fault", fault.getFailure().getfailure());
 		List<Object> fails = q.getResultList();
 		return fails.get(0);
@@ -73,37 +66,11 @@ public class FaultDAOImpl implements FaultDAO {
 	 * objects
 	 */
 
-	public Failure getByFailure(Integer failure) {
-		Query q = em.createQuery(
-				"select f from Failure f where f.failure.failure = :failure",
-				Failure.class);
-		q.setParameter("failure", failure);
-		List<Failure> fails = q.getResultList();
-		return fails.get(0);
-	}
-
-	public CellHier getByCellId(Integer cellId) {
-		Query q = em.createQuery(
-				"select c from CellHier c where c.cellId.cellId = :cellId",
-				CellHier.class);
-		q.setParameter("cellId", cellId);
-		List<CellHier> cells = q.getResultList();
-		return cells.get(0);
-	}
-
-	public UE getByTac(Integer tac) {
-		Query q = em.createQuery("select u from UE u where u.tac.tac = :tac",
-				UE.class);
-		q.setParameter("tac", tac);
-		List<UE> tacs = q.getResultList();
-		System.out.println("ResultSet: "+ tacs.size());
-		return tacs.get(0);
-	}
-
-	public Collection<Object> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end) {
-		//Query q = em.createQuery("select IMSI as IMSI, COUNT(f.id) as TotalFailures, SUM(duration) as TotalDuration from Faults f Group By IMSI");		
+	public Collection<Object> getTotalFaultsAndDurationPerIMSI(Timestamp start,
+			Timestamp end) {
+		// Query q =
+		// em.createQuery("select IMSI as IMSI, COUNT(f.id) as TotalFailures, SUM(duration) as TotalDuration from Faults f Group By IMSI");
 		return null;
 	}
 
-	
 }

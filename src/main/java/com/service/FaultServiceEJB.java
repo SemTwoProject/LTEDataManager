@@ -21,7 +21,7 @@ public class FaultServiceEJB implements FaultServiceLocal {
 		return dao.getFault();
 	}
 
-	public Collection<Object> getFaultByIMSI(Long imsi) {
+	public Collection<Fault> getFaultByIMSI(Long imsi) {
 		return dao.getFaultByIMSI(imsi);
 	}
 
