@@ -9,7 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.entity.Fault;
+import com.entity.EventCause;
 import com.service.FaultServiceLocal;
 
 @Path("/fault")
@@ -21,7 +21,7 @@ public class FaultRest {
 	@POST
 	@Path("/faultsbyimsi")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Fault> getFaultByIMSI(@FormParam("imsi") Long imsi) {
+	public Collection<EventCause> getFaultByIMSI(@FormParam("imsi") Long imsi) {
 		return service.getFaultByIMSI(imsi);
 
 	}

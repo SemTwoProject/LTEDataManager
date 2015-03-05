@@ -8,7 +8,7 @@ import javax.ejb.Local;
 import javax.ejb.Stateful;
 
 import com.dao.FaultDAO;
-import com.entity.Fault;
+import com.entity.EventCause;
 
 @Stateful
 @Local
@@ -17,11 +17,7 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	@EJB
 	private FaultDAO dao;
 
-	public Collection<Fault> getAllFault() {
-		return dao.getFault();
-	}
-
-	public Collection<Fault> getFaultByIMSI(Long imsi) {
+	public Collection<EventCause> getFaultByIMSI(Long imsi) {
 		return dao.getFaultByIMSI(imsi);
 	}
 
