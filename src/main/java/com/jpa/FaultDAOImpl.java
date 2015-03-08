@@ -1,6 +1,7 @@
 package com.jpa;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.dao.FaultDAO;
-import com.entity.Failure;
+import com.entity.EventCause;
 import com.entity.Fault;
 
 @Stateless
@@ -35,36 +36,31 @@ public class FaultDAOImpl implements FaultDAO {
 		return faults.get(0);
 	}
 
-	/*
-	 * public Collection<Object> getFaultByIMSIOd(Long imsi) { Collection<Fault>
-	 * faults = getFaultsByImsi(imsi); List<Object> results = new
-	 * ArrayList<Object>(); for (Fault fault : faults) {
-	 * //results.add(getEventIdByFault(fault));
-	 * results.add(getFailureByFault(fault)); } return results; }
-	 */
+	public Collection<EventCause> getFaultByIMSI(Long imsi) {
+		Collection<Fault> faults = getFaultsByIMSI(imsi);
+		List<EventCause> results = new ArrayList<EventCause>();
+		for (Fault fault : faults) {
+			results.add(getCauseCodeByFault(fault));
+		}
+		return results;
+	}
 
-	public Collection<Fault> getFaultByIMSI(Long imsi) {
-		Query q = em
-				.createQuery(
-						"select distinct f.tac, f.eventCause from Fault f where f.imsi = :imsi").setParameter("imsi", imsi);
+	public Collection<Fault> getFaultsByIMSI(Long imsi) {
+		Query q = em.createQuery("select f from Fault f where f.imsi = :imsi",
+				Fault.class).setParameter("imsi", imsi);
 		List<Fault> faults = q.getResultList();
 		return faults;
 	}
 
-	public Object getFailureByFault(Fault fault) {
-		Query q = em
-				.createQuery(
-						"select distinct f from Failure f left join fetch f.faultList where f.failure = :fault",
-						Failure.class);
-		q.setParameter("fault", fault.getFailure().getfailure());
-		List<Object> fails = q.getResultList();
+	public EventCause getCauseCodeByFault(Fault fault) {
+		Query q = em.createQuery(
+				"select e from EventCause e where e.eventId = :eventId and e.causeCode = :eventCause",
+				EventCause.class);
+		q.setParameter("eventId", fault.getEventCause().getEventId());
+		q.setParameter("eventCause", fault.getEventCause().getCauseCode());
+		List<EventCause> fails = q.getResultList();
 		return fails.get(0);
 	}
-
-	/**
-	 * Helper queries for constructing a Fault by retrieving the relevant entity
-	 * objects
-	 */
 
 	public Collection<Object> getTotalFaultsAndDurationPerIMSI(Timestamp start,
 			Timestamp end) {

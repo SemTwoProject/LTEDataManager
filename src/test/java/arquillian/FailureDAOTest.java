@@ -18,7 +18,6 @@ import org.junit.runner.RunWith;
 import com.dao.FailureDAO;
 import com.dao.FaultDAO;
 import com.entity.Failure;
-import com.entity.Fault;
 
 @RunWith(Arquillian.class)
 public class FailureDAOTest {
@@ -49,8 +48,8 @@ public class FailureDAOTest {
 	@Test
 	public void FailureIsReturnedByFailure() {
 		Failure fail = failureDao.getByFailure(0);
-		int x = fail.getId();
-		int y = 1;
+		int x = fail.getfailure();
+		//int y = 1;
 		assertEquals(1,x);
 	}
 	

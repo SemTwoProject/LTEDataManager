@@ -1,7 +1,5 @@
 package com.service;
 
-import java.util.Collection;
-
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateful;
