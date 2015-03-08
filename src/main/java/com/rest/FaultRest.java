@@ -1,6 +1,7 @@
 package com.rest;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ws.rs.FormParam;
@@ -13,24 +14,29 @@ import com.entity.EventCause;
 import com.service.FaultServiceLocal;
 
 @Path("/fault")
-public class FaultRest {
-
+public class FaultRest
+{
+	
 	@EJB
 	private FaultServiceLocal service;
-
+	
 	@POST
 	@Path("/faultsbyimsi")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<EventCause> getFaultByIMSI(@FormParam("imsi") Long imsi) {
+	public Collection<EventCause> getFaultByIMSI(@FormParam("imsi") Long imsi)
+	{
 		return service.getFaultByIMSI(imsi);
-
+		
 	}
-
-	/*
-	 * @POST
-	 * 
-	 * @Produces(MediaType.APPLICATION_JSON) public Collection<Object>
-	 * getTotalFaultsAndDurationPerIMSI( Timestamp startdate, Timestamp enddate)
-	 * { return service.getTotalFaultsAndDurationPerIMSI(startdate, enddate); }
-	 */
+	
+	@POST
+	@Path("/totalfaults")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Object> getTotalFaultsAndDurationPerIMSI(
+			@FormParam("startdate") Date startdate,
+			@FormParam("enddate") Date enddate)
+	{
+		return service.getTotalFaultsAndDurationPerIMSI(startdate, enddate);
+	}
+	
 }

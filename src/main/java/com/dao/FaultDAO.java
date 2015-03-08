@@ -2,6 +2,7 @@ package com.dao;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.ejb.Local;
 
@@ -15,5 +16,5 @@ public interface FaultDAO {
 
 	Collection<EventCause> getFaultByIMSI(Long imsi);
 
-	Collection<Object> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end);
+	Collection<Object> getTotalFaultsAndDurationPerIMSI(Date start, Date end);
 }

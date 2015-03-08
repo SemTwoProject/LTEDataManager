@@ -2,6 +2,7 @@ package com.service;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
@@ -21,19 +22,8 @@ public class FaultServiceEJB implements FaultServiceLocal {
 		return dao.getFaultByIMSI(imsi);
 	}
 
-	@Override
 	public Collection<Object> getTotalFaultsAndDurationPerIMSI(
-			Timestamp startdate, Timestamp enddate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/*@Override
-	public Collection<Object> getTotalFaultsAndDurationPerIMSI() {
-		return dao.getTotalFaultsAndDurationPerIMSI();
-	public Collection<Object> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end)
-	{
+			Date start, Date end) {
 		return dao.getTotalFaultsAndDurationPerIMSI(start, end);
-
-	}*/
+	}
 }
