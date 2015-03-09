@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @SuppressWarnings("serial")
 @IdClass(EventCauseId.class)
 @Entity
-@Table(name = "event_cause")
+@Table(name = "cause")
 public class EventCause implements Serializable {
 
 	@Id

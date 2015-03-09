@@ -73,18 +73,31 @@ public class FaultDAOImpl implements FaultDAO {
 		return null;
 	}
 	
-	public Long getImsiCount(Timestamp start, Timestamp end,
+	public Long getIMSICount(Timestamp start, Timestamp end,
 			Long imsi) {
 		
-		Query q = em.createQuery("select i.imsi, COUNT(*) AS Total FROM Fault AS i WHERE i.imsi = :imsi AND i.date >= :start AND i where i.date <= :end");
+		Query q = em.createQuery("select COUNT(*) FROM Fault i WHERE i.imsi = :imsi AND i.date >= :start AND i.date <= :end");
 		q.setParameter("start", start);
 		q.setParameter("end", end);
 		q.setParameter("imsi", imsi);
 		
 		List<Long> failureCount = q.getResultList();
-		
-		System.out.println("WE GOT HERE " + failureCount.get(0));
 		return failureCount.get(0);
+	}
+
+	public Collection<Fault> getCauseCodePerIMSI(Long imsi) {
+		Query q = em.createQuery("select distinct eventCause.causeCode FROM Fault i WHERE i.imsi = :imsi");
+		q.setParameter("imsi", imsi);
+		
+		return q.getResultList();
+	}
+
+	public Collection<Fault> getIMSIFailureOverTime(Timestamp start,Timestamp end) {
+		Query q = em.createQuery("select distinct imsi from Fault i where i.date >= :start AND i.date <= :end");
+		q.setParameter("start", start);
+		q.setParameter("end", end);
+		
+		return q.getResultList();
 	}
 
 }

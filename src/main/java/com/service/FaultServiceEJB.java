@@ -9,6 +9,7 @@ import javax.ejb.Stateful;
 
 import com.dao.FaultDAO;
 import com.entity.EventCause;
+import com.entity.Fault;
 import com.interfaces.FaultServiceLocal;
 
 @Stateful
@@ -27,8 +28,17 @@ public class FaultServiceEJB implements FaultServiceLocal {
 		return dao.getTotalFaultsAndDurationPerIMSI(start, end);
 	}
 	
-	public Long getImsiCount(Timestamp start, Timestamp end,
-			Long imsi) {
-		return dao.getImsiCount(start, end, imsi);
+	public Long getIMSICount(Timestamp start, Timestamp end,Long imsi) {
+		return dao.getIMSICount(start, end, imsi);
+	}
+
+	public Collection<Fault> getCauseCodePerIMSI(Long imsi) {
+		return dao.getCauseCodePerIMSI(imsi);
+	}
+
+	@Override
+	public Collection<Fault> getIMSIFailureOverTime(Timestamp start,Timestamp end) {
+		// TODO Auto-generated method stub
+		return dao.getIMSIFailureOverTime(start, end);
 	}
 }

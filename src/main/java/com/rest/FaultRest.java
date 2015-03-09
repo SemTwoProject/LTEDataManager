@@ -15,6 +15,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.entity.EventCause;
 import com.google.gson.Gson;
@@ -51,24 +52,78 @@ public class FaultRest
 	@PermitAll
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/imsicount")
-	public void getImsiCount(@FormParam("startDate") Timestamp startDate,
+	public Response getImsiCount(@FormParam("startDate") Timestamp startDate,
 			@FormParam("endDate") Timestamp endDate,
 			@FormParam("searchimsi") Long searchimsi,
 			@Context HttpServletRequest request,
-			@Context HttpServletResponse response) throws IOException {
+			@Context HttpServletResponse response) {
 
 		String newResponse = null;
 		searchimsi = 191911000516761L;
 		startDate = Timestamp.valueOf("2013-02-19 00:00:00");
 		endDate = Timestamp.valueOf("2013-02-22 00:00:00");
 
-		System.out.println("WE ARE HERE" + startDate);
-		System.out.println("WE ARE HERE" + endDate);
-		System.out.println("WE ARE HERE" + searchimsi);
+		try {
+			newResponse = toJSONString(service.getIMSICount(startDate,endDate,searchimsi));
+		} catch (Exception err) {
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
 
-		//response = toJSONString(faultService.getImsiCount(date,imsi));
+		}
+		return Response.ok(newResponse).build();
 
-		newResponse = toJSONString(service.getImsiCount(startDate,endDate,searchimsi));
+	}
+
+	// /rest/fault/imsicausecodes
+	@GET
+	@PermitAll
+	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("/imsicausecodes")
+	public Response getImsiCauseCodes(@FormParam("searchimsi") Long searchimsi,
+			@Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+
+		String newResponse = null;
+		searchimsi = 191911000516761L;
+		try {
+			newResponse = toJSONString(service.getCauseCodePerIMSI(searchimsi));
+		} catch (Exception err) {
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+
+		}
+		return Response.ok(newResponse).build();
+	}
+
+	// /rest/fault/imsifailuresovertime
+	@GET
+	@PermitAll
+	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("/imsifailuresovertime")
+	public Response getAllIMSIFailuresOverTime(@FormParam("startDate") Timestamp startDate,
+			@FormParam("endDate") Timestamp endDate,
+			@Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
+
+		String newResponse = null;
+		startDate = Timestamp.valueOf("2013-02-19 00:00:00");
+		endDate = Timestamp.valueOf("2013-02-22 00:00:00");
+
+		try {
+			newResponse = toJSONString(service.getIMSIFailureOverTime(startDate,endDate));
+		} catch (Exception err) {
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+
+		}
+		return Response.ok(newResponse).build();
+
 	}
 
 	public String toJSONString(Object object) {
