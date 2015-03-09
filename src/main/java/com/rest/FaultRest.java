@@ -26,7 +26,6 @@ public class FaultRest
 	public Collection<EventCause> getFaultByIMSI(@FormParam("imsi") Long imsi)
 	{
 		return service.getFaultByIMSI(imsi);
-		
 	}
 	
 	@POST

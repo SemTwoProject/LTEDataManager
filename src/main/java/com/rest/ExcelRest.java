@@ -7,11 +7,19 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 import java.io.*;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
+
 import com.service.ExcelServiceLocal;
 
 @Path("/excel")
@@ -27,9 +35,8 @@ public class ExcelRest {
 
 	@POST
 	@Consumes("multipart/form-data")
-	public Response uploadFile(@MultipartForm Form form) {
+	public Response uploadFile(@MultipartForm Form form) throws URISyntaxException {
 
-		String fileName = "";
 		try {
 			wb = new HSSFWorkbook(new ByteArrayInputStream(form.getData()));	
 			service.createCell(wb);
@@ -41,8 +48,7 @@ public class ExcelRest {
 		} catch (IOException | InvalidFormatException e) {
 			e.printStackTrace();
 		}
-		return Response.status(200)
-				.entity("Uploaded file, starting with sheet : " + fileName)
-				.build();
+		URI uri = new URI("../systemadmin.html");
+		return Response.seeOther(uri).build();
 	}
 }
