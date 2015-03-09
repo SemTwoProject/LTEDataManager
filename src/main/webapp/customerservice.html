@@ -70,22 +70,6 @@
 
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
-				<div>
-
-					<form action="rest/excel" method="post" enctype="multipart/form-data">
-
-						<p>
-							Select a file : <input type="file" name="file" />
-						</p>
-
-						<input type="submit" value="Upload" />
-					</form>
-					<form action="rest/fault/faultsbyimsi" method="post">
-						<p>
-							Select a imsi : <input type="text" name="imsi" /> <input
-								type="submit" value="Search" />
-					</form>
-				</div>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="panel panel-default">
@@ -104,13 +88,14 @@
 								</div>
 								<div class="col-sm-4">
 									<div class="input-group">
-										<input type="text" class="form-control"
-											placeholder="Customer IMSI.."> <span
-											class="input-group-btn">
-											<button class="btn btn-default" type="button">
+									<form action="rest/fault/faultsbyimsi" method="post">
+										<input type="text" class="form-control" name="imsi" placeholder="Customer IMSI.."> 
+										<span class="input-group-btn">
+											<button class="btn btn-default" type="submit">
 												<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 											</button>
 										</span>
+										</form>
 									</div>
 								</div>
 								<div class="col-sm-12" id="dates">
