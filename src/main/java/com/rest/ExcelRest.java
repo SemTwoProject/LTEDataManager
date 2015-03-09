@@ -1,5 +1,10 @@
 package com.rest;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -7,20 +12,12 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-
-import java.io.*;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
-import com.service.ExcelServiceLocal;
+import com.interfaces.ExcelServiceLocal;
 
 @Path("/excel")
 public class ExcelRest {

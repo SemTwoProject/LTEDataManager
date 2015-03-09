@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttributeType;
 
 import com.dao.FailureDAO;
 import com.entity.Failure;
+import com.interfaces.FailureServiceLocal;
 
 @Stateful
 @Local

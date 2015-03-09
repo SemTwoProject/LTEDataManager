@@ -8,6 +8,7 @@ import javax.ejb.TransactionAttributeType;
 
 import com.dao.EventCauseDAO;
 import com.entity.EventCause;
+import com.interfaces.EventCauseServiceLocal;
 
 @Stateful
 @Local

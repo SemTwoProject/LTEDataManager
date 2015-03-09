@@ -6,8 +6,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.service.EventCauseServiceLocal;
 import com.entity.EventCause;
+import com.interfaces.EventCauseServiceLocal;
 
 @Path("/eventcause")
 public class EventCauseRest {

@@ -15,6 +15,6 @@ public interface FaultDAO {
 	Fault getById(Integer id);
 
 	Collection<EventCause> getFaultByIMSI(Long imsi);
-
-	Collection<Object> getTotalFaultsAndDurationPerIMSI(Date start, Date end);
+	Collection<Object> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end);
+	Long getImsiCount(Timestamp start,Timestamp end, Long imsi);
 }

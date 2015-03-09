@@ -8,8 +8,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.service.FailureServiceLocal;
 import com.entity.Failure;
+import com.interfaces.FailureServiceLocal;
 
 @Path("/failure")
 public class FailureRest {

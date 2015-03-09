@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttributeType;
 
 import com.dao.UEDAO;
 import com.entity.UE;
+import com.interfaces.UEServiceLocal;
 
 @Stateful
 @Local

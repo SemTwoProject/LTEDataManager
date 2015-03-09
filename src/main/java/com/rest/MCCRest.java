@@ -8,8 +8,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.service.MCCServiceLocal;
 import com.entity.MccMnc;
+import com.interfaces.MCCServiceLocal;
 
 @Path("/mcc")
 public class MCCRest {

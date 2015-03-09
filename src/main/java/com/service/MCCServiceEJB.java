@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttributeType;
 
 import com.dao.MCCDAO;
 import com.entity.MccMnc;
+import com.interfaces.MCCServiceLocal;
 
 @Stateful
 @Local
