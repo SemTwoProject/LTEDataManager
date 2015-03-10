@@ -41,10 +41,9 @@ public class FaultDAOImpl implements FaultDAO
 	
 	public Collection<Fault> getFaultsByIMSI(Long imsi)
 	{
-		Query q = em.createQuery("select f from Fault f where f.imsi = :imsi",
-				Fault.class).setParameter("imsi", imsi);
-		List<Fault> faults = q.getResultList();
-		return faults;
+		Query q = em.createQuery("select eventCause.eventId, eventCause.causeCode from Fault f where f.imsi = :imsi")
+				.setParameter("imsi", imsi);
+		return q.getResultList();
 	}
 	
 	public Collection<Fault> getEventCausePerIMSI(Long imsi)
