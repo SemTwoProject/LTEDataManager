@@ -38,11 +38,27 @@ public class FaultRest
 	
 	@POST
 	@Path("/totalfaults")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	public Collection<Fault> getTotalFaultsAndDurationPerIMSI(
 			@FormParam("startdate") Timestamp startdate,
-			@FormParam("enddate") Timestamp enddate){
-		return service.getTotalFaultsAndDurationPerIMSI(startdate, enddate);
+			@FormParam("enddate") Timestamp enddate)
+	{
+		startdate = Timestamp.valueOf("2013-02-19 00:00:00");
+		enddate = Timestamp.valueOf("2013-02-22 00:00:00");
+		
+		String newResponse = null;
+
+		try {
+			newResponse = toJSONString(service.getTotalFaultsAndDurationPerIMSI(startdate, enddate));
+		} catch (Exception err) {
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+
+		}
+		return Response.ok(newResponse).build();
+
 	}
 	
 

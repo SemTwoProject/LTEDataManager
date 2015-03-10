@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.dao.UEDAO;
+import com.entity.Fault;
 import com.entity.UE;
 
 @Stateless
@@ -31,6 +32,18 @@ public class UEDAOImpl implements UEDAO {
 		q.setParameter("tac", tac);
 		List<UE> tacs = q.getResultList();
 		return tacs.get(0);
+	}
+
+	public Collection<Fault> getEventCausePerModel(String model) {
+		Query q = em.createQuery("select distinct eventCause.eventId,eventCause.causeCode, Count(*) "
+				+ "FROM Fault f where f.tac.model = :model group by eventCause.eventId, eventCause.causeCode");
+		
+		/*Query q = em.createQuery("select Count(eventCause) FROM Fault f where f.tac.model = :model");*/
+	
+		q.setParameter("model", model);
+			
+		List<Fault> modelFailure = q.getResultList();
+		return modelFailure;
 	}
 
 }
