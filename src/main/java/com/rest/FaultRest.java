@@ -17,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.entity.EventCause;
-import com.entity.Fault;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.interfaces.FaultServiceLocal;
@@ -39,7 +38,7 @@ public class FaultRest
 	@POST
 	@Path("/totalfaults")
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
-	public Collection<Fault> getTotalFaultsAndDurationPerIMSI(
+	public Response getTotalFaultsAndDurationPerIMSI(
 			@FormParam("startdate") Timestamp startdate,
 			@FormParam("enddate") Timestamp enddate)
 	{
