@@ -52,7 +52,7 @@ public class Fault implements Serializable {
 	@ManyToOne
 	private CellHier cell;
 
-	@JoinColumns({ @JoinColumn(name = "event_cause", referencedColumnName = "cause"),
+	@JoinColumns({ @JoinColumn(name = "cause", referencedColumnName = "cause"),
 	@JoinColumn(name = "event_id", referencedColumnName = "event_id") })
 	@ManyToOne
 	private EventCause eventCause;
