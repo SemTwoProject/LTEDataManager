@@ -3,6 +3,7 @@ package arquillian;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.util.Collection;
 
 import javax.ejb.EJB;
 
@@ -40,7 +41,7 @@ public class FaultDAOTest {
 		
 	}
 
-	@Test
+	/*@Test
 	public void FaultListIsReturned() {
 	
 	}
@@ -52,15 +53,22 @@ public class FaultDAOTest {
 		int y = 4;
 		int x = cell.getCellId();
 		assertEquals(y,x);
-	}
+	}*/
 	/*@Test
 	public void FaultIsReturnedByIMSI() {
 		Fault f = faultDao.getFaultByIMSI(new Long("11000000000003"));
 		int x = f.getId();
 		There is more than one fault per imsi. so needs to return a list. 
 	}*/
-	
-	
+	@Test
+	public void getImsiPerFailureTest(){
+		int failure = 3;
+		Long imsi = 191911000423411L;
+		
+		Collection<Fault> f = faultDao.getImsiPerFailure(failure);
+		//the actual result is out of bounds for type int
+		assertEquals(imsi, f);
+	}
 	
 
 }

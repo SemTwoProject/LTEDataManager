@@ -24,7 +24,6 @@ import com.interfaces.FaultServiceLocal;
 @Path("/fault")
 public class FaultRest
 {
-	//Test
 	@EJB
 	private FaultServiceLocal service;
 
