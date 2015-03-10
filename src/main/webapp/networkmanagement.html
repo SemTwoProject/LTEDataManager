@@ -74,7 +74,6 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">Network Details</div>
 							<div class="panel-body">
-<<<<<<< HEAD
 								<div class="col-sm-8">
 									<div class="form-group">
 										<select class="form-control" id="querydropdown">
@@ -107,61 +106,25 @@
 								<div class="col-sm-12" id="dates">
 									<div class="col-sm-6">
 										<label>Start:</label>
-=======
-								<form action="rest/fault/totalfaults" method="post" role="form">
-									<div class="col-sm-8">
->>>>>>> branch 'master' of https://github.com/SemTwoProject/LTEDataManager
 										<div class="form-group">
-											<select class="form-control" id="querydropdown">
-												<option value="totalfaults">Count for each IMSI the
-													number of call failures and total duration during a given
-													period of time</option>
-												<option value="query2">Display for a given model of
-													phone, all the unique failure Event ID and Cause Code
-													combinations and the number of occurences</option>
-												<option value="query3">Display the Top 10
-													Market/Operator/Cell ID combinations that had call faulures
-													during a given period of time</option>
-												<option value="query4">Display the Top 10 IMSIs
-													that had call failures during a given time period</option>
-											</select>
-										</div>
-									</div>
-
-									<div class="col-sm-1 pull-right">
-										<button id="submit" type="button" class="btn btn-default">Search</button>
-									</div>
-
-									<div class="col-sm-3 pull-right">
-										<div class="form-group">
-											<input id="phonemodelsearch" type="text" class="form-control"
-												placeholder="Search for model..">
-										</div>
-									</div>
-
-									<div class="col-sm-12" id="dates">
-										<div class="col-sm-6">
-											<label>Start:</label>
-											<div class="form-group">
-												<div class='input-group date' id='startdate'>
-													<input type='text' class="form-control" /> <span
-														class="input-group-addon"><span
-														class="glyphicon glyphicon-calendar"></span> </span>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<label>End:</label>
-											<div class="form-group">
-												<div class='input-group date' id='enddate'>
-													<input type='text' class="form-control" /> <span
-														class="input-group-addon"><span
-														class="glyphicon glyphicon-calendar"></span> </span>
-												</div>
+											<div class='input-group date' id='startdate'>
+												<input type='text' class="form-control" /> <span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-calendar"></span> </span>
 											</div>
 										</div>
 									</div>
-								</form>
+									<div class="col-sm-6">
+										<label>End:</label>
+										<div class="form-group">
+											<div class='input-group date' id='enddate'>
+												<input type='text' class="form-control" /> <span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-calendar"></span> </span>
+											</div>
+										</div>
+									</div>
+								</div>
 
 								<div class=col-sm-12>
 									<table class="table table-bordered" id="datatable">
