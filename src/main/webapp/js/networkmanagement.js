@@ -39,14 +39,16 @@ $(document).ready(function() {
 
 
 $("#submit").click(function()
-	{
+{	
 	if ($("#querydropdown").attr("value") == "totalfaults") 
 	{			
 		var startdate = $('#startdate').data('date');
 		var enddate = $('#enddate').data('date');
+		
 		$('#datatable').empty();
 		var table = $('<tr><th>IMSI</th><th>Total Failures</th><th>Total Duration</th></tr>');				
 		$('#datatable').append(table);
+		
 		$.ajax({
 			type: 'POST',
 			url: "http://localhost:8080/LTEManager/rest/fault/totalfaults",

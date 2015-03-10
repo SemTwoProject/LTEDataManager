@@ -1,7 +1,5 @@
 package com.jpa;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.ejb.Local;
@@ -22,6 +20,7 @@ import com.entity.CellHier;
 import com.entity.EventCause;
 import com.entity.Failure;
 import com.entity.Fault;
+import com.entity.InvalidData;
 import com.entity.MccMnc;
 import com.entity.UE;
 
@@ -33,195 +32,180 @@ public class ExcelReadImpl implements ExcelDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	private CellHier cellHier;
-	private EventCause eventCause;
-	private Failure failure;
-	private Fault fault;
-	private MccMnc mcc;
-	private UE ue;
 	@SuppressWarnings("rawtypes")
 	private ArrayList list;
 
-	public void createCell(HSSFWorkbook wb) throws InvalidFormatException,
-			FileNotFoundException, IOException {
-		ArrayList<Double> col;
-		ArrayList<Double> col1;
-		ArrayList<Double> col2;
-		ArrayList<Double> col3;
+	public void createInvalid(HSSFWorkbook wb) {
+		HSSFSheet sheet = wb.getSheetAt(0);
+		/**
+		 * Date date, Integer eventId, Integer failure, Integer ueType, Integer
+		 * market, Integer operator, Integer cell, Integer duration, Integer
+		 * causeCode, String neVersion, Long imsi, Long hier3Id, Long hier32Id,
+		 * Long hier321Id
+		 **/
 
-		try {
-			col = selectColumnValue(0, 6, wb);
-			col1 = selectColumnValue(0, 11, wb);
-			col2 = selectColumnValue(0, 12, wb);
-			col3 = selectColumnValue(0, 13, wb);
+		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+			HSSFRow row = sheet.getRow(i);
 
-			for (int i = 0; i < col.size(); i++) {
-				cellHier = new CellHier(col.get(i).intValue(), col1.get(i)
-						.longValue(), col2.get(i).longValue(), col3.get(i)
-						.longValue());
-				em.merge(cellHier);
-			}
-		} catch (InvalidFormatException e) {
-			e.getMessage();
+			Double cell = row.getCell(0).getNumericCellValue();
+			Double cell1 = row.getCell(1).getNumericCellValue();
+			Double cell2 = row.getCell(2).getNumericCellValue();
+			Double cell3 = row.getCell(3).getNumericCellValue();
+			Double cell4 = row.getCell(4).getNumericCellValue();
+			Double cell5 = row.getCell(5).getNumericCellValue();
+			Double cell6 = row.getCell(6).getNumericCellValue();
+			Double cell7 = row.getCell(7).getNumericCellValue();
+			Double cell8 = row.getCell(8).getNumericCellValue();
+			String cell9 = row.getCell(9).getStringCellValue();
+			Double cell10 = row.getCell(10).getNumericCellValue();
+			Double cell11 = row.getCell(11).getNumericCellValue();
+			Double cell12 = row.getCell(12).getNumericCellValue();
+			Double cell13 = row.getCell(13).getNumericCellValue();
+			InvalidData invalid = new InvalidData(
+					HSSFDateUtil.getJavaDate(cell), cell1.intValue(),
+					cell2.intValue(), cell3.intValue(), cell4.intValue(),
+					cell5.intValue(), cell6.intValue(), cell7.intValue(),
+					cell8.intValue(), cell9, cell10.longValue(),
+					cell11.longValue(), cell12.longValue(), cell13.longValue());
+			em.persist(invalid);
 		}
+	}
 
+	public void createCell(HSSFWorkbook wb) {
+		HSSFSheet sheet = wb.getSheetAt(0);
+		HSSFRow row;
+		Double cell;
+		Double cell1;
+		Double cell2;
+		Double cell3;
+		CellHier cellHier;
+		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+			row = sheet.getRow(i);
+			cell = row.getCell(6).getNumericCellValue();
+			cell1 = row.getCell(11).getNumericCellValue();
+			cell2 = row.getCell(12).getNumericCellValue();
+			cell3 = row.getCell(13).getNumericCellValue();
+			cellHier = new CellHier(cell.intValue(), cell1.longValue(),
+					cell2.longValue(), cell3.longValue());
+			em.merge(cellHier);
+		}
 	}
 
 	public void createEventCause(HSSFWorkbook wb) {
-		ArrayList<Double> col;
-		ArrayList<Double> col2;
-		ArrayList<String> col1;
-		try {
-			col = selectColumnValue(1, 0, wb);
-			col2 = selectColumnValue(1, 1, wb);
-			col1 = selectColumnValue(1, 2, wb);
-
-			for (int i = 0; i < col.size(); i++) {
-				eventCause = new EventCause(col.get(i).intValue(),col2.get(i).intValue(),col1.get(i));
-				em.merge(eventCause);
-			}
-		} catch (InvalidFormatException e) {
-			e.getMessage();
+		HSSFSheet sheet = wb.getSheetAt(1);
+		HSSFRow row;
+		Double cell;
+		Double cell1;
+		String cell2;
+		EventCause eventCause;
+		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+			row = sheet.getRow(i);
+			cell = row.getCell(0).getNumericCellValue();
+			cell1 = row.getCell(1).getNumericCellValue();
+			cell2 = row.getCell(2).getStringCellValue();
+			eventCause = new EventCause(cell.intValue(), cell1.intValue(),
+					cell2);
+			em.merge(eventCause);
 		}
 	}
 
 	public void createFailure(HSSFWorkbook wb) {
-		ArrayList<Double> col;
-		ArrayList<String> col1;
-		try {
-			col = selectColumnValue(2, 0, wb);
-			col1 = selectColumnValue(2, 1, wb);
-			for (int i = 0; i < col.size(); i++) {
-				failure = new Failure(col.get(i).intValue(), col1.get(i));
-				em.merge(failure);
-			}
-		} catch (InvalidFormatException e) {
-			e.getMessage();
+		HSSFSheet sheet = wb.getSheetAt(2);
+		HSSFRow row;
+		Double cell;
+		String cell1;
+		Failure fail;
+		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+			row = sheet.getRow(i);
+			cell = row.getCell(0).getNumericCellValue();
+			cell1 = row.getCell(1).getStringCellValue();
+			fail = new Failure(cell.intValue(), cell1);
+			em.merge(fail);
 		}
 	}
 
 	public void createMccMnc(HSSFWorkbook wb) {
-		ArrayList<Double> col;
-		ArrayList<String> col1;
-		ArrayList<Double> col2;
-		ArrayList<String> col3;
-		try {
-			col = selectColumnValue(4, 0, wb);
-			col1 = selectColumnValue(4, 2, wb);
-			col2 = selectColumnValue(4, 1, wb);
-			col3 = selectColumnValue(4, 3, wb);
-			for (int i = 0; i < col.size(); i++) {
-				mcc = new MccMnc(col.get(i).intValue(), col1.get(i), col2.get(i).intValue(), col3.get(i));
-				em.merge(mcc);
-			}
-		} catch (InvalidFormatException e) {
-			e.getMessage();
+		HSSFSheet sheet = wb.getSheetAt(4);
+		HSSFRow row;
+		Double cell;
+		String cell1;
+		Double cell2;
+		String cell3;
+		MccMnc mcc;
+		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+			row = sheet.getRow(i);
+			cell = row.getCell(0).getNumericCellValue();
+			cell1 = row.getCell(2).getStringCellValue();
+			cell2 = row.getCell(1).getNumericCellValue();
+			cell3 = row.getCell(3).getStringCellValue();
+			mcc = new MccMnc(cell.intValue(), cell1, cell2.intValue(), cell3);
+			em.merge(mcc);
 		}
 	}
 
 	public void createUE(HSSFWorkbook wb) {
-		ArrayList<Double> col;
-		ArrayList<String> col1;
-		ArrayList<String> col2;
-		ArrayList<String> col3;
-		ArrayList<String> col4;
-		ArrayList<String> col5;
-		ArrayList<String> col6;
-		ArrayList<String> col7;
-		ArrayList<String> col8;
-		/*
-		 * tac, marketingName, manufacturer, accessCapability, model,
-		 * vendorName, os, inputMode, ueType
-		 */
-		try {
-			col = selectColumnValue(3, 0, wb);
-			col1 = selectColumnValue(3, 1, wb);
-			col2 = selectColumnValue(3, 2, wb);
-			col3 = selectColumnValue(3, 3, wb);
-			col4 = selectColumnValue(3, 4, wb);
-			col5 = selectColumnValue(3, 5, wb);
-			col6 = selectColumnValue(3, 6, wb);
-			col7 = selectColumnValue(3, 7, wb);
-			col8 = selectColumnValue(3, 8, wb);
-
-			for (int i = 0; i < col.size(); i++) {
-
-				ue = new UE(col.get(i).intValue(), col1.get(i), col2.get(i),
-						col3.get(i), col4.get(i), col5.get(i), col6.get(i),
-						col7.get(i), col8.get(i));
-				em.merge(ue);
-			}
-		} catch (InvalidFormatException e) {
-			e.getMessage();
+		HSSFSheet sheet = wb.getSheetAt(3);
+		HSSFRow row;
+		UE ue;
+		Double cell;
+		String cell1;
+		String cell2;
+		String cell3;
+		String cell4;
+		String cell5;
+		String cell6;
+		String cell7;
+		String cell8;
+		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+			row = sheet.getRow(i);
+			cell = row.getCell(0).getNumericCellValue();
+			cell1 = row.getCell(1).getStringCellValue();
+			cell2 = row.getCell(2).getStringCellValue();
+			cell3 = row.getCell(3).getStringCellValue();
+			cell4 = row.getCell(4).getStringCellValue();
+			cell5 = row.getCell(5).getStringCellValue();
+			cell6 = row.getCell(6).getStringCellValue();
+			cell7 = row.getCell(7).getStringCellValue();
+			cell8 = row.getCell(8).getStringCellValue();
+			ue = new UE(cell.intValue(), cell1, cell2, cell3, cell4, cell5,
+					cell6, cell7, cell8);
+			em.persist(ue);
 		}
 	}
 
 	public void createFault(HSSFWorkbook wb) {
-		ArrayList<Double> col;
-		ArrayList<Double> col1;
-		ArrayList<Double> col2;
-		ArrayList<Double> col3;
-		ArrayList<Double> col4;
-		ArrayList<Double> col5;
-		ArrayList<Double> col6;
-		ArrayList<Double> col7;
-		ArrayList<Double> col8;
-		ArrayList<String> col9;
-		ArrayList<Double> col10;
-
-		try {
-			col = selectColumnValue(0, 0, wb);
-			col1 = selectColumnValue(0, 1, wb);
-			col2 = selectColumnValue(0, 2, wb);
-			col3 = selectColumnValue(0, 3, wb);
-			col4 = selectColumnValue(0, 4, wb);
-			col5 = selectColumnValue(0, 5, wb);
-			col6 = selectColumnValue(0, 6, wb);
-			col7 = selectColumnValue(0, 7, wb);
-			col8 = selectColumnValue(0, 8, wb);
-			col9 = selectColumnValue(0, 9, wb);
-			col10 = selectColumnValue(0, 10, wb);
-			/*
-			 * String date, Integer eventId, Failure failureid, UE tac,
-			* Integer mcc, Integer mnc, CellHier cell_id, Integer duration,
-			* Integer causeid, String ne, Long imsi
-			 */
-			for (int i = 0; i < col.size(); i++) {
-				fault = new Fault(HSSFDateUtil.getJavaDate(col.get(i).doubleValue()),
-						col1.get(i).intValue(),
-						col2.get(i).intValue(),
-						col3.get(i).intValue(),
-						col4.get(i).intValue(),
-						col5.get(i).intValue(),
-						col6.get(i).intValue(),
-						col7.get(i).intValue(),
-						col8.get(i).intValue(),
-						col9.get(i),
-						col10.get(i).longValue()
-						);
-				em.merge(fault);
-			}
-		} catch (InvalidFormatException e) {
-			e.getMessage();
-		}
-	}
-
-	@SuppressWarnings("rawtypes")
-	public ArrayList selectColumnValue(int sheetNumber, int cellNumber,
-			HSSFWorkbook wb) throws InvalidFormatException {
-		list = new ArrayList();
-		HSSFSheet sheet = wb.getSheetAt(sheetNumber);
+		HSSFSheet sheet = wb.getSheetAt(0);
+		HSSFRow row;
+		Fault fault;
+		Double cell;
+		Double cell1;
+		Double cell2;
+		Double cell3;
+		Double cell4;
+		Double cell5;
+		Double cell6;
+		Double cell7;
+		Double cell8;
+		String cell9;
+		Double cell10;
 		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
-			HSSFRow row = sheet.getRow(i);
-			HSSFCell cell = row.getCell(cellNumber);	
-			if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC)
-				list.add(cell.getNumericCellValue());
-			else if(cell.getCellType() == Cell.CELL_TYPE_STRING)
-				list.add(cell.getStringCellValue());
-		//	else if(cell.getCellType() == Cell.CELL_TYPE_BLANK)
-			//	cell.setCellValue("null");
-				//list.add(cell);
+			row = sheet.getRow(i);
+			cell = row.getCell(0).getNumericCellValue();
+			cell1 = row.getCell(1).getNumericCellValue();
+			cell2 = row.getCell(2).getNumericCellValue();
+			cell3 = row.getCell(3).getNumericCellValue();
+			cell4 = row.getCell(4).getNumericCellValue();
+			cell5 = row.getCell(5).getNumericCellValue();
+			cell6 = row.getCell(6).getNumericCellValue();
+			cell7 = row.getCell(7).getNumericCellValue();
+			cell8 = row.getCell(8).getNumericCellValue();
+			cell9 = row.getCell(9).getStringCellValue();
+			cell10 = row.getCell(10).getNumericCellValue();
+			fault = new Fault(HSSFDateUtil.getJavaDate(cell), cell1.intValue(),
+					cell2.intValue(), cell3.intValue(), cell4.intValue(),
+					cell5.intValue(), cell6.intValue(), cell7.intValue(),
+					cell8.intValue(), cell9, cell10.longValue());
+			em.persist(fault);
 		}
-		return list;
 	}
 }
