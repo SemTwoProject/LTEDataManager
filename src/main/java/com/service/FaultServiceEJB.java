@@ -10,7 +10,6 @@ import javax.ejb.Stateful;
 import com.dao.FaultDAO;
 import com.entity.EventCause;
 import com.entity.Fault;
-
 import com.interfaces.FaultServiceLocal;
 
 @Stateful
@@ -42,5 +41,10 @@ public class FaultServiceEJB implements FaultServiceLocal {
 
 	public Collection<Fault> getAllFault() {
 		return null;
+	}
+
+	@Override
+	public Collection<Fault> getImsiPerFailure(int failure) {
+		return dao.getImsiPerFailure(failure);
 	}
 }

@@ -142,6 +142,26 @@ public class FaultRest
 
 	}
 	
+	@GET
+	@PermitAll
+	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("/imsifailures")
+	public Response getImsiPerFailure(@FormParam ("failure") int failure){
+		String newResponse = null;
+		failure = 0;
+		
+		try {
+			newResponse = toJSONString(service.getImsiPerFailure(failure));
+		} catch (Exception err) {
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+
+		}
+		return Response.ok(newResponse).build();
+		
+	}
 	
 
 	public String toJSONString(Object object) {
