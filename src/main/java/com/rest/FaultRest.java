@@ -1,6 +1,5 @@
 package com.rest;
 
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Collection;
 
@@ -36,16 +35,7 @@ public class FaultRest
 	{
 		return service.getFaultByIMSI(imsi);
 	}
-
-	@POST
-	@Path("/totalfaults")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Object> getTotalFaultsAndDurationPerIMSI(
-			@FormParam("startdate") Timestamp startdate,
-			@FormParam("enddate") Timestamp enddate)
-			{
-		return service.getTotalFaultsAndDurationPerIMSI(startdate, enddate);
-			}
+	
 
 	// /rest/fault/imsicount
 	@GET
@@ -73,9 +63,8 @@ public class FaultRest
 
 		}
 		return Response.ok(newResponse).build();
-
 	}
-
+	
 	// /rest/fault/imsicausecodes
 	@GET
 	@PermitAll
@@ -125,6 +114,35 @@ public class FaultRest
 		return Response.ok(newResponse).build();
 
 	}
+	
+	
+	// /rest/fault/totalfaults
+	@GET
+	@Path("/totalfaults")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getTotalFaultsAndDurationPerIMSI(
+			@FormParam("startdate") Timestamp startdate,
+			@FormParam("enddate") Timestamp enddate)
+	{
+		startdate = Timestamp.valueOf("2013-02-19 00:00:00");
+		enddate = Timestamp.valueOf("2013-02-22 00:00:00");
+		
+		String newResponse = null;
+
+		try {
+			newResponse = toJSONString(service.getTotalFaultsAndDurationPerIMSI(startdate, enddate));
+		} catch (Exception err) {
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+
+		}
+		return Response.ok(newResponse).build();
+
+	}
+	
+	
 
 	public String toJSONString(Object object) {
 		GsonBuilder gsonBuilder = new GsonBuilder();

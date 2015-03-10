@@ -14,7 +14,7 @@ import com.interfaces.FailureServiceLocal;
 
 @Stateful
 @Local
-public class FailureServiceEJB implements FailureServiceLocal {
+public class FailureServiceEJB implements FailureServiceLocal{
 
 	@EJB
 	private FailureDAO dao;
