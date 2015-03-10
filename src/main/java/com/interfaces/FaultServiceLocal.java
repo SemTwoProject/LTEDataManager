@@ -10,6 +10,7 @@ public interface FaultServiceLocal {
 	
 	Collection<Fault> getEventCausePerIMSI(Long imsi);
 	Long getIMSICount(Timestamp start, Timestamp end,Long imsi);
+	Long getAmountOfCallFailuresPerModel(String model, Timestamp dateFrom, Timestamp dateTo);
 	Collection<Fault> getCauseCodePerIMSI(Long imsi);
 	Collection<Fault> getIMSIFailureOverTime(Timestamp startDate, Timestamp endDate);
 	Collection<Fault> getAllFault();

@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 import com.dao.FaultDAO;
 import com.entity.EventCause;
@@ -102,5 +103,16 @@ public class FaultDAOImpl implements FaultDAO
 			
 		List<Fault> imsiFailure = q.getResultList();
 		return imsiFailure;
+	}
+
+	@Override
+	public Long getNumberOfCallFailuresPerModel(String model,
+			Timestamp from, Timestamp to) {
+		Query q = em.createQuery(
+				"select count(f) from Fault f where tac.model=:model AND f.date BETWEEN :from AND :to")
+				.setParameter("model", model)
+				.setParameter("from", from,TemporalType.TIMESTAMP)
+				.setParameter("to", to,TemporalType.TIMESTAMP);
+		return (Long)q.getResultList().get(0);
 	}
 }

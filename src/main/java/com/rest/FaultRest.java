@@ -169,6 +169,34 @@ public class FaultRest
 		return Response.ok(newResponse).build();
 		
 	}
+	@POST
+	@PermitAll
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/faultsbymodel")
+	public Response getCountFaultsByModel(@FormParam("model") String model,
+										  @FormParam("fromdate") Timestamp startDate,
+										  @FormParam("todate") Timestamp endDate,
+										  @Context HttpServletRequest request,
+										  @Context HttpServletResponse response){
+		
+		 startDate = Timestamp.valueOf("2013-02-19 00:00:00"); 
+		 endDate = Timestamp.valueOf("2013-02-20 00:00:00");
+		 model = "A53";
+		 String newResponse = null;
+		
+		try {
+			newResponse = toJSONString(service.getAmountOfCallFailuresPerModel(model,startDate,endDate));
+		} catch (Exception err) {
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+
+
+		}
+		return Response.ok(newResponse).build();
+		
+	}
 	
 
 	public String toJSONString(Object object) {

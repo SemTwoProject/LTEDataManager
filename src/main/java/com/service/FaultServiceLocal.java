@@ -11,4 +11,5 @@ public interface FaultServiceLocal {
 
 	Collection<EventCause> getFaultByIMSI(Long imsi);
 	Collection<Fault> getTotalFaultsAndDurationPerIMSI(Timestamp start,Timestamp end);
+	
 }

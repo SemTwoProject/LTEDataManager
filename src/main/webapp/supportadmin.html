@@ -81,7 +81,7 @@
 										<select class="form-control" id="querydropdown">
 											<option value="query1">Display call failure events for
 												date range</option>
-											<option value="query2">Display number of failures per
+											<option value="numberoffailures">Display number of failures per
 												phone model for date range</option>
 											<option value="query3">Display IMSI associated with cause
 												code</option>
@@ -98,9 +98,15 @@
 										</select>
 									</div>
 								</div>
+								
+								<div class="col-sm-3" id="modelsearch">
+									<div class="form-group">
+										<input type='text' class="form-control" id="modelsearchbar" />
+									</div>
+								</div>
 
 								<div class="col-sm-1 pull-right">
-									<button type="button" class="btn btn-default">Search</button>
+									<button id="submit" type="button" class="btn btn-default" >Search</button>
 								</div>
 
 								<div class="col-sm-12" id="dates">
