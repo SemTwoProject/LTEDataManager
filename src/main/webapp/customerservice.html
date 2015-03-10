@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="css/bootstrap.css" />
 <link href="css/simple-sidebar.css" rel="stylesheet">
 <script src="js/libs/jquery-2.0.3.min.js"></script>
-<script src="js/customerservicedropdown.js"></script>
+<script src="js/customerservice.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -77,25 +77,23 @@
 							<div class="panel-body">
 								<div class="col-sm-8">
 									<div class="form-group">
-										<select class="form-control">
-											<option value="1">Display call failure events for
+										<select id="querydropdown" class="form-control">
+											<option value="callfailures">Display call failure events for
 												IMSI</option>
-											<option value="2">Display count of call failures for
+											<option value="numberoffailures">Display count of call failures for
 												IMSI</option>
-											<option value="3">Display cause codes for IMSI</option>
+											<option value="causecodes">Display cause codes for IMSI</option>
 										</select>
 									</div>
 								</div>
 								<div class="col-sm-4">
 									<div class="input-group">
-									<form action="rest/fault/faultsbyimsi" method="post">
-										<input type="text" class="form-control" name="imsi" placeholder="Customer IMSI.."> 
+										<input type="text" class="form-control" id="imsi" placeholder="Customer IMSI.."> 
 										<span class="input-group-btn">
-											<button class="btn btn-default" type="submit">
+											<button id="submit" class="btn btn-default" type="button">
 												<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 											</button>
 										</span>
-										</form>
 									</div>
 								</div>
 								<div class="col-sm-12" id="dates">

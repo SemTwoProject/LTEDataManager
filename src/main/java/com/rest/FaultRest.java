@@ -27,14 +27,15 @@ public class FaultRest
 	@EJB
 	private FaultServiceLocal service;
 
-	@GET
+	
+
+	//rest/fault/faultsbyimsi - Story 4
+	@POST
 	@Path("/faultsbyimsi")
 	@Produces(MediaType.APPLICATION_JSON)
-
 	public Response getFaultByIMSI(@FormParam("imsi") Long imsi)
 	{		
 		String newResponse = null;
-		imsi = 191911000516761L;
 		try {
 			newResponse = toJSONString(service.getEventCausePerIMSI(imsi));
 		} catch (Exception err) {
@@ -42,29 +43,23 @@ public class FaultRest
 					+ "\"message\":\"No content found \""
 					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
 			return Response.status(401).entity(newResponse).build();
-
 		}
 		return Response.ok(newResponse).build();	
 	}
 	
-	// /rest/fault/imsicount
-	@GET
+	//rest/fault/imsicount - Story 12
+	@POST
 	@PermitAll
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/imsicount")
-	public Response getImsiCount(@FormParam("startDate") Timestamp startDate,
-			@FormParam("endDate") Timestamp endDate,
-			@FormParam("searchimsi") Long searchimsi,
-			@Context HttpServletRequest request,
-			@Context HttpServletResponse response) {
+	public Response getImsiCount(@FormParam("startdate") Timestamp startdate,
+			@FormParam("enddate") Timestamp enddate,
+			@FormParam("imsi") Long imsi) {
 
 		String newResponse = null;
-		searchimsi = 191911000516761L;
-		startDate = Timestamp.valueOf("2013-02-19 00:00:00");
-		endDate = Timestamp.valueOf("2013-02-22 00:00:00");
 
 		try {
-			newResponse = toJSONString(service.getIMSICount(startDate,endDate,searchimsi));
+			newResponse = toJSONString(service.getIMSICount(startdate,enddate,imsi));
 		} catch (Exception err) {
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
@@ -75,19 +70,17 @@ public class FaultRest
 		return Response.ok(newResponse).build();
 	}
 	
-	// /rest/fault/imsicausecodes
-	@GET
+	//rest/fault/imsicausecodes - Story 17
+	@POST
 	@PermitAll
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/imsicausecodes")
-	public Response getImsiCauseCodes(@FormParam("searchimsi") Long searchimsi,
-			@Context HttpServletRequest request,
-			@Context HttpServletResponse response) {
+	public Response getImsiCauseCodes(@FormParam("imsi") Long imsi) {
 
 		String newResponse = null;
-		searchimsi = 191911000516761L;
+		
 		try {
-			newResponse = toJSONString(service.getCauseCodePerIMSI(searchimsi));
+			newResponse = toJSONString(service.getCauseCodePerIMSI(imsi));
 		} catch (Exception err) {
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
@@ -98,22 +91,18 @@ public class FaultRest
 		return Response.ok(newResponse).build();
 	}
 
-	// /rest/fault/imsifailuresovertime
-	@GET
+	//rest/fault/imsifailuresovertime -- Story 5
+	@POST
 	@PermitAll
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/imsifailuresovertime")
-	public Response getAllIMSIFailuresOverTime(@FormParam("startDate") Timestamp startDate,
-			@FormParam("endDate") Timestamp endDate,
-			@Context HttpServletRequest request,
-			@Context HttpServletResponse response) {
+	public Response getAllIMSIFailuresOverTime(@FormParam("startdate") Timestamp startdate,
+			@FormParam("enddate") Timestamp enddate) {
 
 		String newResponse = null;
-		startDate = Timestamp.valueOf("2013-02-19 00:00:00");
-		endDate = Timestamp.valueOf("2013-02-22 00:00:00");
 
 		try {
-			newResponse = toJSONString(service.getIMSIFailureOverTime(startDate,endDate));
+			newResponse = toJSONString(service.getIMSIFailureOverTime(startdate,enddate));
 		} catch (Exception err) {
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
@@ -125,7 +114,7 @@ public class FaultRest
 
 	}
 	
-	//rest/fault/totalfaults
+	//rest/fault/totalfaults -- Story 7
 	@POST
 	@PermitAll
 	@Path("/totalfaults")
