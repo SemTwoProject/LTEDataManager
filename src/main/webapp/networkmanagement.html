@@ -75,7 +75,7 @@
 								<div class="col-sm-8">
 									<div class="form-group">
 										<select class="form-control" id="querydropdown">
-											<option value="query1">Count for each IMSI the
+											<option value="totalfaults">Count for each IMSI the
 												number of call failures and total duration during a given
 												period of time</option>
 											<option value="query2">Display for a given model of
@@ -91,19 +91,15 @@
 								</div>
 
 								<div class="col-sm-1 pull-right">
-									<button type="button" class="btn btn-default">Search</button>
+									<button id="submit" type="button" class="btn btn-default">Search</button>
 								</div>
 
 								<div class="col-sm-3 pull-right">
 									<div class="form-group">
-										<input type="text" class="form-control"
+										<input id="phonemodelsearch" type="text" class="form-control"
 											placeholder="Search for model..">
 									</div>
 								</div>
-
-
-
-
 
 								<div class="col-sm-12" id="dates">
 									<div class="col-sm-6">
@@ -144,6 +140,8 @@
 	<script src="js/libs/jquery-2.0.3.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
-	<script src="js/networkmanagementdropdown.js"></script>
+	<script src="js/networkmanagement.js"></script>
+	<script src="js/moment.js"></script>
+	<script src="js/datetimepicker.js"></script>
 </body>
 </html>

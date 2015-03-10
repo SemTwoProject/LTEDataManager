@@ -39,17 +39,6 @@ public class FaultDAOImpl implements FaultDAO
 		return faults.get(0);
 	}
 	
-	public Collection<EventCause> getFaultByIMSI(Long imsi)
-	{
-		Collection<Fault> faults = getFaultsByIMSI(imsi);
-		List<EventCause> results = new ArrayList<EventCause>();
-		for (Fault fault : faults)
-		{
-			results.add(getCauseCodeByFault(fault));
-		}
-		return results;
-	}
-	
 	public Collection<Fault> getFaultsByIMSI(Long imsi)
 	{
 		Query q = em.createQuery("select f from Fault f where f.imsi = :imsi",
@@ -58,16 +47,12 @@ public class FaultDAOImpl implements FaultDAO
 		return faults;
 	}
 	
-	public EventCause getCauseCodeByFault(Fault fault)
+	public Collection<Fault> getEventCausePerIMSI(Long imsi)
 	{
-		Query q = em
-				.createQuery(
-						"select e from EventCause e where e.eventId = :eventId and e.causeCode = :eventCause",
-						EventCause.class);
-		q.setParameter("eventId", fault.getEventCause().getEventId());
-		q.setParameter("eventCause", fault.getEventCause().getCauseCode());
-		List<EventCause> fails = q.getResultList();
-		return fails.get(0);
+		Query q = em.createQuery("select eventCause.eventId, eventCause.causeCode From Fault f where f.imsi = :imsi Group by eventCode");
+		q.setParameter("imsi",imsi);
+		
+		return q.getResultList();
 	}
 	
 	public Collection<Fault> getTotalFaultsAndDurationPerIMSI(Timestamp start,Timestamp end)

@@ -28,12 +28,23 @@ public class FaultRest
 	@EJB
 	private FaultServiceLocal service;
 
-	@POST
+	@GET
 	@Path("/faultsbyimsi")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<EventCause> getFaultByIMSI(@FormParam("imsi") Long imsi)
-	{
-		return service.getFaultByIMSI(imsi);
+	public Response getFaultByIMSI(@FormParam("imsi") Long imsi)
+	{		
+		String newResponse = null;
+		imsi = 191911000516761L;
+		try {
+			newResponse = toJSONString(service.getEventCausePerIMSI(imsi));
+		} catch (Exception err) {
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+
+		}
+		return Response.ok(newResponse).build();
 	}
 	
 
@@ -117,15 +128,13 @@ public class FaultRest
 	
 	
 	// /rest/fault/totalfaults
-	@GET
+	@POST
 	@Path("/totalfaults")
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response getTotalFaultsAndDurationPerIMSI(
 			@FormParam("startdate") Timestamp startdate,
 			@FormParam("enddate") Timestamp enddate)
 	{
-		startdate = Timestamp.valueOf("2013-02-19 00:00:00");
-		enddate = Timestamp.valueOf("2013-02-22 00:00:00");
 		
 		String newResponse = null;
 

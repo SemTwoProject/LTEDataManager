@@ -28,12 +28,12 @@
  */
 
 $(function() {
-	$('#todate').datetimepicker({
-		format: 'DD-MM-YYYY',
-		defaultDate : "01/01/2015"
+	$('#startdate').datetimepicker({
+		format: 'YYYY-MM-DD hh:mm:ss',
+		defaultDate : "01/01/2012"
 	});
-	$('#fromdate').datetimepicker({
-		format: 'DD-MM-YYYY',
+	$('#enddate').datetimepicker({
+		format: 'YYYY-MM-DD hh:mm:ss',
 		defaultDate : new Date()
 	});
 });
