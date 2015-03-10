@@ -3,6 +3,7 @@ package com.jpa;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
@@ -22,6 +23,7 @@ import com.entity.CellHier;
 import com.entity.EventCause;
 import com.entity.Failure;
 import com.entity.Fault;
+import com.entity.InvalidData;
 import com.entity.MccMnc;
 import com.entity.UE;
 
@@ -42,6 +44,51 @@ public class ExcelReadImpl implements ExcelDAO {
 	@SuppressWarnings("rawtypes")
 	private ArrayList list;
 
+	public void createInvalid(HSSFWorkbook wb){
+		HSSFSheet sheet = wb.getSheetAt(0);
+		/**Date date, Integer eventId, Integer failure,
+		Integer ueType, Integer market, Integer operator, Integer cell,
+		Integer duration, Integer causeCode, String neVersion, Long imsi,
+		Long hier3Id, Long hier32Id, Long hier321Id
+		**/
+		
+		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+			HSSFRow row = sheet.getRow(i);
+			
+			Double cell = row.getCell(0).getNumericCellValue();
+			Double cell1 = row.getCell(1).getNumericCellValue();
+			Double cell2 = row.getCell(2).getNumericCellValue();
+			Double cell3 = row.getCell(3).getNumericCellValue();
+			Double cell4 = row.getCell(4).getNumericCellValue();
+			Double cell5 = row.getCell(5).getNumericCellValue();
+			Double cell6 = row.getCell(6).getNumericCellValue();
+			Double cell7 = row.getCell(7).getNumericCellValue();
+			Double cell8 = row.getCell(8).getNumericCellValue();
+			String cell9 = row.getCell(9).getStringCellValue();
+			Double cell10 = row.getCell(10).getNumericCellValue();
+			Double cell11 = row.getCell(11).getNumericCellValue();
+			Double cell12 = row.getCell(12).getNumericCellValue();
+			Double cell13 = row.getCell(13).getNumericCellValue();
+			InvalidData invalid = new InvalidData(
+					HSSFDateUtil.getJavaDate(cell),
+					cell1.intValue(),
+					cell2.intValue(),
+					cell3.intValue(),
+					cell4.intValue(),
+					cell5.intValue(),
+					cell6.intValue(),
+					cell7.intValue(),
+					cell8.intValue(),
+					cell9,
+					cell10.longValue(),
+					cell11.longValue(),
+					cell12.longValue(),
+					cell13.longValue()
+			);
+			em.persist(invalid);
+		}
+	}
+	
 	public void createCell(HSSFWorkbook wb) throws InvalidFormatException,
 			FileNotFoundException, IOException {
 		ArrayList<Double> col;
