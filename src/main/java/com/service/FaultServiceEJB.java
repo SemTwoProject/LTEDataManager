@@ -42,4 +42,9 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	public Collection<Fault> getAllFault() {
 		return null;
 	}
+
+	@Override
+	public Collection<Fault> getImsiPerFailure(int failure) {
+		return dao.getImsiPerFailure(failure);
+	}
 }

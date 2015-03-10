@@ -14,5 +14,6 @@ public interface FaultServiceLocal {
 	Collection<Fault> getIMSIFailureOverTime(Timestamp startDate, Timestamp endDate);
 	Collection<Fault> getAllFault();
 	Collection<Fault> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end);
+	Collection<Fault> getImsiPerFailure(int failure);
 
 }

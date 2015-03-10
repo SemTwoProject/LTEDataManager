@@ -24,13 +24,13 @@ import com.interfaces.FaultServiceLocal;
 @Path("/fault")
 public class FaultRest
 {
-
 	@EJB
 	private FaultServiceLocal service;
 
 	@GET
 	@Path("/faultsbyimsi")
 	@Produces(MediaType.APPLICATION_JSON)
+
 	public Response getFaultByIMSI(@FormParam("imsi") Long imsi)
 	{		
 		String newResponse = null;
@@ -44,10 +44,9 @@ public class FaultRest
 			return Response.status(401).entity(newResponse).build();
 
 		}
-		return Response.ok(newResponse).build();
+		return Response.ok(newResponse).build();	
 	}
 	
-
 	// /rest/fault/imsicount
 	@GET
 	@PermitAll
@@ -126,20 +125,40 @@ public class FaultRest
 
 	}
 	
-	
-	// /rest/fault/totalfaults
+	//rest/fault/totalfaults
 	@POST
+	@PermitAll
 	@Path("/totalfaults")
-	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getTotalFaultsAndDurationPerIMSI(
 			@FormParam("startdate") Timestamp startdate,
 			@FormParam("enddate") Timestamp enddate)
-	{
+	{		
+	String newResponse = null;
 		
-		String newResponse = null;
-
 		try {
 			newResponse = toJSONString(service.getTotalFaultsAndDurationPerIMSI(startdate, enddate));
+		} catch (Exception err) {
+			newResponse = "{\"status\":\"401\","
+				+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+		return Response.status(401).entity(newResponse).build();
+
+	}
+		return Response.ok(newResponse).build();
+
+}
+	
+	@GET
+	@PermitAll
+	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("/imsifailures")
+	public Response getImsiPerFailure(@FormParam ("failure") int failure){
+		String newResponse = null;
+		failure = 0;
+		
+		try {
+			newResponse = toJSONString(service.getImsiPerFailure(failure));
 		} catch (Exception err) {
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
@@ -148,9 +167,8 @@ public class FaultRest
 
 		}
 		return Response.ok(newResponse).build();
-
+		
 	}
-	
 	
 
 	public String toJSONString(Object object) {

@@ -91,4 +91,16 @@ public class FaultDAOImpl implements FaultDAO
 		
 		return q.getResultList();
 	}
+
+	//Select imsi from faults where failure = 3
+	
+	@Override
+	public Collection<Fault> getImsiPerFailure(int failure) {
+		Query q = em.createQuery("select imsi FROM Fault f where f.failure.failure = :failure");
+	
+		q.setParameter("failure", failure);
+			
+		List<Fault> imsiFailure = q.getResultList();
+		return imsiFailure;
+	}
 }
