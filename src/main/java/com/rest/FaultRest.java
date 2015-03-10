@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.entity.EventCause;
+import com.entity.Fault;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.interfaces.FaultServiceLocal;
@@ -24,7 +25,6 @@ import com.interfaces.FaultServiceLocal;
 @Path("/fault")
 public class FaultRest
 {
-
 	@EJB
 	private FaultServiceLocal service;
 
@@ -34,6 +34,15 @@ public class FaultRest
 	public Collection<EventCause> getFaultByIMSI(@FormParam("imsi") Long imsi)
 	{
 		return service.getFaultByIMSI(imsi);
+	}
+	
+	@POST
+	@Path("/totalfaults")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Fault> getTotalFaultsAndDurationPerIMSI(
+			@FormParam("startdate") Timestamp startdate,
+			@FormParam("enddate") Timestamp enddate){
+		return service.getTotalFaultsAndDurationPerIMSI(startdate, enddate);
 	}
 	
 
@@ -116,31 +125,29 @@ public class FaultRest
 	}
 	
 	
-	// /rest/fault/totalfaults
-	@GET
-	@Path("/totalfaults")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getTotalFaultsAndDurationPerIMSI(
-			@FormParam("startdate") Timestamp startdate,
-			@FormParam("enddate") Timestamp enddate)
-	{
-		startdate = Timestamp.valueOf("2013-02-19 00:00:00");
-		enddate = Timestamp.valueOf("2013-02-22 00:00:00");
+	//rest/fault/totalfaults
+//	@POST
+//	@PermitAll
+//	@Path("/totalfaults")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public void getTotalFaultsAndDurationPerIMSI(
+//			@FormParam("startdate") Timestamp startdate,
+//			@FormParam("enddate") Timestamp enddate)
+//	{		
+//		//String newResponse = null;
 		
-		String newResponse = null;
+//		try {
+//			newResponse = toJSONString(service.getTotalFaultsAndDurationPerIMSI(startdate, enddate));
+//		} catch (Exception err) {
+//			newResponse = "{\"status\":\"401\","
+//					+ "\"message\":\"No content found \""
+//					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+//			return Response.status(401).entity(newResponse).build();
+//
+//		}
+//		return Response.ok(newResponse).build();
 
-		try {
-			newResponse = toJSONString(service.getTotalFaultsAndDurationPerIMSI(startdate, enddate));
-		} catch (Exception err) {
-			newResponse = "{\"status\":\"401\","
-					+ "\"message\":\"No content found \""
-					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
-			return Response.status(401).entity(newResponse).build();
-
-		}
-		return Response.ok(newResponse).build();
-
-	}
+	//}
 	
 	
 
