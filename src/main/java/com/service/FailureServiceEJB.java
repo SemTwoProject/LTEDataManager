@@ -13,7 +13,7 @@ import com.entity.Failure;
 
 @Stateful
 @Local
-public class FailureServiceEJB implements FailureServiceLocal {
+public class FailureServiceEJB implements FailureServiceLocal{
 
 	@EJB
 	private FailureDAO dao;
