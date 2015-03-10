@@ -119,7 +119,7 @@ public class FaultRest
 	// /rest/fault/totalfaults
 	@GET
 	@Path("/totalfaults")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response getTotalFaultsAndDurationPerIMSI(
 			@FormParam("startdate") Timestamp startdate,
 			@FormParam("enddate") Timestamp enddate)
