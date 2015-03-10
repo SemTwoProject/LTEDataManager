@@ -25,12 +25,12 @@ $(document).ready(function() {
 				var table = $('<tr><th>Rank</th><th>Market ID</th><th>Operator ID</th><th>Call ID</th></tr>');				
 				$('#datatable').append(table);
 			}
-			if ($(this).attr("value") == "query4") 
+			if ($(this).attr("value") == "toptenimsiovertime") 
 			{		
 				$("#dates").show();
 				$("#phonemodeldropdown").prop("disabled", true);
 				$('#datatable').empty();
-				var table = $('<tr><th>Rank</th><th>IMSI</th></tr>');				
+				var table = $('<tr><th>IMSI</th><th>Count</th></tr>');				
 				$('#datatable').append(table);
 			}
 		});
@@ -63,6 +63,32 @@ $("#submit").click(function()
 							$('<td>').text(item[0]),
 							$('<td>').text(item[1]),
 							$('<td>').text(item[2]));
+					$('#datatable').append($tr);
+				});          	
+		}});			
+	}
+	else if ($("#querydropdown").attr("value") == "toptenimsiovertime") 
+	{			
+		var startdate = $('#startdate').data('date');
+		var enddate = $('#enddate').data('date');
+		
+		$('#datatable').empty();
+		var table = $('<tr><th>IMSI</th><th>Count</th></tr>');				
+		$('#datatable').append(table);
+		
+		$.ajax({
+			type: 'POST',
+			url: "http://localhost:8080/LTEManager/rest/fault/toptenimsiovertime",
+			dataType: "json", 
+			data: {"startdate": startdate, "enddate": enddate},
+			success:function(response)
+			{
+				$.each(response, function(i, item) 
+				{
+					$tr = "";
+					$tr = $('<tr>').append(
+							$('<td>').text(item[0]),
+							$('<td>').text(item[1]));
 					$('#datatable').append($tr);
 				});          	
 		}});			

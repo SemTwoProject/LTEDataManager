@@ -72,21 +72,6 @@ public class FaultDAOImpl implements FaultDAO
 		return result;
 	}
 	
-	// Story 7 - As a Network Management Engineer I want to count, for each
-	// IMSI, the number of call failures and their total duration during a given
-	// time period
-	public Collection<Fault> getTotalFaultsAndDurationPerIMSI(Timestamp start,
-			Timestamp end)
-	{
-		Query q = em
-				.createQuery("select imsi, COUNT(f.imsi), SUM(duration) "
-						+ "from Faults f where f.date >= :startdate and f.date <= :enddate group by f.imsi");
-		q.setParameter("startdate", start);
-		q.setParameter("enddate", end);
-		Collection<Fault> result = q.getResultList();
-		return result;
-	}
-	
 	// Story 12 - As a Customer Service Rep, I want to count, for a given IMSI,
 	// the number of failures they have had during a given time period.
 	public Collection<Fault> getIMSICount(Timestamp start, Timestamp end,
@@ -108,6 +93,34 @@ public class FaultDAOImpl implements FaultDAO
 		Query q = em
 				.createQuery("select distinct imsi, cause FROM Faults i WHERE i.imsi = :imsi");
 		q.setParameter("imsi", imsi);
+		Collection<Fault> result = q.getResultList();
+		return result;
+	}
+	
+	// Story 18 - As a Network Management Engineer I want to see the Top 10
+	// IMSIs that had call failures during a time period
+	public Collection<Fault> getTopTenIMSIOverTime(Timestamp start,
+			Timestamp end)
+	{
+		Query q = em
+				.createQuery("select imsi, count(f.imsi) from faults f where f.date >= :startdate and f.date <= :enddate group by f.imsi order by count(f.imsi) desc limit 10");
+		q.setParameter("startdate", start);
+		q.setParameter("enddate", end);
+		Collection<Fault> result = q.getResultList();
+		return result;
+	}
+	
+	// Story 7 - As a Network Management Engineer I want to count, for each
+	// IMSI, the number of call failures and their total duration during a given
+	// time period
+	public Collection<Fault> getTotalFaultsAndDurationPerIMSI(Timestamp start,
+			Timestamp end)
+	{
+		Query q = em
+				.createQuery("select imsi, COUNT(f.imsi), SUM(duration) "
+						+ "from Faults f where f.date >= :startdate and f.date <= :enddate group by f.imsi");
+		q.setParameter("startdate", start);
+		q.setParameter("enddate", end);
 		Collection<Fault> result = q.getResultList();
 		return result;
 	}

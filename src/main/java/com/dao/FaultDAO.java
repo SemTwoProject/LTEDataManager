@@ -18,4 +18,5 @@ public interface FaultDAO {
 	Collection<Fault> getIMSIFailureOverTime(Timestamp startDate, Timestamp endDate);
 	Collection<Fault> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end);
 	Collection<Fault> getImsiPerFailure(int failure);
+	Collection<Fault> getTopTenIMSIOverTime(Timestamp start, Timestamp end);
 }

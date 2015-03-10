@@ -42,6 +42,11 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	public Collection<Fault> getAllFault() {
 		return null;
 	}
+	
+	public Collection<Fault> getTopTenIMSIOverTime(Timestamp start, Timestamp end)
+	{
+		return dao.getTopTenIMSIOverTime(start, end);
+	}
 
 	@Override
 	public Collection<Fault> getImsiPerFailure(int failure) {
