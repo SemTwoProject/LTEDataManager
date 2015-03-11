@@ -8,7 +8,6 @@ import javax.ejb.Local;
 import javax.ejb.Stateful;
 
 import com.dao.FaultDAO;
-import com.entity.EventCause;
 import com.entity.Fault;
 import com.interfaces.FaultServiceLocal;
 
@@ -55,5 +54,9 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	
 	public Collection<Fault> getAmountOfCallFailuresPerModel(String model, Timestamp start, Timestamp end) {
 		return dao.getNumberOfCallFailuresPerModel(model, start, end);
+	}
+	
+	public Collection<Fault> getTopTenMarketOperatorCell(Timestamp start, Timestamp end){
+		return dao.getTopTenMarketOperatorCell(start, end);
 	}
 }

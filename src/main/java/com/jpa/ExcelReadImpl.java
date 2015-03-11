@@ -299,7 +299,12 @@ public class ExcelReadImpl implements ExcelDAO {
 				cell8 = row.getCell(8).getNumericCellValue();
 			} else {
 				String temp = row.getCell(8).getStringCellValue();
+				if(temp.equals("(null)")){
+					temp = "88888.88";
+					cell8 = Double.parseDouble(temp);
+				}else{
 				cell8 = Double.parseDouble(temp);
+				}
 			}
 			if (row.getCell(9).getCellType() == Cell.CELL_TYPE_STRING) {
 				cell9 = row.getCell(9).getStringCellValue();
@@ -321,9 +326,12 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 
 		ArrayList<Fault> invalidFaults = new ArrayList<Fault>();
+		System.out.println(eventCauses.size());
+		System.out.println(fails.size());
+		System.out.println(mccMncs.size());
+		System.out.println(eventCauses.size());
 		for (Fault faultList : faults) {
-			if (!eventCauses.containsValue(faultList.getEventCause()
-					.getEventId())) {
+			if (!eventCauses.containsValue(faultList.getEventCause().getEventId())) {
 				invalidFaults.add(faultList);
 				faults.remove(faultList);
 			} else if (!fails
@@ -344,40 +352,11 @@ public class ExcelReadImpl implements ExcelDAO {
 				invalidFaults.add(faultList);
 				faults.remove(faultList);
 			}
+			System.out.println(faults.size());
 			em.persist(faultList);
 		}
+//		for(Fault faultList: faults){
+//			em.persist(faultList);
+//		}
 	}
-
-	// public void validate(){
-	// ArrayList<Fault> invalidFaults = new ArrayList<Fault>();
-	// for(Fault fault: faults){
-	// if(!eventCauses.containsValue(fault.getEventCause().getEventId())){
-	// invalidFaults.add(fault);
-	// faults.remove(fault);
-	// }
-	// else if(!fails.containsValue(fault.getFailure().getfailure())){
-	// invalidFaults.add(fault);
-	// faults.remove(fault);
-	// }
-	// else if(!mccMncs.containsValue(fault.getMccid().getMccId())){
-	// invalidFaults.add(fault);
-	// faults.remove(fault);
-	// }
-	// else
-	// if(!eventCauses.containsValue(fault.getEventCause().getCauseCode())){
-	// invalidFaults.add(fault);
-	// faults.remove(fault);
-	// }
-	// else if(!ues.containsValue(fault.getTac().getTac())){
-	// invalidFaults.add(fault);
-	// faults.remove(fault);
-	// }
-	// else if(!cells.containsValue(fault.getCell().getCellId())){
-	// invalidFaults.add(fault);
-	// faults.remove(fault);
-	// }
-	// System.out.println(fault.getId());
-	// em.persist(fault);
-	// }
-	// }
 }

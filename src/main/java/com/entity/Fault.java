@@ -3,7 +3,6 @@ package com.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,24 +37,24 @@ public class Fault implements Serializable {
 	private Integer duration;
 
 	@JoinColumn(name = "failure", referencedColumnName = "failure")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Failure failure;
 	@JoinColumn(name = "tac", referencedColumnName = "tac")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private UE tac;
 
 	@JoinColumns({ @JoinColumn(name = "mcc", referencedColumnName = "mcc"),
 			@JoinColumn(name = "mnc", referencedColumnName = "mnc") })
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private MccMnc mccid;
 
 	@JoinColumn(name = "cell", referencedColumnName = "cell")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private CellHier cell;
 
 	@JoinColumns({ @JoinColumn(name = "cause", referencedColumnName = "cause"),
 	@JoinColumn(name = "event_id", referencedColumnName = "event_id") })
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private EventCause eventCause;
 
 	public Fault() {

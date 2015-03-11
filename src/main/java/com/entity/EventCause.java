@@ -85,4 +85,51 @@ public class EventCause implements Serializable {
 		fault.setEventCause(this);
 		faultList.add(fault);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((causeCode == null) ? 0 : causeCode.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((eventId == null) ? 0 : eventId.hashCode());
+		result = prime * result
+				+ ((faultList == null) ? 0 : faultList.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EventCause other = (EventCause) obj;
+		if (causeCode == null) {
+			if (other.causeCode != null)
+				return false;
+		} else if (!causeCode.equals(other.causeCode))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (eventId == null) {
+			if (other.eventId != null)
+				return false;
+		} else if (!eventId.equals(other.eventId))
+			return false;
+		if (faultList == null) {
+			if (other.faultList != null)
+				return false;
+		} else if (!faultList.equals(other.faultList))
+			return false;
+		return true;
+	}
+	
 }

@@ -2,10 +2,8 @@ package com.rest;
 
 import java.sql.Timestamp;
 
-import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -184,6 +182,27 @@ public class FaultRest {
 
 		try {
 			newResponse = toJSONString(service.getImsiPerFailure(failure));
+		} catch (Exception err) {
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+
+		}
+		return Response.ok(newResponse).build();
+
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("/imsifailures")
+	public Response getTopTenMarketOperatorCell(
+			@FormParam("startdate") Timestamp startDate,
+			@FormParam("enddate") Timestamp endDate) {
+		String newResponse = null;
+
+		try {
+			newResponse = toJSONString(service.getTopTenMarketOperatorCell(startDate, endDate));
 		} catch (Exception err) {
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""

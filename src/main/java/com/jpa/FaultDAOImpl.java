@@ -1,7 +1,6 @@
 package com.jpa;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.dao.FaultDAO;
-import com.entity.EventCause;
 import com.entity.Fault;
 
 @Stateless
@@ -44,6 +42,18 @@ public class FaultDAOImpl implements FaultDAO {
 				.createQuery("select imsi,eventCause.eventId, eventCause.causeCode From Fault f where f.imsi = :imsi");
 		q.setParameter("imsi", imsi);
 		return q.getResultList();
+	}
+	
+	//As a Network Management Engineer I want to see the 
+	//Top 10 Market/Operator/Cell ID combinations that 
+	//had call failures during a time period
+	public Collection<Fault> getTopTenMarketOperatorCell(Timestamp start, Timestamp end) {
+		Query q = em
+				.createQuery("select mccid.mccId, mccid.mccId, cell.cellId FROM Fault f WHERE f.date >= :start AND f.date <= :end group by f.mccid order by count(f.mccid) desc limit 10");
+		q.setParameter("start", start);
+		q.setParameter("end", end);
+		Collection<Fault> result = q.getResultList();
+		return result;
 	}
 
 	public Collection<Fault> getFaultsByIMSI(Long imsi) {
