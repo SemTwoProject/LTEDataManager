@@ -8,6 +8,6 @@ public interface UserServiceLocal {
 	
 	void addToUserDatabase(User user);
 	Collection<User> getAllUsersInDatabase();
-	User checkLoginDetails(String username,String password);
 	User getUserByName(String name);
+	Collection<User> getUserByUsernameAndPassword(String username, String password);
 }

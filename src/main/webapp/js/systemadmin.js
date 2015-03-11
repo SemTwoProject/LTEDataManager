@@ -1,7 +1,7 @@
 $(document).ready(function() 
 {	
 	$('#usertable').empty();
-	var table = $('<tr><th>User ID</th><th>Name</th></tr>');				
+	var table = $('<tr><th>Name</th><th>User Type</th></tr>');				
 	$('#usertable').append(table);
 	findAllUsers();
 	
@@ -20,8 +20,8 @@ function findAllUsers()
         	{
         		$tr = "";
         		$tr = $('<tr>').append(
-                $('<td>').text(item.id),
-        	    $('<td>').text(item.name));
+                $('<td>').text(item.name),
+        	    $('<td>').text(item.userType));
             	$('#usertable').append($tr);
         	});          	
         }});

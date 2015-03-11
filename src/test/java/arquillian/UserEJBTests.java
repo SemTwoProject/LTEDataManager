@@ -36,11 +36,6 @@ public class UserEJBTests {
 	}
 	
 	@Test
-	public void testThatTheUserDAOReturnsTheRightUserByUsernameAndPassword(){
-		assertEquals(service.checkLoginDetails("Hyde","password").getName(), "Stephen Douglas");
-	}
-	
-	@Test
 	public void testThatTheUserDAOReturnsTheRightUser(){
 		assertEquals(service.getUserByName("Stephen Douglas").getUsername(), "Hyde");
 	}

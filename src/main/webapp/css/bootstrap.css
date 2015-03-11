@@ -6,6 +6,46 @@
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 
+@font-face {
+    font-family: PlutoMed;
+    src: url("src/main/webapp/fonts/PlutoSansMedium.otf");
+}
+
+@font-face {
+    font-family: PlutoHeavy;
+    src: url("src/main/webapp/fonts/PlutoSansHeavy.otf");
+}
+
+
+.hometext
+{
+	font-family: PlutoHeavy;
+	color:#002661;
+}
+
+.largetext
+{
+	padding-top:100px;
+	font-size: 56px;
+	font-weight:700;
+}
+
+.mediumtext
+{
+	padding-top:50px;
+	font-size: 40px;
+}
+
+.smalltext
+{
+	padding-top:20px;
+	font-size: 28px;
+	padding-bottom: 20px;
+}
+
+
+
+
 #page-content-wrapper
 {
 	margin-top:50px;
@@ -1146,7 +1186,7 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
-  border-top: 1px solid #333;
+  border-top: 1px solid #002661;
 }
 .sr-only {
   position: absolute;

@@ -13,14 +13,14 @@ $(document).ready(function()
 				var table = $('<tr><th>IMSI</th><th>Event ID</th><th>Cause Code</th></tr>');				
 				$('#datatable').append(table);
 			}
-			if ($(this).attr("value") == "numberoffailures") 
+			else if ($(this).attr("value") == "numberoffailures") 
 			{
 				$("#dates").show();
 				$('#datatable').empty();
 				var table = $('<tr><th>IMSI</th><th>Number of Failures</th></tr>');				
 				$('#datatable').append(table);
 			}
-			if ($(this).attr("value") == "causecodes") 
+			else if ($(this).attr("value") == "causecodes") 
 			{
 				$("#dates").hide();
 				$('#datatable').empty();
@@ -34,11 +34,11 @@ $(document).ready(function()
 
 
 
-$("#submit").click(function()
-	{
+function submit()
+{
 	if ($("#querydropdown").attr("value") == "callfailures") 
 	{			
-		var imsi = $('#imsi').val();
+		var imsi = document.getElementById("imsi").value;
 		$('#datatable').empty();
 		var table = $('<tr><th>IMSI</th><th>Event ID</th><th>Cause Code</th></tr>');				
 		$('#datatable').append(table);
@@ -60,11 +60,13 @@ $("#submit").click(function()
 				});          	
 		}});			
 	}
-	if ($("#querydropdown").attr("value") == "numberoffailures") 
+	else if ($("#querydropdown").attr("value") == "numberoffailures") 
 	{			
 		var startdate = $('#startdate').data('date');
 		var enddate = $('#enddate').data('date');
-		var imsi = $('#imsi').val();
+		var imsi = document.getElementById("imsi").value;
+		
+		
 		$('#datatable').empty();
 		var table = $('<tr><th>IMSI</th><th>Number of Failures</th></tr>');				
 		$('#datatable').append(table);				
@@ -85,9 +87,9 @@ $("#submit").click(function()
 				});          	
 		}});			
 	}
-	else if ($(this).attr("value") == "causecodes") 
+	else if ($("#querydropdown").attr("value") == "causecodes") 
 	{
-		var imsi = $('#imsi').val();
+		var imsi = document.getElementById("imsi").value;
 		$('#datatable').empty();
 		var table = $('<tr><th>IMSI</th><th>Cause Code</th></tr>');				
 		$('#datatable').append(table);		
@@ -108,5 +110,5 @@ $("#submit").click(function()
 				});          	
 		}});		
 	}
-});
+}
 

@@ -16,5 +16,5 @@ public interface FaultServiceLocal {
 	Collection<Fault> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end);
 	Collection<Fault> getImsiPerFailure(int failure);
 	Collection<Fault> getTopTenIMSIOverTime(Timestamp start, Timestamp end);
-
+	Collection<Fault> getAmountOfCallFailuresPerModel(String model, Timestamp start, Timestamp end);
 }

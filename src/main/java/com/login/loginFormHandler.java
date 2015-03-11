@@ -1,43 +1,47 @@
 package com.login;
 
-import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Collection;
 
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.entity.User;
-import com.interfaces.UserService;
+import com.interfaces.UserServiceLocal;
 
 @Path("/login")
 @PermitAll
 public class loginFormHandler {
 
 	@Inject
-	private UserService service;
+	private UserServiceLocal service;
 
 	@POST
-	@PermitAll
+	@Path("/auth")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public void checkLogin(@FormParam("username") String username,@FormParam("password") String password,@Context HttpServletResponse response, @Context HttpServletRequest request) throws IOException{
+	public String checkLogin(@FormParam("username") String username,
+			@FormParam("password") String password) throws URISyntaxException {
 		String authLevel = null;
 
-		User user = service.checkLoginDetails(username,password);
-		authLevel = user.getUserType(); 
+		Collection<User> user = service.getUserByUsernameAndPassword(username, password);
+		authLevel = user.iterator().next().getUserType(); 
 
-		if (authLevel == null){
-			response.sendRedirect(response.encodeRedirectURL("/LTEDataManager/login.html"));
-
-		}
-		else {
-			response.sendRedirect("/LTEDataManager/home/");
-		}
+		return authLevel;
+//		if (authLevel == null) 
+//		{
+//			URI uri = new URI("../index.html");
+//			return Response.seeOther(uri).build();
+//		} 
+//		else 
+//		{
+//			URI uri = new URI("../home.html");
+//			return Response.seeOther(uri).build();
+//		}
 	}
+
 }

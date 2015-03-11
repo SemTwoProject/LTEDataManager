@@ -19,4 +19,5 @@ public interface FaultDAO {
 	Collection<Fault> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end);
 	Collection<Fault> getImsiPerFailure(int failure);
 	Collection<Fault> getTopTenIMSIOverTime(Timestamp start, Timestamp end);
+	Collection<Fault> getNumberOfCallFailuresPerModel(String model, Timestamp start, Timestamp end);
 }

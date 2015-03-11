@@ -52,4 +52,8 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	public Collection<Fault> getImsiPerFailure(int failure) {
 		return dao.getImsiPerFailure(failure);
 	}
+	
+	public Collection<Fault> getAmountOfCallFailuresPerModel(String model, Timestamp start, Timestamp end) {
+		return dao.getNumberOfCallFailuresPerModel(model, start, end);
+	}
 }
