@@ -3,7 +3,6 @@ package com.interfaces;
 import java.sql.Timestamp;
 import java.util.Collection;
 
-import com.entity.EventCause;
 import com.entity.Fault;
 
 public interface FaultServiceLocal {
@@ -17,4 +16,5 @@ public interface FaultServiceLocal {
 	Collection<Fault> getImsiPerFailure(int failure);
 	Collection<Fault> getTopTenIMSIOverTime(Timestamp start, Timestamp end);
 	Collection<Fault> getAmountOfCallFailuresPerModel(String model, Timestamp start, Timestamp end);
+	Collection<Fault> getTopTenMarketOperatorCell(Timestamp start, Timestamp end);
 }

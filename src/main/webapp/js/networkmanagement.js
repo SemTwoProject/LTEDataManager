@@ -4,7 +4,7 @@ $(document).ready(function() {
 			if ($(this).attr("value") == "totalfaults") 
 			{			
 				$("#dates").show();
-				$("#model").hide();
+				$("#model").prop("disabled", true);
 				$("#phonemodeldropdown").prop("disabled", true);
 				$('#datatable').empty();
 				var table = $('<tr><th>IMSI</th><th>Total Failures</th><th>Total Duration</th></tr>');				
@@ -13,7 +13,7 @@ $(document).ready(function() {
 			if ($(this).attr("value") == "modelfailures") 
 			{				
 				$("#dates").hide();
-				$("#model").show();
+				$("#model").prop("disabled", false);
 				$("#phonemodeldropdown").prop("disabled", false);
 				$('#datatable').empty();
 				var table = $('<tr><th>Phone Model</th><th>Event ID</th><th>Cause Code</th><th>Number of Occurences</th></tr>');				
@@ -22,7 +22,7 @@ $(document).ready(function() {
 			if ($(this).attr("value") == "query3") 
 			{		
 				$("#dates").show();
-				$("#model").hide();
+				$("#model").prop("disabled", true);
 				$("#phonemodeldropdown").prop("disabled", true);
 				$('#datatable').empty();
 				var table = $('<tr><th>Rank</th><th>Market ID</th><th>Operator ID</th><th>Call ID</th></tr>');				
@@ -31,7 +31,7 @@ $(document).ready(function() {
 			if ($(this).attr("value") == "toptenimsiovertime") 
 			{		
 				$("#dates").show();
-				$("#model").hide();
+				$("#model").prop("disabled", true);
 				$("#phonemodeldropdown").prop("disabled", true);
 				$('#datatable').empty();
 				var table = $('<tr><th>IMSI</th><th>Count</th></tr>');				

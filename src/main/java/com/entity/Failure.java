@@ -15,17 +15,15 @@ import javax.persistence.Table;
 @Table(name = "failure")
 public class Failure implements Serializable {
 
-
 	@Id
 	@Column(name = "failure")
 	private Integer failure;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	@OneToMany(mappedBy = "failure")
 	private List<Fault> faultList = new ArrayList<Fault>();
-
 
 	public Failure() {
 	}
@@ -68,11 +66,7 @@ public class Failure implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((failure == null) ? 0 : failure.hashCode());
-		result = prime * result
-				+ ((faultList == null) ? 0 : faultList.hashCode());
 		return result;
 	}
 
@@ -85,22 +79,12 @@ public class Failure implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Failure other = (Failure) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
 		if (failure == null) {
 			if (other.failure != null)
 				return false;
 		} else if (!failure.equals(other.failure))
 			return false;
-		if (faultList == null) {
-			if (other.faultList != null)
-				return false;
-		} else if (!faultList.equals(other.faultList))
-			return false;
 		return true;
 	}
-	
+
 }

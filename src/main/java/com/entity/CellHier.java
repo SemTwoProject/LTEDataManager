@@ -39,7 +39,6 @@ public class CellHier implements Serializable {
 		this.hier321Id = hier321Id;
 	}
 
-
 	public Integer getCellId() {
 		return cellId;
 	}
@@ -90,13 +89,6 @@ public class CellHier implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cellId == null) ? 0 : cellId.hashCode());
-		result = prime * result
-				+ ((faultList == null) ? 0 : faultList.hashCode());
-		result = prime * result
-				+ ((hier321Id == null) ? 0 : hier321Id.hashCode());
-		result = prime * result
-				+ ((hier32Id == null) ? 0 : hier32Id.hashCode());
-		result = prime * result + ((hier3Id == null) ? 0 : hier3Id.hashCode());
 		return result;
 	}
 
@@ -114,27 +106,7 @@ public class CellHier implements Serializable {
 				return false;
 		} else if (!cellId.equals(other.cellId))
 			return false;
-		if (faultList == null) {
-			if (other.faultList != null)
-				return false;
-		} else if (!faultList.equals(other.faultList))
-			return false;
-		if (hier321Id == null) {
-			if (other.hier321Id != null)
-				return false;
-		} else if (!hier321Id.equals(other.hier321Id))
-			return false;
-		if (hier32Id == null) {
-			if (other.hier32Id != null)
-				return false;
-		} else if (!hier32Id.equals(other.hier32Id))
-			return false;
-		if (hier3Id == null) {
-			if (other.hier3Id != null)
-				return false;
-		} else if (!hier3Id.equals(other.hier3Id))
-			return false;
 		return true;
 	}
-	
+
 }
