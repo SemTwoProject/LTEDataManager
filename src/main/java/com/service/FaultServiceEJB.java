@@ -56,4 +56,5 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	public Collection<Fault> getAmountOfCallFailuresPerModel(String model, Timestamp start, Timestamp end) {
 		return dao.getNumberOfCallFailuresPerModel(model, start, end);
 	}
+	
 }

@@ -1,7 +1,6 @@
 package com.jpa;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.dao.FaultDAO;
-import com.entity.EventCause;
 import com.entity.Fault;
 
 @Stateless
@@ -94,7 +92,8 @@ public class FaultDAOImpl implements FaultDAO {
 	public Collection<Fault> getTopTenIMSIOverTime(Timestamp start,
 			Timestamp end) {
 		Query q = em
-				.createQuery("select imsi, count(f.imsi) from Fault f where f.date >= :startdate and f.date <= :enddate group by f.imsi order by count(f.imsi) desc limit 10");
+				.createQuery("select imsi, count(f.imsi) from Fault f where f.date >= :startdate and f.date <= :enddate group by f.imsi order by count(f.imsi) desc");
+		q.setMaxResults(10);
 		q.setParameter("startdate", start);
 		q.setParameter("enddate", end);
 		Collection<Fault> result = q.getResultList();
@@ -128,11 +127,11 @@ public class FaultDAOImpl implements FaultDAO {
 		return result;
 	}
 
-	// Select imsi from faults where failure = 3
+	//Story 19 - As a Support Engineer I want to display, for a given failure cause class, the IMSIs that were affected
 	@Override
 	public Collection<Fault> getImsiPerFailure(int failure) {
 		Query q = em
-				.createQuery("select imsi FROM Fault f where f.failure.failure = :failure");
+				.createQuery("select imsi,date FROM Fault f where f.failure.failure = :failure");
 		q.setParameter("failure", failure);
 		List<Fault> imsiFailure = q.getResultList();
 		return imsiFailure;

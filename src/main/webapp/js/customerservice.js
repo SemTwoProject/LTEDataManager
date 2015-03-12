@@ -27,12 +27,9 @@ $(document).ready(function()
 				var table = $('<tr><th>IMSI</th><th>Cause Code</th></tr>');				
 				$('#datatable').append(table);
 			}
+				});
+			}).change();
 		});
-	}).change();
-});
-
-
-
 
 function submit()
 {
@@ -50,23 +47,28 @@ function submit()
 			success:function(response)
 			{
 				$.each(response, function(i, item) 
-				{
+						{
 					$tr = "";
 					$tr = $('<tr>').append(
 							$('<td>').text(item[0]),
 							$('<td>').text(item[1]),
 							$('<td>').text(item[2]));
 					$('#datatable').append($tr);
-				});          	
-		}});			
+						});          	
+			},
+			error: function(jqXHR,textStatus,errorThrown)
+			{
+				alert("enter an imsi");
+			}
+		});			
 	}
 	else if ($("#querydropdown").attr("value") == "numberoffailures") 
 	{			
 		var startdate = $('#startdate').data('date');
 		var enddate = $('#enddate').data('date');
 		var imsi = document.getElementById("imsi").value;
-		
-		
+
+
 		$('#datatable').empty();
 		var table = $('<tr><th>IMSI</th><th>Number of Failures</th></tr>');				
 		$('#datatable').append(table);				
@@ -78,14 +80,20 @@ function submit()
 			success:function(response)
 			{
 				$.each(response, function(i, item) 
-				{
+						{
 					$tr = "";
 					$tr = $('<tr>').append(
 							$('<td>').text(item[0]),
 							$('<td>').text(item[1]));
 					$('#datatable').append($tr);
-				});          	
-		}});			
+						});          	
+			},
+			error: function(jqXHR,textStatus,errorThrown)
+			{
+				alert("enter an imsi");
+			}
+
+		});			
 	}
 	else if ($("#querydropdown").attr("value") == "causecodes") 
 	{
@@ -101,14 +109,19 @@ function submit()
 			success:function(response)
 			{
 				$.each(response, function(i, item) 
-				{
+						{
 					$tr = "";
 					$tr = $('<tr>').append(
 							$('<td>').text(item[0]),
 							$('<td>').text(item[1]));
 					$('#datatable').append($tr);
-				});          	
-		}});		
+						});          	
+			},
+			error: function(jqXHR,textStatus,errorThrown)
+			{
+				alert("enter an imsi");
+			}
+		});		
 	}
 }
 

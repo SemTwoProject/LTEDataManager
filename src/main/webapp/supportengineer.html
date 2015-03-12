@@ -11,9 +11,9 @@
 <link rel="stylesheet" href="css/fileinput.min.css" />
 <link href="css/simple-sidebar.css" rel="stylesheet">
 <script src="js/libs/jquery-2.0.3.min.js"></script>
-<script src="js/supportadmin.js"></script>
+<script src="js/supportengineer.js"></script>
 </head>
-<body>
+<body onload="checkCookie()">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -27,41 +27,23 @@
 					href="home.html">LTE Data Manager</a>
 			</div>
 
-			<div class="collapse navbar-collapse" id="nav-collapse">
-
-				<ul class="nav navbar-nav hidden-md hidden-sm hidden-lg">
-					<li><a href="home.html">Dashboard</a></li>			
-					<li><a href="customerservice.html">Customer Service</a></li>
-					<li class="active"><a href="supportadmin.html">Support
-							Administration</a></li>
-					<li><a href="networkmanagement.html">Network Management</a></li>
-					<li><a href="systemadmin.html">System Administration</a></li>
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-expanded="false"> <span
-							class="glyphicon glyphicon-user" aria-hidden="true"></span>
-							<span class="caret"></span>
-					</a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="index.html">Logout</a></li>
-						</ul></li>
-				</ul>
-			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false"> <span
+						class="glyphicon glyphicon-user" aria-hidden="true"></span> <span
+						class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="index.html" onclick="deleteCookie()">Logout</a></li>
+					</ul></li>
+			</ul>
 		</div>
 	</nav>
 
 	<div id="wrapper">
 		<div id="sidebar-wrapper">
-			<ul class="sidebar-nav">
-				<li><a href="home.html">Dashboard</a></li>
-				
-				<li><a href="customerservice.html">Customer Service</a></li>
-				<li class="active"><a href="supportadmin.html">Support
-						Administration</a></li>
-				<li><a href="networkmanagement.html">Network Management</a></li>
-				<li><a href="systemadmin.html">System Administration</a></li>
+			<ul id="sidenav" class="sidebar-nav">
+				<li><a href="supportHome.html">Dashboard</a></li>
 			</ul>
 		</div>
 
@@ -76,12 +58,12 @@
 								<div class="col-sm-8">
 									<div class="form-group">
 										<select class="form-control" id="querydropdown">
-											<option value="imsiwithcallfailure">Display call failure events for
-												date range</option>
-											<option value="numberoffailures">Display number of failures per
-												phone model for date range</option>
-											<option value="query3">Display IMSI associated with cause
-												code</option>
+											<option value="imsiwithcallfailure">Display call
+												failure events for date range</option>
+											<option value="numberoffailures">Display number of
+												failures per phone model for date range</option>
+											<option value="imsisbycause">Display IMSI associated
+												with cause code</option>
 										</select>
 									</div>
 								</div>
@@ -89,21 +71,25 @@
 								<div class="col-sm-3" id="causecodes">
 									<div class="form-group">
 										<select class="form-control" id="causecodesdropdown">
-											<option value="1">Cause Code 1</option>
-											<option value="2">Cause Code 2</option>
-											<option value="3">Cause Code 3</option>
+											<option value="1">Cause Code 0</option>
+											<option value="2">Cause Code 1</option>
+											<option value="3">Cause Code 2</option>
+											<option value="4">Cause Code 3</option>
+											<option value="5">Cause Code 4</option>
 										</select>
 									</div>
 								</div>
-								
+
 								<div class="col-sm-3" id="modelsearch">
 									<div class="form-group">
-										<input class="form-control" id="modelsearchbar" placeholder="Model..." />
+										<input class="form-control" id="modelsearchbar"
+											placeholder="Model..." />
 									</div>
 								</div>
 
 								<div class="col-sm-1 pull-right">
-									<button type="button" class="btn btn-default" onclick="submit()">Search</button>
+									<button type="button" class="btn btn-default"
+										onclick="submit()">Search</button>
 								</div>
 
 								<div class="col-sm-12" id="dates">
@@ -129,7 +115,7 @@
 									</div>
 								</div>
 
-								<div class=col-sm-12 style="height:600px;overflow:auto;">
+								<div class=col-sm-12 style="height: 600px; overflow: auto;">
 									<table class="table table-bordered" id="datatable">
 									</table>
 								</div>
@@ -144,7 +130,8 @@
 	<script src="js/moment.js"></script>
 	<script src="js/datetimepicker.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script
-		src="js/bootstrap.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/login.js"></script>
+
 </body>
 </html>

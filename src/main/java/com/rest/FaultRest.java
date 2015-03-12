@@ -47,10 +47,6 @@ public class FaultRest {
 			@FormParam("imsi") Long imsi) {
 
 		String newResponse = null;
-		/*
-		 * startdate = Timestamp.valueOf("2013-02-19 00:00:00"); enddate =
-		 * Timestamp.valueOf("2013-02-22 00:00:00"); imsi = 191911000516761L;
-		 */
 
 		try {
 			newResponse = toJSONString(service.getIMSICount(startdate, enddate,
@@ -175,9 +171,10 @@ public class FaultRest {
 
 	}
 
+	// rest/fault/imsiperfailurecode - Story 19
 	@POST
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
-	@Path("/imsifailures")
+	@Path("/imsiperfailurecode")
 	public Response getImsiPerFailure(@FormParam("failure") int failure) {
 		String newResponse = null;
 		failure = 0;
@@ -192,12 +189,11 @@ public class FaultRest {
 
 		}
 		return Response.ok(newResponse).build();
-
 	}
 
 	public String toJSONString(Object object) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setDateFormat("yyyy-mm-dd'T'HH:mm:ss.SSS'Z'");
+		gsonBuilder.setDateFormat("yyyy-mm-dd' 'HH:mm:ss");
 
 		Gson gson = gsonBuilder.create();
 		return gson.toJson(object);

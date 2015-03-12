@@ -1,5 +1,3 @@
-
-
 function login() {
 	var username = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
@@ -10,60 +8,89 @@ function login() {
 		url : "http://localhost:8080/LTEManager/rest/users/getuser",
 		dataType : "json",
 		data : {
-			"username" : username, "password" : password},
-			success : function(response) 
-			{
-				$.each(response, function(i,item) 
-						{
-					userRole = item.userType;
-						})
-			}
+			"username" : username,
+			"password" : password
+		},
+		success : function(response) {
+			$.each(response, function(i, item) {
+				userRole = item.userType;
+			})
+		}
 	});
 
-	alert(1);
-	setCookie("userRole", userRole, 1);
-	checkCookie();
-	alert(2);
+	setTimeout(function() {
+		setCookie("userRole", userRole, 1)
+	}, 500);
+	setTimeout(function() {
+		checkCookie()
+	}, 600);
+	setTimeout(function() {
+		window.location.replace("http://localhost:8080/LTEManager/home.html");
+	}, 1000);
 }
 
-function setCookie (cuserRole, cvalue, expdays) {
+function setCookie(cuserRole, cvalue, expdays) {
 	var date = new Date();
-	date.setTime(date.getTime() + (expdays*24*60*60*1000));
+	date.setTime(date.getTime() + (expdays * 24 * 60 * 60 * 1000));
 	var expires = "expires=" + date.toUTCString();
 	document.cookie = cuserRole + "=" + cvalue + "; " + expires;
 }
 
-function getCookie(cuserRole){
+function getCookie(cuserRole) {
 	var userRole = cuserRole + "=";
 	var char = document.cookie.split(';');
-	for(var i=0; i<char.length; i++){
+	for (var i = 0; i < char.length; i++) {
 		var c = char[i];
-		while (c.charAt(0)==' ') c = c.substring(1);
+		while (c.charAt(0) == ' ')
+			c = c.substring(1);
 		if (c.indexOf(userRole) == 0)
 			return c.substring(name.length, c.length);
 	}
 	return "";
 }
 
-function checkCookie() {
-	var userRole = getCookie("userRole");
-	if(userRole == "System Administrator"){
-		alert(userRole);
-	}
-	if(userRole == "Customer Service Rep"){
-		alert(userRole);
-	}
-	if(userRole == "Network Management Engineer"){
-		alert(userRole);
-	}
-	if(userRole == "Supporty Engineer"){
-		alert(userRole);
-	}
-	if(userRole == ""){
-		alert("Empty");
+function checkCookie() 
+{
+	if (document.cookie == "") 
+	{
+		window.location.replace("http://localhost:8080/LTEManager/index.html");
+	} 
+	else 
+	{
+		var userRole = getCookie("userRole");
+		
+		if (userRole == "userRole=Customer Service Rep") 
+		{
+			$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
+		} 
+		else if (userRole == "userRole=Support Engineer") 
+		{
+			$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
+			$('#sidenav').append($('<li><a href="supportengineer.html">Support Engineer</a></li>'));
+		}
+		else if (userRole == "userRole=Network Management Engineer") 
+		{
+			$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
+			$('#sidenav').append($('<li><a href="supportengineer.html">Support Engineer</a></li>'));
+			$('#sidenav').append($('<li><a href="networkmanagement.html">Network Management</a></li>'));
+		} 
+		else if (userRole == "userRole=System Administrator") 
+		{
+			$('#sidenav').append($('<li><a href="systemadmin.html">System Administration</a></li>'));
+		} 
+		
 	}
 }
 
-function deleteCookie(){
+function deleteCookie() 
+{
 	document.cookie = "userRole=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+}
+
+function rememberMe() 
+{
+	if (document.cookie != "") 
+	{
+		window.location.replace("http://localhost:8080/LTEManager/home.html");
+	}
 }
