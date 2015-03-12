@@ -21,14 +21,14 @@ public class EventCause implements Serializable {
 	@Id
 	@Column(name = "event_id")
 	private Integer eventId;
-	
+
 	@Id
 	@Column(name = "cause")
 	private Integer causeCode;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	@OneToMany(mappedBy = "eventCause")
 	private List<Fault> faultList = new ArrayList<Fault>();
 
@@ -72,6 +72,7 @@ public class EventCause implements Serializable {
 	public void setCauseCode(Integer causeCode) {
 		this.causeCode = causeCode;
 	}
+
 	@XmlTransient
 	public List<Fault> getFaultList() {
 		return faultList;
@@ -92,11 +93,7 @@ public class EventCause implements Serializable {
 		int result = 1;
 		result = prime * result
 				+ ((causeCode == null) ? 0 : causeCode.hashCode());
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((eventId == null) ? 0 : eventId.hashCode());
-		result = prime * result
-				+ ((faultList == null) ? 0 : faultList.hashCode());
 		return result;
 	}
 
@@ -114,22 +111,12 @@ public class EventCause implements Serializable {
 				return false;
 		} else if (!causeCode.equals(other.causeCode))
 			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
 		if (eventId == null) {
 			if (other.eventId != null)
 				return false;
 		} else if (!eventId.equals(other.eventId))
 			return false;
-		if (faultList == null) {
-			if (other.faultList != null)
-				return false;
-		} else if (!faultList.equals(other.faultList))
-			return false;
 		return true;
 	}
-	
+
 }

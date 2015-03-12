@@ -32,11 +32,13 @@ public class ExcelReadImpl implements ExcelDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	Map<Integer, CellHier> cells;
-	Map<Integer, EventCause> eventCauses;
-	Map<Integer, Failure> fails;
-	Map<Integer, MccMnc> mccMncs;
-	Map<Integer, UE> ues;
+	Map<CellHier, Integer> cells;
+	Map<EventCause, Integer> eventIds;
+	Map<EventCause, Integer> eventCauses;
+	Map<Failure, Integer> fails;
+	Map<MccMnc, Integer> mccMccs;
+	Map<MccMnc, Integer> mccMncs;
+	Map<UE, Integer> ues;
 	CopyOnWriteArrayList<Fault> faults;
 
 	public void createInvalid(HSSFWorkbook wb) {
@@ -83,7 +85,7 @@ public class ExcelReadImpl implements ExcelDAO {
 		Double cell2;
 		Double cell3;
 		CellHier cellHier;
-		cells = new HashMap<Integer, CellHier>();
+		cells = new HashMap<CellHier, Integer>();
 		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
 			row = sheet.getRow(i);
 			cell = row.getCell(6).getNumericCellValue();
@@ -92,11 +94,11 @@ public class ExcelReadImpl implements ExcelDAO {
 			cell3 = row.getCell(13).getNumericCellValue();
 			cellHier = new CellHier(cell.intValue(), cell1.longValue(),
 					cell2.longValue(), cell3.longValue());
-			cells.put(i, cellHier);
+			cells.put(cellHier, cell.intValue());
 
 		}
 		if (cells.size() > 1) {
-			for (CellHier cellHierList : cells.values()) {
+			for (CellHier cellHierList : cells.keySet()) {
 				em.merge(cellHierList);
 			}
 		}
@@ -109,7 +111,8 @@ public class ExcelReadImpl implements ExcelDAO {
 		Double cell1;
 		String cell2;
 		EventCause eventCause;
-		eventCauses = new HashMap<Integer, EventCause>();
+		eventIds = new HashMap<EventCause, Integer>();
+		eventCauses = new HashMap<EventCause, Integer>();
 		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
 			row = sheet.getRow(i);
 			cell = row.getCell(0).getNumericCellValue();
@@ -117,10 +120,11 @@ public class ExcelReadImpl implements ExcelDAO {
 			cell2 = row.getCell(2).getStringCellValue();
 			eventCause = new EventCause(cell.intValue(), cell1.intValue(),
 					cell2);
-			eventCauses.put(i, eventCause);
+			eventIds.put(eventCause, cell1.intValue());
+			eventCauses.put(eventCause, cell.intValue());
 		}
-		if (eventCauses.size() > 1) {
-			for (EventCause eventCauseList : eventCauses.values()) {
+		if (eventIds.size() > 1) {
+			for (EventCause eventCauseList : eventIds.keySet()) {
 				em.merge(eventCauseList);
 			}
 		}
@@ -132,16 +136,16 @@ public class ExcelReadImpl implements ExcelDAO {
 		Double cell;
 		String cell1;
 		Failure fail;
-		fails = new HashMap<Integer, Failure>();
+		fails = new HashMap<Failure, Integer>();
 		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
 			row = sheet.getRow(i);
 			cell = row.getCell(0).getNumericCellValue();
 			cell1 = row.getCell(1).getStringCellValue();
 			fail = new Failure(cell.intValue(), cell1);
-			fails.put(i, fail);
+			fails.put(fail, cell.intValue());
 		}
 		if (fails.size() > 1) {
-			for (Failure failsList : fails.values()) {
+			for (Failure failsList : fails.keySet()) {
 				em.merge(failsList);
 			}
 		}
@@ -155,7 +159,8 @@ public class ExcelReadImpl implements ExcelDAO {
 		Double cell2;
 		String cell3;
 		MccMnc mcc;
-		mccMncs = new HashMap<Integer, MccMnc>();
+		mccMccs = new HashMap<MccMnc, Integer>();
+		mccMncs = new HashMap<MccMnc, Integer>();
 		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
 			row = sheet.getRow(i);
 			cell = row.getCell(0).getNumericCellValue();
@@ -163,10 +168,11 @@ public class ExcelReadImpl implements ExcelDAO {
 			cell2 = row.getCell(1).getNumericCellValue();
 			cell3 = row.getCell(3).getStringCellValue();
 			mcc = new MccMnc(cell.intValue(), cell1, cell2.intValue(), cell3);
-			mccMncs.put(i, mcc);
+			mccMccs.put(mcc, cell.intValue());
+			mccMncs.put(mcc, cell2.intValue());
 		}
-		if (mccMncs.size() > 1) {
-			for (MccMnc mccMncsList : mccMncs.values()) {
+		if (mccMccs.size() > 1) {
+			for (MccMnc mccMncsList : mccMccs.keySet()) {
 				em.merge(mccMncsList);
 			}
 		}
@@ -185,7 +191,7 @@ public class ExcelReadImpl implements ExcelDAO {
 		String cell6;
 		String cell7;
 		String cell8;
-		ues = new HashMap<Integer, UE>();
+		ues = new HashMap<UE, Integer>();
 		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
 			row = sheet.getRow(i);
 			cell = row.getCell(0).getNumericCellValue();
@@ -214,10 +220,10 @@ public class ExcelReadImpl implements ExcelDAO {
 			cell8 = "" + row.getCell(8).getStringCellValue();
 			ue = new UE(cell.intValue(), cell1, cell2, cell3, cell4, cell5,
 					cell6, cell7, cell8);
-			ues.put(i, ue);
+			ues.put(ue,cell.intValue());
 		}
 		if (ues.size() > 1) {
-			for (UE ueList : ues.values()) {
+			for (UE ueList : ues.keySet()) {
 				em.merge(ueList);
 			}
 		}
@@ -255,14 +261,13 @@ public class ExcelReadImpl implements ExcelDAO {
 			}
 			if (row.getCell(2).getCellType() == Cell.CELL_TYPE_NUMERIC) {
 				cell2 = row.getCell(2).getNumericCellValue();
-			}
-			else {
+			} else {
 				String temp = row.getCell(2).getStringCellValue();
-				if(temp.equals("(null)")){
+				if (temp.equals("(null)")) {
 					temp = "88888.88";
 					cell2 = Double.parseDouble(temp);
-				}else{
-				cell2 = Double.parseDouble(temp);
+				} else {
+					cell2 = Double.parseDouble(temp);
 				}
 			}
 			if (row.getCell(3).getCellType() == Cell.CELL_TYPE_NUMERIC) {
@@ -299,11 +304,11 @@ public class ExcelReadImpl implements ExcelDAO {
 				cell8 = row.getCell(8).getNumericCellValue();
 			} else {
 				String temp = row.getCell(8).getStringCellValue();
-				if(temp.equals("(null)")){
+				if (temp.equals("(null)")) {
 					temp = "88888.88";
 					cell8 = Double.parseDouble(temp);
-				}else{
-				cell8 = Double.parseDouble(temp);
+				} else {
+					cell8 = Double.parseDouble(temp);
 				}
 			}
 			if (row.getCell(9).getCellType() == Cell.CELL_TYPE_STRING) {
@@ -326,37 +331,19 @@ public class ExcelReadImpl implements ExcelDAO {
 		}
 
 		ArrayList<Fault> invalidFaults = new ArrayList<Fault>();
-		System.out.println(eventCauses.size());
-		System.out.println(fails.size());
-		System.out.println(mccMncs.size());
-		System.out.println(eventCauses.size());
 		for (Fault faultList : faults) {
-			if (!eventCauses.containsValue(faultList.getEventCause().getEventId())) {
-				invalidFaults.add(faultList);
-				faults.remove(faultList);
-			} else if (!fails
-					.containsValue(faultList.getFailure().getfailure())) {
-				invalidFaults.add(faultList);
-				faults.remove(faultList);
-			} else if (!mccMncs.containsValue(faultList.getMccid().getMccId())) {
-				invalidFaults.add(faultList);
-				faults.remove(faultList);
-			} else if (!eventCauses.containsValue(faultList.getEventCause()
-					.getCauseCode())) {
-				invalidFaults.add(faultList);
-				faults.remove(faultList);
-			} else if (!ues.containsValue(faultList.getTac().getTac())) {
-				invalidFaults.add(faultList);
-				faults.remove(faultList);
-			} else if (!cells.containsValue(faultList.getCell().getCellId())) {
+			if (eventIds.containsValue(faultList.getEventCause().getEventId())
+					&& eventCauses.containsValue(faultList.getEventCause().getCauseCode())
+					&& fails.containsValue(faultList.getFailure().getfailure())
+					&& mccMccs.containsValue(faultList.getMccid().getMccId())
+					&& mccMncs.containsValue(faultList.getMccid().getMncId())
+					&& ues.containsValue(faultList.getTac().getTac())
+					&& cells.containsValue(faultList.getCell().getCellId())) {
+				 em.persist(faultList);
+			} else {
 				invalidFaults.add(faultList);
 				faults.remove(faultList);
 			}
-			System.out.println(faults.size());
-			em.persist(faultList);
 		}
-//		for(Fault faultList: faults){
-//			em.persist(faultList);
-//		}
 	}
 }
