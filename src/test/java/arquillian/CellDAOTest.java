@@ -47,8 +47,9 @@ public class CellDAOTest {
 		
 		CellHier cell = dao.getByCellId(4);
 		int x = 4;
-		int y = cell.getCellId();
-		assertEquals(x,y);
+		Long hier321ID =  1150444940909479936L;
+
+		assertEquals(hier321ID,(Long)cell.getHier321Id());
 	}
 
 }
