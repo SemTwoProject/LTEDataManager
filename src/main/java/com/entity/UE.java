@@ -132,4 +132,30 @@ public class UE implements Serializable {
 		fault.setTac(this);
 		faultList.add(fault);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((tac == null) ? 0 : tac.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UE other = (UE) obj;
+		if (tac == null) {
+			if (other.tac != null)
+				return false;
+		} else if (!tac.equals(other.tac))
+			return false;
+		return true;
+	}
+	
 }

@@ -8,11 +8,11 @@ import javax.ejb.Stateless;
 
 import com.dao.UserDAO;
 import com.entity.User;
-import com.interfaces.UserService;
+import com.interfaces.UserServiceLocal;
 
 @Stateless
 @Local
-public class UserServiceEJB implements UserService {
+public class UserServiceEJB implements UserServiceLocal {
 	
 	@EJB
 	private UserDAO dao;
@@ -24,12 +24,13 @@ public class UserServiceEJB implements UserService {
 	public Collection<User> getAllUsersInDatabase(){
 		return dao.getAllUsers();
 	}
-
-	public User checkLoginDetails(String username,String password) {
-		return dao.getUserByUsernameAndPassword(username,password);
-	}
 	
 	public User getUserByName(String name){
 		return dao.getUserByName(name);
+	}
+
+	public Collection<User> getUserByUsernameAndPassword(String username, String password) {
+		// TODO Auto-generated method stub
+		return dao.getUserByUsernameAndPassword(username, password);
 	}
 }

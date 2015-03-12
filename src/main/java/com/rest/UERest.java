@@ -6,6 +6,7 @@ import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -28,13 +29,12 @@ public class UERest {
 		return service.getAllUE();
 	}
 	
-	@GET
+	@POST
 	@PermitAll
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/modelfailures")
 	public Response getModelFailures(@FormParam ("model") String model){
 		String newResponse = null;
-		model = "A53";
 		
 		try {
 			newResponse = toJSONString(service.getEventCausePerModel(model));

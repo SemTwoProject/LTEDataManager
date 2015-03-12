@@ -40,19 +40,12 @@ public class UserDAOImpl implements UserDAO {
 			em.remove(user);
 	}
 
-	public User getUserByUsernameAndPassword(String username,String password) {
-		Query query = em.createQuery("FROM com.entity.User");
+	public Collection<User> getUserByUsernameAndPassword(String username,String password) {
+		Query query = em.createQuery("Select u From User u where u.username = :username AND u.password = :password");
+		query.setParameter("username", username);
+		query.setParameter("password", password);
 		List<User> users = query.getResultList();
-		for (User user:users){
-			if(user.getUsername().equals(username)&&user.getPassword().equals(password)){
-				return user;
-			}
-			else{
-				User nullUser = new User(null,null,null,null);
-				return nullUser;
-			}
-		}
-		return null;
+		return users;
 	}
 
 	public User getUserByName(String name) {

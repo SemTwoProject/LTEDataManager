@@ -39,13 +39,10 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-expanded="false"> <span
-							class="glyphicon glyphicon-user" aria-hidden="true"></span> User
+							class="glyphicon glyphicon-user" aria-hidden="true"></span>
 							<span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Account</a></li>
-							<li><a href="#">Settings</a></li>
-							<li class="divider"></li>
 							<li><a href="index.html">Logout</a></li>
 						</ul></li>
 				</ul>
@@ -78,14 +75,14 @@
 											<option value="totalfaults">Count for each IMSI the
 												number of call failures and total duration during a given
 												period of time</option>
-											<option value="query2">Display for a given model of
+											<option value="modelfailures">Display for a given model of
 												phone, all the unique failure Event ID and Cause Code
 												combinations and the number of occurences</option>
 											<option value="query3">Display the Top 10
 												Market/Operator/Cell ID combinations that had call faulures
 												during a given period of time</option>
-											<option value="toptenimsiovertime">Display the Top 10 IMSIs that
-												had call failures during a given time period</option>
+											<option value="toptenimsiovertime">Display the Top
+												10 IMSIs that had call failures during a given time period</option>
 										</select>
 									</div>
 								</div>
@@ -95,7 +92,7 @@
 
 								<div class="col-sm-3 pull-right">
 									<div class="form-group">
-										<input id="phonemodelsearch" type="text" class="form-control"
+										<input id="model" type="text" class="form-control"
 											placeholder="Search for model..">
 									</div>
 								</div>
@@ -122,39 +119,10 @@
 										</div>
 									</div>
 								</div>
-
-								<div class=col-sm-12>
+								<div class=col-sm-12 style="height:600px;overflow:auto;">
 									<table class="table table-bordered" id="datatable">
 									</table>
 								</div>
-							</div>
-
-							<div class="col-sm-12" id="dates">
-								<div class="col-sm-6">
-									<label>Start:</label>
-									<div class="form-group">
-										<div class='input-group date' id='startdate'>
-											<input type='text' class="form-control" /> <span
-												class="input-group-addon"><span
-												class="glyphicon glyphicon-calendar"></span> </span>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<label>End:</label>
-									<div class="form-group">
-										<div class='input-group date' id='enddate'>
-											<input type='text' class="form-control" /> <span
-												class="input-group-addon"><span
-												class="glyphicon glyphicon-calendar"></span> </span>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class=col-sm-12>
-								<table class="table table-bordered" id="datatable">
-								</table>
 							</div>
 						</div>
 					</div>

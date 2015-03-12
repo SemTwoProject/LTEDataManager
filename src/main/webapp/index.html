@@ -1,51 +1,91 @@
 <!DOCTYPE html>
-
 <html>
 <head>
 <title>Ericsson LTE Data Manager</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css" />
-<link rel="stylesheet" href="css/screen.css" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="stylesheet" href="css/bootstrap.css" />
 </head>
 <body>
-	<div id="container">
-		<section>
-			<article id="intro-art" data-role="page" data-title="Home">
-				<div data-role="header" class="header">
-					<h3>Ericsson LTE Data Manager</h3>
-				</div>
-				<div class="ui-content" role="main">
-					<div class="wrap">
-						<div class="login-panel panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Please Sign In</h3>
-							</div>
-							<div class="panel-body">
-								<form  action="/LTEManager/rest/login" method="post" role="form">
-									<fieldset>
-										<div class="form-group">
-											<input class="form-control" placeholder="Username"
-												name="username" type="text" autofocus>
-										</div>
-										<div class="form-group">
-											<input class="form-control" placeholder="Password"
-												name="password" type="password" value="">
-										</div>
-										<input type="submit" value="Login"/>
-									</fieldset>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</article>
-		</section>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#nav-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html"><img
+					src="img/ericsson-brand.png"></img></a> <a class="navbar-brand"
+					href="index.html">LTE Data Manager</a>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<center>
+					<div class="hometext">
+						<div class="largetext">Welcome to the Ericsson LTE Data
+							Manager</div>
+						<div class="mediumtext">Sorry!</div>
+						<div class="smalltext">You must sign in to use the system.</div>
+
+						<button class="dropdown-toggle btn btn-default" role="button"
+							aria-expanded="false" data-toggle="modal"
+							data-target=".bs-modal-sm">Sign In</button>
+				</center>
+			</div>
+		</div>
 	</div>
 
-	<script type="text/javascript" src="js/libs/jquery-2.0.3.js"></script>
-	<script type="text/javascript" src="js/libs/jquery.mobile-1.4.2.js"></script>
-	<script type="text/javascript" src="js/libs/lodash-2.4.1.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
+
+	<div class="modal fade bs-modal-sm" id="myModal" tabindex="-1"
+		role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+
+					<center>
+						<h4 class="modal-title">User Login</h4>
+					</center>
+				</div>
+
+				<form action="rest/login/auth" method="post" role="form">
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Username</label> <input id="username" class="form-control"
+								name="username" placeholder="Username..">
+						</div>
+						<div class="form-group">
+							<label>Password</label> <input id="password" class="form-control"
+								name="password" placeholder="Password..">
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" onclick="login()" class="btn btn-default">Login</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script src="js/libs/jquery-2.0.3.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/login.js"></script>
 </body>
 </html>

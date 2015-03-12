@@ -5,14 +5,16 @@ $(document).ready(function() {
 			{				
 				$("#dates").show();
 				$("#causecodesdropdown").prop("disabled", true);
+				$("#modelsearch").hide();
 				$('#datatable').empty();
 				var table = $('<tr><th>IMSI</th><th>Event ID</th><th>Time</th></tr>');				
 				$('#datatable').append(table);
 			}
-			if ($(this).attr("value") == "query2") 
+			if ($(this).attr("value") == "numberoffailures") 
 			{
 				$("#dates").show();
-				$("#causecodesdropdown").prop("disabled", true);
+				$("#causecodes").hide();
+				$("#modelsearch").show();
 				$('#datatable').empty();
 				var table = $('<tr><th>Phone Model</th><th>Total Failures</th></tr>');				
 				$('#datatable').append(table);
@@ -20,7 +22,8 @@ $(document).ready(function() {
 			if ($(this).attr("value") == "query3") 
 			{
 				$("#dates").hide();
-				$("#causecodesdropdown").prop("disabled", false);
+				$("#modelsearch").hide();
+				$("#causecodes").show();
 				$('#datatable').empty();
 				var table = $('<tr><th>IMSI</th><th>Time</th></tr>');				
 				$('#datatable').append(table);
@@ -30,7 +33,7 @@ $(document).ready(function() {
 });
 
 
-$("#submit").click(function()
+function submit()
 		{
 		if ($("#querydropdown").attr("value") == "imsiwithcallfailure") 
 		{			
@@ -57,4 +60,30 @@ $("#submit").click(function()
 					});          	
 			}});			
 		}
-	});
+		if ($("#querydropdown").attr("value") == "numberoffailures") 
+		{			
+			var startdate = $('#startdate').data('date');
+			var enddate = $('#enddate').data('date');
+			var model = document.getElementById("modelsearchbar").value;
+			$('#datatable').empty();
+			var table = $('<tr><th>Phone Model</th><th>Total Failures</th></tr>');				
+			$('#datatable').append(table);
+			
+			$.ajax({
+				type: 'POST',
+				url: "http://localhost:8080/LTEManager/rest/fault/faultsbymodel",
+				dataType: "json", 
+				data: {"model": model, "startdate": startdate, "enddate": enddate},
+				success:function(response)
+				{
+					$.each(response, function(i, item) 
+					{
+						alert("test3");
+						$tr = "";
+						$tr = $('<tr>').append(
+								$('<td>').text(item[0]),
+								$('<td>').text(item[1]));
+						$('#datatable').append($tr);
+					});          	
+			}});			
+		}}
