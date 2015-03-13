@@ -189,9 +189,10 @@ public class FaultRest {
 		return Response.ok(newResponse).build();
 	}
 	
+	// rest/fault/toptenmnnmcncell - Story 15
 	@POST
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
-	@Path("/imsifailures")
+	@Path("/toptenmnnmcncell")
 	public Response getTopTenMarketOperatorCell(
 			@FormParam("startdate") Timestamp startDate,
 			@FormParam("enddate") Timestamp endDate) {

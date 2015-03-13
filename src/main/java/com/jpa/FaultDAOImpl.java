@@ -44,15 +44,16 @@ public class FaultDAOImpl implements FaultDAO {
 		return q.getResultList();
 	}
 	
-	//As a Network Management Engineer I want to see the 
+	// Story 15 - As a Network Management Engineer I want to see the 
 	//Top 10 Market/Operator/Cell ID combinations that 
-	//had call failures during a time period
+	//had call failures during a time period 
 	public Collection<Fault> getTopTenMarketOperatorCell(Timestamp start, Timestamp end) {
 		Query q = em
-				.createQuery("select mccid.mccId, mccid.mccId, cell.cellId FROM Fault f WHERE f.date >= :start AND f.date <= :end group by f.mccid order by count(f.mccid) desc limit 10");
+				.createQuery("select distinct mccid.mccId, mccid.mncId, cell.cellId, count(*) from Fault f WHERE f.date >= :start AND f.date <= :end group by f.mccid.mccId,f.mccid.mncId,f.cell.cellId order by count(*) desc");
 		q.setParameter("start", start);
 		q.setParameter("end", end);
 		Collection<Fault> result = q.getResultList();
+		System.out.println(result);
 		return result;
 	}
 
