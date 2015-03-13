@@ -73,8 +73,8 @@
 
 								<div class="col-sm-3 pull-right">
 									<div class="form-group">
-										<input id="imsi" type="text" class="form-control"
-											placeholder="Search for imsi..">
+										<input id="imsi" type="number" class="form-control"
+											placeholder="Search for imsi.."  pattern="^[0-9]{15,15}$" >
 									</div>
 								</div>
 
@@ -101,7 +101,7 @@
 									</div>
 								</div>
 
-								<div class=col-sm-12 style="height: 600px; overflow: auto;">
+								<div class="col-sm-12" style="height: 600px; overflow: auto;">
 									<table class="table table-bordered" id="datatable">
 									</table>
 								</div>

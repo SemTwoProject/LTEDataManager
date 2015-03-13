@@ -57,11 +57,11 @@ public class FaultDAOImpl implements FaultDAO {
 		return result;
 	}
 
-	public Collection<Fault> getFaultsByIMSI(Long imsi) {
+	public List<Fault> getFaultsByIMSI(Long imsi) {
 		Query q = em
 				.createQuery("select distinct imsi, eventCause.causeCode, eventCause.eventId from Fault f where f.imsi = :imsi");
 		q.setParameter("imsi", imsi);
-		Collection<Fault> result = q.getResultList();
+		List<Fault> result = q.getResultList();
 		return result;
 	}
 

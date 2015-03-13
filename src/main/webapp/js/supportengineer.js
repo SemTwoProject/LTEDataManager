@@ -64,46 +64,48 @@ function submit() {
 			},
 			error: function(jqXHR,textStatus,errorThrown)
 			{
-				alert("enter an model");
+				alert("You need to enter valid dates");
 			}
 		});
 	} 
 	else if ($("#querydropdown").attr("value") == "numberoffailures") {
 		var startdate = $('#startdate').data('date');
 		var enddate = $('#enddate').data('date');
-		var model = document.getElementById("modelsearchbar").value;
+		var model = document.getElementById("modelsearchfield").value;
 		$('#datatable').empty();
 		var table = $('<tr><th>Phone Model</th><th>Total Failures</th></tr>');
 		$('#datatable').append(table);
 
-		$.ajax({
-			type : 'POST',
-			url : "http://localhost:8080/LTEManager/rest/fault/faultsbymodel",
-			dataType : "json",
-			data : {
-				"model" : model,
-				"startdate" : startdate,
-				"enddate" : enddate
-			},
-			success : function(response) {
-				$.each(response, function(i, item) {
-					$tr = "";
-					$tr = $('<tr>').append($('<td>').text(item[0]),
-							$('<td>').text(item[1]));
-					$('#datatable').append($tr);
-				});
-			},
-
-			error: function(jqXHR,textStatus,errorThrown)
-			{
-				alert("enter an imsi");
-			}
-		});
+		if(model == ""){
+			alert("Please enter a model");
+		}
+		else{
+			$.ajax({
+				type : 'POST',
+				url : "http://localhost:8080/LTEManager/rest/fault/faultsbymodel",
+				dataType : "json",
+				data : {
+					"model" : model,
+					"startdate" : startdate,
+					"enddate" : enddate
+				},
+				success : function(response) {
+					if (response == ""){
+						alert("No data for that model");
+					}
+					$.each(response, function(i, item) {
+						$tr = "";
+						$tr = $('<tr>').append($('<td>').text(item[0]),
+								$('<td>').text(item[1]));
+						$('#datatable').append($tr);
+					});
+				}
+			});
+		}
 	}
 	else if ($("#querydropdown").attr("value") == "imsisbycause") 
 	{		 
 		var cause = $("#querydropdown").attr("value");
-		alert(cause);
 		$('#datatable').empty();
 		var table = $('<tr><th>IMSI</th><th>Time</th></tr>');
 		$('#datatable').append(table);
@@ -126,10 +128,6 @@ function submit() {
 							$('<td>').text(item[1]));
 					$('#datatable').append($tr);
 						});
-			},
-			error: function(jqXHR,textStatus,errorThrown)
-			{
-				alert("enter an imsi");
 			}
 		});
 	}

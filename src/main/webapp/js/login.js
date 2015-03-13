@@ -51,40 +51,40 @@ function getCookie(cuserRole) {
 
 function checkCookie() 
 {
-	if (document.cookie == "") 
+	var userRole = getCookie("userRole");
+
+	if (userRole == "userRole=Customer Service Rep") 
 	{
-		window.location.replace("http://localhost:8080/LTEManager/index.html");
+		$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
 	} 
-	else 
+	else if (userRole == "userRole=Support Engineer") 
 	{
-		var userRole = getCookie("userRole");
-		
-		if (userRole == "userRole=Customer Service Rep") 
-		{
-			$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
-		} 
-		else if (userRole == "userRole=Support Engineer") 
-		{
-			$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
-			$('#sidenav').append($('<li><a href="supportengineer.html">Support Engineer</a></li>'));
-		}
-		else if (userRole == "userRole=Network Management Engineer") 
-		{
-			$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
-			$('#sidenav').append($('<li><a href="supportengineer.html">Support Engineer</a></li>'));
-			$('#sidenav').append($('<li><a href="networkmanagement.html">Network Management</a></li>'));
-		} 
-		else if (userRole == "userRole=System Administrator") 
-		{
-			$('#sidenav').append($('<li><a href="systemadmin.html">System Administration</a></li>'));
-		} 
-		
+		$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
+		$('#sidenav').append($('<li><a href="supportengineer.html">Support Engineer</a></li>'));
 	}
+	else if (userRole == "userRole=Network Management Engineer") 
+	{
+		$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
+		$('#sidenav').append($('<li><a href="supportengineer.html">Support Engineer</a></li>'));
+		$('#sidenav').append($('<li><a href="networkmanagement.html">Network Management</a></li>'));
+	} 
+	else if (userRole == "userRole=System Administrator") 
+	{
+		$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
+		$('#sidenav').append($('<li><a href="supportengineer.html">Support Engineer</a></li>'));
+		$('#sidenav').append($('<li><a href="networkmanagement.html">Network Management</a></li>'));
+		$('#sidenav').append($('<li><a href="systemadmin.html">System Administration</a></li>'));
+	}
+	else
+	{
+		deleteCookie();
+		window.location.replace("http://localhost:8080/LTEManager/index.html");
+	}  
 }
 
 function deleteCookie() 
 {
-	document.cookie = "userRole=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+	document.cookie = "userRole=; expires=Thu, 01 Jan 1988 00:00:00 UTC";
 }
 
 function rememberMe() 

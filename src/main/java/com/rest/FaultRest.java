@@ -155,9 +155,12 @@ public class FaultRest {
 			@FormParam("startdate") Timestamp startDate,
 			@FormParam("enddate") Timestamp endDate) {
 		String newResponse = null;
-
 		try {
 			newResponse = toJSONString(service.getAmountOfCallFailuresPerModel(model, startDate, endDate));
+			if(newResponse == "")
+			{
+				
+			}
 		} catch (Exception err) {
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""

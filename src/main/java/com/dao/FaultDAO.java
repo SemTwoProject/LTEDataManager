@@ -2,8 +2,10 @@ package com.dao;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Local;
+
 import com.entity.Fault;
 
 @Local
@@ -19,4 +21,5 @@ public interface FaultDAO {
 	Collection<Fault> getTopTenIMSIOverTime(Timestamp start, Timestamp end);
 	Collection<Fault> getNumberOfCallFailuresPerModel(String model, Timestamp start, Timestamp end);
 	Collection<Fault> getTopTenMarketOperatorCell(Timestamp start, Timestamp end);
+	List<Fault> getFaultsByIMSI(Long imsi);
 }
