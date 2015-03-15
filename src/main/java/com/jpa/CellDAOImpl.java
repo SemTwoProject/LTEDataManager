@@ -26,11 +26,11 @@ public class CellDAOImpl implements CellDAO {
 		return q.getResultList();
 	}
 	
-	public CellHier getByCellId(Integer cellId) {
+	public Collection<CellHier> getByCellId(Integer cellId) {
 		Query q = em.createQuery("select c from CellHier c where c.cellId = :cellId",
 				CellHier.class);
 		 q.setParameter("cellId", cellId);
 		 List<CellHier> cells = q.getResultList();
-		return cells.get(0);
+		return cells;
 	}
 }

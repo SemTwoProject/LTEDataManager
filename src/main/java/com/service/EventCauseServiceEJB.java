@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.Collection;
+
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateful;
@@ -18,7 +20,7 @@ public class EventCauseServiceEJB implements EventCauseServiceLocal {
 	private EventCauseDAO dao;
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public EventCause getAllEventCause(Integer eventid) {
+	public Collection<EventCause> getAllEventCause(Integer eventid) {
 		return dao.getEventCause(eventid);
 	}
 }

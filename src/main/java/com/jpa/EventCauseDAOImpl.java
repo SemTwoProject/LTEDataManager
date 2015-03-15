@@ -1,5 +1,6 @@
 package com.jpa;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -20,30 +21,30 @@ public class EventCauseDAOImpl implements EventCauseDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	public EventCause getEventCause(Integer causeid) {
+	public Collection<EventCause> getEventCause(Integer causeid) {
 		Query q = em.createQuery(
-				"select e from EventCause e where e.causeid = :causeid",
+				"select e from EventCause e where e.cause = :causeid",
 				EventCause.class);
 		q.setParameter("causeid", causeid);
 		List<EventCause> causes = q.getResultList();
-		return causes.get(0);
+		return causes;
 	}
 
-	public EventCause getByEventCause(Integer event) {
+	public Collection<EventCause> getByEventCause(Integer event) {
 		Query q = em.createQuery(
-				"select e from EventCause e where e.cause = :event",
+				"select e from EventCause e where e.event_id = :event",
 				EventCause.class);
 		q.setParameter("event", event);
 		List<EventCause> causes = q.getResultList();
-		return causes.get(0);
+		return causes;
 	}
 
-	public List<Object> getEventCauseByFault(Fault fault) {
+	public Collection<EventCause> getEventCauseByFault(Fault fault) {
 		Query q = em.createQuery(
 				"select e from EventCause e where e.eventId = :fault",
 				EventCause.class);
-		q.setParameter("fault", fault.getEventCause());
-		List<Object> causes = q.getResultList();
+		q.setParameter("fault", fault.getEventCause().getEventId());
+		List<EventCause> causes = q.getResultList();
 		return causes;
 	}
 }

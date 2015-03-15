@@ -1,5 +1,7 @@
 package com.rest;
 
+import java.util.Collection;
+
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,7 +19,7 @@ public class EventCauseRest {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public EventCause getEventCause() {
+	public Collection<EventCause> getEventCause() {
 		return service.getAllEventCause(10);
 	}
 }

@@ -8,5 +8,5 @@ import java.util.Collection;
 public interface CellDAO {
 
 	Collection<CellHier> getCell();
-	CellHier getByCellId(Integer cellId);
+	Collection<CellHier> getByCellId(Integer cellId);
 }
