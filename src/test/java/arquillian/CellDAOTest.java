@@ -1,8 +1,9 @@
 package arquillian;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
+import java.util.Collection;
 
 import javax.ejb.EJB;
 
@@ -23,6 +24,16 @@ public class CellDAOTest {
 
 	@EJB
 	private CellDAO dao;
+	
+	int cellId1; 
+	int cellId2;
+	int cellId3;
+	
+	Collection<CellHier> cellList1;
+	Collection<CellHier> cell1;
+	Collection<CellHier> cell2;
+	Collection<CellHier> cell3;
+	
 
 	@Deployment
 	public static WebArchive createDeployment() {
@@ -35,21 +46,27 @@ public class CellDAOTest {
 
 	@Before
 	public void setUp() {
+		cellId1 = 4;
+		cellId2 = 3842;
+		cellId3 = 123; // not a cell id
+		cellList1 = (Collection<CellHier>) dao.getCell();
+		cell1 = dao.getByCellId(cellId1);
+		cell2 = dao.getByCellId(cellId2);
+		cell3= dao.getByCellId(cellId3);
 	}
 
 	@Test
-	public void CellListIsReturned() {
-		assertEquals(dao.getCell().size(), 3);
+	public void getCellTest() {
+		assertFalse(cellList1.isEmpty());
 	}
 
 	@Test
-	public void CellIsReturnedById() {
+	public void getByCellIdTest() {
 		
-		CellHier cell = dao.getByCellId(4);
-		int x = 4;
-		Long hier321ID =  1150444940909479936L;
-
-		assertEquals(hier321ID,(Long)cell.getHier321Id());
+		assertTrue(cell1.iterator().hasNext());
+		assertTrue(cell2.iterator().hasNext());
+		assertFalse(cell3.iterator().hasNext());
+		
 	}
 
 }
