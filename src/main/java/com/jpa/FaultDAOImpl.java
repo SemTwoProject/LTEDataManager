@@ -44,23 +44,24 @@ public class FaultDAOImpl implements FaultDAO {
 		return q.getResultList();
 	}
 	
-	//As a Network Management Engineer I want to see the 
+	// Story 15 - As a Network Management Engineer I want to see the 
 	//Top 10 Market/Operator/Cell ID combinations that 
-	//had call failures during a time period
+	//had call failures during a time period 
 	public Collection<Fault> getTopTenMarketOperatorCell(Timestamp start, Timestamp end) {
 		Query q = em
-				.createQuery("select mccid.mccId, mccid.mccId, cell.cellId FROM Fault f WHERE f.date >= :start AND f.date <= :end group by f.mccid order by count(f.mccid) desc limit 10");
+				.createQuery("select distinct mccid.mccId, mccid.mncId, cell.cellId, count(*) from Fault f WHERE f.date >= :start AND f.date <= :end group by f.mccid.mccId,f.mccid.mncId,f.cell.cellId order by count(*) desc");
 		q.setParameter("start", start);
 		q.setParameter("end", end);
 		Collection<Fault> result = q.getResultList();
+		System.out.println(result);
 		return result;
 	}
 
-	public Collection<Fault> getFaultsByIMSI(Long imsi) {
+	public List<Fault> getFaultsByIMSI(Long imsi) {
 		Query q = em
 				.createQuery("select distinct imsi, eventCause.causeCode, eventCause.eventId from Fault f where f.imsi = :imsi");
 		q.setParameter("imsi", imsi);
-		Collection<Fault> result = q.getResultList();
+		List<Fault> result = q.getResultList();
 		return result;
 	}
 
@@ -104,7 +105,8 @@ public class FaultDAOImpl implements FaultDAO {
 	public Collection<Fault> getTopTenIMSIOverTime(Timestamp start,
 			Timestamp end) {
 		Query q = em
-				.createQuery("select imsi, count(f.imsi) from Fault f where f.date >= :startdate and f.date <= :enddate group by f.imsi order by count(f.imsi) desc limit 10");
+				.createQuery("select imsi, count(f.imsi) from Fault f where f.date >= :startdate and f.date <= :enddate group by f.imsi order by count(f.imsi) desc");
+		q.setMaxResults(10);
 		q.setParameter("startdate", start);
 		q.setParameter("enddate", end);
 		Collection<Fault> result = q.getResultList();
@@ -138,11 +140,11 @@ public class FaultDAOImpl implements FaultDAO {
 		return result;
 	}
 
-	// Select imsi from faults where failure = 3
+	//Story 19 - As a Support Engineer I want to display, for a given failure cause class, the IMSIs that were affected
 	@Override
 	public Collection<Fault> getImsiPerFailure(int failure) {
 		Query q = em
-				.createQuery("select imsi FROM Fault f where f.failure.failure = :failure");
+				.createQuery("select imsi,date FROM Fault f where f.failure.failure = :failure");
 		q.setParameter("failure", failure);
 		List<Fault> imsiFailure = q.getResultList();
 		return imsiFailure;

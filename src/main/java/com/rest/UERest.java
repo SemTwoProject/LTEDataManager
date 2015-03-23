@@ -31,7 +31,7 @@ public class UERest {
 	
 	@POST
 	@PermitAll
-	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/modelfailures")
 	public Response getModelFailures(@FormParam ("model") String model){
 		String newResponse = null;

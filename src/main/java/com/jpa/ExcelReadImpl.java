@@ -21,7 +21,6 @@ import com.entity.CellHier;
 import com.entity.EventCause;
 import com.entity.Failure;
 import com.entity.Fault;
-import com.entity.InvalidData;
 import com.entity.MccMnc;
 import com.entity.UE;
 
@@ -31,51 +30,18 @@ public class ExcelReadImpl implements ExcelDAO {
 
 	@PersistenceContext
 	private EntityManager em;
+	
+	@PersistenceContext
+	private EntityManager emOther;
 
-	Map<CellHier, Integer> cells;
-	Map<EventCause, Integer> eventIds;
-	Map<EventCause, Integer> eventCauses;
-	Map<Failure, Integer> fails;
-	Map<MccMnc, Integer> mccMccs;
-	Map<MccMnc, Integer> mccMncs;
-	Map<UE, Integer> ues;
-	CopyOnWriteArrayList<Fault> faults;
-
-	public void createInvalid(HSSFWorkbook wb) {
-		HSSFSheet sheet = wb.getSheetAt(0);
-		/**
-		 * Date date, Integer eventId, Integer failure, Integer ueType, Integer
-		 * market, Integer operator, Integer cell, Integer duration, Integer
-		 * causeCode, String neVersion, Long imsi, Long hier3Id, Long hier32Id,
-		 * Long hier321Id
-		 **/
-
-		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
-			HSSFRow row = sheet.getRow(i);
-
-			Double cell = row.getCell(0).getNumericCellValue();
-			Double cell1 = row.getCell(1).getNumericCellValue();
-			Double cell2 = row.getCell(2).getNumericCellValue();
-			Double cell3 = row.getCell(3).getNumericCellValue();
-			Double cell4 = row.getCell(4).getNumericCellValue();
-			Double cell5 = row.getCell(5).getNumericCellValue();
-			Double cell6 = row.getCell(6).getNumericCellValue();
-			Double cell7 = row.getCell(7).getNumericCellValue();
-			Double cell8 = row.getCell(8).getNumericCellValue();
-			String cell9 = row.getCell(9).getStringCellValue();
-			Double cell10 = row.getCell(10).getNumericCellValue();
-			Double cell11 = row.getCell(11).getNumericCellValue();
-			Double cell12 = row.getCell(12).getNumericCellValue();
-			Double cell13 = row.getCell(13).getNumericCellValue();
-			InvalidData invalid = new InvalidData(
-					HSSFDateUtil.getJavaDate(cell), cell1.intValue(),
-					cell2.intValue(), cell3.intValue(), cell4.intValue(),
-					cell5.intValue(), cell6.intValue(), cell7.intValue(),
-					cell8.intValue(), cell9, cell10.longValue(),
-					cell11.longValue(), cell12.longValue(), cell13.longValue());
-			em.persist(invalid);
-		}
-	}
+	private Map<CellHier, Integer> cells;
+	private Map<EventCause, Integer> eventIds;
+	private Map<EventCause, Integer> eventCauses;
+	private Map<Failure, Integer> fails;
+	private Map<MccMnc, Integer> mccMccs;
+	private Map<MccMnc, Integer> mccMncs;
+	private Map<UE, Integer> ues;
+	private CopyOnWriteArrayList<Fault> faults;
 
 	public void createCell(HSSFWorkbook wb) {
 		HSSFSheet sheet = wb.getSheetAt(0);
@@ -245,7 +211,7 @@ public class ExcelReadImpl implements ExcelDAO {
 		String cell9;
 		Double cell10;
 		faults = new CopyOnWriteArrayList<Fault>();
-		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+		for (int i = 1; i < sheet.getLastRowNum() +1; i++) {
 			row = sheet.getRow(i);
 			if (row.getCell(0).getCellType() == Cell.CELL_TYPE_NUMERIC) {
 				cell = row.getCell(0).getNumericCellValue();
@@ -329,21 +295,20 @@ public class ExcelReadImpl implements ExcelDAO {
 					cell8.intValue(), cell9, cell10.longValue());
 			faults.add(fault);
 		}
-
 		ArrayList<Fault> invalidFaults = new ArrayList<Fault>();
 		for (Fault faultList : faults) {
-			if (eventIds.containsValue(faultList.getEventCause().getEventId())
-					&& eventCauses.containsValue(faultList.getEventCause().getCauseCode())
-					&& fails.containsValue(faultList.getFailure().getfailure())
-					&& mccMccs.containsValue(faultList.getMccid().getMccId())
-					&& mccMncs.containsValue(faultList.getMccid().getMncId())
-					&& ues.containsValue(faultList.getTac().getTac())
-					&& cells.containsValue(faultList.getCell().getCellId())) {
-				 em.persist(faultList);
-			} else {
-				invalidFaults.add(faultList);
-				faults.remove(faultList);
+				if (eventIds.containsValue(faultList.getEventCause().getEventId())
+						&& eventCauses.containsValue(faultList.getEventCause().getCauseCode())
+						&& fails.containsValue(faultList.getFailure().getfailure())
+						&& mccMccs.containsValue(faultList.getMccid().getMccId())
+						&& mccMncs.containsValue(faultList.getMccid().getMncId())
+						&& ues.containsValue(faultList.getTac().getTac())
+						&& cells.containsValue(faultList.getCell().getCellId())) {
+					 emOther.persist(faultList);
+				} else {
+					invalidFaults.add(faultList);
+					faults.remove(faultList);
+				}
 			}
-		}
 	}
 }

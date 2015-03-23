@@ -10,8 +10,7 @@
 <link rel="stylesheet" href="css/bootstrap.css" />
 <link href="css/simple-sidebar.css" rel="stylesheet">
 </head>
-<body>
-
+<body onload="checkCookie()">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -24,39 +23,23 @@
 					src="img/ericsson-brand.png"></img></a> <a class="navbar-brand"
 					href="home.html">LTE Data Manager</a>
 			</div>
-
-			<div class="collapse navbar-collapse" id="nav-collapse">
-
-				<ul class="nav navbar-nav hidden-md hidden-sm hidden-lg">
-					<li class="active"><a href="home.html">Dashboard</a></li>
-					<li><a href="customerservice.html">Customer Service</a></li>
-					<li><a href="supportadmin.html">Support Administration</a></li>
-					<li><a href="networkmanagement.html">Network Management</a></li>
-					<li><a href="systemadmin.html">System Administration</a></li>
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-expanded="false"> <span
-							class="glyphicon glyphicon-user" aria-hidden="true"></span> <span
-							class="caret"></span>
-					</a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="index.html">Logout</a></li>
-						</ul></li>
-				</ul>
-			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false"> <span
+						class="glyphicon glyphicon-user" aria-hidden="true"></span> <span
+						class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="index.html" onclick="deleteCookie()">Logout</a></li>
+					</ul></li>
+			</ul>
 		</div>
 	</nav>
 
 	<div id="wrapper">
 		<div id="sidebar-wrapper">
-			<ul class="sidebar-nav">
+			<ul id="sidenav" class="sidebar-nav">
 				<li class="active"><a href="home.html">Dashboard</a></li>
-				<li><a href="customerservice.html">Customer Service</a></li>
-				<li><a href="supportadmin.html">Support Administration</a></li>
-				<li><a href="networkmanagement.html">Network Management</a></li>
-				<li><a href="systemadmin.html">System Administration</a></li>
 			</ul>
 		</div>
 

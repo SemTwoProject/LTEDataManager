@@ -71,9 +71,6 @@ public class UserREST {
 
 			}
 			return Response.ok(response).build();
-			
-
-		
 	}
 
 	// /rest/users/list

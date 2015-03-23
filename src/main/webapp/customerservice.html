@@ -12,7 +12,7 @@
 <script src="js/libs/jquery-2.0.3.min.js"></script>
 <script src="js/customerservice.js"></script>
 </head>
-<body>
+<body onload="checkCookie()">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -26,44 +26,25 @@
 					href="home.html">LTE Data Manager</a>
 			</div>
 
-			<div class="collapse navbar-collapse" id="nav-collapse">
-
-				<ul class="nav navbar-nav hidden-md hidden-sm hidden-lg">
-					<li><a href="home.html">Dashboard</a></li>
-					<li class="active"><a href="customerservice.html">Customer
-							Service</a></li>							
-					<li><a href="supportadmin.html">Support Administration</a></li>
-					<li><a href="networkmanagement.html">Network Management</a></li>
-					<li><a href="systemadmin.html">System Administration</a></li>
-					
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-expanded="false"> <span
-							class="glyphicon glyphicon-user" aria-hidden="true"></span>
-							<span class="caret"></span>
-					</a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="index.html">Logout</a></li>
-						</ul></li>
-				</ul>
-			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false"> <span
+						class="glyphicon glyphicon-user" aria-hidden="true"></span> <span
+						class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="index.html" onclick="deleteCookie()">Logout</a></li>
+					</ul></li>
+			</ul>
 		</div>
 	</nav>
 
 	<div id="wrapper">
 		<div id="sidebar-wrapper">
-			<ul class="sidebar-nav">
+			<ul id="sidenav" class="sidebar-nav">
 				<li><a href="home.html">Dashboard</a></li>
-				<li class="active"><a href="customerservice.html">Customer
-						Service</a></li>		
-				<li><a href="supportadmin.html">Support Administration</a></li>
-				<li><a href="networkmanagement.html">Network Management</a></li>
-				<li><a href="systemadmin.html">System Administration</a></li>
 			</ul>
 		</div>
-
 
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
@@ -75,26 +56,28 @@
 								<div class="col-sm-8">
 									<div class="form-group">
 										<select id="querydropdown" class="form-control">
-											<option value="callfailures">Display call failure events for
+											<option value="callfailures">Display call failure
+												events for IMSI</option>
+											<option value="numberoffailures">Display count of
+												call failures for IMSI</option>
+											<option value="causecodes">Display cause codes for
 												IMSI</option>
-											<option value="numberoffailures">Display count of call failures for
-												IMSI</option>
-											<option value="causecodes">Display cause codes for IMSI</option>
 										</select>
 									</div>
 								</div>
-								
+
 								<div class="col-sm-1 pull-right">
-									<button id="submit" onclick="submit()" type="button" class="btn btn-default">Search</button>
+									<button id="submit" onclick="submit()" type="button"
+										class="btn btn-default">Search</button>
 								</div>
 
 								<div class="col-sm-3 pull-right">
 									<div class="form-group">
-										<input id="imsi" type="text" class="form-control"
-											placeholder="Search for imsi..">
+										<input id="imsi" type="number" class="form-control"
+											placeholder="Search for imsi.."  pattern="^[0-9]{15,15}$" >
 									</div>
 								</div>
-								
+
 								<div class="col-sm-12" id="dates">
 									<div class="col-sm-6">
 										<label>From:</label>
@@ -118,7 +101,7 @@
 									</div>
 								</div>
 
-								<div class=col-sm-12 style="height:600px;overflow:auto;">
+								<div class="col-sm-12" style="height: 600px; overflow: auto;">
 									<table class="table table-bordered" id="datatable">
 									</table>
 								</div>
@@ -134,6 +117,8 @@
 	<script src="js/datetimepicker.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
+	<script src="js/login.js"></script>
+
 
 </body>
 </html>

@@ -1,7 +1,6 @@
 package arquillian;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 import java.io.File;
 
@@ -38,6 +37,6 @@ public class UserEJBTests {
 	
 	@Test
 	public void testThatTheUserDAOReturnsTheRightUser(){
-		assertEquals(service.getUserByName("S").getUsername(), "s");
+		assertEquals(service.getUserByName("Stephen Douglas").getUsername(), "Hyde");
 	}
 }

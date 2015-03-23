@@ -8,7 +8,10 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="stylesheet" href="css/bootstrap.css" />
+<link rel="stylesheet" href="css/fileinput.min.css" />
 <link href="css/simple-sidebar.css" rel="stylesheet">
+<script src="js/libs/jquery-2.0.3.min.js"></script>
+<script src="js/supportengineer.js"></script>
 </head>
 <body onload="checkCookie()">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -23,6 +26,7 @@
 					src="img/ericsson-brand.png"></img></a> <a class="navbar-brand"
 					href="home.html">LTE Data Manager</a>
 			</div>
+
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false"> <span
@@ -43,44 +47,54 @@
 			</ul>
 		</div>
 
+
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Network Details</div>
+							<div class="panel-heading">Support Details</div>
 							<div class="panel-body">
 								<div class="col-sm-8">
 									<div class="form-group">
 										<select class="form-control" id="querydropdown">
-											<option value="totalfaults">Count for each IMSI the
-												number of call failures and total duration during a given
-												period of time</option>
-											<option value="modelfailures">Display for a given
-												model of phone, all the unique failure Event ID and Cause
-												Code combinations and the number of occurences</option>
-											<option value="toptenmccmnccell">Display the Top 10
-												Market/Operator/Cell ID combinations that had call faulures
-												during a given period of time</option>
-											<option value="toptenimsiovertime">Display the Top
-												10 IMSIs that had call failures during a given time period</option>
+											<option value="imsiwithcallfailure">Display call
+												failure events for date range</option>
+											<option value="numberoffailures">Display number of
+												failures per phone model for date range</option>
+											<option value="imsisbycause">Display IMSI associated
+												with cause code</option>
 										</select>
 									</div>
 								</div>
-								<div class="col-sm-1 pull-right">
-									<button id="submit" type="button" class="btn btn-default">Search</button>
+
+								<div class="col-sm-3" id="causecodes">
+									<div class="form-group">
+										<select class="form-control" id="causecodesdropdown">
+											<option value="1">Cause Code 0</option>
+											<option value="2">Cause Code 1</option>
+											<option value="3">Cause Code 2</option>
+											<option value="4">Cause Code 3</option>
+											<option value="5">Cause Code 4</option>
+										</select>
+									</div>
 								</div>
 
-								<div class="col-sm-3 pull-right">
+								<div class="col-sm-3" id="modelsearch">
 									<div class="form-group">
-										<input id="modelsearchfield" type="text" class="form-control"
-											placeholder="Search for model..">
+										<input class="form-control" id="modelsearchfield"
+											placeholder="Model..." />
 									</div>
+								</div>
+
+								<div class="col-sm-1 pull-right">
+									<button type="button" class="btn btn-default"
+										onclick="submit()">Search</button>
 								</div>
 
 								<div class="col-sm-12" id="dates">
 									<div class="col-sm-6">
-										<label>Start:</label>
+										<label>From:</label>
 										<div class="form-group">
 											<div class='input-group date' id='startdate'>
 												<input type='text' class="form-control" /> <span
@@ -90,7 +104,7 @@
 										</div>
 									</div>
 									<div class="col-sm-6">
-										<label>End:</label>
+										<label>To:</label>
 										<div class="form-group">
 											<div class='input-group date' id='enddate'>
 												<input type='text' class="form-control" /> <span
@@ -100,10 +114,7 @@
 										</div>
 									</div>
 								</div>
-								
-								<div id="graphical" class="col-sm-12">									
-								</div>
-								
+
 								<div class="col-sm-12" style="height: 600px; overflow: auto;">
 									<table class="table table-bordered" id="datatable">
 									</table>
@@ -115,12 +126,11 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/libs/jquery-2.0.3.min.js"></script>
-	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/networkmanagement.js"></script>
+
 	<script src="js/moment.js"></script>
 	<script src="js/datetimepicker.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
 	<script src="js/login.js"></script>
 
 </body>

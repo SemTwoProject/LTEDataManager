@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.ejb.EJB;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -17,67 +18,31 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.dao.ExcelDAO;
-import com.entity.Failure;
-import com.entity.Fault;
 
 @RunWith(Arquillian.class)
 public class ExcelReadImplTest {
 
 	@EJB
 	private ExcelDAO dao;
-	
-	private ArrayList<Fault> correctFaults;
-	private ArrayList<Fault> erroneousFaults;
-	private Fault correctOne;
-	private Fault errorOne;
+	File file;
+	ArrayList<Cell> cells;
 
 	@Deployment
 	public static WebArchive createDeployment() {
+
 		return ShrinkWrap.create(ZipImporter.class, "test.war")
 				.importFrom(new File("target/LTEManager.war"))
 				.as(WebArchive.class);
+
 	}
 
 	@Before
 	public void setUp() {
-		correctFaults = new ArrayList<Fault>();
-		erroneousFaults =  new ArrayList<Fault>();
-		correctOne = new Fault();
-		Failure fail = new Failure();
-		fail.setfailure(1);
-		correctOne.setFailure(fail);
-		correctFaults.add(correctOne);
-		errorOne = new Fault();
-		erroneousFaults.add(errorOne);
-		}
+		file = new File(getClass().getClassLoader().getResource("test.xls").getFile());
+	}
 
 	@Test
-	public void testValidationRemovesInvalid() {
-		
-		assertNotNull(correctFaults);
-	}
-	@Test
-	public void testCreateCell(){
-		
-	}
-	@Test
-	public void testEventCause(){
-		
-	}
-	@Test
-	public void testFailure(){
-		
-	}
-	@Test
-	public void testMccMnc(){
-		
-	}
-	@Test
-	public void testUE(){
-		
-	}
-	@Test
-	public void testFault(){
-		
+	public void getExcelResourceTest6() {
+		assertNotNull(file);
 	}
 }
