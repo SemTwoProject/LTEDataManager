@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -32,7 +33,7 @@ public class MccMnc implements Serializable {
 	@Column(name = "operator")
 	private String operator;
 	
-	@OneToMany(mappedBy = "mccid")
+	@OneToMany(mappedBy = "mccid", cascade = CascadeType.ALL)
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public MccMnc() {
@@ -90,4 +91,36 @@ public class MccMnc implements Serializable {
 		fault.setMccid(this);
 		faultList.add(fault);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((mccId == null) ? 0 : mccId.hashCode());
+		result = prime * result + ((mncId == null) ? 0 : mncId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MccMnc other = (MccMnc) obj;
+		if (mccId == null) {
+			if (other.mccId != null)
+				return false;
+		} else if (!mccId.equals(other.mccId))
+			return false;
+		if (mncId == null) {
+			if (other.mncId != null)
+				return false;
+		} else if (!mncId.equals(other.mncId))
+			return false;
+		return true;
+	}
+	
 }

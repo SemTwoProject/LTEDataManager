@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ public class EventCause implements Serializable {
 	@Column(name = "description")
 	private String description;
 
-	@OneToMany(mappedBy = "eventCause")
+	@OneToMany(mappedBy = "eventCause", cascade = CascadeType.ALL)
 	private List<Fault> faultList = new ArrayList<Fault>();
 
 	public EventCause() {
@@ -118,5 +119,5 @@ public class EventCause implements Serializable {
 			return false;
 		return true;
 	}
-
+	
 }

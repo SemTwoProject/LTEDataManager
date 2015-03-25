@@ -108,5 +108,4 @@ public class CellHier implements Serializable {
 			return false;
 		return true;
 	}
-
 }

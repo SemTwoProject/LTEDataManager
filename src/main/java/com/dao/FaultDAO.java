@@ -21,5 +21,5 @@ public interface FaultDAO {
 	Collection<Fault> getTopTenIMSIOverTime(Timestamp start, Timestamp end);
 	Collection<Fault> getNumberOfCallFailuresPerModel(String model, Timestamp start, Timestamp end);
 	Collection<Fault> getTopTenMarketOperatorCell(Timestamp start, Timestamp end);
-	Collection<Fault> getFaultsByIMSI(Long imsi1);
+	List<Fault> getFaultsByIMSI(Long imsi);
 }

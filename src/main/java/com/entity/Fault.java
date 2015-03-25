@@ -3,10 +3,9 @@ package com.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -22,7 +21,6 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Fault implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Integer id;
 	@Column(name = "date_time")
@@ -49,7 +47,7 @@ public class Fault implements Serializable {
 	private MccMnc mccid;
 
 	@JoinColumn(name = "cell", referencedColumnName = "cell")
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private CellHier cell;
 
 	@JoinColumns({ @JoinColumn(name = "cause", referencedColumnName = "cause"),
@@ -59,11 +57,12 @@ public class Fault implements Serializable {
 
 	public Fault() {
 	}
-
-	public Fault(Date date, Integer eventId, Integer failure, Integer tac,
-			Integer mcc, Integer mnc, Integer cell, Integer duration,
+	
+	public Fault(Integer id, Date date, Integer eventId, Integer failure, Integer tac,
+			Integer mcc, Integer mnc, CellHier cell, Integer duration,
 			Integer causeid, String ne, Long imsi) {
 
+		this.id = id;
 		this.date = date;
 		this.eventCause = new EventCause();
 		this.eventCause.setEventId(eventId);
@@ -75,8 +74,9 @@ public class Fault implements Serializable {
 		this.failure.setfailure(failure);
 		this.tac = new UE();
 		this.tac.setTac(tac);
-		this.cell = new CellHier();
-		this.cell.setCellId(cell);
+		this.cell = cell;
+//		this.cell = new CellHier();
+//		this.cell.setCellId(cell);
 		this.duration = duration;
 		this.ne = ne;
 		this.imsi = imsi;
@@ -167,4 +167,29 @@ public class Fault implements Serializable {
 		this.eventCause = eventCause;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Fault other = (Fault) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	
 }
