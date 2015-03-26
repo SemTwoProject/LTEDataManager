@@ -233,6 +233,7 @@ public class ExcelReadImpl implements ExcelDAO {
 		String ne;
 		Double imsi;
 		faults = new CopyOnWriteArrayList<Fault>();
+		int id = createId();
 		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
 			row = sheet.getRow(i);
 			if (row.getCell(0).getCellType() == Cell.CELL_TYPE_NUMERIC) {
@@ -319,7 +320,7 @@ public class ExcelReadImpl implements ExcelDAO {
 				String temp = row.getCell(10).getStringCellValue();
 				imsi = Double.parseDouble(temp);
 			}
-			fault = new Fault(createId()+i, HSSFDateUtil.getJavaDate(date),
+			fault = new Fault(id+i, HSSFDateUtil.getJavaDate(date),
 					eventId.intValue(), failure.intValue(), tac.intValue(),
 					mcc.intValue(), mnc.intValue(), cellHier,
 					duration.intValue(), causeid.intValue(), ne,
@@ -360,7 +361,7 @@ public class ExcelReadImpl implements ExcelDAO {
 	}
 	
 	public int createId(){
-		Query q = em.createQuery("select count(*) from Fault");
+		Query q = em.createQuery("select f.id from Fault f order by f.id desc");
 		return q.getFirstResult();
 	}
 }
