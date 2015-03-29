@@ -1,10 +1,10 @@
 package arquillian;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -18,18 +18,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.dao.CellDAO;
 import com.dao.FaultDAO;
 import com.entity.Fault;
-import com.interfaces.CellServiceLocal;
-import com.interfaces.FaultServiceLocal;
 
 @RunWith(Arquillian.class)
 public class FaultDAOTest {
 
 	@EJB
 	FaultDAO faultDao;
-	CellDAO cellDao;
 
 	Long imsi0;
 	Long imsi1;

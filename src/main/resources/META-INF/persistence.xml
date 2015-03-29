@@ -9,17 +9,11 @@
 		<class>com.entity.EventCause</class>
 		<class>com.entity.Failure</class>
 		<class>com.entity.Fault</class>
-		<class>com.entity.InvalidData</class>
 		<class>com.entity.MccMnc</class>
 		<class>com.entity.UE</class>
 		<class>com.entity.User</class>
 		<properties>
 			<property name="hibernate.hdm2ddl.auto" value="update" />
-			<property name="hibernate.show_sql" value="false" />
-			<property name="hibernate.format_sql" value="false" />
-		  <property name="javax.persistence.schema-generation.create-database-schemas" value="true"/>
-		  <property name="javax.persistence.schema-generation.database.action" value="create"/> 
-		
 		</properties>
 	</persistence-unit>
 </persistence>
