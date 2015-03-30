@@ -278,6 +278,51 @@
 				</dependency>
 			</dependencies>
 		</profile>
+		<profile>
+			<id>ubuntu-andrew-wildfly-8</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<!-- <testFailureIgnore>true</testFailureIgnore> -->
+							<systemPropertyVariables>
+								<arquillian.launch>jbossas-managed-wildfly-8</arquillian.launch>
+							</systemPropertyVariables>
+						</configuration>
+					</plugin>
+				</plugins>
+				<finalName>LTEManager</finalName>
+			</build>
+			<dependencies>
+	<dependency>
+					<groupId>org.wildfly</groupId>
+					<artifactId>wildfly-spec-api</artifactId>
+					<version>8.0.0.Beta1</version>
+					<type>pom</type>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.wildfly</groupId>
+					<artifactId>wildfly-arquillian-container-managed</artifactId>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.wildfly</groupId>
+					<artifactId>wildfly-arquillian-protocol-jmx</artifactId>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.wildfly</groupId>
+					<artifactId>wildfly-arquillian-common</artifactId>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+		</profile>
 <profile>
     <id>arquillian-wildfly-openshift</id>
     <build>
