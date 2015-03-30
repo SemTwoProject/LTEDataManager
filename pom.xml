@@ -278,5 +278,29 @@
 				</dependency>
 			</dependencies>
 		</profile>
+<profile>
+    <id>arquillian-wildfly-openshift</id>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.14.1</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <arquillian.launch>arquillian-wildfly-openshift</arquillian.launch>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.arquillian.container</groupId>
+            <artifactId>arquillian-openshift</artifactId>
+            <version>1.0.0.Final-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</profile>
 	</profiles>
 </project>
