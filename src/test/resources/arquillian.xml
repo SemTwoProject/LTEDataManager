@@ -9,7 +9,7 @@
             <property name="namespace">semtwoproject</property>
             <property name="application">mywildfly</property>
             <property name="libraDomain">rhcloud.com.com</property>
-            <property name="sshUserName">55194bf9fcf933c4a600002e</property>
+            <property name="sshUserName">551954dbe0b8cd00510000f3</property>
             <property name="login">andrew.phelan3@mydit.ie</property>
             <property name="deploymentTimeoutInSeconds">300</property>
             <property name="disableStrictHostChecking">true</property>
