@@ -52,7 +52,6 @@ public class ExcelReadImpl implements ExcelDAO {
 	private CopyOnWriteArrayList<Fault> faults;
 	CellHier cellHier;
 
-	//@PostConstruct
 	public void callAll() {
 		try {
 			String file = "upload.xls";
