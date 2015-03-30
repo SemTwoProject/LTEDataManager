@@ -8,7 +8,7 @@
         <configuration>
             <property name="namespace">semtwoproject</property>
             <property name="application">mywildfly</property>
-            <property name="libraDomain">rhcloud.com</property>
+            <property name="libraDomain">rhcloud.com.com</property>
             <property name="sshUserName">54f85c39fcf9331600000066</property>
             <property name="login">andrew.phelan3@mydit.ie</property>
             <property name="deploymentTimeoutInSeconds">300</property>
