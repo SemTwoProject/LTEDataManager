@@ -28,7 +28,7 @@ public class ExcelRest {
 	public Response uploadFile(@MultipartForm Form form)
 			throws URISyntaxException {
 
-		fileName = "c:\\excel\\upload.xls";
+		fileName = "/home/andrew/upload.xls";
 		try {
 			writeFile(form.getData(), fileName);
 			service.callAll();

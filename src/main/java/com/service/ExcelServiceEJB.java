@@ -14,34 +14,6 @@ public class ExcelServiceEJB implements ExcelServiceLocal {
 	@EJB
 	private ExcelDAO dao;
 
-	public void createCell() {
-		dao.createCell();
-	}
-
-	public void createMccMnc() {
-		dao.createMccMnc();
-
-	}
-
-	public void createFailure() {
-		dao.createFailure();
-
-	}
-
-	public void createEventCause() {
-		dao.createEventCause();
-
-	}
-
-	public void createUE() {
-		dao.createUE();
-
-	}
-
-	public void createFault() {
-		dao.createFault();
-	}
-
 	public void callAll() {
 		dao.callAll();
 	}

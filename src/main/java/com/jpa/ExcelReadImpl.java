@@ -55,7 +55,7 @@ public class ExcelReadImpl implements ExcelDAO {
 	public void callAll() {
 		try {
 			String file = "upload.xls";
-			String path = "c:\\excel\\" + file;
+			String path = "/home/andrew" + file;
 			in = new FileInputStream(new File(path));
 			wb = new HSSFWorkbook(in);
 			createCell();
@@ -361,6 +361,7 @@ public class ExcelReadImpl implements ExcelDAO {
 	
 	public int createId(){
 		Query q = em.createQuery("select f.id from Fault f order by f.id desc");
+		q.setMaxResults(1);
 		return q.getFirstResult();
 	}
 }
