@@ -10,14 +10,14 @@ $(document).ready(function()
 			{
 				$("#dates").hide();
 				$('#datatable').empty();
-				var table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th></tr>');				
+				var table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Failure</th><th>Date</th></tr>');				
 				$('#datatable').append(table);
 			}
 			else if ($(this).attr("value") == "numberoffailures") 
 			{
 				$("#dates").show();
 				$('#datatable').empty();
-				var table = $('<tr><th>IMSI</th><th>Number of Failures</th></tr>');				
+				var table = $('<tr><th>Number of Failures</th></tr>');				
 				$('#datatable').append(table);
 			}
 			else if ($(this).attr("value") == "causecodes") 
@@ -36,7 +36,7 @@ function submit() {
 	if ($("#querydropdown").attr("value") == "callfailures") {
 		var imsi = document.getElementById("imsi").value;
 		$('#datatable').empty();
-		var table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th></tr>');
+		var table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Failure</th><th>Date</th></tr>');
 		$('#datatable').append(table);
 		if (imsi == "") {
 			alert("Please enter a VALID IMSI. (Numbers only, 15 digits)");
@@ -58,7 +58,9 @@ function submit() {
 							$tr = $('<tr>').append(
 									$('<td>').text(item[0]),
 									$('<td>').text(item[1]),
-									$('<td>').text(item[2]));
+									$('<td>').text(item[2]),
+									$('<td>').text(item[3]),
+									$('<td>').text(item[4]));
 							$('#datatable').append($tr);
 						});
 					}
@@ -72,7 +74,7 @@ function submit() {
 		var imsi = document.getElementById("imsi").value;
 
 		$('#datatable').empty();
-		var table = $('<tr><th>IMSI</th><th>Number of Failures</th></tr>');
+		var table = $('<tr><th>Number of Failures</th></tr>');
 		$('#datatable').append(table);
 		if (imsi == "") {
 			alert("Please enter a VALID IMSI. (Numbers only, 15 digits)");
@@ -96,8 +98,7 @@ function submit() {
 				success : function(response) {
 					$.each(response, function(i, item) {
 						$tr = "";
-						$tr = $('<tr>').append($('<td>').text(item[0]),
-								$('<td>').text(item[1]));
+						$tr = $('<tr>').append($('<td>').text(item[0]));
 						$('#datatable').append($tr);
 					});
 				},

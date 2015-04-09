@@ -35,7 +35,7 @@ public class UEDAOImpl implements UEDAO {
 	}
 
 	public Collection<Fault> getEventCausePerModel(String model) {
-		Query q = em.createQuery("select distinct tac.model, eventCause.eventId,eventCause.causeCode, Count(*) "
+		Query q = em.createQuery("select distinct eventCause.eventId,eventCause.causeCode,eventCause.description, Count(*) "
 				+ "FROM Fault f where f.tac.model = :model group by eventCause.eventId, eventCause.causeCode");
 	
 		q.setParameter("model", model);

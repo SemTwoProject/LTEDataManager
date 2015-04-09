@@ -39,7 +39,7 @@ public class FaultDAOImpl implements FaultDAO {
 	// affecting that IMSI
 	public Collection<Fault> getEventCausePerIMSI(Long imsi) {
 		Query q = em
-				.createQuery("select eventCause.eventId, eventCause.causeCode, eventCause.description From Fault f where f.imsi = :imsi");
+				.createQuery("select eventCause.eventId, eventCause.causeCode, eventCause.description,failure.description,date From Fault f where f.imsi = :imsi");
 		q.setParameter("imsi", imsi);
 		return q.getResultList();
 	}
@@ -83,7 +83,7 @@ public class FaultDAOImpl implements FaultDAO {
 	public Collection<Fault> getIMSICount(Timestamp start, Timestamp end,
 			Long imsi) {
 		Query q = em
-				.createQuery("select imsi, COUNT(*) FROM Fault i WHERE i.imsi = :imsi AND i.date >= :start AND i.date <= :end");
+				.createQuery("select COUNT(*) FROM Fault i WHERE i.imsi = :imsi AND i.date >= :start AND i.date <= :end");
 		q.setParameter("start", start);
 		q.setParameter("end", end);
 		q.setParameter("imsi", imsi);
@@ -133,7 +133,7 @@ public class FaultDAOImpl implements FaultDAO {
 	public Collection<Fault> getNumberOfCallFailuresPerModel(String model,
 			Timestamp from, Timestamp to) {
 		Query q = em
-				.createQuery("select tac.model, tac.manufacturer, count(f) from Fault f where tac.model=:model AND f.date BETWEEN :from AND :to group by tac.model");
+				.createQuery("select tac.manufacturer, count(f) from Fault f where tac.model=:model AND f.date BETWEEN :from AND :to group by tac.model");
 		q.setParameter("model", model);
 		q.setParameter("from", from);
 		q.setParameter("to", to);
@@ -145,8 +145,9 @@ public class FaultDAOImpl implements FaultDAO {
 	@Override
 	public Collection<Fault> getImsiPerFailure(int failure) {
 		Query q = em
-				.createQuery("select imsi,eventCause.description,mccid.operator,mccid.country,date FROM Fault f where f.failure.failure = :failure");
+				.createQuery("select imsi,eventCause.description,mccid.operator,mccid.country,date FROM Fault f where f.failure.failure = :failure Order by imsi");
 		q.setParameter("failure", failure);
+		System.out.println("Failure: " + failure);
 		List<Fault> imsiFailure = q.getResultList();
 		return imsiFailure;
 	}

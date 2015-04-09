@@ -5,13 +5,13 @@
 	<persistence-unit name="LTEManager">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/datasources/mysql</jta-data-source>
-		<class>src.main.java.com.entity.CellHier</class>
-		<class>src.main.java.com.entity.EventCause</class>
-		<class>src.main.java.com.entity.Failure</class>
-		<class>src.main.java.com.entity.Fault</class>
-		<class>src.main.java.com.entity.MccMnc</class>
-		<class>src.main.java.com.entity.UE</class>
-		<class>src.main.java.com.entity.User</class>
+		<class>com.entity.CellHier</class>
+		<class>com.entity.EventCause</class>
+		<class>com.entity.Failure</class>
+		<class>com.entity.Fault</class>
+		<class>com.entity.MccMnc</class>
+		<class>com.entity.UE</class>
+		<class>com.entity.User</class>
 		<properties>
 			<property name="hibernate.hdm2ddl.auto" value="update" />
 		</properties>

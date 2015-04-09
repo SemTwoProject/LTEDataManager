@@ -24,7 +24,7 @@ public class DirectoryWatcher {
 	
 	private WatchService watcher;
 	private Path dir;
-	@PostConstruct
+	//@PostConstruct
 	public void artStartUp(){
 		try{
 			dir = Paths.get("c:\\excel\\");

@@ -20,7 +20,7 @@ $(document).ready(function()
 				$("#causecodes").hide();
 				$("#modelsearch").show();
 				$('#datatable').empty();
-				var table = $('<tr><th>Phone Model</th><th>Manufacturer</th><th>Total Failures</th></tr>');
+				var table = $('<tr><th>Manufacturer</th><th>Total Failures</th></tr>');
 				$('#datatable').append(table);
 			} 
 			else if ($(this).attr("value") == "imsisbycause") 
@@ -77,7 +77,7 @@ function submit() {
 		var enddate = $('#enddate').data('date');
 		var model = document.getElementById("modelsearchfield").value;
 		$('#datatable').empty();
-		var table = $('<tr><th>Phone Model</th><th>Manufacturer</th><th>Total Failures</th></tr>');
+		var table = $('<tr><th>Manufacturer</th><th>Total Failures</th></tr>');
 		$('#datatable').append(table);
 
 		if(model == ""){
@@ -100,8 +100,7 @@ function submit() {
 					$.each(response, function(i, item) {
 						$tr = "";
 						$tr = $('<tr>').append($('<td>').text(item[0]),
-								$('<td>').text(item[1]),
-								$('<td>').text(item[2]));
+								$('<td>').text(item[1]));
 						$('#datatable').append($tr);
 					});
 				}
@@ -111,7 +110,6 @@ function submit() {
 	else if ($("#querydropdown").attr("value") == "imsisbycause") 
 	{		 
 		var cause = $("#causecodesdropdown").attr("value");
-			alert(cause);
 		$('#datatable').empty();
 		var table = $('<tr><th>IMSI</th><th>Description</th><th>Operator</th><th>Country</th><th>Date</th></tr>');
 		$('#datatable').append(table);

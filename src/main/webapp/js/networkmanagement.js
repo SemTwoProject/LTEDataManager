@@ -16,7 +16,7 @@ $(document).ready(function() {
 				$("#modelsearchfield").prop("disabled", false);
 				$("#phonemodeldropdown").prop("disabled", false);
 				$('#datatable').empty();
-				var table = $('<tr><th>Phone Model</th><th>Event ID</th><th>Cause Code</th><th>Number of Occurences</th></tr>');				
+				var table = $('<tr></th><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Number of Occurences</th></tr>');				
 				$('#datatable').append(table);
 			}
 			if ($(this).attr("value") == "toptenmccmnccell") 
@@ -25,7 +25,7 @@ $(document).ready(function() {
 				$("#modelsearchfield").prop("disabled", true);
 				$("#phonemodeldropdown").prop("disabled", true);
 				$('#datatable').empty();
-				var table = $('<tr><th>Market ID</th><th>Operator ID</th><th>Call ID</th><th>Count</th></tr>');				
+				var table = $('<tr><th>Market ID</th><th>Operator ID</th><th>Cell ID</th><th>Count</th></tr>');				
 				$('#datatable').append(table);
 			}
 			if ($(this).attr("value") == "toptenimsiovertime") 
@@ -83,7 +83,7 @@ $("#submit").click(function()
 		var model = document.getElementById("modelsearchfield").value;
 		alert(model);
 		$('#datatable').empty();
-		var table = $('<tr><th>Phone Model</th><th>Event ID</th><th>Cause Code</th><th>Number of Occurences</th></tr>');				
+		var table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Number of Occurences</th></tr>');				
 		$('#datatable').append(table);
 		if (model == ""){
 			alert("Please enter a valid model");
