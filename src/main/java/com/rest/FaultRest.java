@@ -173,12 +173,12 @@ public class FaultRest {
 	@POST
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/imsiperfailurecode")
-	public Response getImsiPerFailure(@FormParam("failure") int failure) {
+	public Response getImsiPerFailure(@FormParam("cause") int failureValue) {
 		String newResponse = null;
-		failure = 0;
-
+		
+		System.out.println(failureValue);
 		try {
-			newResponse = toJSONString(service.getImsiPerFailure(failure));
+			newResponse = toJSONString(service.getImsiPerFailure(failureValue));
 		} catch (Exception err) {
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""

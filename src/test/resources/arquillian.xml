@@ -30,4 +30,5 @@
 		<configuration>
 			<property name="jbossHome">C://wildfly//wildfly-8.2.0.Final</property>
 		</configuration>
+	</container>
 </arquillian>

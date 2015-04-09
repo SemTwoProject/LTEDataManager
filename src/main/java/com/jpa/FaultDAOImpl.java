@@ -39,7 +39,7 @@ public class FaultDAOImpl implements FaultDAO {
 	// affecting that IMSI
 	public Collection<Fault> getEventCausePerIMSI(Long imsi) {
 		Query q = em
-				.createQuery("select imsi,eventCause.eventId, eventCause.causeCode From Fault f where f.imsi = :imsi");
+				.createQuery("select eventCause.eventId, eventCause.causeCode, eventCause.description From Fault f where f.imsi = :imsi");
 		q.setParameter("imsi", imsi);
 		return q.getResultList();
 	}
@@ -57,6 +57,7 @@ public class FaultDAOImpl implements FaultDAO {
 		return result;
 	}
 
+	
 	public List<Fault> getFaultsByIMSI(Long imsi) {
 		Query q = em
 				.createQuery("select distinct imsi, eventCause.causeCode, eventCause.eventId from Fault f where f.imsi = :imsi");
@@ -70,7 +71,7 @@ public class FaultDAOImpl implements FaultDAO {
 	public Collection<Fault> getIMSIFailureOverTime(Timestamp start,
 			Timestamp end) {
 		Query q = em
-				.createQuery("select distinct imsi, eventCause.eventId, date from Fault i where i.date >= :start AND i.date <= :end");
+				.createQuery("select distinct imsi, eventCause.description,failure.description,mccid.operator,mccid.country,duration, date from Fault i where i.date >= :start AND i.date <= :end");
 		q.setParameter("start", start);
 		q.setParameter("end", end);
 		Collection<Fault> result = q.getResultList();
@@ -92,9 +93,9 @@ public class FaultDAOImpl implements FaultDAO {
 
 	// Story 17 - As a Customer Service Rep. I want to see, for a given IMSI,
 	// all the unique Cause Codes associated with its call failures
-	public Collection<Fault> getCauseCodePerIMSI(Long imsi) {
+	public Collection<Fault> getCauseCodePerIMSI(Long imsi) { 
 		Query q = em
-				.createQuery("select Distinct imsi, eventCause.causeCode FROM Fault i WHERE i.imsi = :imsi");
+				.createQuery("select Distinct eventCause.causeCode, COUNT(eventCause.causeCode) FROM Fault i WHERE i.imsi = :imsi Group by eventCause.causeCode");
 		q.setParameter("imsi", imsi);
 		Collection<Fault> result = q.getResultList();
 		return result;
@@ -132,7 +133,7 @@ public class FaultDAOImpl implements FaultDAO {
 	public Collection<Fault> getNumberOfCallFailuresPerModel(String model,
 			Timestamp from, Timestamp to) {
 		Query q = em
-				.createQuery("select tac.model, count(f) from Fault f where tac.model=:model AND f.date BETWEEN :from AND :to group by tac.model");
+				.createQuery("select tac.model, tac.manufacturer, count(f) from Fault f where tac.model=:model AND f.date BETWEEN :from AND :to group by tac.model");
 		q.setParameter("model", model);
 		q.setParameter("from", from);
 		q.setParameter("to", to);
@@ -144,7 +145,7 @@ public class FaultDAOImpl implements FaultDAO {
 	@Override
 	public Collection<Fault> getImsiPerFailure(int failure) {
 		Query q = em
-				.createQuery("select imsi,date FROM Fault f where f.failure.failure = :failure");
+				.createQuery("select imsi,eventCause.description,mccid.operator,mccid.country,date FROM Fault f where f.failure.failure = :failure");
 		q.setParameter("failure", failure);
 		List<Fault> imsiFailure = q.getResultList();
 		return imsiFailure;

@@ -10,7 +10,7 @@ $(document).ready(function()
 			{
 				$("#dates").hide();
 				$('#datatable').empty();
-				var table = $('<tr><th>IMSI</th><th>Event ID</th><th>Cause Code</th></tr>');				
+				var table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th></tr>');				
 				$('#datatable').append(table);
 			}
 			else if ($(this).attr("value") == "numberoffailures") 
@@ -24,7 +24,7 @@ $(document).ready(function()
 			{
 				$("#dates").hide();
 				$('#datatable').empty();
-				var table = $('<tr><th>IMSI</th><th>Cause Code</th></tr>');				
+				var table = $('<tr><th>Cause Code</th><th>Count</th></tr>');				
 				$('#datatable').append(table);
 			}
 				});
@@ -36,7 +36,7 @@ function submit() {
 	if ($("#querydropdown").attr("value") == "callfailures") {
 		var imsi = document.getElementById("imsi").value;
 		$('#datatable').empty();
-		var table = $('<tr><th>IMSI</th><th>Event ID</th><th>Cause Code</th></tr>');
+		var table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th></tr>');
 		$('#datatable').append(table);
 		if (imsi == "") {
 			alert("Please enter a VALID IMSI. (Numbers only, 15 digits)");
@@ -110,7 +110,7 @@ function submit() {
 	} else if ($("#querydropdown").attr("value") == "causecodes") {
 		var imsi = document.getElementById("imsi").value;
 		$('#datatable').empty();
-		var table = $('<tr><th>IMSI</th><th>Cause Code</th></tr>');
+		var table = $('<tr><th>Cause Code</th><th>Count</th></tr>');
 		$('#datatable').append(table);
 		if (imsi == "") {
 			alert("Please enter a VALID IMSI. (Numbers only, 15 digits)");

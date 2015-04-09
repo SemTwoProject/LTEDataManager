@@ -11,7 +11,7 @@ $(document).ready(function()
 				$("#causecodes").show();
 				$("#modelsearch").hide();
 				$('#datatable').empty();
-				var table = $('<tr><th>IMSI</th><th>Event ID</th><th>Time</th></tr>');
+				var table = $('<tr><th>IMSI</th><th>Description</th><th>Failure</th><th>Operator</th><th>Country</th><th>Duration</th><th>Date</th></tr>');
 				$('#datatable').append(table);
 			} 
 			else if ($(this).attr("value") == "numberoffailures") 
@@ -20,7 +20,7 @@ $(document).ready(function()
 				$("#causecodes").hide();
 				$("#modelsearch").show();
 				$('#datatable').empty();
-				var table = $('<tr><th>Phone Model</th><th>Total Failures</th></tr>');
+				var table = $('<tr><th>Phone Model</th><th>Manufacturer</th><th>Total Failures</th></tr>');
 				$('#datatable').append(table);
 			} 
 			else if ($(this).attr("value") == "imsisbycause") 
@@ -30,7 +30,7 @@ $(document).ready(function()
 				$("#causecodes").show();
 				$("#causecodesdropdown").prop("disabled",false);
 				$('#datatable').empty();
-				var table = $('<tr><th>IMSI</th><th>Time</th></tr>');
+				var table = $('<tr><th>IMSI</th><th>Description</th><th>Operator</th><th>Country</th><th>Date</th></tr>');
 				$('#datatable').append(table);
 			}
 				});}).change();
@@ -42,7 +42,7 @@ function submit() {
 		var startdate = $('#startdate').data('date');
 		var enddate = $('#enddate').data('date');
 		$('#datatable').empty();
-		var table = $('<tr><th>IMSI</th><th>Event ID</th><th>Time</th></tr>');
+		var table = $('<tr><tr><th>IMSI</th><th>Description</th><th>Failure</th><th>Operator</th><th>Country</th><th>Duration</th><th>Date</th></tr></tr>');
 		$('#datatable').append(table);
 		$
 		.ajax({
@@ -58,7 +58,11 @@ function submit() {
 					$tr = "";
 					$tr = $('<tr>').append($('<td>').text(item[0]),
 							$('<td>').text(item[1]),
-							$('<td>').text(item[2]));
+							$('<td>').text(item[2]),
+							$('<td>').text(item[3]),
+							$('<td>').text(item[4]),
+							$('<td>').text(item[5]),
+							$('<td>').text(item[6]));
 					$('#datatable').append($tr);
 				});
 			},
@@ -73,7 +77,7 @@ function submit() {
 		var enddate = $('#enddate').data('date');
 		var model = document.getElementById("modelsearchfield").value;
 		$('#datatable').empty();
-		var table = $('<tr><th>Phone Model</th><th>Total Failures</th></tr>');
+		var table = $('<tr><th>Phone Model</th><th>Manufacturer</th><th>Total Failures</th></tr>');
 		$('#datatable').append(table);
 
 		if(model == ""){
@@ -96,7 +100,8 @@ function submit() {
 					$.each(response, function(i, item) {
 						$tr = "";
 						$tr = $('<tr>').append($('<td>').text(item[0]),
-								$('<td>').text(item[1]));
+								$('<td>').text(item[1]),
+								$('<td>').text(item[2]));
 						$('#datatable').append($tr);
 					});
 				}
@@ -105,9 +110,10 @@ function submit() {
 	}
 	else if ($("#querydropdown").attr("value") == "imsisbycause") 
 	{		 
-		var cause = $("#querydropdown").attr("value");
+		var cause = $("#causecodesdropdown").attr("value");
+			alert(cause);
 		$('#datatable').empty();
-		var table = $('<tr><th>IMSI</th><th>Time</th></tr>');
+		var table = $('<tr><th>IMSI</th><th>Description</th><th>Operator</th><th>Country</th><th>Date</th></tr>');
 		$('#datatable').append(table);
 
 		$.ajax({
@@ -125,7 +131,10 @@ function submit() {
 					$tr = "";
 					$tr = $('<tr>').append(
 							$('<td>').text(item[0]),
-							$('<td>').text(item[1]));
+							$('<td>').text(item[1]),
+							$('<td>').text(item[2]),
+							$('<td>').text(item[3]),
+							$('<td>').text(item[4]));
 					$('#datatable').append($tr);
 						});
 			}
