@@ -32,16 +32,6 @@ public class loginFormHandler {
 		authLevel = user.iterator().next().getUserType(); 
 
 		return authLevel;
-//		if (authLevel == null) 
-//		{
-//			URI uri = new URI("../index.html");
-//			return Response.seeOther(uri).build();
-//		} 
-//		else 
-//		{
-//			URI uri = new URI("../home.html");
-//			return Response.seeOther(uri).build();
-//		}
 	}
 
 }

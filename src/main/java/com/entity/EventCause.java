@@ -50,10 +50,6 @@ public class EventCause implements Serializable {
 		this.eventId = eventId;
 	}
 
-	public Integer getEvent() {
-		return causeCode;
-	}
-
 	public void setEvent(Integer causeCode) {
 		this.causeCode = causeCode;
 	}

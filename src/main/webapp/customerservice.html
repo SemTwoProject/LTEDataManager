@@ -69,12 +69,14 @@
 								<div class="col-sm-1 pull-right">
 									<button id="submit" onclick="submit()" type="button"
 										class="btn btn-default">Search</button>
+									<button id="graphBtn" href="#graphModal" type="button"
+										class="btn btn-default" data-toggle="modal">Graph</button>
 								</div>
 
 								<div class="col-sm-3 pull-right">
 									<div class="form-group">
 										<input id="imsi" type="number" class="form-control"
-											placeholder="Search for imsi.."  pattern="^[0-9]{15,15}$" >
+											placeholder="Search for imsi.." pattern="^[0-9]{15,15}$">
 									</div>
 								</div>
 
@@ -113,6 +115,33 @@
 		</div>
 	</div>
 
+
+
+	<div class="bs-example">
+		<!-- Modal HTML -->
+		<div id="graphModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Edit Track Form</h4>
+					</div>
+					<div class="modal-body">
+						<canvas id="myChart" width="300" height="300"></canvas>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<input type="submit" class="btn btn-primary" id="saveEditbtn"
+							value="Save changes" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="js/chart.min.js"></script>
 	<script src="js/moment.js"></script>
 	<script src="js/datetimepicker.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

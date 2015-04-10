@@ -42,8 +42,7 @@ $(document).ready(function() {
 });
 
 
-$("#submit").click(function()
-		{	
+$("#submit").click(function(){	
 	if ($("#querydropdown").attr("value") == "totalfaults") 
 	{			
 		var startdate = $('#startdate').data('date');
@@ -149,9 +148,8 @@ $("#submit").click(function()
 				}});		
 		}
 	}
-
 	else if ($("#querydropdown").attr("value") == "toptenimsiovertime") 
-	{			
+	{	
 		var startdate = $('#startdate').data('date');
 		var enddate = $('#enddate').data('date');
 
@@ -161,26 +159,96 @@ $("#submit").click(function()
 		if (startdate == ""){
 			alert("Please enter a VALID Start Date");
 		}
-		else if (enddate == ""){
+		else if (enddate == "")
+		{
 			alert("Please enter a VALID End Date");
 		}
-		else {
+		else 
+		{
+			var doughnutData;
+			
+			
 			$.ajax({
 				type: 'POST',
 				url: "http://localhost:8080/LTEManager/rest/fault/toptenimsiovertime",
 				dataType: "json", 
 				data: {"startdate": startdate, "enddate": enddate},
 				success:function(response)
-				{
-					$.each(response, function(i, item) 
+				{$.each(response, function(i, item) {
+					$tr = "";
+					$tr = $('<tr>').append(
+							$('<td>').text(item[0]),
+							$('<td>').text(item[1]));
+					$('#datatable').append($tr);
+					
+					doughnutData += {
+						value: response[i][1],
+						color:"#F7464A",
+						highlight: "#F7464A",
+						label: response[i][0] };
+					
+				});
+
+				doughnutData = [{
+					value: response[0][1],
+					color:"#F7464A",
+					highlight: "#F7464A",
+					label: response[0][0] },
+
+					{
+						value: response[1][1],
+						color:"#60a61e",
+						highlight: "#60a61e",
+						label: response[1][0] },
+
+
+						{
+							value: response[2][1],
+							color:"#00FFFF",
+							highlight: "#00FFFF",
+							label: response[2][0] },
+
+
+
 							{
-						$tr = "";
-						$tr = $('<tr>').append(
-								$('<td>').text(item[0]),
-								$('<td>').text(item[1]));
-						$('#datatable').append($tr);
-							});          	
-				}});			
+								value: response[3][1],
+								color:"#99FF66",
+								highlight: "#99FF66",
+								label: response[3][0] },
+
+
+								{
+									value: response[4][1],
+									color:"#FFFF00",
+									highlight: "#FFFF00",
+									label: response[4][0] },
+
+
+									{
+										value: response[5][1],
+										color:"#FF0066",
+										highlight: "#FF0066",
+										label: response[5][0] }];
+
+
+
+
+				var ctx = document.getElementById("myChart").getContext("2d");
+				var myDoughnutChart = new Chart(ctx).Pie(doughnutData);
+
+				}});
+
+
+
 		}
 	}
-		});
+
+});
+
+/*$("#myChart").click( 
+		function(evt){
+			var activePoints = myDoughnut.getSegmentsAtEvent(evt);  
+			var url = "label= " + activePoints[0].label + "&value= " + activePoints[0].value;
+			alert(url);
+		}
+); */
