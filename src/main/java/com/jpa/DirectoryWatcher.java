@@ -27,7 +27,7 @@ public class DirectoryWatcher {
 	
 	public DirectoryWatcher() throws IOException {
 		FileSystem fileSystem = FileSystems.getDefault();
-		Path path = fileSystem.getPath("/home/andrew");
+		Path path = fileSystem.getPath("c:\\excel\\");
 		watcher = fileSystem.newWatchService();
 		path.register(watcher, ENTRY_CREATE, ENTRY_MODIFY);
 	}

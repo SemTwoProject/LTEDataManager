@@ -62,6 +62,7 @@ function submit() {
 									$('<td>').text(item[3]),
 									$('<td>').text(item[4]));
 							$('#datatable').append($tr);
+							
 						});
 					}
 				}
@@ -129,7 +130,7 @@ function submit() {
 						$tr = "";
 						$tr = $('<tr>').append
 						($('<td>').text(item[0]),
-						$('<td>').text(item[1]));
+								$('<td>').text(item[1]));
 						$('#datatable').append($tr);
 					});
 				},
@@ -140,3 +141,4 @@ function submit() {
 		}
 	}
 }
+
