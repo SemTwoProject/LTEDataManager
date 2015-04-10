@@ -11,7 +11,6 @@ public interface FaultServiceLocal {
 	Collection<Fault> getIMSICount(Timestamp start, Timestamp end,Long imsi);
 	Collection<Fault> getCauseCodePerIMSI(Long imsi);
 	Collection<Fault> getIMSIFailureOverTime(Timestamp startDate, Timestamp endDate);
-	Collection<Fault> getAllFault();
 	Collection<Fault> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end);
 	Collection<Fault> getImsiPerFailure(int failure);
 	Collection<Fault> getTopTenIMSIOverTime(Timestamp start, Timestamp end);

@@ -14,7 +14,7 @@ public class ExcelServiceEJB implements ExcelServiceLocal {
 	@EJB
 	private ExcelDAO dao;
 
-	public void callAll() {
-		dao.callAll();
+	public void callAll(String fileName) {
+		dao.callAll(fileName);
 	}
 }

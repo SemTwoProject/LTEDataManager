@@ -2,5 +2,5 @@ package com.interfaces;
 
 public interface ExcelServiceLocal {
 
-	void callAll();
+	public void callAll(String fileName);
 }

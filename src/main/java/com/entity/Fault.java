@@ -75,8 +75,6 @@ public class Fault implements Serializable {
 		this.tac = new UE();
 		this.tac.setTac(tac);
 		this.cell = cell;
-//		this.cell = new CellHier();
-//		this.cell.setCellId(cell);
 		this.duration = duration;
 		this.ne = ne;
 		this.imsi = imsi;
@@ -193,4 +191,3 @@ public class Fault implements Serializable {
 	}
 	
 }
-

@@ -14,11 +14,12 @@ import java.nio.file.WatchService;
 
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
+import javax.ejb.Startup;
 import javax.ejb.Stateless;
 
 import com.dao.ExcelDAO;
 
-
+@Startup
 @Stateless
 public class DirectoryWatcher {
 	private WatchService watcher;
@@ -27,21 +28,23 @@ public class DirectoryWatcher {
 	
 	public DirectoryWatcher() throws IOException {
 		FileSystem fileSystem = FileSystems.getDefault();
-		Path path = fileSystem.getPath("/home/andrew");
+		Path path = fileSystem.getPath("c:\\excel\\");
 		watcher = fileSystem.newWatchService();
 		path.register(watcher, ENTRY_CREATE, ENTRY_MODIFY);
 	}
 	
-	@Schedule(hour = "*", minute = "*/1")
+	@Schedule(minute = "*/1", hour = "*", persistent=false)
 	public void execute() {
+		String fileName;
 		try {
 			WatchKey key = watcher.take();
 			for (WatchEvent<?> event : key.pollEvents()) {
 				if (event.kind() == OVERFLOW)
 					continue;
 				else
-					System.out.println(event.kind() +" "+ event.count());
-					dao.callAll();
+					fileName = ""+event.context();
+				System.out.println(fileName);
+					dao.callAll(fileName.replaceAll("\\s+",""));
 			}
 			if (!key.reset())
 				return;

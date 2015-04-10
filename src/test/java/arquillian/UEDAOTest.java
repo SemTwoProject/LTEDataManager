@@ -17,7 +17,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.dao.FaultDAO;
 import com.dao.UEDAO;
 import com.entity.Fault;
 import com.entity.UE;
@@ -63,12 +62,6 @@ public class UEDAOTest {
 		
 		model1 = "Fake";
 		model2 = "VEA3";
-		
-		device1 = dao.getByTac(tac1);
-		device2 = dao.getByTac(tac2);
-		device3 = dao.getByTac(tac3);
-		
-		getUEList = (List<UE>) dao.getUE();
 		
 		getEventCausePerModel1 = (List<Fault>) dao.getEventCausePerModel(model1);
 		getEventCausePerModel2 = (List<Fault>) dao.getEventCausePerModel(model2);

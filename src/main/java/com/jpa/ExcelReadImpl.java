@@ -2,9 +2,7 @@ package com.jpa;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +25,7 @@ import com.entity.CellHier;
 import com.entity.EventCause;
 import com.entity.Failure;
 import com.entity.Fault;
+import com.entity.InvalidFault;
 import com.entity.MccMnc;
 import com.entity.UE;
 
@@ -50,12 +49,14 @@ public class ExcelReadImpl implements ExcelDAO {
 	private Map<MccMnc, Integer> mccMncsList;
 	private Map<UE, Integer> uesList;
 	private CopyOnWriteArrayList<Fault> faults;
-	CellHier cellHier;
+	private int id;
+	private CellHier cellHier;
+	private Long start;
+	private Long end;
 
-	public void callAll() {
+	public void callAll(String fileName) {
 		try {
-			String file = "upload.xls";
-			String path = "/home/andrew" + file;
+			String path = "c:\\excel\\" + fileName;
 			in = new FileInputStream(new File(path));
 			wb = new HSSFWorkbook(in);
 			createCell();
@@ -75,7 +76,7 @@ public class ExcelReadImpl implements ExcelDAO {
 		Double cell1;
 		Double cell2;
 		Double cell3;
-		
+
 		cellsList = new HashMap<CellHier, Integer>();
 		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
 			row = sheet.getRow(i);
@@ -232,7 +233,8 @@ public class ExcelReadImpl implements ExcelDAO {
 		String ne;
 		Double imsi;
 		faults = new CopyOnWriteArrayList<Fault>();
-		int id = createId();
+		id = createId();
+		start = System.currentTimeMillis();
 		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
 			row = sheet.getRow(i);
 			if (row.getCell(0).getCellType() == Cell.CELL_TYPE_NUMERIC) {
@@ -276,20 +278,14 @@ public class ExcelReadImpl implements ExcelDAO {
 				String temp = row.getCell(5).getStringCellValue();
 				mnc = Double.parseDouble(temp);
 			}
-			if(row.getCell(6).getCellType() == Cell.CELL_TYPE_NUMERIC){
-				for(CellHier cellHiers: cellsList.keySet()){
+			if (row.getCell(6).getCellType() == Cell.CELL_TYPE_NUMERIC) {
+				for (CellHier cellHiers : cellsList.keySet()) {
 					cell = row.getCell(6).getNumericCellValue();
-					if(cellHiers.getCellId() == cell.intValue()){
+					if (cellHiers.getCellId() == cell.intValue()) {
 						cellHier = cellHiers;
 					}
 				}
 			}
-//			if (row.getCell(6).getCellType() == Cell.CELL_TYPE_NUMERIC) {
-//				cellHier = row.getCell(6).getNumericCellValue();
-//			} else {
-//				String temp = row.getCell(6).getStringCellValue();
-//				cellHier = Double.parseDouble(temp);
-//			}
 			if (row.getCell(7).getCellType() == Cell.CELL_TYPE_NUMERIC) {
 				duration = row.getCell(7).getNumericCellValue();
 			} else {
@@ -319,21 +315,26 @@ public class ExcelReadImpl implements ExcelDAO {
 				String temp = row.getCell(10).getStringCellValue();
 				imsi = Double.parseDouble(temp);
 			}
-			fault = new Fault(id+i, HSSFDateUtil.getJavaDate(date),
+			fault = new Fault(id + i, HSSFDateUtil.getJavaDate(date),
 					eventId.intValue(), failure.intValue(), tac.intValue(),
 					mcc.intValue(), mnc.intValue(), cellHier,
 					duration.intValue(), causeid.intValue(), ne,
 					imsi.longValue());
 			faults.add(fault);
 		}
-		ArrayList<Fault> invalidFaults = new ArrayList<Fault>();
+		int total = faults.size();
+		invalidFaults = new ArrayList<Fault>();
 		for (Fault faultList : faults) {
-			if (eventIdsList.containsValue(faultList.getEventCause().getEventId())
+			if (eventIdsList.containsValue(faultList.getEventCause()
+					.getEventId())
 					&& eventCausesList.containsValue(faultList.getEventCause()
 							.getCauseCode())
-					&& failsList.containsValue(faultList.getFailure().getfailure())
-					&& mccMccsList.containsValue(faultList.getMccid().getMccId())
-					&& mccMncsList.containsValue(faultList.getMccid().getMncId())
+					&& failsList.containsValue(faultList.getFailure()
+							.getfailure())
+					&& mccMccsList.containsValue(faultList.getMccid()
+							.getMccId())
+					&& mccMncsList.containsValue(faultList.getMccid()
+							.getMncId())
 					&& uesList.containsValue(faultList.getTac().getTac())
 					&& cellsList.containsValue(faultList.getCell().getCellId())) {
 				em.merge(faultList);
@@ -342,26 +343,25 @@ public class ExcelReadImpl implements ExcelDAO {
 				faults.remove(faultList);
 			}
 		}
-	}
-
-	public void writeErrorToLog() {
-		// save the array list objects to file
-		String fileName = "c:\\excel\\invalid.txt";
-		try {
-			ObjectOutputStream fileOut = new ObjectOutputStream(
-					new FileOutputStream(fileName));
-			for (Fault invalid : invalidFaults) {
-				fileOut.writeObject(invalid);
-			}
-			fileOut.close();
-		} catch (IOException e) {
-			e.getMessage();
+		for (Fault invFault : invalidFaults) {
+			InvalidFault inv = new InvalidFault(invFault.getId(),
+					invFault.getDate(), ""
+							+ invFault.getEventCause().getEventId(), ""
+							+ invFault.getFailure().getfailure(), ""
+							+ invFault.getTac().getTac(), ""
+							+ invFault.getMccid().getMccId(), ""
+							+ invFault.getMccid().getMncId(), ""
+							+ invFault.getCell().getCellId(), "" + invFault.getDuration(),
+					"" + invFault.getEventCause().getCauseCode(), ""
+							+ invFault.getNe(), "" + invFault.getImsi());
+			em.merge(inv);
 		}
+		end = System.currentTimeMillis() - start;
+		int dropped = invalidFaults.size();
+		System.out.println("Total Valid Faults: "+(total-dropped)+ " Total Invalid Faults: "+dropped +"\n" + "Persisted in : "+end);
 	}
-	
-	public int createId(){
-		Query q = em.createQuery("select f.id from Fault f order by f.id desc");
-		q.setMaxResults(1);
+	public int createId() {
+		Query q = em.createQuery("select count(*) from Fault");
 		return q.getFirstResult();
 	}
 }

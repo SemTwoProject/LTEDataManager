@@ -28,19 +28,16 @@ public class ExcelRest {
 	public Response uploadFile(@MultipartForm Form form)
 			throws URISyntaxException {
 
-		fileName = "/home/andrew/upload.xls";
+		fileName = "c:\\excel\\upload.xls";
 		try {
 			writeFile(form.getData(), fileName);
-			service.callAll();
+			//service.callAll(fileName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		URI uri = new URI("../systemadmin.html");
 		return Response.seeOther(uri).build();
 	}
-
-	
 	
 	private void writeFile(byte[] content, String filename) throws IOException {
 

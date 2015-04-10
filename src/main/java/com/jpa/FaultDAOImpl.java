@@ -21,19 +21,6 @@ public class FaultDAOImpl implements FaultDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	public Collection<Fault> getFault() {
-		Query q = em.createQuery("select f from Fault f");
-		return q.getResultList();
-	}
-
-	public Fault getById(Integer id) {
-		Query q = em.createQuery("select f from Fault f where f.id = :id",
-				Fault.class);
-		q.setParameter("id", id);
-		List<Fault> faults = q.getResultList();
-		return faults.get(0);
-	}
-
 	// Story 4 - As Customer Service Rep. I want to display, for a given
 	// affected IMSI, the Event ID and Cause Code for any / all failures
 	// affecting that IMSI

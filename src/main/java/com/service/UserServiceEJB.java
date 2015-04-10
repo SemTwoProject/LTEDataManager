@@ -30,7 +30,6 @@ public class UserServiceEJB implements UserServiceLocal {
 	}
 
 	public Collection<User> getUserByUsernameAndPassword(String username, String password) {
-		// TODO Auto-generated method stub
 		return dao.getUserByUsernameAndPassword(username, password);
 	}
 }

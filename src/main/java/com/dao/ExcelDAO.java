@@ -5,5 +5,5 @@ import javax.ejb.Local;
 @Local
 public interface ExcelDAO {
 
-	public void callAll();
+	public void callAll(String fileName);
 }

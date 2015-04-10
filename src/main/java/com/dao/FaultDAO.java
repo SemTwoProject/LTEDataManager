@@ -11,7 +11,6 @@ import com.entity.Fault;
 @Local
 public interface FaultDAO {
 
-	Fault getById(Integer id);
 	Collection<Fault> getEventCausePerIMSI(Long imsi);
 	Collection<Fault> getIMSICount(Timestamp start,Timestamp end, Long imsi);
 	Collection<Fault> getCauseCodePerIMSI(Long imsi);
