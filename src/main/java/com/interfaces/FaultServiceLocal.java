@@ -16,4 +16,6 @@ public interface FaultServiceLocal {
 	Collection<Fault> getTopTenIMSIOverTime(Timestamp start, Timestamp end);
 	Collection<Fault> getAmountOfCallFailuresPerModel(String model, Timestamp start, Timestamp end);
 	Collection<Fault> getTopTenMarketOperatorCell(Timestamp start, Timestamp end);
+	Collection<Fault> getEventCausePerModel(String model);
+
 }

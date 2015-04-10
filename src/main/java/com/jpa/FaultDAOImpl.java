@@ -138,4 +138,12 @@ public class FaultDAOImpl implements FaultDAO {
 		List<Fault> imsiFailure = q.getResultList();
 		return imsiFailure;
 	}
+	
+	public Collection<Fault> getEventCausePerModel(String model) {
+		Query q = em.createQuery("select distinct eventCause.eventId,eventCause.causeCode,eventCause.description, Count(*) "
+				+ "FROM Fault f where f.tac.model = :model group by eventCause.eventId, eventCause.causeCode");
+		q.setParameter("model", model);
+		List<Fault> modelFailure = q.getResultList();
+		return modelFailure;
+	}
 }

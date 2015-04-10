@@ -2,6 +2,7 @@ package com.rest;
 
 import java.sql.Timestamp;
 
+import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -210,6 +211,28 @@ public class FaultRest {
 		return Response.ok(newResponse).build();
 
 	}
+	
+	
+	@POST
+	@PermitAll
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/modelfailures")
+	public Response getModelFailures(@FormParam ("model") String model){
+		String newResponse = null;
+		
+		try {
+			newResponse = toJSONString(service.getEventCausePerModel(model));
+		} catch (Exception err) {
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+
+		}
+		return Response.ok(newResponse).build();
+		
+	}
+	
 
 	public String toJSONString(Object object) {
 		GsonBuilder gsonBuilder = new GsonBuilder();

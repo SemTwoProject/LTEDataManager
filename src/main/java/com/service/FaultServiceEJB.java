@@ -55,4 +55,8 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	public Collection<Fault> getTopTenMarketOperatorCell(Timestamp start, Timestamp end){
 		return dao.getTopTenMarketOperatorCell(start, end);
 	}
+	
+	public Collection<Fault> getEventCausePerModel(String model) {
+		return dao.getEventCausePerModel(model);
+	}
 }
