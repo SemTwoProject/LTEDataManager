@@ -56,12 +56,7 @@ public class ExcelReadImpl implements ExcelDAO {
 
 	public void callAll(String fileName) {
 		try {
-<<<<<<< HEAD
 			String path = "c:\\excel\\" + fileName;
-=======
-			String file = "upload.xls";
-			String path = "c:\\excel\\" + file;
->>>>>>> 109bec8eece242e4eee3fb910ee5500298a2bb6a
 			in = new FileInputStream(new File(path));
 			wb = new HSSFWorkbook(in);
 			createCell();
