@@ -1,12 +1,21 @@
+var piechartData = new Array();
+var ctx = document.getElementById("piechart").getContext("2d");
 var colours = ['#00FF00', '#FF6600', '#0066FF', '#FFFF00', '#00FFFF', '#333333', '#CC9900', '#009999', '#660066', '#00CC99'];
-var doughnutData = new Array();
+var chart = new Chart(ctx).Pie(piechartData);
+
+function clearChart()
+{
+	chart.clear();
+	chart.destroy();
+	$('#piechart').hide();
+}
 
 $(document).ready(function() {
 	$("#querydropdown").change(function() {
 		$("select option:selected").each(function() {
 			if ($(this).attr("value") == "totalfaults") 
-			{			
-				$('#myChart').hide();
+			{		
+				clearChart();
 				$("#dates").show();
 				$("#modelsearchfield").prop("disabled", true);
 				$("#phonemodeldropdown").prop("disabled", true);
@@ -16,7 +25,7 @@ $(document).ready(function() {
 			}
 			if ($(this).attr("value") == "modelfailures") 
 			{			
-				$('#myChart').hide();
+				clearChart();
 				$("#dates").hide();
 				$("#modelsearchfield").prop("disabled", false);
 				$("#phonemodeldropdown").prop("disabled", false);
@@ -26,7 +35,7 @@ $(document).ready(function() {
 			}
 			if ($(this).attr("value") == "toptenmccmnccell") 
 			{		
-				$('#myChart').hide();
+				clearChart();
 				$("#dates").show();
 				$("#modelsearchfield").prop("disabled", true);
 				$("#phonemodeldropdown").prop("disabled", true);
@@ -36,7 +45,7 @@ $(document).ready(function() {
 			}
 			if ($(this).attr("value") == "toptenimsiovertime") 
 			{		
-				$('#myChart').hide();
+				clearChart();
 				$("#dates").show();
 				$("#modelsearchfield").prop("disabled", true);
 				$("#phonemodeldropdown").prop("disabled", true);
@@ -73,21 +82,20 @@ $("#submit").click(function(){
 				success:function(response)
 				{
 					$.each(response, function(i, item) 
-							{
+					{
 						$tr = "";
 						$tr = $('<tr>').append(
 								$('<td>').text(item[0]),
 								$('<td>').text(item[1]),
 								$('<td>').text(item[2]));
 						$('#datatable').append($tr);
-							});          	
+					});          	
 				}});
 		}
 	}
 	else if ($("#querydropdown").attr("value") == "modelfailures") 
 	{			
 		var model = document.getElementById("modelsearchfield").value;
-		alert(model);
 		$('#datatable').empty();
 		var table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Number of Occurences</th></tr>');				
 		$('#datatable').append(table);
@@ -95,6 +103,9 @@ $("#submit").click(function(){
 			alert("Please enter a valid model");
 		}
 		else{
+			$('#piechart').show();
+			piechartData = [];
+			
 			$.ajax({
 				type: 'POST',
 				url: "http://localhost:8080/LTEManager/rest/fault/modelfailures",
@@ -107,7 +118,7 @@ $("#submit").click(function(){
 					}
 					else{
 						$.each(response, function(i, item) 
-								{
+						{
 							$tr = "";
 							$tr = $('<tr>').append(
 									$('<td>').text(item[0]),
@@ -115,9 +126,18 @@ $("#submit").click(function(){
 									$('<td>').text(item[2]),
 									$('<td>').text(item[3]));
 							$('#datatable').append($tr);
+							
+							
+							piechartData.push({
+								value: response[i][3],
+								color: colours[i%10],
+								highlight: "#F7464A",
+								label: " Event ID " + response[i][0] +  " Cause Code " + response[i][1] +  " Value "});	
 								});
 					}
-				}});
+					chart = new Chart(ctx).Pie(piechartData);	
+				}
+			});
 		}
 	}
 	else if ($("#querydropdown").attr("value") == "toptenmccmnccell") 
@@ -126,7 +146,7 @@ $("#submit").click(function(){
 		var enddate = $('#enddate').data('date');
 
 		$('#datatable').empty();
-		var table = $('<tr><th>Market ID</th><th>Operator ID</th><th>Call ID</th><th>Count</th></tr>');				
+		var table = $('<tr><th>Market ID</th><th>Operator ID</th><th>Cell ID</th><th>Count</th></tr>');				
 		$('#datatable').append(table);
 		if (startdate == ""){
 			alert("Please enter a VALID Start Date");
@@ -135,6 +155,9 @@ $("#submit").click(function(){
 			alert("Please enter a VALID End Date");
 		}
 		else {
+			$('#piechart').show();
+			piechartData = [];
+			
 			$.ajax({
 				type: 'POST',
 				url: "http://localhost:8080/LTEManager/rest/fault/toptenmnnmcncell",
@@ -151,12 +174,16 @@ $("#submit").click(function(){
 								$('<td>').text(item[2]),
 								$('<td>').text(item[3]));
 						$('#datatable').append($tr);
-							});
+						
+						piechartData.push({
+							value: response[i][3],
+							color: colours[i%10],
+							highlight: "#F7464A",
+							label: "Cell: " + response[i][2] + "  Count"});	
+				});
 				
-					var ctx = document.getElementById("myChart").getContext("2d");
-					var myPieChart = new Chart(ctx).Pie(pieData);
-
-				}});		
+					chart =  new Chart(ctx).Pie(piechartData,  { tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
+			}});		
 		}
 	}
 	else if ($("#querydropdown").attr("value") == "toptenimsiovertime") 
@@ -176,15 +203,16 @@ $("#submit").click(function(){
 		}
 		else 
 		{
-			$('#myChart').show();
-			doughnutData = [];
+			$('#piechart').show();
+			piechartData = [];
 			$.ajax({
 				type: 'POST',
 				url: "http://localhost:8080/LTEManager/rest/fault/toptenimsiovertime",
 				dataType: "json", 
 				data: {"startdate": startdate, "enddate": enddate},
 				success:function(response)
-				{$.each(response, function(i, item) {
+				{$.each(response, function(i, item) 
+				{
 					$tr = "";
 					$tr = $('<tr>').append(
 							$('<td>').text(item[0]),
@@ -192,18 +220,16 @@ $("#submit").click(function(){
 					$('#datatable').append($tr);
 
 					
-					doughnutData.push({
+					piechartData.push({
 						value: response[i][1],
 						color: colours[i%10],
 						highlight: "#F7464A",
 						label: response[i][0]});					
-				});
+				});						
+				
+				chart =  new Chart(ctx).Pie(piechartData,  { tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
 
-
-				var ctx = document.getElementById("myChart").getContext("2d");
-				var myDoughnutChart = new Chart(ctx).Pie(doughnutData,  { tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
-
-				}});
+			}});
 		}
 	}
 });
