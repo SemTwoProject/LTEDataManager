@@ -78,7 +78,7 @@ public class ExcelReadImpl implements ExcelDAO {
 		Double cell3;
 
 		cellsList = new HashMap<CellHier, Integer>();
-		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) { 
 			row = sheet.getRow(i);
 			cell = row.getCell(6).getNumericCellValue();
 			cell1 = row.getCell(11).getNumericCellValue();

@@ -16,7 +16,7 @@ import com.entity.Fault;
 @Stateless
 @Local
 @SuppressWarnings("unchecked")
-public class FaultDAOImpl implements FaultDAO {
+public class FaultDAOImpl implements FaultDAO {  
 
 	@PersistenceContext
 	private EntityManager em;

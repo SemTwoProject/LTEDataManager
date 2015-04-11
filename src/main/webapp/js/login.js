@@ -57,7 +57,7 @@ function checkCookie()
 	{
 		$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
 	} 
-	else if (userRole == "userRole=Support_Admin") 
+	else if (userRole == "userRole=Support Engineer") 
 	{
 		$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
 		$('#sidenav').append($('<li><a href="supportengineer.html">Support Engineer</a></li>'));
@@ -68,7 +68,7 @@ function checkCookie()
 		$('#sidenav').append($('<li><a href="supportengineer.html">Support Engineer</a></li>'));
 		$('#sidenav').append($('<li><a href="networkmanagement.html">Network Management</a></li>'));
 	} 
-	else if (userRole == "userRole=System_Admin") 
+	else if (userRole == "userRole=System Administrator") 
 	{
 		$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
 		$('#sidenav').append($('<li><a href="supportengineer.html">Support Engineer</a></li>'));

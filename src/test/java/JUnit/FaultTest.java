@@ -1,4 +1,4 @@
-package JUnit;
+/*package JUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -163,3 +163,4 @@ public class FaultTest {
 		assertEquals(eventCause,val);
 	}
 }
+*/

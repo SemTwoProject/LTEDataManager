@@ -18,7 +18,11 @@ public class UserServiceEJB implements UserServiceLocal {
 	private UserDAO dao;
 	
 	public void addToUserDatabase(User user){
-			dao.addUser(user);
+		dao.addUser(user);
+	}
+	
+	public void deleteUser(User user){
+		dao.deleteUser(user);
 	}
 	
 	public Collection<User> getAllUsersInDatabase(){
