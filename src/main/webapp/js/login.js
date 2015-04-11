@@ -1,7 +1,7 @@
 function login() {
 	var username = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
-	var userRole;
+	var userRole = "";
 
 	$.ajax({
 		type : 'POST',
@@ -14,15 +14,15 @@ function login() {
 		success : function(response) {
 			$.each(response, function(i, item) {
 				userRole = item.userType;
-			})
+			});
 		}
 	});
 
 	setTimeout(function() {
-		setCookie("userRole", userRole, 1)
+		setCookie("userRole", userRole, 1);
 	}, 500);
 	setTimeout(function() {
-		checkCookie()
+		checkCookie();
 	}, 600);
 	setTimeout(function() {
 		window.location.replace("http://localhost:8080/LTEManager/home.html");
@@ -57,7 +57,7 @@ function checkCookie()
 	{
 		$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
 	} 
-	else if (userRole == "userRole=Support Engineer") 
+	else if (userRole == "userRole=Support_Admin") 
 	{
 		$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
 		$('#sidenav').append($('<li><a href="supportengineer.html">Support Engineer</a></li>'));
@@ -68,7 +68,7 @@ function checkCookie()
 		$('#sidenav').append($('<li><a href="supportengineer.html">Support Engineer</a></li>'));
 		$('#sidenav').append($('<li><a href="networkmanagement.html">Network Management</a></li>'));
 	} 
-	else if (userRole == "userRole=System Administrator") 
+	else if (userRole == "userRole=System_Admin") 
 	{
 		$('#sidenav').append($('<li><a href="customerservice.html">Customer Service</a></li>'));
 		$('#sidenav').append($('<li><a href="supportengineer.html">Support Engineer</a></li>'));

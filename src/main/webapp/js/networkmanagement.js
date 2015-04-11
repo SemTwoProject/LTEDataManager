@@ -1,8 +1,12 @@
+var colours = ['#00FF00', '#FF6600', '#0066FF', '#FFFF00', '#00FFFF', '#333333', '#CC9900', '#009999', '#660066', '#00CC99'];
+var doughnutData = new Array();
+
 $(document).ready(function() {
 	$("#querydropdown").change(function() {
 		$("select option:selected").each(function() {
 			if ($(this).attr("value") == "totalfaults") 
 			{			
+				$('#myChart').hide();
 				$("#dates").show();
 				$("#modelsearchfield").prop("disabled", true);
 				$("#phonemodeldropdown").prop("disabled", true);
@@ -11,7 +15,8 @@ $(document).ready(function() {
 				$('#datatable').append(table);
 			}
 			if ($(this).attr("value") == "modelfailures") 
-			{				
+			{			
+				$('#myChart').hide();
 				$("#dates").hide();
 				$("#modelsearchfield").prop("disabled", false);
 				$("#phonemodeldropdown").prop("disabled", false);
@@ -21,6 +26,7 @@ $(document).ready(function() {
 			}
 			if ($(this).attr("value") == "toptenmccmnccell") 
 			{		
+				$('#myChart').hide();
 				$("#dates").show();
 				$("#modelsearchfield").prop("disabled", true);
 				$("#phonemodeldropdown").prop("disabled", true);
@@ -30,6 +36,7 @@ $(document).ready(function() {
 			}
 			if ($(this).attr("value") == "toptenimsiovertime") 
 			{		
+				$('#myChart').hide();
 				$("#dates").show();
 				$("#modelsearchfield").prop("disabled", true);
 				$("#phonemodeldropdown").prop("disabled", true);
@@ -165,9 +172,8 @@ $("#submit").click(function(){
 		}
 		else 
 		{
-			var doughnutData;
-			
-			
+			$('#myChart').show();
+			doughnutData = [];
 			$.ajax({
 				type: 'POST',
 				url: "http://localhost:8080/LTEManager/rest/fault/toptenimsiovertime",
@@ -181,56 +187,12 @@ $("#submit").click(function(){
 							$('<td>').text(item[1]));
 					$('#datatable').append($tr);
 					
-					doughnutData += {
+					doughnutData.push({
 						value: response[i][1],
-						color:"#F7464A",
+						color: colours[i%10],
 						highlight: "#F7464A",
-						label: response[i][0] };
-					
+						label: "IMSI: " + response[i][0] + "  Value "});					
 				});
-
-				doughnutData = [{
-					value: response[0][1],
-					color:"#F7464A",
-					highlight: "#F7464A",
-					label: response[0][0] },
-
-					{
-						value: response[1][1],
-						color:"#60a61e",
-						highlight: "#60a61e",
-						label: response[1][0] },
-
-
-						{
-							value: response[2][1],
-							color:"#00FFFF",
-							highlight: "#00FFFF",
-							label: response[2][0] },
-
-
-
-							{
-								value: response[3][1],
-								color:"#99FF66",
-								highlight: "#99FF66",
-								label: response[3][0] },
-
-
-								{
-									value: response[4][1],
-									color:"#FFFF00",
-									highlight: "#FFFF00",
-									label: response[4][0] },
-
-
-									{
-										value: response[5][1],
-										color:"#FF0066",
-										highlight: "#FF0066",
-										label: response[5][0] }];
-
-
 
 
 				var ctx = document.getElementById("myChart").getContext("2d");
@@ -245,10 +207,3 @@ $("#submit").click(function(){
 
 });
 
-/*$("#myChart").click( 
-		function(evt){
-			var activePoints = myDoughnut.getSegmentsAtEvent(evt);  
-			var url = "label= " + activePoints[0].label + "&value= " + activePoints[0].value;
-			alert(url);
-		}
-); */
