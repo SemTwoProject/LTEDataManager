@@ -48,31 +48,6 @@ public class TestEntities
 	}
 	
 	@Test
-	public void testFault()
-	{
-		f.setId(1);
-		f.setImsi(1234l);
-		f.setDate(new Date());
-		f.setNe("11B");
-		f.setDuration(1000);
-		assertEquals((int)f.getId(), 1);
-		assertEquals((long)f.getImsi(), 1234l);
-		assertEquals(f.getDate(), new Date());
-		assertEquals(f.getNe(), "11B");
-		assertEquals((int)f.getDuration(), 1000);
-		f.setFailure(new Failure(0, "Emergency"));
-		f.setTac(new UE());
-		f.setCell(new CellHier(4, 123l, 124l, 125l));
-		f.setMccid(new MccMnc(238, "Denmark", 1, "TDC-DK"));
-		f.setEventCause(new EventCause(0, 4097, "RRC CONN-SETUP"));
-		assertEquals((int)f.getFailure().getfailure(), 0);
-		assertEquals((int)f.getCell().getCellId(), 4);
-		assertEquals((int)f.getMccid().getMccId(), 238);
-		assertEquals((int)f.getEventCause().getEventId(), 4097);
-		
-	}
-	
-	@Test
 	public void testMarketOperator()
 	{
 		mo.setMccId(238);

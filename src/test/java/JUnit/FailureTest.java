@@ -25,20 +25,20 @@ public class FailureTest {
 
 	@Test
 	public void testEquals_Symmetric() {
-		assertTrue(failure1.equals(sameFailure) && sameFailure.equals(failure1));
-		assertTrue(failure1.hashCode() == sameFailure.hashCode());
+		assertEquals(failure1.equals(sameFailure),sameFailure.equals(failure1));
+		assertEquals(failure1.hashCode(),sameFailure.hashCode());
 	}
 
 	@Test
 	public void testFailureEmptyConstructor() {
 		Failure fail = new Failure();
-		assertTrue(fail.getClass()==Failure.class);
+		assertTrue(fail.getClass().equals(Failure.class));
 	}
 
 	@Test
 	public void testFailureConstructor() {
 		Failure fail = new Failure(5,"Failure Description");
-		assertTrue(fail.getClass()== Failure.class);
+		assertTrue(fail.getClass().equals(Failure.class));
 	}
 
 	@Test

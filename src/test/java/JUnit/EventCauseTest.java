@@ -26,8 +26,8 @@ public class EventCauseTest {
 	}
 	@Test
 	public void testEquals_Symmetric() {
-		assertTrue(event1.equals(eventSame) && eventSame.equals(event1));
-		assertTrue(event1.hashCode() == eventSame.hashCode());
+		assertEquals(event1.equals(eventSame),eventSame.equals(event1));
+		assertEquals(event1.hashCode(),eventSame.hashCode());
 	}
 
 	@Test

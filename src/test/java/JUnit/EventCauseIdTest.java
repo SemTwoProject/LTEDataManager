@@ -21,14 +21,14 @@ public class EventCauseIdTest {
 
 	@Test
 	public void testEquals_Symmetric() {
-		assertTrue(emptyId.equals(idSame) && idSame.equals(emptyId));
-		assertTrue(emptyId.hashCode() == idSame.hashCode());
+		assertEquals(emptyId.equals(idSame),idSame.equals(emptyId));
+		assertEquals(emptyId.hashCode(),idSame.hashCode());
 	}
 
 	@Test
 	public void testEventCauseId() {
 		EventCauseId id = new EventCauseId();
-		assertTrue(id.getClass()== EventCauseId.class);
+		assertTrue(id.getClass().equals(EventCauseId.class));
 	}
 
 	@Test

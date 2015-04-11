@@ -28,8 +28,8 @@ public class CellHierTest {
 	
 	@Test
 	public void testEquals_Symmetric() {
-		assertTrue(cell1.equals(cellSame) && cellSame.equals(cell1));
-		assertTrue(cell1.hashCode() == cellSame.hashCode());
+		assertEquals(cell1.equals(cellSame),cellSame.equals(cell1));
+		assertEquals(cell1.hashCode(),cellSame.hashCode());
 	}
 
 	@Test

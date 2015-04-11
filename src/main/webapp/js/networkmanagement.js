@@ -144,7 +144,52 @@ $("#submit").click(function(){
 								$('<td>').text(item[2]),
 								$('<td>').text(item[3]));
 						$('#datatable').append($tr);
-							});          	
+							});
+					
+					pieData = [{
+						value: response[0][3],
+						color:"#F7464A",
+						highlight: "#F7464A",
+						label: response[0][2] },
+
+						{
+						value: response[1][3],
+						color:"#60a61e",
+						highlight: "#60a61e",
+						label: response[1][2] 
+						},
+
+						{
+						value: response[2][3],
+						color:"#00FFFF",
+						highlight: "#00FFFF",
+						label: response[2][2] 
+						},
+
+						{
+						value: response[3][3],
+						color:"#99FF66",
+						highlight: "#99FF66",
+						label: response[3][2] 
+						},
+
+						{
+						value: response[4][3],
+						color:"#FFFF00",
+						highlight: "#FFFF00",
+						label: response[4][2] 
+						},
+
+						{
+						value: response[5][3],
+						color:"#FF0066",
+						highlight: "#FF0066",
+						label: response[5][2] 
+						}];
+
+					var ctx = document.getElementById("myChart").getContext("2d");
+					var myPieChart = new Chart(ctx).Pie(pieData);
+
 				}});		
 		}
 	}
@@ -165,7 +210,7 @@ $("#submit").click(function(){
 		}
 		else 
 		{
-			var doughnutData;
+			var doughnutData = [];
 			
 			
 			$.ajax({
@@ -180,75 +225,55 @@ $("#submit").click(function(){
 							$('<td>').text(item[0]),
 							$('<td>').text(item[1]));
 					$('#datatable').append($tr);
-					
-					doughnutData += {
-						value: response[i][1],
-						color:"#F7464A",
-						highlight: "#F7464A",
-						label: response[i][0] };
-					
 				});
 
-				doughnutData = [{
+				pieData = [{
 					value: response[0][1],
 					color:"#F7464A",
 					highlight: "#F7464A",
 					label: response[0][0] },
 
 					{
-						value: response[1][1],
-						color:"#60a61e",
-						highlight: "#60a61e",
-						label: response[1][0] },
+					value: response[1][1],
+					color:"#60a61e",
+					highlight: "#60a61e",
+					label: response[1][0] 
+					},
 
+					{
+					value: response[2][1],
+					color:"#00FFFF",
+					highlight: "#00FFFF",
+					label: response[2][0] 
+					},
 
-						{
-							value: response[2][1],
-							color:"#00FFFF",
-							highlight: "#00FFFF",
-							label: response[2][0] },
+					{
+					value: response[3][1],
+					color:"#99FF66",
+					highlight: "#99FF66",
+					label: response[3][0] 
+					},
 
+					{
+					value: response[4][1],
+					color:"#FFFF00",
+					highlight: "#FFFF00",
+					label: response[4][0] 
+					},
 
-
-							{
-								value: response[3][1],
-								color:"#99FF66",
-								highlight: "#99FF66",
-								label: response[3][0] },
-
-
-								{
-									value: response[4][1],
-									color:"#FFFF00",
-									highlight: "#FFFF00",
-									label: response[4][0] },
-
-
-									{
-										value: response[5][1],
-										color:"#FF0066",
-										highlight: "#FF0066",
-										label: response[5][0] }];
-
-
-
+					{
+					value: response[5][1],
+					color:"#FF0066",
+					highlight: "#FF0066",
+					label: response[5][0] 
+					}];
 
 				var ctx = document.getElementById("myChart").getContext("2d");
-				var myDoughnutChart = new Chart(ctx).Pie(doughnutData);
+				var myDoughnutChart = new Chart(ctx).Pie(pieData);
 
 				}});
-
-
 
 		}
 	}
 
 });
-
-/*$("#myChart").click( 
-		function(evt){
-			var activePoints = myDoughnut.getSegmentsAtEvent(evt);  
-			var url = "label= " + activePoints[0].label + "&value= " + activePoints[0].value;
-			alert(url);
-		}
-); */
