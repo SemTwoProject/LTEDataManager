@@ -9,6 +9,7 @@ function clearChart()
 	chart.clear();
 	chart.destroy();
 	$('#piechart').hide();
+	$('#piechart').attr('onclick','').unbind('click');
 }
 
 $(document).ready(function() 
