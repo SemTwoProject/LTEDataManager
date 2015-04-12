@@ -22,5 +22,5 @@ public interface FaultDAO {
 	Collection<Fault> getTopTenMarketOperatorCell(Timestamp start, Timestamp end);
 	List<Fault> getFaultsByIMSI(Long imsi);
 	Collection<Fault> getEventCausePerModel(String model);
-
+	Collection<Fault> getFaultsForCell(int marketid, int operatorid, int cellid);
 }

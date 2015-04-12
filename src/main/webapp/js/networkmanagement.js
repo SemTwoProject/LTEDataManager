@@ -3,6 +3,7 @@ var piechartData = new Array();
 var ctx = document.getElementById("piechart").getContext("2d");
 var colours = ['#00FF00', '#FF6600', '#0066FF', '#FFFF00', '#00FFFF', '#333333', '#CC9900', '#009999', '#660066', '#00CC99'];
 var chart = new Chart(ctx).Pie(piechartData);
+var piechartinfo;
 
 function clearChart()
 {
@@ -169,7 +170,7 @@ $("#submit").click(function()
 			alert("Please enter a VALID End Date");
 		}
 		else 
-		{
+		{		
 			$('#piechart').show();
 			piechartData = [];
 			
@@ -194,9 +195,50 @@ $("#submit").click(function()
 							value: response[i][3],
 							color: colours[i%10],
 							highlight: "#F7464A",
-							label: response[i][0] + "/" + response[i][1] + "/" + response[i][2] + "  Count"});	
+							label: response[i][0] + "/" + response[i][1] + "/" + response[i][2] + "/  Failures"});	
 					});
 					chart =  new Chart(ctx).Pie(piechartData,  { tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
+				
+					$("#piechart").click( function(evt)
+			        {
+						$('#drilldowntable').empty();
+						table = $('<tr><th>IMSI</th><th>Cause Code</th><th>Event ID</th><th>Description</th><th>Failure</th><th>Date</th></tr>');
+						$('#drilldowntable').append(table);
+			            piechartinfo = chart.getSegmentsAtEvent(evt);
+			            var ids = piechartinfo[0].label.split("/");
+			            var marketid = ids[0];
+			            var operatorid = ids[1];
+			            var cellid = ids[2];
+			            $('#drilldowninfo').text("Showing failures for Cell: " + cellid + " Operator: " + operatorid + " Market: " + marketid);
+			            $.ajax({
+			        		type : 'POST',
+			        		url : "http://localhost:8080/LTEManager/rest/fault/faultsforcell",
+			        		dataType : "json",
+			        		data : {
+			        			"marketid": marketid,
+			        			"operatorid": operatorid,
+			        			"cellid": cellid
+			        		},
+			        		success : function(response) 
+			        		{
+			        			$.each(response, function(i, item) 
+			        			{
+			        				$tr = "";
+			        				$tr = $('<tr>').append(
+			        				$('<td>').text(item[0]),
+			        				$('<td>').text(item[1]),
+			        				$('<td>').text(item[2]),
+			        				$('<td>').text(item[3]),
+			        				$('<td>').text(item[4]),
+			        				$('<td>').text(item[5]));
+			        				$('#drilldowntable').append($tr);	        							
+			        			});	        					
+			        		}
+			        	});
+
+						$('#drilldown').modal('show');
+			            }
+			         ); 		
 				}});		
 		}
 	}
@@ -248,14 +290,14 @@ $("#submit").click(function()
 						$('#drilldowntable').empty();
 						table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Failure</th><th>Date</th></tr>');
 						$('#drilldowntable').append(table);
-	                    var activePoints = chart.getSegmentsAtEvent(evt);
-	                    $('#drilldowninfo').text("Faults for IMSI: " + activePoints[0].label);
+	                    piechartinfo = chart.getSegmentsAtEvent(evt);
+	                    $('#drilldowninfo').text("Faults for IMSI: " + piechartinfo[0].label + " Total Faults: " + piechartinfo[0].value);
 	                    $.ajax({
 	        				type : 'POST',
 	        				url : "http://localhost:8080/LTEManager/rest/fault/faultsbyimsi",
 	        				dataType : "json",
 	        				data : {
-	        					"imsi" : activePoints[0].label
+	        					"imsi" : piechartinfo[0].label
 	        				},
 	        				success : function(response) 
 	        				{
