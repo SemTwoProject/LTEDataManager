@@ -114,6 +114,33 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	
+	<div class="modal fade bs-modal-sm" id="drilldown" tabindex="-1"
+		role="dialog" aria-labelledby="drilldownlabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" style="height: 500px; width:900px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<center>
+						<h4 class="modal-title" id="drilldowninfo"></h4>
+					</center>
+				</div>
+					<div class="modal-body">
+						<div class="col-sm-12" style="height: 400px; width:800px; overflow: auto;">
+							<table class="table table-bordered" id="drilldowntable"></table>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+					</div>
+			</div>
+		</div>
+	</div>
 
 	<script src="js/chart.js"></script>
 	<script src="js/libs/jquery-2.0.3.min.js"></script>
