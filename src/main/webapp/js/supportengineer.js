@@ -1,5 +1,28 @@
+var failures = [];
+var models = [];
 $(document).ready(function() 
 		{
+
+	$.ajax({
+		type : 'GET',
+		url : "http://localhost:8080/LTEManager/rest/fault/failuredescriptions",
+		dataType : "json",
+		success : function(response) {
+		$.each(response, function(i, item) {
+		failures.push(item);
+		});
+	},
+	});
+	$.ajax({
+		type : 'GET',
+		url : "http://localhost:8080/LTEManager/rest/fault/models",
+		dataType : "json",
+		success : function(response) {
+		$.each(response, function(i, item) {
+		models.push(item);
+		});
+	},
+	});
 	$("#querydropdown").change(function() 
 			{
 		$("select option:selected").each(function() 
@@ -16,6 +39,10 @@ $(document).ready(function()
 			} 
 			else if ($(this).attr("value") == "numberoffailures") 
 			{
+				$("#modelsearchfield").autocomplete({
+					source : models,
+					autoFocus : false,
+					});
 				$("#dates").show();
 				$("#causecodes").hide();
 				$("#modelsearch").show();
@@ -25,10 +52,14 @@ $(document).ready(function()
 			} 
 			else if ($(this).attr("value") == "imsisbycause") 
 			{
+				$("#causecodesearchfield").autocomplete({
+					source : failures,
+					autoFocus : false,
+					});
 				$("#dates").hide();
 				$("#modelsearch").hide();
 				$("#causecodes").show();
-				$("#causecodesdropdown").prop("disabled",false);
+				$("#causecodesearchfield").prop("disabled",false);
 				$('#datatable').empty();
 				var table = $('<tr><th>IMSI</th><th>Description</th><th>Operator</th><th>Country</th><th>Date</th></tr>');
 				$('#datatable').append(table);
@@ -109,7 +140,8 @@ function submit() {
 	}
 	else if ($("#querydropdown").attr("value") == "imsisbycause") 
 	{		 
-		var cause = $("#causecodesdropdown").attr("value");
+		var failure = $("#causecodesearchfield").attr("value");
+		var failureCode = failures.indexOf(failure)-1;
 		$('#datatable').empty();
 		var table = $('<tr><th>IMSI</th><th>Description</th><th>Operator</th><th>Country</th><th>Date</th></tr>');
 		$('#datatable').append(table);
@@ -120,10 +152,13 @@ function submit() {
 			dataType : "json",
 			data : 
 			{
-				"cause": cause
+				"failure": failureCode
 			},
 			success : function(response) 
 			{
+				if (response == ""){
+					alert("No data for that failure");
+				}
 				$.each(response, function(i, item) 
 						{
 					$tr = "";

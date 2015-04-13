@@ -164,4 +164,25 @@ public class FaultDAOImpl implements FaultDAO {
 		List<Fault> faults = q.getResultList();
 		return faults;
 	}
+
+	
+	public Collection<String> getAllModels() {
+		Query q = em.createQuery("Select u.model from UE u");
+		List<String> models = q.getResultList();
+		return models;
+	}
+
+	@Override
+	public Collection<String> getFailureDescriptions() {
+		Query q = em.createQuery("Select f.description from Failure f");
+		List<String> desc = q.getResultList();
+		return desc;
+	}
+
+	@Override
+	public Collection<Long> getIMSIS() {
+		Query q = em.createQuery("Select distinct f.imsi from Fault f");
+		Collection<Long> imsis = q.getResultList();
+		return imsis;
+	}
 }

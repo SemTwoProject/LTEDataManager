@@ -19,4 +19,7 @@ public interface FaultServiceLocal {
 	Collection<Fault> getEventCausePerModel(String model);
 	Collection<Fault> getFaultsForCell(int marketid, int operatorid, int cellid);
 	Collection<Fault> getFaultsForModelCombo(String model, int eventid, int causecode);
+	Collection<String> getAllModels();
+	Collection<String> getFailureDescriptions();
+	Collection<Long>getIMSIS();
 }

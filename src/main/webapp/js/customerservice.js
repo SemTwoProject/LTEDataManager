@@ -1,7 +1,25 @@
 $('#dates').hide();
+var imsis = [];
 
 $(document).ready(function() 
 		{
+	$.ajax({
+		type : 'GET',
+		url : "http://localhost:8080/LTEManager/rest/fault/imsis",
+		dataType : "json",
+		success : function(response) {
+		$.each(response, function(i, item) {
+		imsis.push(item.toString());
+		});
+	},
+	});
+	
+	$("#imsi").autocomplete({
+		source : imsis,
+		autoFocus : false,
+		minLength:2,
+		});
+	
 	$("select").change(function() 
 			{
 		$("select option:selected").each(function() 
