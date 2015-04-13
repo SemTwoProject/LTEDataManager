@@ -5,12 +5,12 @@
  */
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
-#piechart
+#piechart, #barchart
 {
-	min-width: 300px !important;
+	min-width: 100% !important;
 	min-height: 300px !important;
 	height: 300px;
-	width: 300px;
+	width: 100%;
 }
 @font-face {
     font-family: PlutoMed;

@@ -23,4 +23,6 @@ public interface FaultDAO {
 	List<Fault> getFaultsByIMSI(Long imsi);
 	Collection<Fault> getEventCausePerModel(String model);
 	Collection<Fault> getFaultsForCell(int marketid, int operatorid, int cellid);
+	Collection<Fault> getFaultsForModelCombo(String model, int eventid, int causecode);
+	
 }

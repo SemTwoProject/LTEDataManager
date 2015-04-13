@@ -6,7 +6,7 @@ var piectx = document.getElementById("piechart").getContext("2d");
 var barctx = document.getElementById("barchart").getContext("2d");
 var colours = ['#00FF00', '#FF6600', '#0066FF', '#FFFF00', '#00FFFF', '#333333', '#CC9900', '#009999', '#660066', '#00CC99'];
 var piechartinfo;
-var data = { labels: [""], datasets: [{ label: "", fillColor: "rgba(0,0,255,0.5)", strokeColor: "rgba(0,0,100,0.8)", highlightFill: "rgba(255,0,0,0.75)", highlightStroke: "rgba(100,0,0,1)", data: [] }]};		
+var data = { labels: [""], datasets: [{ label: "", fillColor: "", strokeColor: "", highlightFill: "", highlightStroke: "", data: [] }]};		
 var piechart = new Chart(piectx).Pie(piechartData);
 var barchart = new Chart(barctx).Bar(data);
 
@@ -167,6 +167,7 @@ $("#submit").click(function()
 					}
 					else
 					{
+						
 						$.each(response, function(i, item) 
 						{
 							$tr = "";
@@ -181,10 +182,42 @@ $("#submit").click(function()
 								value: response[i][3],
 								color: colours[i%10],
 								highlight: "#F7464A",
-								label: " Event ID " + response[i][0] +  " Cause Code " + response[i][1] +  " Value "});	
+								label: response[i][0] +  ":" + response[i][1] + ": Value "});	
 						});
 					}
 					piechart = new Chart(piectx).Pie(piechartData);	
+					
+					$("#piechart").click( function(evt)
+					{
+						$('#drilldowntable').empty();
+						table = $('<tr><th>IMSI</th><th>Date</th></tr>');
+						$('#drilldowntable').append(table);
+					    piechartinfo = piechart.getSegmentsAtEvent(evt);
+					    var ids = piechartinfo[0].label.split(":");
+					    $('#drilldowninfo').text("Showing failures for Model: " + model + " with Event/Cause Combo:" + ids[0] + "/" + ids[1] );
+					    $.ajax({
+					        type : 'POST',
+					        url : "http://localhost:8080/LTEManager/rest/fault/faultsformodeleventcombo",
+					        dataType : "json",
+					        data : {
+					        	"model": model,
+					        	"eventid": ids[0],
+					        	"causecode": ids[1]
+					        },
+					        success : function(response) 
+					        {
+					        	$.each(response, function(i, item) 
+					        	{
+					        		$tr = "";
+					        		$tr = $('<tr>').append(
+					        		$('<td>').text(item[0]),
+					        		$('<td>').text(item[5]));
+					        		$('#drilldowntable').append($tr);	        							
+					        	});	        					
+					        }
+					      });
+						$('#drilldown').modal('show');
+					});
 				}
 			});
 		}
@@ -243,18 +276,15 @@ $("#submit").click(function()
 						$('#drilldowntable').append(table);
 			            piechartinfo = piechart.getSegmentsAtEvent(evt);
 			            var ids = piechartinfo[0].label.split("/");
-			            var marketid = ids[0];
-			            var operatorid = ids[1];
-			            var cellid = ids[2];
-			            $('#drilldowninfo').text("Showing failures for Cell: " + cellid + " Operator: " + operatorid + " Market: " + marketid);
+			            $('#drilldowninfo').text("Showing failures for Cell: " + ids[2] + " Operator: " + ids[1] + " Market: " + ids[0]);
 			            $.ajax({
 			        		type : 'POST',
 			        		url : "http://localhost:8080/LTEManager/rest/fault/faultsforcell",
 			        		dataType : "json",
 			        		data : {
-			        			"marketid": marketid,
-			        			"operatorid": operatorid,
-			        			"cellid": cellid
+			        			"marketid": ids[0],
+			        			"operatorid": ids[1],
+			        			"cellid": ids[2]
 			        		},
 			        		success : function(response) 
 			        		{

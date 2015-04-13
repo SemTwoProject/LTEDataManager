@@ -251,6 +251,7 @@ public class FaultRest
 		
 	}
 	
+	//Drill down
 	@POST
 	@PermitAll
 	@Produces(MediaType.APPLICATION_JSON)
@@ -275,6 +276,30 @@ public class FaultRest
 		
 	}
 	
+	//Drill down
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/faultsformodeleventcombo")
+	public Response getFaultsForModelCombo(@FormParam("model") String model, @FormParam("eventid") int eventid, @FormParam("causecode") int causecode)
+	{
+		String newResponse = null;
+		try
+		{
+			newResponse = toJSONString(service.getFaultsForModelCombo(model, eventid, causecode));
+		}
+		catch (Exception err)
+		{
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+			
+		}
+		return Response.ok(newResponse).build();
+		
+	}
+	
+	//Drill down
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/faultsforcell")
