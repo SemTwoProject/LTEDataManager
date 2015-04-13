@@ -1,3 +1,4 @@
+var ue_models = [];
 var table;
 var piechartData = new Array();
 var barchartLabels = new Array();
@@ -23,6 +24,16 @@ function clearChart()
 
 $(document).ready(function() 
 		{
+	$.ajax({
+		type : 'GET',
+		url : "http://localhost:8080/LTEManager/rest/fault/models",
+		dataType : "json",
+		success : function(response) {
+		$.each(response, function(i, item) {
+		ue_models.push(item);
+		});
+	},
+	});
 	$("#querydropdown").change(function() 
 			{
 		$("select option:selected").each(function() 
@@ -38,7 +49,11 @@ $(document).ready(function()
 				$('#datatable').append(table);
 			}
 			if ($(this).attr("value") == "modelfailures") 
-			{			
+			{	
+				$("#modelsearchfield").autocomplete({
+					source : ue_models,
+					autoFocus : false,
+					});
 				clearChart();
 				$("#dates").hide();
 				$("#modelsearchfield").prop("disabled", false);
@@ -142,7 +157,10 @@ $("#submit").click(function()
 		}
 	}
 	else if ($("#querydropdown").attr("value") == "modelfailures") 
-	{			
+	{	
+		$("‪#modelsearchfield").autocomplete({
+			source : ue_models,
+		});
 		var model = document.getElementById("modelsearchfield").value;
 		$('#datatable').empty();
 		table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Number of Occurences</th></tr>');				

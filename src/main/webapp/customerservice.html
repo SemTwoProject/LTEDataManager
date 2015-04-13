@@ -9,8 +9,28 @@
 <meta name="author" content="">
 <link rel="stylesheet" href="css/bootstrap.css" />
 <link href="css/simple-sidebar.css" rel="stylesheet">
+<link href="css/jquery-ui.min.css" rel="stylesheet">
 <script src="js/libs/jquery-2.0.3.min.js"></script>
 <script src="js/customerservice.js"></script>
+<script src="js/libs/jquery-ui.min.js"></script>
+<style type="text/css">ul.ui-autocomplete.ui-menu{font-color: black;}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    background: #33ADFF;
+    border: none;
+    color:#000;
+    border-radius:0;
+    font-color: black;
+
+}
+.ui-autocomplete {
+    max-height: 300px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
+}
+</style>
 </head>
 <body onload="checkCookie()">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -53,7 +73,7 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">Customer Details</div>
 							<div class="panel-body">
-								<div class="col-sm-8">
+								<div class="col-sm-6">
 									<div class="form-group">
 										<select id="querydropdown" class="form-control">
 											<option value="callfailures">Display call failure
@@ -71,10 +91,10 @@
 										class="btn btn-default">Search</button>
 								</div>
 
-								<div class="col-sm-3 pull-right">
+								<div class="col-sm-4 pull-right">
 									<div class="form-group">
-										<input id="imsi" type="number" class="form-control"
-											placeholder="Search for imsi.." pattern="^[0-9]{15,15}$">
+										<input id="imsi" class="form-control"
+											placeholder="Search for imsi..">
 									</div>
 								</div>
 

@@ -67,4 +67,19 @@ public class FaultServiceEJB implements FaultServiceLocal {
 	public Collection<Fault> getFaultsForModelCombo(String model, int eventid, int causecode) {
 		return dao.getFaultsForModelCombo(model, eventid, causecode);
 	}
+
+	@Override
+	public Collection<String> getAllModels() {
+		return dao.getAllModels();
+	}
+
+	@Override
+	public Collection<String> getFailureDescriptions() {
+		return dao.getFailureDescriptions();
+	}
+
+	@Override
+	public Collection<Long> getIMSIS() {
+		return dao.getIMSIS();
+	}
 }

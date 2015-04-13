@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -204,7 +205,7 @@ public class FaultRest
 	@POST
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/imsiperfailurecode")
-	public Response getImsiPerFailure(@FormParam("cause") int failureValue)
+	public Response getImsiPerFailure(@FormParam("failure") int failureValue)
 	{
 		String newResponse = null;
 		
@@ -322,6 +323,63 @@ public class FaultRest
 		}
 		return Response.ok(newResponse).build();
 		
+	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/models")
+	public Response getModels(){
+		String newResponse = null;
+		try
+		{
+			newResponse = toJSONString(service.getAllModels());
+		}
+		catch (Exception err)
+		{
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+			
+		}
+		return Response.ok(newResponse).build();
+	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/failuredescriptions")
+	public Response getFailureDescriptions(){
+		String newResponse = null;
+		try
+		{
+			newResponse = toJSONString(service.getFailureDescriptions());
+		}
+		catch (Exception err)
+		{
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+			
+		}
+		return Response.ok(newResponse).build();
+	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/imsis")
+	public Response getIMSIS(){
+		String newResponse = null;
+		try
+		{
+			newResponse = toJSONString(service.getIMSIS());
+		}
+		catch (Exception err)
+		{
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+			
+		}
+		return Response.ok(newResponse).build();
 	}
 	
 	public String toJSONString(Object object)

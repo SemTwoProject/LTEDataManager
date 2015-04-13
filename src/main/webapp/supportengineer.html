@@ -11,7 +11,28 @@
 <link rel="stylesheet" href="css/fileinput.min.css" />
 <link href="css/simple-sidebar.css" rel="stylesheet">
 <script src="js/libs/jquery-2.0.3.min.js"></script>
+<script src="js/libs/jquery-ui.min.js"></script>
 <script src="js/supportengineer.js"></script>
+<link href="css/jquery-ui.min.css" rel="stylesheet">
+<style type="text/css">
+
+.ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+  }
+
+ul.ui-autocomplete.ui-menu{font-color: black;width:300px}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    background: #33ADFF;
+    border: none;
+    color:#000;
+    border-radius:0;
+    font-color: black;
+}
+</style>
 </head>
 <body onload="checkCookie()">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -70,13 +91,8 @@
 
 								<div class="col-sm-3" id="causecodes">
 									<div class="form-group">
-										<select class="form-control" name = "failureValue" id="causecodesdropdown">
-											<option  value="0">EMERGENCY</option>
-											<option  value="1">HIGH PRIORITY ACCESS</option>
-											<option  value="2">MT ACCESS</option>
-											<option  value="3">MO SIGNALLING</option>
-											<option  value="4">MO DATA</option>
-										</select>
+										<input id="causecodesearchfield" class="form-control"
+											placeholder="Search Cause..">
 									</div>
 								</div>
 
