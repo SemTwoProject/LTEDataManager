@@ -36,7 +36,7 @@ public class FaultDAOImpl implements FaultDAO {
 	//had call failures during a time period 
 	public Collection<Fault> getTopTenMarketOperatorCell(Timestamp start, Timestamp end) {
 		Query q = em
-				.createQuery("select distinct mccid.mccId, mccid.mncId, cell.cellId, count(*) from Fault f WHERE f.date >= :start AND f.date <= :end group by f.mccid.mccId,f.mccid.mncId,f.cell.cellId order by count(*) desc");
+				.createQuery("select distinct mccid.country, mccid.operator, cell.cellId, count(*) from Fault f WHERE f.date >= :start AND f.date <= :end group by f.mccid.mccId,f.mccid.mncId,f.cell.cellId order by count(*) desc");
 		q.setParameter("start", start);
 		q.setParameter("end", end);
 		Collection<Fault> result = q.getResultList();

@@ -40,7 +40,7 @@ $(document).ready(function() {
 				$("#modelsearchfield").prop("disabled", true);
 				$("#phonemodeldropdown").prop("disabled", true);
 				$('#datatable').empty();
-				var table = $('<tr><th>Market ID</th><th>Operator ID</th><th>Cell ID</th><th>Count</th></tr>');				
+				var table = $('<tr><th>Country</th><th>Operator</th><th>Cell ID</th><th>Count</th></tr>');				
 				$('#datatable').append(table);
 			}
 			if ($(this).attr("value") == "toptenimsiovertime") 
@@ -89,7 +89,30 @@ $("#submit").click(function(){
 								$('<td>').text(item[1]),
 								$('<td>').text(item[2]));
 						$('#datatable').append($tr);
-					});          	
+					});       
+					
+					var data = {
+						    labels: ["January", "February", "March", "April", "May", "June", "July"],
+						    datasets: [
+						        {
+						            label: "My First dataset",
+						            fillColor: "rgba(220,220,220,0.5)",
+						            strokeColor: "rgba(220,220,220,0.8)",
+						            highlightFill: "rgba(220,220,220,0.75)",
+						            highlightStroke: "rgba(220,220,220,1)",
+						            data: [65, 59, 80, 81, 56, 55, 40]
+						        },
+						        {
+						            label: "My Second dataset",
+						            fillColor: "rgba(151,187,205,0.5)",
+						            strokeColor: "rgba(151,187,205,0.8)",
+						            highlightFill: "rgba(151,187,205,0.75)",
+						            highlightStroke: "rgba(151,187,205,1)",
+						            data: [28, 48, 40, 19, 86, 27, 90]
+						        }
+						    ]
+						};
+					chart = new Chart(ctx).Bar(data);	
 				}});
 		}
 	}
@@ -135,7 +158,7 @@ $("#submit").click(function(){
 								label: " Event ID " + response[i][0] +  " Cause Code " + response[i][1] +  " Value "});	
 								});
 					}
-					chart = new Chart(ctx).Pie(piechartData);	
+					chart = new Chart(ctx).Doughnut(piechartData);	
 				}
 			});
 		}
@@ -146,7 +169,7 @@ $("#submit").click(function(){
 		var enddate = $('#enddate').data('date');
 
 		$('#datatable').empty();
-		var table = $('<tr><th>Market ID</th><th>Operator ID</th><th>Cell ID</th><th>Count</th></tr>');				
+		var table = $('<tr><th>Country</th><th>Operator</th><th>Cell ID</th><th>Count</th></tr>');				
 		$('#datatable').append(table);
 		if (startdate == ""){
 			alert("Please enter a VALID Start Date");
@@ -182,7 +205,7 @@ $("#submit").click(function(){
 							label: "Cell: " + response[i][2] + "  Count"});	
 				});
 				
-					chart =  new Chart(ctx).Pie(piechartData,  { tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
+					chart =  new Chart(ctx).Doughnut(piechartData,  { tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
 			}});		
 		}
 	}
@@ -227,8 +250,8 @@ $("#submit").click(function(){
 						label: response[i][0]});					
 				});						
 				
-				chart =  new Chart(ctx).Pie(piechartData,  { tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
-
+				chart =  new Chart(ctx).Doughnut(piechartData,  { responsive: true, tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
+				document.getElementById("graphical").innerHTML = chart.generateLengent();
 			}});
 		}
 	}

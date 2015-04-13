@@ -28,7 +28,7 @@
 </container>
 	<container qualifier="jbossas-managed-wildfly-8">
 		<configuration>
-			<property name="jbossHome">C://wildfly//wildfly-8.2.0.Final</property>
+			<property name="jbossHome">C://Users//Shane//wildfly-8.2.0.Final</property>
 		</configuration>
 	</container>
 </arquillian>

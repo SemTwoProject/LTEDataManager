@@ -1,4 +1,4 @@
-/*package arquillian;
+package arquillian;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -80,4 +80,4 @@ public class ExcelReadImplTest {
 	public void testFault(){
 		
 	}
-}*/
+}

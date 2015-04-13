@@ -1,4 +1,4 @@
-/*package arquillian;
+package arquillian;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -282,4 +282,4 @@ public class FaultDAOTest {
 	//		assertTrue(Top10List3.size() > 1);
 	//	}
 
-}*/
+}
