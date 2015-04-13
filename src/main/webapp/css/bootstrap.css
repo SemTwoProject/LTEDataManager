@@ -5,7 +5,13 @@
  */
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
-
+#piechart
+{
+	min-width: 300px !important;
+	min-height: 300px !important;
+	height: 300px;
+	width: 300px;
+}
 @font-face {
     font-family: PlutoMed;
     src: url("src/main/webapp/fonts/PlutoSansMedium.otf");
@@ -81,6 +87,8 @@ audio,
 canvas,
 progress,
 video {
+	min-width:300px !important;
+	min-height:300px !important;
   display: inline-block;
   vertical-align: baseline;
 }
