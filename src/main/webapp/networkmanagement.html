@@ -100,16 +100,47 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-sm-8" style="height: 600px; overflow: auto;">
+								<div class="col-sm-8" style="height: 350px; overflow: auto;">
 									<table class="table table-bordered" id="datatable">
 									</table>
 								</div>
+								
 								<div id="graphical" class="col-sm-4 img-responsive">
 									<canvas id="piechart" width="430" height="300"></canvas>
+								<div id="graphical">
+									<div class="col-sm-4">
+										<canvas id="piechart"></canvas>
+									</div>
+									<div class="col-sm-12">
+										<canvas id="barchart"></canvas>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade bs-modal-sm" id="drilldown" tabindex="-1"
+		role="dialog" aria-labelledby="drilldownlabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm"
+			style="height: 500px; width: 900px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="col-sm-12" id="drilldownbody">
+						<table class="table table-bordered" id="drilldowntable"></table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
 				</div>
 			</div>
 		</div>

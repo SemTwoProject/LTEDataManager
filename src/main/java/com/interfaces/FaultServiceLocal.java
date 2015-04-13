@@ -17,5 +17,6 @@ public interface FaultServiceLocal {
 	Collection<Fault> getAmountOfCallFailuresPerModel(String model, Timestamp start, Timestamp end);
 	Collection<Fault> getTopTenMarketOperatorCell(Timestamp start, Timestamp end);
 	Collection<Fault> getEventCausePerModel(String model);
-
+	Collection<Fault> getFaultsForCell(int marketid, int operatorid, int cellid);
+	Collection<Fault> getFaultsForModelCombo(String model, int eventid, int causecode);
 }

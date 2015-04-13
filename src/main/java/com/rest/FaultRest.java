@@ -16,19 +16,24 @@ import com.google.gson.GsonBuilder;
 import com.interfaces.FaultServiceLocal;
 
 @Path("/fault")
-public class FaultRest {
+public class FaultRest
+{
 	@EJB
 	private FaultServiceLocal service;
-
+	
 	// rest/fault/faultsbyimsi - Story 4
 	@POST
 	@Path("/faultsbyimsi")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getFaultByIMSI(@FormParam("imsi") Long imsi) {
+	public Response getFaultByIMSI(@FormParam("imsi") Long imsi)
+	{
 		String newResponse = null;
-		try {
+		try
+		{
 			newResponse = toJSONString(service.getEventCausePerIMSI(imsi));
-		} catch (Exception err) {
+		}
+		catch (Exception err)
+		{
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
 					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
@@ -36,156 +41,185 @@ public class FaultRest {
 		}
 		return Response.ok(newResponse).build();
 	}
-
+	
 	// rest/fault/imsicount - Story 12
 	@POST
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/imsicount")
 	public Response getImsiCount(@FormParam("startdate") Timestamp startdate,
 			@FormParam("enddate") Timestamp enddate,
-			@FormParam("imsi") Long imsi) {
-
+			@FormParam("imsi") Long imsi)
+	{
+		
 		String newResponse = null;
-
-		try {
+		
+		try
+		{
 			newResponse = toJSONString(service.getIMSICount(startdate, enddate,
 					imsi));
-		} catch (Exception err) {
+		}
+		catch (Exception err)
+		{
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
 					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
 			return Response.status(401).entity(newResponse).build();
-
+			
 		}
 		return Response.ok(newResponse).build();
 	}
-
+	
 	// rest/fault/imsicausecodes - Story 17
 	@POST
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/imsicausecodes")
-	public Response getCauseCodesPerIMSI(@FormParam("imsi") Long imsi) {
-
+	public Response getCauseCodesPerIMSI(@FormParam("imsi") Long imsi)
+	{
+		
 		String newResponse = null;
-
-		try {
+		
+		try
+		{
 			newResponse = toJSONString(service.getCauseCodePerIMSI(imsi));
-		} catch (Exception err) {
+		}
+		catch (Exception err)
+		{
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
 					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
 			return Response.status(401).entity(newResponse).build();
-
+			
 		}
 		return Response.ok(newResponse).build();
 	}
-
+	
 	// rest/fault/imsifailuresovertime -- Story 5
 	@POST
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/imsifailuresovertime")
 	public Response getAllIMSIFailuresOverTime(
 			@FormParam("startdate") Timestamp startdate,
-			@FormParam("enddate") Timestamp enddate) {
-
+			@FormParam("enddate") Timestamp enddate)
+	{
+		
 		String newResponse = null;
-
-		try {
+		
+		try
+		{
 			newResponse = toJSONString(service.getIMSIFailureOverTime(
 					startdate, enddate));
-		} catch (Exception err) {
+		}
+		catch (Exception err)
+		{
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
 					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
 			return Response.status(401).entity(newResponse).build();
-
+			
 		}
 		return Response.ok(newResponse).build();
-
+		
 	}
-
+	
 	// rest/fault/totalfaults -- Story 7
 	@POST
 	@Path("/totalfaults")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getTotalFaultsAndDurationPerIMSI(
 			@FormParam("startdate") Timestamp startdate,
-			@FormParam("enddate") Timestamp enddate) {
+			@FormParam("enddate") Timestamp enddate)
+	{
 		String newResponse = null;
-
-		try {
+		
+		try
+		{
 			newResponse = toJSONString(service
 					.getTotalFaultsAndDurationPerIMSI(startdate, enddate));
-		} catch (Exception err) {
+		}
+		catch (Exception err)
+		{
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
 					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
 			return Response.status(401).entity(newResponse).build();
-
+			
 		}
 		return Response.ok(newResponse).build();
 	}
-
+	
 	// rest/fault/toptenimsiovertime -- Story 18
 	@POST
 	@Path("/toptenimsiovertime")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getTopTenIMSIOverTime(
 			@FormParam("startdate") Timestamp startdate,
-			@FormParam("enddate") Timestamp enddate) {
+			@FormParam("enddate") Timestamp enddate)
+	{
 		String newResponse = null;
-
-		try {
+		
+		try
+		{
 			newResponse = toJSONString(service.getTopTenIMSIOverTime(startdate,
 					enddate));
-		} catch (Exception err) {
+		}
+		catch (Exception err)
+		{
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
 					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
 			return Response.status(401).entity(newResponse).build();
-
+			
 		}
 		return Response.ok(newResponse).build();
 	}
-
+	
 	// rest/fault/faultsbymodel -- Story 6
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/faultsbymodel")
 	public Response getCountFaultsByModel(@FormParam("model") String model,
 			@FormParam("startdate") Timestamp startDate,
-			@FormParam("enddate") Timestamp endDate) {
+			@FormParam("enddate") Timestamp endDate)
+	{
 		String newResponse = null;
-
-		try {
-			newResponse = toJSONString(service.getAmountOfCallFailuresPerModel(model, startDate, endDate));
-		} catch (Exception err) {
+		
+		try
+		{
+			newResponse = toJSONString(service.getAmountOfCallFailuresPerModel(
+					model, startDate, endDate));
+		}
+		catch (Exception err)
+		{
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
 					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
 			return Response.status(401).entity(newResponse).build();
-
+			
 		}
 		return Response.ok(newResponse).build();
-
+		
 	}
-
+	
 	// rest/fault/imsiperfailurecode - Story 19
 	@POST
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/imsiperfailurecode")
-	public Response getImsiPerFailure(@FormParam("cause") int failureValue) {
+	public Response getImsiPerFailure(@FormParam("cause") int failureValue)
+	{
 		String newResponse = null;
 		
 		System.out.println(failureValue);
-		try {
+		try
+		{
 			newResponse = toJSONString(service.getImsiPerFailure(failureValue));
-		} catch (Exception err) {
+		}
+		catch (Exception err)
+		{
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
 					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
 			return Response.status(401).entity(newResponse).build();
-
+			
 		}
 		return Response.ok(newResponse).build();
 	}
@@ -196,50 +230,108 @@ public class FaultRest {
 	@Path("/toptenmnnmcncell")
 	public Response getTopTenMarketOperatorCell(
 			@FormParam("startdate") Timestamp startDate,
-			@FormParam("enddate") Timestamp endDate) {
+			@FormParam("enddate") Timestamp endDate)
+	{
 		String newResponse = null;
-
-		try {
-			newResponse = toJSONString(service.getTopTenMarketOperatorCell(startDate, endDate));
-		} catch (Exception err) {
+		
+		try
+		{
+			newResponse = toJSONString(service.getTopTenMarketOperatorCell(
+					startDate, endDate));
+		}
+		catch (Exception err)
+		{
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
 					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
 			return Response.status(401).entity(newResponse).build();
-
+			
 		}
 		return Response.ok(newResponse).build();
-
+		
 	}
 	
-	
+	//Drill down
 	@POST
 	@PermitAll
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/modelfailures")
-	public Response getModelFailures(@FormParam ("model") String model){
+	public Response getModelFailures(@FormParam("model") String model)
+	{
 		String newResponse = null;
 		
-		try {
+		try
+		{
 			newResponse = toJSONString(service.getEventCausePerModel(model));
-		} catch (Exception err) {
+		}
+		catch (Exception err)
+		{
 			newResponse = "{\"status\":\"401\","
 					+ "\"message\":\"No content found \""
 					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
 			return Response.status(401).entity(newResponse).build();
-
+			
 		}
 		return Response.ok(newResponse).build();
 		
 	}
 	
-
-	public String toJSONString(Object object) {
+	//Drill down
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/faultsformodeleventcombo")
+	public Response getFaultsForModelCombo(@FormParam("model") String model, @FormParam("eventid") int eventid, @FormParam("causecode") int causecode)
+	{
+		String newResponse = null;
+		try
+		{
+			newResponse = toJSONString(service.getFaultsForModelCombo(model, eventid, causecode));
+		}
+		catch (Exception err)
+		{
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+			
+		}
+		return Response.ok(newResponse).build();
+		
+	}
+	
+	//Drill down
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/faultsforcell")
+	public Response getFaultsForCell(@FormParam("marketid") int marketid,
+			@FormParam("operatorid") int operatorid,
+			@FormParam("cellid") int cellid)
+	{
+		String newResponse = null;
+		try
+		{
+			newResponse = toJSONString(service.getFaultsForCell(marketid,
+					operatorid, cellid));
+		}
+		catch (Exception err)
+		{
+			newResponse = "{\"status\":\"401\","
+					+ "\"message\":\"No content found \""
+					+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+			return Response.status(401).entity(newResponse).build();
+			
+		}
+		return Response.ok(newResponse).build();
+		
+	}
+	
+	public String toJSONString(Object object)
+	{
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setDateFormat("yyyy-mm-dd' 'HH:mm:ss");
-
+		
 		Gson gson = gsonBuilder.create();
 		return gson.toJson(object);
 	}
-
+	
 }
