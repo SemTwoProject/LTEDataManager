@@ -5,6 +5,8 @@
  */
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+
+
 #piechart, #barchart
 {
 	min-width: 100% !important;
@@ -12,14 +14,32 @@
 	height: 300px;
 	width: 100%;
 }
+
+#background
+{
+	/* HARDCODE TO SCREEN SIZE, REFRESH INDEX.HTML UNTIL THE IMAGE SITS AT THE BOTTOM */
+	height: 643px;
+	background: url("../img/background.jpg") no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+ 	 background-size: cover;
+}
+
+#drilldownbody
+{
+	height: 400px; 
+	width: 800px; 
+	overflow: auto;
+}
 @font-face {
     font-family: PlutoMed;
-    src: url("src/main/webapp/fonts/PlutoSansMedium.otf");
+    src: url("../src/main/webapp/fonts/PlutoSansMedium.otf");
 }
 
 @font-face {
     font-family: PlutoHeavy;
-    src: url("src/main/webapp/fonts/PlutoSansHeavy.otf");
+    src: url("../src/main/webapp/fonts/PlutoSansHeavy.otf");
 }
 
 #graphical {
