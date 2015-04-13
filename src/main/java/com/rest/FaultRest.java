@@ -170,7 +170,7 @@ public class FaultRest
 			return Response.status(401).entity(newResponse).build();
 			
 		}
-		return Response.ok(newResponse).build();
+		return Response.ok(newResponse).build(); 
 	}
 	
 	// rest/fault/faultsbymodel -- Story 6
@@ -208,7 +208,6 @@ public class FaultRest
 	{
 		String newResponse = null;
 		
-		System.out.println(failureValue);
 		try
 		{
 			newResponse = toJSONString(service.getImsiPerFailure(failureValue));
@@ -303,15 +302,15 @@ public class FaultRest
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/faultsforcell")
-	public Response getFaultsForCell(@FormParam("marketid") int marketid,
-			@FormParam("operatorid") int operatorid,
+	public Response getFaultsForCell(@FormParam("country") String country,
+			@FormParam("operator") String operator,
 			@FormParam("cellid") int cellid)
 	{
 		String newResponse = null;
 		try
 		{
-			newResponse = toJSONString(service.getFaultsForCell(marketid,
-					operatorid, cellid));
+			newResponse = toJSONString(service.getFaultsForCell(country,
+					operator, cellid));
 		}
 		catch (Exception err)
 		{

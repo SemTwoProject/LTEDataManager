@@ -1,4 +1,4 @@
-/*package JUnit;
+package JUnit.entity;
 
 
 import static org.junit.Assert.assertEquals;
@@ -108,4 +108,3 @@ public class TestEntities
 	}
 
 }
-*/

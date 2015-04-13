@@ -22,7 +22,7 @@ public interface FaultDAO {
 	Collection<Fault> getTopTenMarketOperatorCell(Timestamp start, Timestamp end);
 	List<Fault> getFaultsByIMSI(Long imsi);
 	Collection<Fault> getEventCausePerModel(String model);
-	Collection<Fault> getFaultsForCell(int marketid, int operatorid, int cellid);
+	Collection<Fault> getFaultsForCell(String country, String operator, int cellid);
 	Collection<Fault> getFaultsForModelCombo(String model, int eventid, int causecode);
 	
 }

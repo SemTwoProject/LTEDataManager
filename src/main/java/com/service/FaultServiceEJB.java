@@ -60,8 +60,8 @@ public class FaultServiceEJB implements FaultServiceLocal {
 		return dao.getEventCausePerModel(model);
 	}
 	
-	public Collection<Fault> getFaultsForCell(int marketid, int operatorid, int cellid) {
-		return dao.getFaultsForCell(marketid, operatorid, cellid);
+	public Collection<Fault> getFaultsForCell(String country, String operator, int cellid) {
+		return dao.getFaultsForCell(country, operator, cellid);
 	}
 	
 	public Collection<Fault> getFaultsForModelCombo(String model, int eventid, int causecode) {

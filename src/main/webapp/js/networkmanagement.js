@@ -275,7 +275,7 @@ $("#submit").click(function()
 
 					chart =  new Chart(ctx).Doughnut(piechartData,  { tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
 				}});
-			
+
 			$("#piechart").click( function(evt)
 					{
 				$('#drilldowntable').empty();
@@ -289,8 +289,8 @@ $("#submit").click(function()
 					url : "http://localhost:8080/LTEManager/rest/fault/faultsforcell",
 					dataType : "json",
 					data : {
-						"marketid": ids[0],
-						"operatorid": ids[1],
+						"country": ids[0],
+						"operator": ids[1],
 						"cellid": ids[2]
 					},
 					success : function(response) 
@@ -358,7 +358,7 @@ $("#submit").click(function()
 							});						
 
 					chart =  new Chart(ctx).Doughnut(piechartData,  { responsive: true, tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
-					document.getElementById("graphical").innerHTML = chart.generateLengent();
+
 					$("#piechart").click( function(evt)
 							{
 						$('#drilldowntable').empty();
@@ -388,9 +388,9 @@ $("#submit").click(function()
 										});	        					
 							}
 						});
-						$('#drilldown').modal('show');
-							}
-					); 
+
+						$('#drilldown').modal('show'); 		
+							});		
 				}});
 		}
 	}

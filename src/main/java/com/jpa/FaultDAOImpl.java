@@ -40,7 +40,6 @@ public class FaultDAOImpl implements FaultDAO {
 		q.setParameter("start", start);
 		q.setParameter("end", end);
 		Collection<Fault> result = q.getResultList();
-		System.out.println(result);
 		return result;
 	}
 
@@ -134,7 +133,6 @@ public class FaultDAOImpl implements FaultDAO {
 		Query q = em
 				.createQuery("select imsi,eventCause.description,mccid.operator,mccid.country,date FROM Fault f where f.failure.failure = :failure Order by imsi");
 		q.setParameter("failure", failure);
-		System.out.println("Failure: " + failure);
 		List<Fault> imsiFailure = q.getResultList();
 		return imsiFailure;
 	}
@@ -147,10 +145,10 @@ public class FaultDAOImpl implements FaultDAO {
 		return modelFailure;
 	}
 	
-	public Collection<Fault> getFaultsForCell(int marketid, int operatorid, int cellid) {
-		Query q = em.createQuery("select distinct imsi, eventCause.causeCode, eventCause.eventId, eventCause.description, failure.description, date from Fault f where mccid.mccId = :mccid AND mccid.mncId = :mncid AND cell.cellId = :cellid");
-		q.setParameter("mccid", marketid);
-		q.setParameter("mncid", operatorid);
+	public Collection<Fault> getFaultsForCell(String country, String operator, int cellid) {
+		Query q = em.createQuery("select distinct imsi, eventCause.causeCode, eventCause.eventId, eventCause.description, failure.description, date from Fault f where mccid.country = :country AND mccid.operator = :operator AND cell.cellId = :cellid");
+		q.setParameter("country", country);
+		q.setParameter("operator", operator);
 		q.setParameter("cellid", cellid);
 		List<Fault> faultsForCell = q.getResultList();
 		return faultsForCell;
