@@ -31,7 +31,7 @@ $(document).ready(function()
 			{
 				$("#dates").show();
 				$("#causecodesdropdown").prop("disabled",true);
-				$("#causecodes").show();
+				$("#causecodes").hide();
 				$("#modelsearch").hide();
 				$('#datatable').empty();
 				var table = $('<tr><th>IMSI</th><th>Description</th><th>Failure</th><th>Operator</th><th>Country</th><th>Duration</th><th>Date</th></tr>');
