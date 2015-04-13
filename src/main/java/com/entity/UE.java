@@ -128,6 +128,14 @@ public class UE implements Serializable {
 		this.inputMode = inputMode;
 	}
 	
+	public List<Fault> getFaultList() {
+		return faultList;
+	}
+
+	public void setFaultList(List<Fault> faultList) {
+		this.faultList = faultList;
+	}
+
 	public void addFault(Fault fault) {
 		fault.setTac(this);
 		faultList.add(fault);
