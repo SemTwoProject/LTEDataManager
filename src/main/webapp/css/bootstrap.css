@@ -18,7 +18,7 @@
 #background
 {
 	/* HARDCODE TO SCREEN SIZE, REFRESH INDEX.HTML UNTIL THE IMAGE SITS AT THE BOTTOM */
-	height: 643px;
+	height: 860px;
 	background: url("../img/background.jpg") no-repeat center center fixed; 
   	-webkit-background-size: cover;
   	-moz-background-size: cover;

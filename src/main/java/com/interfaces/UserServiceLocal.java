@@ -7,7 +7,6 @@ import com.entity.User;
 public interface UserServiceLocal {
 	
 	void addToUserDatabase(User user);
-	void deleteUser(User user);
 	Collection<User> getAllUsersInDatabase();
 	User getUserByName(String name);
 	Collection<User> getUserByUsernameAndPassword(String username, String password);

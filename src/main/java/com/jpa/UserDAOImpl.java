@@ -32,13 +32,6 @@ public class UserDAOImpl implements UserDAO {
 		if(!users.contains(user))
 			em.persist(user);
 	}
-	
-	public void deleteUser(User user){
-		Query query = em.createQuery("FROM com.entity.User");
-		List<User> users = query.getResultList();
-		if(users.contains(user))
-			em.remove(user);
-	}
 
 	public Collection<User> getUserByUsernameAndPassword(String username,String password) {
 		Query query = em.createQuery("Select u From User u where u.username = :username AND u.password = :password");

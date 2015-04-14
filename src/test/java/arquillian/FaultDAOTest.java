@@ -1,30 +1,7 @@
 package arquillian;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.io.File;
-import java.sql.Timestamp;
-import java.util.List;
-
-import javax.ejb.EJB;
-
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.importer.ZipImporter;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import com.dao.FaultDAO;
-import com.entity.Fault;
 
 @RunWith(Arquillian.class)
-public class FaultDAOTest {
 
 	@EJB
 	FaultDAO faultDao;
@@ -55,8 +32,6 @@ public class FaultDAOTest {
 	String model1;
 	String model2;
 	String model3;
-
-
 
 	List<Fault> f0;
 	List<Fault> f1;
@@ -101,21 +76,14 @@ public class FaultDAOTest {
 	List<Fault> getNumberOfCallFailuresPerModel2;
 	List<Fault> getNumberOfCallFailuresPerModel3;
 
-	//	List<Fault> Top10List1;
-	//	List<Fault> Top10List2;
-	//	List<Fault> Top10List3;
-
 
 	@Deployment
 	public static WebArchive createDeployment() {
-		File[] files = Maven.resolver().resolve("org.apache.poi:poi:3.11").withTransitivity().asFile();
-
-		return ShrinkWrap.create(WebArchive.class, "test.war")
-				.addPackages(true,"com")
-				.addAsResource("META-INF/persistence.xml")
-				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml").addAsLibraries(files);
-
+		return ShrinkWrap.create(ZipImporter.class, "test.war")
+				.importFrom(new File("target/LTEManager.war"))
+				.as(WebArchive.class);
 	}
+	
 	@Before
 	public void setUp() {
 
@@ -123,7 +91,6 @@ public class FaultDAOTest {
 		model2 = "VEA3";
 		model3 = "Gobi3000";
 
-		//imsi0 = 191911000423411L;
 		imsi1 = 838383838383838L;		//dummy
 		imsi2 = 344930000000001L;
 		imsi3 = 240210000000003L;
@@ -151,7 +118,6 @@ public class FaultDAOTest {
 		f3 = (List<Fault>) faultDao.getImsiPerFailure(failure3);
 		f4 = (List<Fault>) faultDao.getImsiPerFailure(failure4);
 
-		//getEventCauseId1 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi0);
 		getEventCauseId2 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi2);
 		getEventCauseId3 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi3);
 		getEventCauseId4 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi4);
