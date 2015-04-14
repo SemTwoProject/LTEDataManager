@@ -1,4 +1,4 @@
-/*package arquillian;
+package arquillian;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -10,8 +10,9 @@ import javax.ejb.EJB;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.importer.ZipImporter;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,9 +34,12 @@ public class ExcelReadImplTest {
 
 	@Deployment
 	public static WebArchive createDeployment() {
-		return ShrinkWrap.create(ZipImporter.class, "test.war")
-				.importFrom(new File("target/LTEManager.war"))
-				.as(WebArchive.class);
+		File[] files = Maven.resolver().resolve("org.apache.poi:poi:3.11").withTransitivity().asFile();
+
+		return ShrinkWrap.create(WebArchive.class, "test.war")
+				.addPackages(true,"com")
+				.addAsResource("META-INF/persistence.xml")
+				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml").addAsLibraries(files);
 	}
 
 	@Before
@@ -80,4 +84,4 @@ public class ExcelReadImplTest {
 	public void testFault(){
 		
 	}
-}*/
+}
