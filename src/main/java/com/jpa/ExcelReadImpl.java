@@ -323,7 +323,7 @@ public class ExcelReadImpl implements ExcelDAO {
 			faults.add(fault);
 		}
 		int total = faults.size();
-		invalidFaults = new ArrayList<Fault>();
+		invalidFaults = new ArrayList<Fault>(); 
 		for (Fault faultList : faults) {
 			if (eventIdsList.containsValue(faultList.getEventCause()
 					.getEventId())

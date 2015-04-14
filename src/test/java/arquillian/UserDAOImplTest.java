@@ -21,7 +21,6 @@ import org.junit.runner.RunWith;
 
 import com.entity.User;
 import com.interfaces.UserServiceLocal;
-import com.jpa.UserDAOImpl;
 
 
 @RunWith(Arquillian.class)
@@ -34,6 +33,7 @@ public class UserDAOImplTest {
 		return ShrinkWrap.create(WebArchive.class, "test.war")
 				.addPackages(true,"com")
 				.addAsResource("META-INF/persistence.xml")
+				.setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml").addAsLibraries(files);
 	}
 

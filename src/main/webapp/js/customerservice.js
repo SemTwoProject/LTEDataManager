@@ -115,11 +115,9 @@ function submit() {
 					"imsi" : imsi
 				},
 				success : function(response) {
-					$.each(response, function(i, item) {
 						$tr = "";
-						$tr = $('<tr>').append($('<td>').text(item[0]));
+						$tr = $('<tr>').append($('<td>').text(response));
 						$('#datatable').append($tr);
-					});
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					alert("You need to enter an IMSI");
