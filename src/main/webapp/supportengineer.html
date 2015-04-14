@@ -12,27 +12,10 @@
 <link href="css/simple-sidebar.css" rel="stylesheet">
 <script src="js/libs/jquery-2.0.3.min.js"></script>
 <script src="js/libs/jquery-ui.min.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
 <script src="js/supportengineer.js"></script>
 <link href="css/jquery-ui.min.css" rel="stylesheet">
-<style type="text/css">
 
-.ui-autocomplete {
-    max-height: 200px;
-    overflow-y: auto;
-    /* prevent horizontal scrollbar */
-    overflow-x: hidden;
-  }
-
-ul.ui-autocomplete.ui-menu{font-color: black;width:300px}
-
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
-    background: #33ADFF;
-    border: none;
-    color:#000;
-    border-radius:0;
-    font-color: black;
-}
-</style>
 </head>
 <body onload="checkCookie()">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -132,9 +115,10 @@ ul.ui-autocomplete.ui-menu{font-color: black;width:300px}
 								</div>
 
 								<div class="col-sm-12" style="height: 600px; overflow: auto;">
-									<table class="table table-bordered" id="datatable">
+									<table class="display table table-bordered" cellspacing="0" id="datatable">
 									</table>
 								</div>
+
 							</div>
 						</div>
 					</div>

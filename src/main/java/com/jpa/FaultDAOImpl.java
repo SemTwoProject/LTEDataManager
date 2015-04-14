@@ -99,6 +99,9 @@ public class FaultDAOImpl implements FaultDAO {
 		Collection<Fault> result = q.getResultList();
 		return result;
 	}
+	
+	
+	
 
 	// Story 7 - As a Network Management Engineer I want to count, for each
 	// IMSI, the number of call failures and their total duration during a given
@@ -113,6 +116,22 @@ public class FaultDAOImpl implements FaultDAO {
 		Collection<Fault> result = q.getResultList();
 		return result;
 	}
+	
+	
+	// Story 7 - As a Network Management Engineer I want to count, for each
+		// IMSI, the number of call failures and their total duration during a given
+		// time period
+		public Collection<Fault> getTopTenTotalFaultsAndDurationPerIMSI(Timestamp start,
+				Timestamp end) {
+			Query q = em
+					.createQuery("select imsi, COUNT(f.imsi), SUM(duration) "
+							+ "from Fault f where f.date >= :startdate and f.date <= :enddate group by f.imsi order by sum(duration) desc");
+			q.setParameter("startdate", start);
+			q.setParameter("enddate", end);
+			q.setMaxResults(10);
+			Collection<Fault> result = q.getResultList();
+			return result;
+		}
 
 	// Story 6 - As a Support Engineer I want to count, for a given model of
 	// phone, the number of call failures it has had during a given time period.

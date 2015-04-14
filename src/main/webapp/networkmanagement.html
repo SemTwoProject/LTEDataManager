@@ -10,16 +10,6 @@
 <link rel="stylesheet" href="css/bootstrap.css" />
 <link href="css/simple-sidebar.css" rel="stylesheet">
 <link href="css/jquery-ui.min.css" rel="stylesheet">
-<style type="text/css">
-ul.ui-autocomplete.ui-menu{font-color: black;}
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
-    background: #33ADFF;
-    border: none;
-    color:#000;
-    border-radius:0;
-    font-color: black;
-}
-</style>
 </head>
 <body onload="checkCookie()">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -111,16 +101,25 @@ ul.ui-autocomplete.ui-menu{font-color: black;}
 										</div>
 									</div>
 								</div>
-								<div class="col-sm-8" style="height: 350px; overflow: auto;">
+								<div class="col-sm-12">
+									<hr>
+								</div>
+								<div id="tableholder" class="col-sm-8"
+									style="height: 350px; overflow: auto;">
 									<table class="table table-bordered" id="datatable">
 									</table>
 								</div>
-								
 								<div id="graphical">
 									<div class="col-sm-4">
+										<div class="col-sm-12 text-center hometext medtext"
+											id="piechartheader"></div>
 										<canvas id="piechart"></canvas>
 									</div>
 									<div class="col-sm-12">
+
+										<hr>
+										<div class="col-sm-12 text-center hometext medtext"
+											id="barchartheader"></div>
 										<canvas id="barchart"></canvas>
 									</div>
 								</div>
@@ -137,10 +136,13 @@ ul.ui-autocomplete.ui-menu{font-color: black;}
 		<div class="modal-dialog modal-sm"
 			style="height: 500px; width: 900px;">
 			<div class="modal-content">
-				<div class="modal-body">
-					<div class="col-sm-12" id="drilldownbody">
-						<table class="table table-bordered" id="drilldowntable"></table>
-					</div>
+				<div class="modal-header">
+					<center>
+						<h4 class="modal-title" id="drilldowninfo"></h4>
+					</center>
+				</div>
+				<div class="modal-body" id="drilldownbody">
+					<table class="table table-bordered" id="drilldowntable"></table>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
@@ -154,12 +156,12 @@ ul.ui-autocomplete.ui-menu{font-color: black;}
 	<script src="js/libs/jquery-ui.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
-	<script src="js/networkmanagement.js"></script>
 	<script src="js/moment.js"></script>
 	<script src="js/datetimepicker.js"></script>
 	<script src="js/login.js"></script>
 	<script
 		src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
+	<script src="js/networkmanagement.js"></script>
 
 </body>
 </html>

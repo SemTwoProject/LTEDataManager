@@ -16,6 +16,7 @@ public interface FaultDAO {
 	Collection<Fault> getCauseCodePerIMSI(Long imsi);
 	Collection<Fault> getIMSIFailureOverTime(Timestamp startDate, Timestamp endDate);
 	Collection<Fault> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end);
+	Collection<Fault> getTopTenTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end);
 	Collection<Fault> getImsiPerFailure(int failure);
 	Collection<Fault> getTopTenIMSIOverTime(Timestamp start, Timestamp end);
 	Collection<Fault> getNumberOfCallFailuresPerModel(String model, Timestamp start, Timestamp end);
@@ -26,6 +27,6 @@ public interface FaultDAO {
 	Collection<Fault> getFaultsForModelCombo(String model, int eventid, int causecode);
 	Collection<String> getAllModels();
 	Collection<String> getFailureDescriptions();
-	Collection<Long>getIMSIS();
+	Collection<Long> getIMSIS();
 	
 }

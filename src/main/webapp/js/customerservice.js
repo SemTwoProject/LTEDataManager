@@ -1,77 +1,86 @@
-$('#dates').hide();
 var imsis = [];
 
 $(document).ready(function() 
-		{
+{
+	$('#dates').hide();
+	
 	$.ajax({
 		type : 'GET',
 		url : "http://localhost:8080/LTEManager/rest/fault/imsis",
 		dataType : "json",
-		success : function(response) {
-		$.each(response, function(i, item) {
-		imsis.push(item.toString());
-		});
-	},
+		success : function(response) 
+		{
+			$.each(response, function(i, item) 
+			{
+				imsis.push(item.toString());
+			});
+		}
 	});
 	
-	$("#imsi").autocomplete({
-		source : imsis,
-		autoFocus : false,
-		minLength:2,
-		});
+	$("#imsi").autocomplete({ source : imsis, autoFocus : false, minLength:2 });
 	
-	$("select").change(function() 
-			{
-		$("select option:selected").each(function() 
-				{
-			if ($(this).attr("value") == "callfailures") 
-			{
-				$("#dates").hide();
-				$('#datatable').empty();
-				var table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Failure</th><th>Date</th></tr>');				
-				$('#datatable').append(table);
-			}
-			else if ($(this).attr("value") == "numberoffailures") 
-			{
-				$("#dates").show();
-				$('#datatable').empty();
-				var table = $('<tr><th>Number of Failures</th></tr>');				
-				$('#datatable').append(table);
-			}
-			else if ($(this).attr("value") == "causecodes") 
-			{
-				$("#dates").hide();
-				$('#datatable').empty();
-				var table = $('<tr><th>Cause Code</th><th>Count</th></tr>');				
-				$('#datatable').append(table);
-			}
-				});
-			}).change();
-		});
+$("select").change(function() 
+{
+	$("select option:selected").each(function() 
+	{
+		if ($(this).attr("value") == "callfailures") 
+		{
+			$("#dates").hide();
+			$('#datatable').empty();
+			var table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Failure</th><th>Date</th></tr>');				
+			$('#datatable').append(table);
+		}
+		else if ($(this).attr("value") == "numberoffailures") 
+		{
+			$("#dates").show();
+			$('#datatable').empty();
+			var table = $('<tr><th>Number of Failures</th></tr>');				
+			$('#datatable').append(table);
+		}
+		else if ($(this).attr("value") == "causecodes") 
+		{
+			$("#dates").hide();
+			$('#datatable').empty();
+			var table = $('<tr><th>Cause Code</th><th>Count</th></tr>');				
+			$('#datatable').append(table);
+		}
+	});
+}).change();
+});
 
 
-function submit() {
-	if ($("#querydropdown").attr("value") == "callfailures") {
+function submit() 
+{
+	if ($("#querydropdown").attr("value") == "callfailures") 
+	{
 		var imsi = document.getElementById("imsi").value;
 		$('#datatable').empty();
 		var table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Failure</th><th>Date</th></tr>');
 		$('#datatable').append(table);
-		if (imsi == "") {
+		if (imsi == "") 
+		{
 			alert("Please enter a VALID IMSI. (Numbers only, 15 digits)");
 		} 
-		else {
+		else 
+		{
 			$.ajax({
 				type : 'POST',
 				url : "http://localhost:8080/LTEManager/rest/fault/faultsbyimsi",
 				dataType : "json",
-				data : {
+				data : 
+				{
 					"imsi" : imsi
 				},
-				success : function(response) {
-					if (response == "") {
+				success : function(response) 
+				{
+					if (response == "") 
+					{
 						alert("No data for given IMSI");
-					} else {
-						$.each(response, function(i, item) {
+					} 
+					else 
+					{
+						$.each(response, function(i, item) 
+						{
 							$tr = "";
 							$tr = $('<tr>').append(
 									$('<td>').text(item[0]),
@@ -79,15 +88,15 @@ function submit() {
 									$('<td>').text(item[2]),
 									$('<td>').text(item[3]),
 									$('<td>').text(item[4]));
-							$('#datatable').append($tr);
-							
+							$('#datatable').append($tr);						
 						});
 					}
 				}
 			});
 		}
 	} 
-	else if ($("#querydropdown").attr("value") == "numberoffailures") {
+	else if ($("#querydropdown").attr("value") == "numberoffailures") 
+	{
 		var startdate = $('#startdate').data('date');
 		var enddate = $('#enddate').data('date');
 		var imsi = document.getElementById("imsi").value;
@@ -95,54 +104,66 @@ function submit() {
 		$('#datatable').empty();
 		var table = $('<tr><th>Number of Failures</th></tr>');
 		$('#datatable').append(table);
-		if (imsi == "") {
+		if (imsi == "") 
+		{
 			alert("Please enter a VALID IMSI. (Numbers only, 15 digits)");
 		}
-		else if (startdate == ""){
+		else if (startdate == "")
+		{
 			alert("Please enter a VALID Start Date");
 		}
-		else if (enddate == ""){
+		else if (enddate == "")
+		{
 			alert("Please enter a VALID End Date");
 		}
-		else {
+		else 
+		{
 			$.ajax({
 				type : 'POST',
 				url : "http://localhost:8080/LTEManager/rest/fault/imsicount",
 				dataType : "json",
-				data : {
+				data : 
+				{
 					"startdate" : startdate,
 					"enddate" : enddate,
 					"imsi" : imsi
 				},
-				success : function(response) {
+				success : function(response) 
+				{
 						$tr = "";
 						$tr = $('<tr>').append($('<td>').text(response));
 						$('#datatable').append($tr);
 				},
-				error : function(jqXHR, textStatus, errorThrown) {
+				error : function(jqXHR, textStatus, errorThrown) 
+				{
 					alert("You need to enter an IMSI");
 				}
-
 			});
 		}
-	} else if ($("#querydropdown").attr("value") == "causecodes") {
+	} 
+	else if ($("#querydropdown").attr("value") == "causecodes") 
+	{
 		var imsi = document.getElementById("imsi").value;
 		$('#datatable').empty();
 		var table = $('<tr><th>Cause Code</th><th>Count</th></tr>');
 		$('#datatable').append(table);
-		if (imsi == "") {
+		if (imsi == "") 
+		{
 			alert("Please enter a VALID IMSI. (Numbers only, 15 digits)");
-		} else {
-			$
-			.ajax({
+		} else 
+		{
+			$.ajax({
 				type : 'POST',
 				url : "http://localhost:8080/LTEManager/rest/fault/imsicausecodes",
 				dataType : "json",
-				data : {
+				data : 
+				{
 					"imsi" : imsi
 				},
-				success : function(response) {
-					$.each(response, function(i, item) {
+				success : function(response) 
+				{
+					$.each(response, function(i, item) 
+					{
 						$tr = "";
 						$tr = $('<tr>').append
 						($('<td>').text(item[0]),
@@ -150,7 +171,8 @@ function submit() {
 						$('#datatable').append($tr);
 					});
 				},
-				error : function(jqXHR, textStatus, errorThrown) {
+				error : function(jqXHR, textStatus, errorThrown) 
+				{
 					alert("You need to enter an IMSI");
 				}
 			});
