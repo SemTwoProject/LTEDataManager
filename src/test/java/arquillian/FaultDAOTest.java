@@ -22,12 +22,13 @@ import org.junit.runner.RunWith;
 
 import com.dao.FaultDAO;
 import com.entity.Fault;
+import com.interfaces.FaultServiceLocal;
 
 @RunWith(Arquillian.class)
 public class FaultDAOTest {
 
 	@EJB
-	FaultDAO faultDao;
+	FaultServiceLocal faultDao;
 
 	Long imsi0;
 	Long imsi1;
@@ -47,10 +48,6 @@ public class FaultDAOTest {
 	Timestamp time2;
 	Timestamp time3; //Dummy
 	Timestamp time4; //Dummy
-	Timestamp time5;
-	Timestamp time6;
-	Timestamp time7;
-	Timestamp time8;
 
 	String model1;
 	String model2;
@@ -70,6 +67,7 @@ public class FaultDAOTest {
 	List<Fault> getEventCauseId4;
 	List<Fault> getEventCauseId5;
 
+	List<Fault> getFaultsByImsi0;
 	List<Fault> getFaultsByImsi1;
 	List<Fault> getFaultsByImsi2;
 	List<Fault> getFaultsByImsi3;
@@ -101,34 +99,31 @@ public class FaultDAOTest {
 	List<Fault> getNumberOfCallFailuresPerModel2;
 	List<Fault> getNumberOfCallFailuresPerModel3;
 
-	//	List<Fault> Top10List1;
-	//	List<Fault> Top10List2;
-	//	List<Fault> Top10List3;
+	List<Fault> Top10List1;
+	List<Fault> Top10List2;
+	List<Fault> Top10List3;
 
 
 	@Deployment
 	public static WebArchive createDeployment() {
-		File[] files = Maven.resolver().resolve("org.apache.poi:poi:3.11").withTransitivity().asFile();
 
-		return ShrinkWrap.create(WebArchive.class, "test.war")
-				.addPackages(true,"com")
-				.addAsResource("META-INF/persistence.xml")
-				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml").addAsLibraries(files);
+		return ShrinkWrap.create(ZipImporter.class, "test.war")
+				.importFrom(new File("target/LTEManager.war"))
+				.as(WebArchive.class);
 
 	}
 	@Before
 	public void setUp() {
 
-		model1 = "A53";
-		model2 = "VEA3";
-		model3 = "Gobi3000";
+		model1 = "Mitsubishi GSM MT 20 Type MT 1171FD2";
+		model2 = "Model";
 
-		//imsi0 = 191911000423411L;
-		imsi1 = 838383838383838L;		//dummy
-		imsi2 = 344930000000001L;
-		imsi3 = 240210000000003L;
-		imsi4 = 310560000000012L;
-		imsi5 = 344930000000011L;
+		imsi0 = 100101001000100L;//dummy
+		imsi1 = 191911000456426L;		
+		imsi2 = 191911000269383L;
+		imsi3 = 191911000187300L;
+		imsi4 = 191911000560407L;
+		imsi5 = 191911000563502L;
 
 		failure0 = 0;
 		failure1 = 1;
@@ -136,14 +131,15 @@ public class FaultDAOTest {
 		failure3 = 3;
 		failure4 = 5; // dummy
 
-		time1 = Timestamp.valueOf("2013-01-11 17:15:00");
-		time2 = Timestamp.valueOf("2013-01-12 17:18:00");
-		time3 = Timestamp.valueOf("2012-01-01 05:18:00"); 
-		time4 = Timestamp.valueOf("2015-03-13 05:19:00"); 
-		time5 = Timestamp.valueOf("2013-01-11 17:15:20");
-		time6 = Timestamp.valueOf("2013-01-11 17:15:30");
-		time7 = Timestamp.valueOf("2013-01-11 17:17:00");
-		time8 = Timestamp.valueOf("2013-01-11 17:19:00");
+		time1 = Timestamp.valueOf("2010-01-11 17:15:00");
+		time2 = Timestamp.valueOf("2015-01-12 17:18:00");
+		time3 = Timestamp.valueOf("2015-01-12 17:18:00");
+		time4 = Timestamp.valueOf("2015-05-12 17:18:00");
+	}
+
+
+	@Test
+	public void getImsiPerFailureTest(){
 
 		f0 = (List<Fault>) faultDao.getImsiPerFailure(failure0);
 		f1 = (List<Fault>) faultDao.getImsiPerFailure(failure1);
@@ -151,108 +147,68 @@ public class FaultDAOTest {
 		f3 = (List<Fault>) faultDao.getImsiPerFailure(failure3);
 		f4 = (List<Fault>) faultDao.getImsiPerFailure(failure4);
 
-		//getEventCauseId1 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi0);
-		getEventCauseId2 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi2);
-		getEventCauseId3 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi3);
-		getEventCauseId4 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi4);
-		getEventCauseId5 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi1);	//dummy imsi1
-
-		getFaultsByImsi1 = (List<Fault>)faultDao.getFaultsByIMSI(imsi1);
-		getFaultsByImsi2 = (List<Fault>)faultDao.getFaultsByIMSI(imsi2);
-		getFaultsByImsi3 = (List<Fault>)faultDao.getFaultsByIMSI(imsi3);
-		getFaultsByImsi4 = (List<Fault>)faultDao.getFaultsByIMSI(imsi4);
-
-		getImsiFailureOverTime1 = (List<Fault>)faultDao.getIMSIFailureOverTime(time3, time4);
-		getImsiFailureOverTime2 = (List<Fault>)faultDao.getIMSIFailureOverTime(time3, time4);
-		getImsiFailureOverTime3 = (List<Fault>)faultDao.getIMSIFailureOverTime(time5, time6);
-
-		getIMSICount1 = (List<Fault>)faultDao.getIMSICount(time1, time2,imsi5); //invalid imsi
-		getIMSICount2 = (List<Fault>)faultDao.getIMSICount(time3, time4,imsi5); 
-		getIMSICount3 = (List<Fault>)faultDao.getIMSICount(time5, time6,imsi5);
-
-		getCauseCodePerIMSI1 = (List<Fault>)faultDao.getCauseCodePerIMSI(imsi5);
-		getCauseCodePerIMSI2 = (List<Fault>)faultDao.getCauseCodePerIMSI(imsi2);
-		getCauseCodePerIMSI3 = (List<Fault>)faultDao.getCauseCodePerIMSI(imsi1); //Invalid
-
-		getTopTenIMSIOverTime1 =(List<Fault>)faultDao.getTopTenIMSIOverTime(time1, time2);
-		getTopTenIMSIOverTime2 =(List<Fault>)faultDao.getTopTenIMSIOverTime(time3, time4);
-		getTopTenIMSIOverTime3 =(List<Fault>)faultDao.getTopTenIMSIOverTime(time5, time6);
-
-		getTotalFaultsAndDurationPerIMSI1 =(List<Fault>)faultDao.getTopTenIMSIOverTime(time1, time2);
-		getTotalFaultsAndDurationPerIMSI2 =(List<Fault>)faultDao.getTopTenIMSIOverTime(time3, time4);
-		getTotalFaultsAndDurationPerIMSI3 =(List<Fault>)faultDao.getTopTenIMSIOverTime(time5, time6); //invalid/empty List
-
-
-		getNumberOfCallFailuresPerModel1 = (List<Fault>)faultDao.getNumberOfCallFailuresPerModel(model1, time3, time4);// model in not in faults time is valid /returns empty
-		getNumberOfCallFailuresPerModel2 = (List<Fault>)faultDao.getNumberOfCallFailuresPerModel(model2, time3, time4);// valid model and time
-		getNumberOfCallFailuresPerModel3 = (List<Fault>)faultDao.getNumberOfCallFailuresPerModel(model3, time7, time8);// valid model not in time frame/returns empty
-		//		Top10List1 = (List<Fault>) faultDao.getTopTenMarketOperatorCell(time1, time2);
-		//		Top10List2 = (List<Fault>) faultDao.getTopTenMarketOperatorCell(time3, time4); //Dummy
-		//		Top10List3 = (List<Fault>) faultDao.getTopTenMarketOperatorCell(time5, time6);
-	}
-
-
-	@Test
-	public void getImsiPerFailureTest(){
-
-		//		assertEquals(160, f0.size());
-		//		assertEquals(600, f1.size());
-		//		assertEquals(40, f2.size());
-		//		assertEquals(0, f3.size());
-		//		assertEquals(0, f4.size());
-
 		assertFalse(f0.isEmpty());
 		assertFalse(f1.isEmpty());
 		assertFalse(f2.isEmpty());
-		assertTrue(f3.isEmpty());
+		assertFalse(f3.isEmpty());
 		assertTrue(f4.isEmpty());
 	}
 
-	@Test
-	public void imsiCollectionIsNotEmptyTest(){
-
-		assertFalse(f0.isEmpty());
-		assertFalse(f1.isEmpty());
-		assertFalse(f2.isEmpty());
-		assertTrue(f3.isEmpty());
-		assertTrue(f4.isEmpty());
-	}
 
 	@Test
 	public void getEventCausePerIMSITest(){
+		getEventCauseId1 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi0);//dummy imsi0
+		getEventCauseId2 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi2);
+		getEventCauseId3 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi3);
+		getEventCauseId4 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi4);
+		getEventCauseId5 = (List<Fault>) faultDao.getEventCausePerIMSI(imsi1);
 		//assertTrue(getEventCauseId1.size() > 1);
 		assertFalse(getEventCauseId2.isEmpty());
 		assertFalse(getEventCauseId3.isEmpty());
 		assertFalse(getEventCauseId4.isEmpty());
-		assertTrue(getEventCauseId5.isEmpty());
+		assertFalse(getEventCauseId5.isEmpty());
+		assertTrue(getEventCauseId1.isEmpty());
 	}
 
 	@Test
 	public void getFaultsByIMSITest(){
-		assertTrue(getFaultsByImsi1.isEmpty());
+		getFaultsByImsi0 = (List<Fault>)faultDao.getEventCausePerIMSI(imsi0);
+		getFaultsByImsi1 = (List<Fault>)faultDao.getEventCausePerIMSI(imsi1);
+		getFaultsByImsi2 = (List<Fault>)faultDao.getEventCausePerIMSI(imsi2);
+		getFaultsByImsi3 = (List<Fault>)faultDao.getEventCausePerIMSI(imsi3);
+		getFaultsByImsi4 = (List<Fault>)faultDao.getEventCausePerIMSI(imsi4);
+
+		
+		assertTrue(getFaultsByImsi0.isEmpty());
+		assertFalse(getFaultsByImsi2.isEmpty());
 		assertFalse(getFaultsByImsi2.isEmpty());
 		assertFalse(getFaultsByImsi3.isEmpty());
 		assertFalse(getFaultsByImsi4.isEmpty());
 	}
 	@Test
 	public void getIMSIFailureOverTimeTest(){
+		getImsiFailureOverTime1 = (List<Fault>)faultDao.getIMSIFailureOverTime(time1, time2);
+		getImsiFailureOverTime2 = (List<Fault>)faultDao.getIMSIFailureOverTime(time3, time4);
+//		getImsiFailureOverTime3 = (List<Fault>)faultDao.getIMSIFailureOverTime(time5, time6);
+		
+		assertTrue(getImsiFailureOverTime2.isEmpty());
 		assertTrue(getImsiFailureOverTime1.size() > 1);
 	}
-
-	@Test
-	public void getCauseCodePerIMSITest(){
-
-	}
-
 	@Test
 	public void getIMSICountTest(){
-		//assertTrue(getIMSICount1.isEmpty());
-		assertFalse(getIMSICount2.isEmpty());
-		//assertTrue(getIMSICount3.size() > 1);
+		getIMSICount1 = (List<Fault>)faultDao.getIMSICount(time1, time2,imsi5); 
+		getIMSICount3 = (List<Fault>)faultDao.getIMSICount(time3, time4,imsi5);
+		assertTrue(getIMSICount1.size()>0);
+		assertTrue(getIMSICount3.getClass() != List.class);
 	}
 
 	@Test
 	public void getCauseCodePerIMSI(){
+		getCauseCodePerIMSI1 = (List<Fault>)faultDao.getCauseCodePerIMSI(imsi5);
+		getCauseCodePerIMSI2 = (List<Fault>)faultDao.getCauseCodePerIMSI(imsi2);
+		getCauseCodePerIMSI3 = (List<Fault>)faultDao.getCauseCodePerIMSI(imsi0); //Invalid imsi
+
+
 		assertFalse(getCauseCodePerIMSI1.isEmpty());
 		assertFalse(getCauseCodePerIMSI2.isEmpty());
 		assertTrue(getCauseCodePerIMSI3.isEmpty());
@@ -261,29 +217,38 @@ public class FaultDAOTest {
 
 	@Test
 	public void getTopTenIMSIOverTime(){
+		getTopTenIMSIOverTime1 =(List<Fault>)faultDao.getTopTenIMSIOverTime(time1, time2);
+		getTopTenIMSIOverTime2 =(List<Fault>)faultDao.getTopTenIMSIOverTime(time3, time4);
+
 		assertFalse(getTopTenIMSIOverTime1.isEmpty());
-		//assertTrue(getTopTenIMSIOverTime2.isEmpty());
+		assertTrue(getTopTenIMSIOverTime2.isEmpty());
 		//assertTrue(getTopTenIMSIOverTime3.isEmpty());
 	}
 	@Test
 	public void getTotalFaultsAndDurationPerIMSITest(){
+		getTotalFaultsAndDurationPerIMSI1 =(List<Fault>)faultDao.getTopTenIMSIOverTime(time1, time2);
+		getTotalFaultsAndDurationPerIMSI2 =(List<Fault>)faultDao.getTopTenIMSIOverTime(time3, time4);
 		assertFalse(getTotalFaultsAndDurationPerIMSI1.isEmpty());
-		assertFalse(getTotalFaultsAndDurationPerIMSI2.isEmpty());
-		assertTrue(getTotalFaultsAndDurationPerIMSI3.isEmpty());
+		assertTrue(getTotalFaultsAndDurationPerIMSI2.isEmpty());
+		
 	}
 
 	@Test
 	public void getNumberOfCallFailuresPerModelTest(){
-		assertTrue(getNumberOfCallFailuresPerModel1.isEmpty());
-		assertFalse(getNumberOfCallFailuresPerModel2.isEmpty());
-		assertTrue(getNumberOfCallFailuresPerModel3.isEmpty());
+		getNumberOfCallFailuresPerModel1 = (List<Fault>)faultDao.getAmountOfCallFailuresPerModel(model1, time1, time2);// model in faults time is valid
+		getNumberOfCallFailuresPerModel2 = (List<Fault>)faultDao.getAmountOfCallFailuresPerModel(model2, time3, time4);// invalid model and invalid time
+
+		assertTrue(getNumberOfCallFailuresPerModel1.size()>0);
+		assertTrue(getNumberOfCallFailuresPerModel2.getClass() != List.class);
 	}
 
-	//	@Test
-	//	public void getTopTenMarketOperatorCell(){
-	//		assertTrue(Top10List1.size() > 1);
-	//		assertTrue(Top10List2.size() == 0); //Dummy
-	//		assertTrue(Top10List3.size() > 1);
-	//	}
+		@Test
+		public void getTopTenMarketOperatorCell(){
+			Top10List1 = (List<Fault>) faultDao.getTopTenMarketOperatorCell(time1, time2);
+			Top10List2 = (List<Fault>) faultDao.getTopTenMarketOperatorCell(time3, time4); //Dummy
+			
+			assertTrue(Top10List1.size() > 1);
+			assertTrue(Top10List2.size() == 0); //Dummy
+		}
 
 }
