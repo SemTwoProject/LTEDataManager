@@ -46,7 +46,6 @@ public class DirectoryWatcher {
 	private TimerService timerService;
 
 	@PostConstruct
-	@Lock(LockType.READ)
 	public void atStartUp() {
 		FileSystem fileSystem = FileSystems.getDefault();
 		Path path = fileSystem.getPath("c:\\excel\\");
@@ -58,6 +57,7 @@ public class DirectoryWatcher {
 		}
 	}
 
+	@Lock(LockType.READ)
 	@Schedule(minute = "*/1", hour = "*", persistent = false)
 	public void execute() {
 		String fileName;
