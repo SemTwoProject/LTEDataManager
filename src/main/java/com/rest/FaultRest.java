@@ -148,6 +148,33 @@ public class FaultRest
 		return Response.ok(newResponse).build();
 	}
 	
+	
+		// rest/fault/toptentotalfaults -- Story 7
+		@POST
+		@Path("/toptentotalfaults")
+		@Produces(MediaType.APPLICATION_JSON)
+		public Response getTopTenTotalFaultsAndDurationPerIMSI(
+				@FormParam("startdate") Timestamp startdate,
+				@FormParam("enddate") Timestamp enddate)
+		{
+			String newResponse = null;
+			
+			try
+			{
+				newResponse = toJSONString(service
+						.getTopTenTotalFaultsAndDurationPerIMSI(startdate, enddate));
+			}
+			catch (Exception err)
+			{
+				newResponse = "{\"status\":\"401\","
+						+ "\"message\":\"No content found \""
+						+ "\"developerMessage\":\"" + err.getMessage() + "\"" + "}";
+				return Response.status(401).entity(newResponse).build();
+				
+			}
+			return Response.ok(newResponse).build();
+		}
+	
 	// rest/fault/toptenimsiovertime -- Story 18
 	@POST
 	@Path("/toptenimsiovertime")

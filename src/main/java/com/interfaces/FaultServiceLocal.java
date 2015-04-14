@@ -12,6 +12,7 @@ public interface FaultServiceLocal {
 	Collection<Fault> getCauseCodePerIMSI(Long imsi);
 	Collection<Fault> getIMSIFailureOverTime(Timestamp startDate, Timestamp endDate);
 	Collection<Fault> getTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end);
+	Collection<Fault> getTopTenTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end);
 	Collection<Fault> getImsiPerFailure(int failure);
 	Collection<Fault> getTopTenIMSIOverTime(Timestamp start, Timestamp end);
 	Collection<Fault> getAmountOfCallFailuresPerModel(String model, Timestamp start, Timestamp end);
@@ -21,5 +22,5 @@ public interface FaultServiceLocal {
 	Collection<Fault> getFaultsForModelCombo(String model, int eventid, int causecode);
 	Collection<String> getAllModels();
 	Collection<String> getFailureDescriptions();
-	Collection<Long>getIMSIS();
+	Collection<Long> getIMSIS();
 }

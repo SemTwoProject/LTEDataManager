@@ -1,5 +1,6 @@
 var ue_models = [];
 var table;
+var tabledata = new Array();
 var piechartData = new Array();
 var barchartLabels = new Array();
 var barchartData = new Array();
@@ -10,6 +11,7 @@ var piechartinfo;
 var data = { labels: [""], datasets: [{ label: "", fillColor: "", strokeColor: "", highlightFill: "", highlightStroke: "", data: [] }]};		
 var piechart = new Chart(piectx).Pie(piechartData);
 var barchart = new Chart(barctx).Bar(data);
+var tableholder = document.getElementById("tableholder");
 
 function clearChart()
 {
@@ -17,88 +19,90 @@ function clearChart()
 	piechart.destroy();
 	barchart.clear();
 	barchart.destroy();
+	$('#piechartheader').text("");
+	$('#barchartheader').text("");
+	$('#piechart').show();
+	$('#barchart').show();
 	$('#graphical').hide();
-	$('#barchart').hide();
 	$('#piechart').attr('onclick','').unbind('click');
 }
 
 $(document).ready(function() 
-		{
+{
 	$.ajax({
 		type : 'GET',
 		url : "http://localhost:8080/LTEManager/rest/fault/models",
 		dataType : "json",
-		success : function(response) {
-		$.each(response, function(i, item) {
-		ue_models.push(item);
-		});
-	},
-	});
-	$("‪#modelsearchfield").autocomplete({
-			source : ue_models,
-		});
-	
-		});
-
-	
-	$("#querydropdown").change(function() 
+		success : function(response) 
+		{
+			$.each(response, function(i, item) 
 			{
-		$("select option:selected").each(function() 
-				{
-			if ($(this).attr("value") == "totalfaults") 
-			{		
-				clearChart();
-				$("#dates").show();
-				$("#modelsearchfield").prop("disabled", true);
-				$("#phonemodeldropdown").prop("disabled", true);
-				$('#datatable').empty();
-				table = $('<tr><th>IMSI</th><th>Total Failures</th><th>Total Duration</th></tr>');				
-				$('#datatable').append(table);
-			}
-			if ($(this).attr("value") == "modelfailures") 
-			{	
-				$("#modelsearchfield").autocomplete({
-					source : ue_models,
-					autoFocus : false,
-					});
-				clearChart();
-				$("#dates").hide();
-				$("#modelsearchfield").prop("disabled", false);
-				$("#phonemodeldropdown").prop("disabled", false);
-				$('#datatable').empty();
-				table = $('<tr></th><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Number of Occurences</th></tr>');				
-				$('#datatable').append(table);
-			}
-			if ($(this).attr("value") == "toptenmccmnccell") 
-			{		
-				clearChart();
-				$("#dates").show();
-				$("#modelsearchfield").prop("disabled", true);
-				$("#phonemodeldropdown").prop("disabled", true);
-				$('#datatable').empty();
-
-				table = $('<tr><th>Market ID</th><th>Operator ID</th><th>Cell ID</th><th>Count</th></tr>');				
-				$('#datatable').append(table);
-			}
-			if ($(this).attr("value") == "toptenimsiovertime") 
-			{		
-				clearChart();
-				$("#dates").show();
-				$("#modelsearchfield").prop("disabled", true);
-				$("#phonemodeldropdown").prop("disabled", true);
-				$('#datatable').empty();
-				table = $('<tr><th>IMSI</th><th>Count</th></tr>');				
-				$('#datatable').append(table);
-			}
-				});
-			}).change();
-		});
+				ue_models.push(item);
+			});
+		}
+	});
+	
+	
+$("#querydropdown").change(function() 
+{
+	$("select option:selected").each(function() 
+	{
+		if ($(this).attr("value") == "totalfaults") 
+		{		
+			tableholder.className = "col-sm-12";
+			clearChart();
+			$("#dates").show();
+			$("#modelsearchfield").prop("disabled", true);
+			$("#phonemodeldropdown").prop("disabled", true);
+			$('#datatable').empty();
+			table = $('<tr><th>IMSI</th><th>Total Failures</th><th>Total Duration</th></tr>');				
+			$('#datatable').append(table);
+		}
+		if ($(this).attr("value") == "modelfailures") 
+		{		
+			tableholder.className = "col-sm-8";
+			clearChart();
+			$("#dates").hide();
+			$("#modelsearchfield").prop("disabled", false);
+			$("#modelsearchfield").autocomplete({ source : ue_models, autoFocus : false, minLength:2 });
+			$("#phonemodeldropdown").prop("disabled", false);
+			$('#datatable').empty();
+			table = $('<tr></th><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Number of Occurences</th></tr>');				
+			$('#datatable').append(table);
+		}
+		if ($(this).attr("value") == "toptenmccmnccell") 
+		{		
+			tableholder.className = "col-sm-8";
+			clearChart();
+			$("#dates").show();
+			$("#modelsearchfield").prop("disabled", true);
+			$("#phonemodeldropdown").prop("disabled", true);
+			$('#datatable').empty();
+			table = $('<tr><th>Market ID</th><th>Operator ID</th><th>Cell ID</th><th>Count</th></tr>');				
+			$('#datatable').append(table);
+		}
+		if ($(this).attr("value") == "toptenimsiovertime") 
+		{		
+			tableholder.className = "col-sm-8";
+			clearChart();
+			$("#dates").show();
+			$("#modelsearchfield").prop("disabled", true);
+			$("#phonemodeldropdown").prop("disabled", true);
+			$('#datatable').empty();
+			table = $('<tr><th>IMSI</th><th>Count</th></tr>');				
+			$('#datatable').append(table);
+		}
+	});
+}).change();
+});
 
 
 $("#submit").click(function()
-		{	
+{	
 	if ($("#querydropdown").attr("value") == "totalfaults") 
-	{			
+	{		
+		$('#graphical').show();
+		$('#piechart').hide();
 		var startdate = $('#startdate').data('date');
 		var enddate = $('#enddate').data('date');
 
@@ -115,11 +119,42 @@ $("#submit").click(function()
 		}
 		else 
 		{
-			$('#graphical').show();
-			$('#barchart').show();
-			piechartData = [];
 			barchartLabels = [];
 			barchartData = [];
+			$.ajax({
+				type: 'POST',
+				url: "http://localhost:8080/LTEManager/rest/fault/toptentotalfaults",
+				dataType: "json", 
+				data: {"startdate": startdate, "enddate": enddate},
+				success:function(response)
+				{
+					$.each(response, function(i, item) 
+					{	
+						barchartLabels.push(item[0]);
+						barchartData.push(item[2]);
+					});
+			}});
+			setTimeout(function()
+			{
+				$('#barchartheader').text("Top Ten IMSI with Failures ordered by Duration");
+				
+				data = {
+						labels: barchartLabels,
+						datasets: 
+						[{
+							label: "Call Failures",
+							fillColor: "rgba(0,0,255,0.5)",
+							strokeColor: "rgba(0,0,100,0.8)",
+							highlightFill: "rgba(255,0,0,0.75)",
+							highlightStroke: "rgba(100,0,0,1)",
+							data: barchartData
+						}]};
+				
+				barchart =  new Chart(barctx).Bar(data);
+			}, 2000);
+			
+			
+			
 			$.ajax({
 				type: 'POST',
 				url: "http://localhost:8080/LTEManager/rest/fault/totalfaults",
@@ -128,44 +163,22 @@ $("#submit").click(function()
 				success:function(response)
 				{
 					$.each(response, function(i, item) 
-							{
+					{	
 						$tr = "";
-						$tr = $('<tr>').append(
-								$('<td>').text(item[0]),
-								$('<td>').text(item[1]),
-								$('<td>').text(item[2]));
-						$('#datatable').append($tr);
-
-						barchartLabels.push(item[0]);
-						barchartData.push(item[2]);
-
-						piechartData.push({
-							value: response[i][2],
-							color: colours[i%10],
-							highlight: "#F7464A",
-							label: response[i][0]});
-							});   
-
-					data = {
-							labels: barchartLabels,
-							datasets: 
-								[{
-									label: "Call Failures",
-									fillColor: "rgba(0,0,255,0.5)",
-									strokeColor: "rgba(0,0,100,0.8)",
-									highlightFill: "rgba(255,0,0,0.75)",
-									highlightStroke: "rgba(100,0,0,1)",
-									data: barchartData
-								}]
-					};		
-					piechart = new Chart(piectx).Pie(piechartData, { tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
-					barchart =  new Chart(barctx).Bar(data);	
-				}});
+						$tr = $('<tr>').append
+						(
+							$('<td>').text(item[0]),
+							$('<td>').text(item[1]),
+							$('<td>').text(item[2])
+						);
+						
+						$($tr).appendTo('#datatable');
+					});
+			}});
 		}
 	}
 	else if ($("#querydropdown").attr("value") == "modelfailures") 
-	{	
-		
+	{			
 		var model = document.getElementById("modelsearchfield").value;
 		$('#datatable').empty();
 		table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Number of Occurences</th></tr>');				
@@ -177,6 +190,7 @@ $("#submit").click(function()
 		else
 		{
 			$('#graphical').show();
+			$('#barchart').hide();
 			piechartData = [];
 			barchartData = [];
 			$.ajax({
@@ -210,10 +224,11 @@ $("#submit").click(function()
 								label: response[i][0] +  ":" + response[i][1] + ": Value "});	
 								});
 					}	
-					piechart = new Chart(piectx).Pie(piechartData);	
+					piechart =  new Chart(piectx).Pie(piechartData,  { tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
+					$('#piechartheader').text("Model Failures");
 
 					$("#piechart").click( function(evt)
-							{
+					{
 						$('#drilldowntable').empty();
 						table = $('<tr><th>IMSI</th><th>Date</th></tr>');
 						$('#drilldowntable').append(table);
@@ -224,7 +239,8 @@ $("#submit").click(function()
 							type : 'POST',
 							url : "http://localhost:8080/LTEManager/rest/fault/faultsformodeleventcombo",
 							dataType : "json",
-							data : {
+							data : 
+							{
 								"model": model,
 								"eventid": ids[0],
 								"causecode": ids[1]
@@ -252,8 +268,7 @@ $("#submit").click(function()
 		var startdate = $('#startdate').data('date');
 		var enddate = $('#enddate').data('date');
 
-		$('#datatable').empty();
-		var table = $('<tr><th>Country</th><th>Operator</th><th>Cell ID</th><th>Count</th></tr>');				
+		$('#datatable').empty();			
 		table = $('<tr><th>Market ID</th><th>Operator ID</th><th>Cell ID</th><th>Count</th></tr>');				
 		$('#datatable').append(table);
 		if (startdate == "")
@@ -267,8 +282,8 @@ $("#submit").click(function()
 		else 
 		{		
 			$('#graphical').show();
+			$('#barchart').hide();
 			piechartData = [];
-			barchartData = [];
 
 			$.ajax({
 				type: 'POST',
@@ -278,7 +293,7 @@ $("#submit").click(function()
 				success:function(response)
 				{
 					$.each(response, function(i, item) 
-							{
+					{
 						$tr = "";
 						$tr = $('<tr>').append(
 								$('<td>').text(item[0]),
@@ -288,17 +303,17 @@ $("#submit").click(function()
 						$('#datatable').append($tr);
 
 						piechartData.push({
-							value: response[i][3],
+							value: item[3],
 							color: colours[i%10],
 							highlight: "#F7464A",
-							label: response[i][0] + "/" + response[i][1] + "/" + response[i][2] + "/  Failures"});	
+							label: item[0] + "/" + item[1] + "/" + item[2] + "/  Failures"});	
 							});
 					piechart =  new Chart(piectx).Pie(piechartData,  { tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
-
+					$('#piechartheader').text("Top 10 MCC");
 				}});
 			
 			$("#piechart").click( function(evt)
-					{
+			{
 				$('#drilldowntable').empty();
 				table = $('<tr><th>IMSI</th><th>Cause Code</th><th>Event ID</th><th>Description</th><th>Failure</th><th>Date</th></tr>');
 				$('#drilldowntable').append(table);
@@ -310,14 +325,14 @@ $("#submit").click(function()
 					url : "http://localhost:8080/LTEManager/rest/fault/faultsforcell",
 					dataType : "json",
 					data : {
-						"marketid": ids[0],
-						"operatorid": ids[1],
+						"country": ids[0],
+						"operator": ids[1],
 						"cellid": ids[2]
 					},
 					success : function(response) 
 					{
 						$.each(response, function(i, item) 
-								{
+						{
 							$tr = "";
 							$tr = $('<tr>').append(
 									$('<td>').text(item[0]),
@@ -326,13 +341,13 @@ $("#submit").click(function()
 									$('<td>').text(item[3]),
 									$('<td>').text(item[4]),
 									$('<td>').text(item[5]));
-							$('#drilldowntable').append($tr);	        							
-								});	        					
+							$($tr).appendTo('#drilldowntable');	        							
+						});	        					
 					}
 				});
 
 				$('#drilldown').modal('show'); 		
-					});		
+			});		
 		}
 	}
 	else if ($("#querydropdown").attr("value") == "toptenimsiovertime") 
@@ -354,8 +369,8 @@ $("#submit").click(function()
 		else 
 		{
 			$('#graphical').show();
+			$('#barchart').hide();
 			piechartData = [];
-			barchartData = [];
 			$.ajax({
 				type: 'POST',
 				url: "http://localhost:8080/LTEManager/rest/fault/toptenimsiovertime",
@@ -364,7 +379,7 @@ $("#submit").click(function()
 				success:function(response)
 				{
 					$.each(response, function(i, item) 
-							{
+					{
 						$tr = "";
 						$tr = $('<tr>').append(
 								$('<td>').text(item[0]),
@@ -378,10 +393,10 @@ $("#submit").click(function()
 							label: response[i][0]});					
 							});						
 
-					piechart =  new Chart(piectx).Doughnut(piechartData,  { responsive: true, tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
-					document.getElementById("graphical").innerHTML = piechart.generateLengent();
+					piechart =  new Chart(piectx).Pie(piechartData,  { responsive: true, tooltipTemplate: " <%=label%>: <%= numeral(value).format('(00[.]00)') %> - <%= numeral(circumference / 6.283).format('(0[.][00]%)') %>" });
+					$('#piechartheader').text("Top 10 IMSI");
 					$("#piechart").click( function(evt)
-							{
+					{
 						$('#drilldowntable').empty();
 						table = $('<tr><th>Event ID</th><th>Cause Code</th><th>Description</th><th>Failure</th><th>Date</th></tr>');
 						$('#drilldowntable').append(table);
@@ -397,7 +412,7 @@ $("#submit").click(function()
 							success : function(response) 
 							{
 								$.each(response, function(i, item) 
-										{
+								{
 									$tr = "";
 									$tr = $('<tr>').append(
 											$('<td>').text(item[0]),
@@ -406,14 +421,14 @@ $("#submit").click(function()
 											$('<td>').text(item[3]),
 											$('<td>').text(item[4]));
 									$('#drilldowntable').append($tr);	        							
-										});	        					
+									});	        					
 							}
 						});
 						$('#drilldown').modal('show');
-							}
-					); 
-				}});
+					}
+				); 
+			}});
 		}
 	}
-		});
+});
 

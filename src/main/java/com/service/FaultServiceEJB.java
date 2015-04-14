@@ -26,6 +26,10 @@ public class FaultServiceEJB implements FaultServiceLocal {
 			return dao.getTotalFaultsAndDurationPerIMSI(start, end);
 	}
 	
+	public Collection<Fault> getTopTenTotalFaultsAndDurationPerIMSI(Timestamp start, Timestamp end) {
+		return dao.getTopTenTotalFaultsAndDurationPerIMSI(start, end);
+	}
+	
 	public Collection<Fault> getIMSICount(Timestamp start, Timestamp end,Long imsi) {
 		return dao.getIMSICount(start, end, imsi);
 	}
