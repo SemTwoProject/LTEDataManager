@@ -351,6 +351,7 @@ public class FaultRest
 		return Response.ok(newResponse).build();
 		
 	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/models")
@@ -370,6 +371,7 @@ public class FaultRest
 		}
 		return Response.ok(newResponse).build();
 	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/failuredescriptions")
@@ -389,6 +391,7 @@ public class FaultRest
 		}
 		return Response.ok(newResponse).build();
 	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/imsis")

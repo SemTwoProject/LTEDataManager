@@ -1,7 +1,12 @@
 var failures = [];
 var models = [];
-var $tr;
-var tabledata = new Array();
+var table;
+
+function clearTable()
+{
+	$('#datatable').remove();
+	$('#datatable_wrapper').remove();
+}
 
 $(document).ready(function() 
 {
@@ -42,20 +47,21 @@ $("#querydropdown").change(function()
 		if ($(this).attr("value") == "imsiwithcallfailure") 
 		{
 			$("#dates").show();
+			$("#causecodes").show();
 			$("#causecodesearchfield").prop("disabled",true);
 			$("#modelsearch").hide();
-			$('#datatable').empty();
-			var table = $('<tr><th>IMSI</th><th>Description</th><th>Failure</th><th>Operator</th><th>Country</th><th>Duration</th><th>Date</th></tr>');
-			$('#datatable').append(table);
+			clearTable();
+			table = $('<table class="display table table-bordered" cellspacing="0" id="datatable"><tr><th>IMSI</th><th>Description</th><th>Failure</th><th>Operator</th><th>Country</th><th>Duration</th><th>Date</th></tr></table>');
+			$('#tableholder').append(table);
 		} 
 		else if ($(this).attr("value") == "numberoffailures") 
 		{
 			$("#dates").show();
 			$("#causecodes").hide();
 			$("#modelsearch").show();
-			$('#datatable').empty();
-			var table = $('<tr><th>Manufacturer</th><th>Total Failures</th></tr>');
-			$('#datatable').append(table);
+			clearTable();
+			table = $('<table class="display table table-bordered" cellspacing="0" id="datatable"><tr><th>Manufacturer</th><th>Total Failures</th></tr></table>');
+			$('#tableholder').append(table);
 		} 
 		else if ($(this).attr("value") == "imsisbycause") 
 		{
@@ -63,9 +69,9 @@ $("#querydropdown").change(function()
 				$("#modelsearch").hide();
 				$("#causecodes").show();
 				$("#causecodesearchfield").prop("disabled",false);
-				$('#datatable').empty();
-				var table = $('<tr><th>IMSI</th><th>Description</th><th>Operator</th><th>Country</th><th>Date</th></tr>');
-				$('#datatable').append(table);
+				clearTable();
+				table = $('<table class="display table table-bordered" cellspacing="0" id="datatable"><tr><th>IMSI</th><th>Description</th><th>Operator</th><th>Country</th><th>Date</th></tr></table>');
+				$('#tableholder').append(table);
 			}
 		});
 }).change();
@@ -74,13 +80,14 @@ $("#querydropdown").change(function()
 
 function submit() 
 {
+	tabledata = [];
 	if ($("#querydropdown").attr("value") == "imsiwithcallfailure") 
 	{
+		clearTable();
+		table = $('<table class="display table table-bordered" cellspacing="0" id="datatable"><tr><th>IMSI</th><th>Description</th><th>Failure</th><th>Operator</th><th>Country</th><th>Duration</th><th>Date</th></tr></table>');
+		$('#tableholder').append(table);
 		var startdate = $('#startdate').data('date');
 		var enddate = $('#enddate').data('date');
-		$('#datatable').empty();
-		var table = $('<tr><th>IMSI</th><th>Description</th><th>Failure</th><th>Operator</th><th>Country</th><th>Duration</th><th>Date</th></tr>');
-		$('#datatable').append(table);
 		
 		$.ajax
 		({
@@ -94,35 +101,21 @@ function submit()
 			},
 			success : function(response) 
 			{	
-				
-					$('#datatable').dataTable( 
-					{
-						"data": response,
-						"columns": [
-						     { "title": "IMSI" },
-						     { "title": "Description" },
-						     { "title": "Failure" },
-						     { "title": "Operator"},
-						     { "title": "Country"},
-						     { "title": "Duration"},
-						     { "title": "Date"}
+				$('#datatable').dataTable( 
+				{
+					"bDeferRender": true,
+					"pagingType": "full_numbers",
+					"data": response,
+					"columns": [
+						{ "title": "IMSI" },
+						{ "title": "Description" },
+						{ "title": "Failure" },
+						{ "title": "Operator"},
+						{ "title": "Country"},
+						{ "title": "Duration"},
+						{ "title": "Date"}
                     ]
-                }); 
-				 
-//				for(var i = 0; i < 10; i++)
-//				{
-//					tabledata.push([
-//						response[i][0], 
-//						response[i][1],
-//						response[i][2], 
-//						response[i][3],
-//						response[i][4], 
-//						response[i][5],
-//						response[i][6]
-//						]);
-//				}
-				
-				
+                }); 			
 			},
 			error: function(jqXHR,textStatus,errorThrown)
 			{
@@ -132,13 +125,13 @@ function submit()
 	} 
 	else if ($("#querydropdown").attr("value") == "numberoffailures") 
 	{
+		clearTable();
+		table = $('<table class="display table table-bordered" cellspacing="0" id="datatable"><tr><th>Manufacturer</th><th>Total Failures</th></tr></table>');
+		$('#tableholder').append(table);
 		var startdate = $('#startdate').data('date');
 		var enddate = $('#enddate').data('date');
 		var model = document.getElementById("modelsearchfield").value;
-		$('#datatable').empty();
-		var table = $('<tr><th>Manufacturer</th><th>Total Failures</th></tr>');
-		$('#datatable').append(table);
-
+		
 		if(model == "")
 		{
 			alert("Please enter a model");
@@ -156,29 +149,28 @@ function submit()
 				},
 				success : function(response) 
 				{
-					if (response == "")
+					$('#datatable').dataTable( 
 					{
-						alert("No data for that model");
-					}
-					$.each(response, function(i, item) 
-					{
-						$tr = "";
-						$tr = $('<tr>').append($('<td>').text(item[0]),
-								$('<td>').text(item[1]));
-						$('#datatable').append($tr);
-					});
+						"bDeferRender": true,
+						"pagingType": "full_numbers",
+						"data": response,
+						"columns": [
+							{ "title": "Manufacturer" },
+							{ "title": "Total Failures" }
+			             ]
+			     }); 
 				}
 			});
 		}
 	}
 	else if ($("#querydropdown").attr("value") == "imsisbycause") 
 	{		 
+		clearTable();
+		table = $('<table class="display table table-bordered" cellspacing="0" id="datatable"><tr><th>IMSI</th><th>Description</th><th>Operator</th><th>Country</th><th>Date</th></tr></table>');
+		$('#tableholder').append(table);
 		var failure = $("#causecodesearchfield").attr("value");
 		var failureCode = failures.indexOf(failure)-1;
-		$('#datatable').empty();
-		var table = $('<tr><th>IMSI</th><th>Description</th><th>Operator</th><th>Country</th><th>Date</th></tr>');
-		$('#datatable').append(table);
-
+		
 		$.ajax({
 			type : 'POST',
 			url : "http://localhost:8080/LTEManager/rest/fault/imsiperfailurecode",
@@ -189,21 +181,19 @@ function submit()
 			},
 			success : function(response) 
 			{
-				if (response == "")
+				$('#datatable').dataTable( 
 				{
-					alert("No data for that failure");
-				}
-				$.each(response, function(i, item) 
-				{
-					$tr = "";
-					$tr = $('<tr>').append(
-							$('<td>').text(item[0]),
-							$('<td>').text(item[1]),
-							$('<td>').text(item[2]),
-							$('<td>').text(item[3]),
-							$('<td>').text(item[4]));
-					$('#datatable').append($tr);
-				});
+					"bDeferRender": true,
+					"pagingType": "full_numbers",
+					"data": response,
+					"columns": [
+						{ "title": "IMSI" },
+						{ "title": "Description" },
+						{ "title": "Operator" },
+						{ "title": "Country" },
+						{ "title": "Date" }
+				     ]
+				 }); 
 			}
 		});
 	}

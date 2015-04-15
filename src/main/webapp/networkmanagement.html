@@ -9,6 +9,7 @@
 <meta name="author" content="">
 <link rel="stylesheet" href="css/bootstrap.css" />
 <link href="css/simple-sidebar.css" rel="stylesheet">
+<link href="css/jquery.dataTables.css" rel="stylesheet">
 <link href="css/jquery-ui.min.css" rel="stylesheet">
 </head>
 <body onload="checkCookie()">
@@ -104,19 +105,19 @@
 								<div class="col-sm-12">
 									<hr>
 								</div>
-								<div id="tableholder" class="col-sm-8"
-									style="height: 350px; overflow: auto;">
-									<table class="table table-bordered" id="datatable">
-									</table>
+								<div id="tableholder" class="col-sm-8">
+									<div class="col-sm-12" id="tablediv">
+										<table class="display table table-bordered" cellspacing="0" id="datatable">
+										</table>
+									</div>
 								</div>
 								<div id="graphical">
 									<div class="col-sm-4">
 										<div class="col-sm-12 text-center hometext medtext"
 											id="piechartheader"></div>
-										<canvas id="piechart"></canvas>
+										<canvas class="col-sm-12" id="piechart"></canvas>
 									</div>
 									<div class="col-sm-12">
-
 										<hr>
 										<div class="col-sm-12 text-center hometext medtext"
 											id="barchartheader"></div>
@@ -142,7 +143,10 @@
 					</center>
 				</div>
 				<div class="modal-body" id="drilldownbody">
-					<table class="table table-bordered" id="drilldowntable"></table>
+				<div class="col-sm-12" id="drilltablediv">
+						<table class="display table table-bordered" cellspacing="0" id="drilldowntable">
+						</table>
+				</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
@@ -161,6 +165,7 @@
 	<script src="js/login.js"></script>
 	<script
 		src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
 	<script src="js/networkmanagement.js"></script>
 
 </body>

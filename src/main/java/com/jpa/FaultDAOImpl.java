@@ -57,7 +57,7 @@ public class FaultDAOImpl implements FaultDAO {
 	public Collection<Fault> getIMSIFailureOverTime(Timestamp start,
 			Timestamp end) {
 		Query q = em
-				.createQuery("select distinct imsi, eventCause.description,failure.description,mccid.operator,mccid.country,duration, date from Fault i where i.date >= :start AND i.date <= :end");
+				.createQuery("select imsi, eventCause.description,failure.description,mccid.operator,mccid.country,duration, date from Fault i where i.date >= :start AND i.date <= :end");
 		q.setParameter("start", start);
 		q.setParameter("end", end);
 		Collection<Fault> result = q.getResultList();
@@ -69,7 +69,7 @@ public class FaultDAOImpl implements FaultDAO {
 	public Collection<Fault> getIMSICount(Timestamp start, Timestamp end,
 			Long imsi) {
 		Query q = em
-				.createQuery("select COUNT(*) FROM Fault i WHERE i.imsi = :imsi AND i.date >= :start AND i.date <= :end");
+				.createQuery("select COUNT(*), SUM(duration) FROM Fault i WHERE i.imsi = :imsi AND i.date >= :start AND i.date <= :end");
 		q.setParameter("start", start);
 		q.setParameter("end", end);
 		q.setParameter("imsi", imsi);
